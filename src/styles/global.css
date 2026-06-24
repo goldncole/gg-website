@@ -230,7 +230,6 @@ h1, h2, h3 { margin: 0; font-weight: 400; }
    --------------------------------------------------------------------- */
 .reveal {
   opacity: 0;
-  transform: translateY(22px);
   will-change: opacity, transform;
 }
 .is-ready .reveal { transition: none; }
