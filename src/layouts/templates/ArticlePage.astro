@@ -1,0 +1,264 @@
+---
+// =====================================================================
+// ArticlePage — Journal article template (readability + content velocity).
+// Renders a content-collection entry: article header (category, title,
+// dek, author + date + reading time, hero image) → ProseBody rendering
+// the MDX <slot> → footer (tags, optional author bio) → RelatedGrid
+// (related posts) → CtaBand.
+//
+// Used by src/pages/journal/[...slug].astro.
+// =====================================================================
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+import InnerPage from "../InnerPage.astro";
+import ProseBody from "../../components/blocks/ProseBody.astro";
+import RelatedGrid from "../../components/blocks/RelatedGrid.astro";
+import type { RelatedItem } from "../../components/blocks/RelatedGrid.astro";
+import CtaBand from "../../components/blocks/CtaBand.astro";
+import type { BandCta } from "../../components/blocks/CtaBand.astro";
+
+export interface ArticlePageContent {
+  title: string;
+  dek: string;
+  category?: string;
+  tags?: string[];
+  author?: string;
+  authorBio?: string;
+  publishDate: Date;
+  readingTime?: string;
+  heroImage?: ImageMetadata;
+  heroImageAlt?: string;
+  related?: { heading?: string; items: RelatedItem[] };
+  cta?: {
+    eyebrow?: string;
+    heading: string;
+    body?: string;
+    primaryCta?: BandCta;
+    secondaryCta?: BandCta;
+    variant?: "light" | "dark";
+  };
+}
+
+export interface Props {
+  content: ArticlePageContent;
+}
+
+const { content } = Astro.props;
+const {
+  title,
+  dek,
+  category = "Perspective",
+  tags = [],
+  author = "Global Gold",
+  authorBio,
+  publishDate,
+  readingTime,
+  heroImage,
+  heroImageAlt,
+  related,
+  cta,
+} = content;
+
+const dateLabel = new Intl.DateTimeFormat("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  timeZone: "UTC",
+}).format(publishDate);
+
+const defaultCta = {
+  eyebrow: "The Global Gold Standard",
+  heading: "Allocated gold, settled globally.",
+  body: "One shared standard for how the world's gold is registered, represented, collateralized, and made liquid.",
+  primaryCta: { label: "Request Access", href: "/access/" },
+  secondaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+  variant: "dark" as const,
+};
+const ctaContent = cta ?? defaultCta;
+---
+
+<InnerPage title={`${title} — The Journal · Global Gold`} description={dek}>
+  <article>
+    <header class="section article-header" aria-labelledby="article-title">
+      <div class="container container--narrow article-header__inner">
+        <p class="eyebrow reveal">{category}</p>
+        <h1 class="display display--lg article-header__title reveal" id="article-title" data-reveal-delay="0.05">
+          {title}
+        </h1>
+        <p class="article-header__dek reveal" data-reveal-delay="0.1">{dek}</p>
+        <p class="article-header__byline reveal" data-reveal-delay="0.13">
+          <span class="article-header__author">{author}</span>
+          <span class="article-header__dot" aria-hidden="true">·</span>
+          <time datetime={publishDate.toISOString()}>{dateLabel}</time>
+          {readingTime && (
+            <>
+              <span class="article-header__dot" aria-hidden="true">·</span>
+              <span>{readingTime}</span>
+            </>
+          )}
+        </p>
+      </div>
+
+      {
+        heroImage && (
+          <div class="container article-header__media reveal" data-reveal-delay="0.16">
+            <figure>
+              <Image src={heroImage} alt={heroImageAlt ?? title} widths={[640, 960, 1320]} sizes="(max-width: 1320px) 100vw, 1320px" />
+            </figure>
+          </div>
+        )
+      }
+    </header>
+
+    <div class="section article-body">
+      <div class="container">
+        <ProseBody>
+          <slot />
+        </ProseBody>
+      </div>
+    </div>
+
+    <footer class="section article-footer">
+      <div class="container container--narrow article-footer__inner">
+        {
+          tags.length > 0 && (
+            <ul class="article-footer__tags" aria-label="Tags">
+              {tags.map((tag) => (
+                <li class="article-footer__tag">{tag}</li>
+              ))}
+            </ul>
+          )
+        }
+        {
+          authorBio && (
+            <div class="article-footer__bio">
+              <p class="article-footer__bio-name">{author}</p>
+              <p class="article-footer__bio-text">{authorBio}</p>
+            </div>
+          )
+        }
+      </div>
+    </footer>
+  </article>
+
+  {
+    related && related.items.length > 0 && (
+      <RelatedGrid eyebrow="Keep reading" heading={related.heading ?? "Related from the Journal"} items={related.items} columns={3} />
+    )
+  }
+
+  <CtaBand
+    eyebrow={ctaContent.eyebrow}
+    heading={ctaContent.heading}
+    body={ctaContent.body}
+    primaryCta={ctaContent.primaryCta}
+    secondaryCta={ctaContent.secondaryCta}
+    variant={ctaContent.variant}
+  />
+</InnerPage>
+
+<style>
+  .article-header {
+    padding-top: clamp(140px, 18vh, 220px);
+    padding-bottom: clamp(40px, 5vw, 64px);
+  }
+  .article-header__inner {
+    text-align: center;
+  }
+  .article-header__title {
+    margin-top: 0.5em;
+    max-width: 22ch;
+    margin-inline: auto;
+    text-wrap: balance;
+  }
+  .article-header__dek {
+    margin: clamp(24px, 3vw, 36px) auto 0;
+    max-width: 56ch;
+    font-family: var(--serif-body);
+    font-size: var(--t-lede);
+    line-height: 1.5;
+    color: var(--char);
+  }
+  .article-header__byline {
+    margin: clamp(28px, 3.2vw, 40px) 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.6em;
+    font-family: var(--sans-display);
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+    color: var(--graphite);
+  }
+  .article-header__author {
+    color: var(--gold-deep);
+    font-weight: 500;
+  }
+  .article-header__dot {
+    color: var(--rule);
+  }
+  .article-header__media {
+    margin-top: clamp(40px, 5vw, 72px);
+  }
+  .article-header__media figure {
+    margin: 0;
+    border-radius: var(--radius-img);
+    overflow: hidden;
+    background: var(--stone);
+  }
+  .article-header__media :global(img) {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .article-body {
+    padding-top: clamp(48px, 6vw, 80px);
+  }
+
+  .article-footer {
+    padding-top: 0;
+  }
+  .article-footer__inner {
+    border-top: 1px solid var(--rule);
+    padding-top: clamp(32px, 4vw, 48px);
+  }
+  .article-footer__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6em;
+  }
+  .article-footer__tag {
+    font-family: var(--sans-display);
+    font-size: 0.74rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    padding: 7px 14px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+  }
+  .article-footer__bio {
+    margin-top: clamp(28px, 3.4vw, 44px);
+    padding-top: clamp(24px, 2.8vw, 36px);
+    border-top: 1px solid var(--rule-faint);
+  }
+  .article-footer__bio-name {
+    margin: 0 0 0.4em;
+    font-family: var(--sans-display);
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+  }
+  .article-footer__bio-text {
+    margin: 0;
+    max-width: 60ch;
+    font-size: var(--t-body);
+    line-height: 1.6;
+    color: var(--graphite);
+  }
+</style>

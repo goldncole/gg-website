@@ -1,0 +1,147 @@
+---
+// =====================================================================
+// PAGE — Solutions · Bullion Dealers (uses SolutionPage template).
+// Copy v2 — conversion + repositioning pass. Core thesis, validated by
+// research: a dealer's inventory is capped by the local buyer pool and
+// today's local bid, while margins (~1%) are crushed by carry costs
+// (financing ~9-10% vs retail spreads of 3-5%). Regional premiums are
+// large and persistent (India +6-8%, Dubai-Mumbai ~$400/oz, China
+// +$10-30/oz) but walled off by duties, export licensing, logistics,
+// and capital controls. The Standard lets a dealer tokenize allocated
+// bars and sell into continuous, global, 24/7 on-chain liquidity —
+// reaching worldwide demand WITHOUT shipping metal across a border,
+// accelerating inventory turnover and freeing trapped working capital.
+// De-emphasizes the P2P premium-bar marketplace (architecturally
+// de-prioritized); keeps bar-identity preservation via CCTs as a
+// supporting reassurance, not the spine. Verb is "collateralize" (not
+// "lock"). Voice: Network/Protocol, no "we" = LLC. Swap the hero
+// `/images/*` placeholder for final dealer/inventory photography.
+// =====================================================================
+import SolutionPage from "../../layouts/templates/SolutionPage.astro";
+import type { SolutionPageContent } from "../../layouts/templates/SolutionPage.astro";
+
+const content: SolutionPageContent = {
+  meta: {
+    title: "For Bullion Dealers — Solutions · Global Gold",
+    description:
+      "Break out of your local market. Tokenize allocated bars and sell them into a continuous, global, 24/7 on-chain market — turning inventory faster and freeing trapped working capital, without shipping a bar across a single border.",
+  },
+  hero: {
+    eyebrow: "Solutions · Bullion Dealers",
+    title: "Sell your inventory into a global, 24/7 market — without shipping a single bar.",
+    lede: "A dealer's inventory is worth what the local market will bid today. The Standard connects your allocated bars to continuous, worldwide demand: tokenize a bar and sell it into a global, on-chain market — turning inventory faster and freeing the working capital trapped in metal, while the bar stays in allocated custody and your client relationships stay yours.",
+    image: {
+      src: "/images/bullion-dealer.png",
+      alt: "Allocated gold bars in dealer inventory",
+    },
+    primaryCta: { label: "Request Access", href: "/access/" },
+    secondaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+  },
+  challenge: {
+    eyebrow: "The challenge",
+    heading: "Your inventory moves only as fast as your local market.",
+    body: [
+      "Working capital sits in metal, and the carry is unforgiving — inventory financed at prime-plus while retail spreads run a few points. When the cost of holding outruns the margin on selling, a dealer is left with two levers: carry less, or turn it faster. Across the trade, margins have thinned toward a single point, and most operators are being squeezed toward the first.",
+      "And the buyer pool is whatever walks through the door. Demand — and stronger prices — exist in other markets: gold trades at persistent regional premiums, from Shanghai to Mumbai to the Gulf. But duties, export licensing, logistics, and capital controls wall a local dealer off from them. Inventory that sits slow on your counter may be bid up a continent away, with no clean pathway to reach it.",
+    ],
+  },
+  benefits: {
+    eyebrow: "How the Standard works for you",
+    heading: "Your counter is local. Your market no longer has to be.",
+    lede: "Tokenize a bar and reach a continuous, global, on-chain market — without shipping metal, surrendering custody, or losing the client.",
+    columns: 3,
+    items: [
+      {
+        eyebrow: "Global reach",
+        title: "Sell into worldwide demand",
+        body: "Tokenize an allocated bar and collateralize it into Standard Metal Units, then sell into a continuous, 24/7 on-chain market. Your inventory reaches buyers far beyond the local counter — without a bar ever crossing a border.",
+      },
+      {
+        eyebrow: "Velocity",
+        title: "Turn inventory, don't just hold it",
+        body: "Convert standing inventory into liquidity when you choose, rather than waiting on a local buyer or a buyback that tightens in every shock. Faster turns ease the carry that quietly erodes the book.",
+      },
+      {
+        eyebrow: "Custody & clients",
+        title: "Title intact, premiums preserved",
+        body: "Metal stays in allocated custody and your client relationships stay yours. Bar identity — serial, refiner, weight, fineness — is preserved on-chain, so a premium bar trades as itself rather than dissolving into a spot ounce.",
+      },
+    ],
+  },
+  howItWorks: {
+    eyebrow: "How it works for you",
+    heading: "Three steps from your counter to the world.",
+    steps: [
+      {
+        title: "Hold inventory at a participating vault",
+        body: "Eligible bars sit in allocated custody, registered on the vault's on-chain Title Register with full identity — serial, refiner, weight, fineness. Nothing about your physical operation changes.",
+      },
+      {
+        title: "Tokenize a bar when you want to sell",
+        body: "Create a bar-specific claim, and collateralize it into fungible Standard Metal Units when you want globally tradeable liquidity. Tokenization is client-initiated and reversible — no standing token float to manage.",
+      },
+      {
+        title: "Sell into global liquidity",
+        body: "Sell the bar-specific claim to a counterparty anywhere, or sell the units into the continuous on-chain market. Settlement is on-chain and around the clock — no wires, no couriers, no border.",
+      },
+    ],
+  },
+  proof: {
+    eyebrow: "Why dealers adopt the Standard",
+    heading: "Built for the metal trade.",
+    stats: [
+      { label: "Market access", value: "Global, 24/7" },
+      { label: "Settlement", value: "On-chain" },
+      { label: "Tokenization", value: "On demand, reversible" },
+      { label: "Custody", value: "Allocated, title intact" },
+    ],
+    statColumns: 4,
+  },
+  faq: {
+    eyebrow: "Questions",
+    heading: "What dealers ask first.",
+    items: [
+      {
+        question: "Do we have to tokenize our whole inventory?",
+        answer:
+          "No. Tokenization is on-demand, client-initiated, and reversible — a bar is tokenized when you want to sell or move it, and untokenized inventory simply sits in allocated custody, registered on the vault's ledger.",
+      },
+      {
+        question: "How do we actually reach global buyers?",
+        answer:
+          "Tokenize a bar into a bar-specific claim, or collateralize it into Standard Metal Units for fungible liquidity. The claim can be sold to any onboarded counterparty; the units trade into continuous, on-chain gold markets — USG against other gold units and digital assets — around the clock. Demand is no longer limited to who is local to you.",
+      },
+      {
+        question: "Don't we have to ship metal to sell across borders?",
+        answer:
+          "No — that is the point. The bar stays in the vault; only the claim or the units move, on-chain. You reach global demand without export logistics, physical-movement duties, or re-assay into someone else's chain of custody.",
+      },
+      {
+        question: "What happens to premiums on branded or special bars?",
+        answer:
+          "They survive. Bar-specific claims carry serial, refiner, weight, and fineness, so an identified premium bar trades as the bar it is, rather than dissolving into a fungible ounce price.",
+      },
+      {
+        question: "Who holds the metal, and do we keep our clients?",
+        answer:
+          "Participating vaults hold the metal in allocated custody, exactly as before, and you keep your client relationships. The protocol takes neither custody nor title — it adds the market, not an intermediary between you and your buyer.",
+      },
+      {
+        question: "How does client compliance work?",
+        answer:
+          "Participants are onboarded under the Council's compliance framework through a designated KYC provider, and transfers run compliance checks on-chain. You serve your clients; the framework handles eligibility.",
+      },
+    ],
+  },
+  cta: {
+    eyebrow: "Solutions · Bullion Dealers",
+    heading: "Sell to the world from where you stand.",
+    body: "Request access to discuss connecting your inventory to the Global Gold Standard.",
+    primaryCta: { label: "Request Access", href: "/access/" },
+    secondaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+    variant: "dark",
+  },
+};
+---
+
+<SolutionPage content={content} />

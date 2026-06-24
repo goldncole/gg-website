@@ -1,0 +1,132 @@
+---
+// [7] Modules — the architectural proof behind the story. Six modules in a
+// hairline-ruled typographic grid.
+const modules = [
+  {
+    no: "01",
+    title: "Title Register Module",
+    body: "Each participating vault runs its own Title Register for allocated bars in custody. The Register records bar identity, ownership status, claim status, and vault-approved title events. The protocol does not take custody; the vault remains in control of its records, its metal, and its approval process.",
+  },
+  {
+    no: "02",
+    title: "Tokenize Module",
+    body: "Creates Conditional Claim Tokens against registered bars. A CCT represents a claim tied to a specific bar and the right to request title transfer under protocol and vault rules. This is how allocated gold becomes addressable on-chain without pretending the token itself is legal title.",
+  },
+  {
+    no: "03",
+    title: "Mint Module",
+    body: "Collateralizes CCTs to mint Standard Metal Units. When SMUs are burned, the user can reclaim a bar-specific claim on comparable gold of the same caliber, subject to protocol and vault rules. This is the bridge between allocated ownership and market liquidity.",
+  },
+  {
+    no: "04",
+    title: "Liquidity Module",
+    body: "SMUs trade through the Liquidity Module, routing against other gold units and liquidity venues. Vaults settle title on their own registers; the market settles unit trades on-chain.",
+  },
+  {
+    no: "05",
+    title: "Reserve Module",
+    body: "A communal vault holds a fixed basket of jurisdictional gold tokens; deliver the basket to mint gGold one-for-one, and redeem any gGold for a pro-rata slice of the basket. No single issuer can mint, freeze, or redeem it — and as more gold tokens join, gGold becomes the unit the on-chain gold economy routes and settles through.",
+  },
+  {
+    no: "06",
+    title: "Security Module",
+    body: "Guardians apply institutional-grade controls to vault-approved actions including title movements, claim creation, and corrective transfers. The approval architecture is designed so no single signer, operator, or issuer can unilaterally move title or rewrite the rules.",
+  },
+];
+---
+
+<section class="section standard-modules" id="modules" aria-labelledby="standard-modules-heading">
+  <div class="container">
+    <header class="standard-modules__head">
+      <p class="eyebrow reveal">Modules</p>
+      <h2
+        class="display display--lg reveal"
+        id="standard-modules-heading"
+        data-reveal-delay="0.05"
+      >
+        The architectural proof behind the story.
+      </h2>
+      <p class="standard-modules__lede reveal" data-reveal-delay="0.1">
+        The layers explain the user journey. The modules define the rails that
+        make it enforceable across participating vaults, markets, and governance.
+      </p>
+    </header>
+
+    <div class="standard-modules__grid">
+      {
+        modules.map((mod, i) => (
+          <article class="module-card reveal" data-reveal-delay={(0.04 + (i % 3) * 0.04).toFixed(2)}>
+            <span class="module-card__no">{mod.no}</span>
+            <h3 class="module-card__title">{mod.title}</h3>
+            <p class="module-card__body">{mod.body}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .standard-modules__head {
+    max-width: 40ch;
+  }
+  .standard-modules__head h2 {
+    margin-top: 0.5em;
+  }
+  .standard-modules__lede {
+    margin-top: clamp(20px, 2.4vw, 30px);
+    max-width: 58ch;
+    font-size: var(--t-lede);
+    line-height: 1.5;
+    color: var(--graphite);
+  }
+
+  .standard-modules__grid {
+    margin-top: clamp(48px, 6vw, 84px);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-right: 1px solid var(--rule-faint);
+    border-bottom: 1px solid var(--rule-faint);
+  }
+  .module-card {
+    background: var(--paper);
+    border-left: 1px solid var(--rule-faint);
+    border-top: 1px solid var(--rule-faint);
+    padding: clamp(28px, 2.6vw, 40px) clamp(22px, 2vw, 32px) clamp(32px, 3.2vw, 44px);
+    display: flex;
+    flex-direction: column;
+  }
+  .module-card__no {
+    font-family: var(--sans-display);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    color: var(--gold-deep);
+  }
+  .module-card__title {
+    margin: clamp(18px, 2.2vw, 28px) 0 clamp(12px, 1.4vw, 18px);
+    font-family: var(--serif-display);
+    font-weight: 300;
+    font-size: clamp(1.3rem, 1.8vw, 1.6rem);
+    line-height: 1.12;
+    color: var(--char);
+  }
+  .module-card__body {
+    margin: 0;
+    font-size: 0.96rem;
+    line-height: 1.55;
+    color: var(--graphite);
+  }
+
+  @media (max-width: 900px) {
+    .standard-modules__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 560px) {
+    .standard-modules__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

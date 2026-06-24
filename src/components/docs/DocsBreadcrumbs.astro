@@ -1,0 +1,60 @@
+---
+// =====================================================================
+// DocsBreadcrumbs — Docs / Section / Page trail, derived from the IA.
+// The current page is rendered as plain (aria-current) text.
+// =====================================================================
+export interface Props {
+  group: string;
+  label: string;
+}
+
+const { group, label } = Astro.props;
+---
+
+<nav class="crumbs" aria-label="Breadcrumb" data-pagefind-ignore>
+  <ol class="crumbs__list">
+    <li class="crumbs__item">
+      <a href="/docs/">Docs</a>
+      <span class="crumbs__sep" aria-hidden="true">/</span>
+    </li>
+    <li class="crumbs__item">
+      <span class="crumbs__group">{group}</span>
+      <span class="crumbs__sep" aria-hidden="true">/</span>
+    </li>
+    <li class="crumbs__item">
+      <span class="crumbs__current" aria-current="page">{label}</span>
+    </li>
+  </ol>
+</nav>
+
+<style>
+  .crumbs__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5em;
+    font-family: var(--sans-display);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+  }
+  .crumbs__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+  }
+  .crumbs__list a,
+  .crumbs__group {
+    color: var(--graphite);
+    transition: color var(--t-fast) var(--ease);
+  }
+  .crumbs__list a:hover {
+    color: var(--gold-deep);
+  }
+  .crumbs__sep {
+    color: var(--rule);
+  }
+  .crumbs__current {
+    color: var(--gold-deep);
+    font-weight: 500;
+  }
+</style>

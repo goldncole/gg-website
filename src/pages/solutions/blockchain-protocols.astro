@@ -1,0 +1,141 @@
+---
+// =====================================================================
+// PAGE — Solutions · Blockchain Protocols (uses SolutionPage template).
+// Copy v3 — DIFFERENTIATION pass (2026-06-23). Prior version overlapped
+// heavily with the DeFi Protocols page (same "fresh vs recycled
+// liquidity / better collateral / how-is-this-different-from-PAXG"
+// spine). Lanes are now split:
+//   • DeFi Protocols  = the INTEGRATOR pitch (collateral & gold markets
+//     for YOUR protocol and its users).
+//   • Blockchain Protocols (this page) = the ECOSYSTEM pitch for an L1/L2:
+//     net-new STICKY TVL that doesn't rotate out + a real-asset
+//     SETTLEMENT STANDARD your builders compose with + a category to own.
+// gGold is basket-backed (per 10D_GGOLD_GBAR brief); cross-chain
+// mechanism left generic ("cross-chain"), not "LayerZero OFT".
+// GOVERNANCE FIX: Council is a PURE STANDARDS BODY under SD-21 — it does
+// NOT hold a treasury (the Foundation does). Removed the
+// stale "its own treasury" claim.
+// =====================================================================
+import SolutionPage from "../../layouts/templates/SolutionPage.astro";
+import type { SolutionPageContent } from "../../layouts/templates/SolutionPage.astro";
+
+const content: SolutionPageContent = {
+  meta: {
+    title: "For Blockchain Protocols — Solutions · Global Gold",
+    description:
+      "Win liquidity that doesn't leave — net-new, real-world gold that flows in as vaults tokenize and stays — and give your builders a real-asset settlement standard to found an ecosystem on.",
+  },
+  hero: {
+    eyebrow: "Solutions · Blockchain Protocols",
+    title: "Liquidity that stays — and a standard to build on.",
+    lede: "Chains compete for liquidity, and most of what they win is mercenary: it arrives for the incentives and leaves when they stop. Global Gold brings the opposite — net-new, real-world gold that flows in as independent vaults tokenize and deepens as the network grows. Beneath it sits a real-asset settlement standard your builders can compose with, so you're not renting TVL — you're founding a category on your chain.",
+    image: {
+      src: "/images/blockchain-protocol.png",
+      alt: "Architecture of an on-chain title register",
+    },
+    primaryCta: { label: "Request Access", href: "/access/" },
+    secondaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+  },
+  challenge: {
+    eyebrow: "The challenge",
+    heading: "Every chain is fighting for the same recycled liquidity.",
+    body: [
+      "Liquidity is the moat, and most of it is mercenary: incentive-chasing capital — the same crypto and the same two stablecoins — rotating from chain to chain. You pay to attract it, and it leaves the moment a better program appears. What actually deepens an ecosystem is net-new, sticky, real-world value, and that has been the scarcest thing on-chain.",
+      "The real-world assets that could change this mostly sit in permissioned silos, each with its own compliance and settlement model — fragmenting liquidity rather than deepening it, as the ECB has warned. What an ecosystem needs isn't another isolated pool. It's a real asset that circulates and composes, and a common standard its builders can build on.",
+    ],
+  },
+  benefits: {
+    eyebrow: "What the Standard offers an ecosystem",
+    heading: "Found a category, not a campaign.",
+    lede: "Net-new liquidity that stays, a real-asset settlement standard your builders compose with, and a category your chain can own over time.",
+    columns: 3,
+    items: [
+      {
+        eyebrow: "Sticky TVL",
+        title: "Liquidity that doesn't rotate out",
+        body: "Net-new, real-world gold flows onto your chain as vaults tokenize — and stays. Value from outside crypto that deepens with the network, not mercenary capital that leaves when an incentive program ends. You grow the base, not just rent it.",
+      },
+      {
+        eyebrow: "A standard to build on",
+        title: "A real-asset settlement primitive",
+        body: "Each participating vault's Title Register is an authoritative, on-chain book of record — the RWA title problem closed by construction. Your builders get real-asset rails to compose with — gold-denominated claims, units, and settlement — not just one more token to list.",
+      },
+      {
+        eyebrow: "A category to own",
+        title: "More than gold, over time",
+        body: "The same architecture generalizes to silver, platinum, and any allocated commodity, under credibly neutral governance. Become the chain where real-world assets actually settle — a durable category, not a single integration.",
+      },
+    ],
+  },
+  howItWorks: {
+    eyebrow: "How it works for an ecosystem",
+    heading: "Three ways to connect.",
+    steps: [
+      {
+        title: "Bring the liquidity cross-chain",
+        body: "gGold extends cross-chain, bringing diversified, gold-denominated liquidity to your ecosystem's markets — real-world value that deepens as more vaults tokenize.",
+      },
+      {
+        title: "Put the standard in your builders' hands",
+        body: "The per-vault register pattern, the conditional-claim instrument, and the gold-denominated units are documented architecture your builders can compose with. Participation rules and conformance are published by the Council, in the open.",
+      },
+      {
+        title: "Extend the category",
+        body: "As the standard generalizes to new commodities and more jurisdictions bring metal on-chain, your ecosystem grows with it — the home base for real-world settlement, not a one-off listing.",
+      },
+    ],
+  },
+  proof: {
+    eyebrow: "Why ecosystems engage",
+    heading: "The architecture, in brief.",
+    stats: [
+      { label: "Liquidity", value: "Net-new — and it stays" },
+      { label: "Cross-chain", value: "Omnichain reach" },
+      { label: "For builders", value: "A real-asset settlement standard" },
+      { label: "Scope", value: "Any allocated commodity" },
+    ],
+    statColumns: 4,
+  },
+  faq: {
+    eyebrow: "Questions",
+    heading: "What ecosystem teams ask first.",
+    items: [
+      {
+        question: "Will this liquidity stay, or rotate out when incentives end?",
+        answer:
+          "It's net-new, real-world gold — value brought on-chain as independent vaults tokenize previously-offline allocated bars, not mercenary capital chasing the next program. It deepens as the network grows, and the underlying gold doesn't leave your ecosystem when an incentive campaign ends.",
+      },
+      {
+        question: "Which chains does the stack live on, and how does the liquidity travel?",
+        answer:
+          "The core protocol — registers, claims, collateralization, and the gGold vault — lives on Ethereum mainnet. gGold extends cross-chain so gold-denominated liquidity can reach your ecosystem without fragmenting the underlying gold.",
+      },
+      {
+        question: "What do builders on our chain actually get to build with?",
+        answer:
+          "A real-asset settlement standard: vault-operated on-chain registers, bar-level conditional claims, and gold-denominated units (gGold and USG) that compose like any ERC-20. The same units a DeFi protocol integrates as collateral become primitives your whole ecosystem can build lending, trading, structured products, and payments on — with compliance at the title and claim layer, not a freeze over the unit.",
+      },
+      {
+        question: "Is this just a gold project?",
+        answer:
+          "Gold is the first market because it is the largest and most fragmented. The architecture — vault-operated registers, bar-level claims, gold-denominated units — was designed from the start to generalize to silver, platinum, and any allocated commodity custody.",
+      },
+      {
+        question: "What makes the governance credibly neutral?",
+        answer:
+          "The standard is set by a Wyoming nonprofit association under Wyo. Stat. § 17-32 — with its own legal personality and standing independent of any operating company — rather than a corporate foundation captured by a single vendor. It writes the rules; it does not run the markets or issue the tokens.",
+      },
+    ],
+  },
+  cta: {
+    eyebrow: "Solutions · Blockchain Protocols",
+    heading: "Found a category, not a campaign.",
+    body: "Request access to the architecture and integration documentation for the Global Gold Standard.",
+    primaryCta: { label: "Request Access", href: "/access/" },
+    secondaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+    variant: "dark",
+  },
+};
+---
+
+<SolutionPage content={content} />

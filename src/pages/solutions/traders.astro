@@ -1,0 +1,124 @@
+---
+// =====================================================================
+// PAGE — Solutions · Traders (uses SolutionPage template).
+// Draft copy v1 — continuous gold-denominated liquidity, gold-to-gold
+// routing (USG vs major gold units), and the round trip to allocated
+// metal. Voice note: structural, specific — no yield-pitch language.
+// =====================================================================
+import SolutionPage from "../../layouts/templates/SolutionPage.astro";
+import type { SolutionPageContent } from "../../layouts/templates/SolutionPage.astro";
+
+const content: SolutionPageContent = {
+  meta: {
+    title: "For Traders — Solutions · Global Gold",
+    description:
+      "Continuous, gold-denominated liquidity — fungible ounce units, gold-to-gold routing against the major gold tokens, and a round trip to allocated metal.",
+  },
+  hero: {
+    eyebrow: "Solutions · Traders",
+    title: "The gold market, without the closing bell.",
+    lede: "Continuous, gold-denominated liquidity — fungible ounce units, gold-to-gold routing against the major gold tokens, and a round trip that ends in allocated metal, not in an issuer's queue.",
+    image: {
+      src: "/images/trader.png",
+      alt: "Gold liquidity, continuously traded",
+    },
+    primaryCta: { label: "Request Access", href: "/access/" },
+    secondaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+  },
+  challenge: {
+    eyebrow: "The challenge",
+    heading: "Gold trades inside windows. Capital doesn't.",
+    body: [
+      "The physical market keeps hub hours and settles through regional rails that don't interoperate — London and Zurich, New York, Shanghai, Hong Kong, Dubai, Singapore, each inside its own window. Futures add basis and roll. The market is deep, but it is never simply open.",
+      "Tokenized gold was supposed to fix this, and instead it fragmented further: each issuer's token is its own island, with its own liquidity, its own redemption desk, and its own counterparty. Moving between gold instruments usually means leaving gold — out to a dollar leg and back in — paying the spread both ways.",
+    ],
+  },
+  benefits: {
+    eyebrow: "How the Standard works for you",
+    heading: "One market, denominated in ounces.",
+    columns: 3,
+    items: [
+      {
+        eyebrow: "Depth",
+        title: "Network-wide fungibility",
+        body: "Standard Metal Units from every participating vault are interchangeable, so liquidity pools in one market instead of fragmenting vault by vault or issuer by issuer.",
+      },
+      {
+        eyebrow: "Routing",
+        title: "Gold to gold, directly",
+        body: "Pools route USG against the major gold tokens and digital assets, with gGold at the hub — relative-value and basis positions without leaving gold.",
+      },
+      {
+        eyebrow: "Finality",
+        title: "A round trip to real metal",
+        body: "Burn units and take a bar-specific claim on allocated gold. The exit from the trade is the metal itself — not a redemption desk's discretion.",
+      },
+    ],
+  },
+  howItWorks: {
+    eyebrow: "How it works for you",
+    heading: "From access to position.",
+    steps: [
+      {
+        title: "Complete onboarding",
+        body: "Eligibility runs through the network's compliance framework once — then the market is open to you on-chain, continuously.",
+      },
+      {
+        title: "Trade and route, 24/7",
+        body: "Take positions in USG and the SMU series, route gold-to-gold against the incumbent tokens, and settle on-chain at any hour, any day.",
+      },
+      {
+        title: "Redeem or roll",
+        body: "Hold units, roll between gold instruments, or burn to a bar-specific claim and stand on allocated metal. Every path stays open.",
+      },
+    ],
+  },
+  proof: {
+    eyebrow: "Why traders use the Standard",
+    heading: "Market structure, in brief.",
+    stats: [
+      { label: "Market hours", value: "24/7" },
+      { label: "Unit", value: "1 SMU = 1 troy oz" },
+      { label: "Routing", value: "Gold-to-gold pools" },
+      { label: "Redemption", value: "To bar-specific claims" },
+    ],
+    statColumns: 4,
+  },
+  faq: {
+    eyebrow: "Questions",
+    heading: "What traders ask first.",
+    items: [
+      {
+        question: "What am I actually trading?",
+        answer:
+          "Standard Metal Units — fungible ERC-20 ounce units, each backed 1:1 by a collateralized claim on a specific allocated bar in a participating vault. The unit is the liquid surface of real, identified metal.",
+      },
+      {
+        question: "What pairs and venues exist?",
+        answer:
+          "Pool architecture routes USG against the major incumbent gold tokens and digital assets, with gGold as the routing hub. Request access for current venues, pairs, and depth.",
+      },
+      {
+        question: "Who is my counterparty?",
+        answer:
+          "Trades settle on-chain against pooled liquidity — there is no bilateral counterparty, no settlement window, and no redemption desk between you and the position.",
+      },
+      {
+        question: "What stands behind the unit?",
+        answer:
+          "Allocated bars in participating vaults, registered on vault-operated on-chain ledgers, with collateralized claims held by a bankruptcy-remote collateral agent. Eligible collateral is not pledged, lent, or rehypothecated.",
+      },
+    ],
+  },
+  cta: {
+    eyebrow: "Solutions · Traders",
+    heading: "Trade gold like the market never closes.",
+    body: "Request access to trade Standard Metal Units on the network's markets.",
+    primaryCta: { label: "Request Access", href: "/access/" },
+    secondaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+    variant: "dark",
+  },
+};
+---
+
+<SolutionPage content={content} />

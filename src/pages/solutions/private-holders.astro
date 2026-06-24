@@ -1,0 +1,124 @@
+---
+// =====================================================================
+// PAGE — Solutions · Private Holders (uses SolutionPage template).
+// Draft copy v1 — institutional voice (this is the Global Gold site,
+// not GOLDN), built on the "compliant pathways to allocated gold
+// ownership" framing. Human, but never retail-register.
+// =====================================================================
+import SolutionPage from "../../layouts/templates/SolutionPage.astro";
+import type { SolutionPageContent } from "../../layouts/templates/SolutionPage.astro";
+
+const content: SolutionPageContent = {
+  meta: {
+    title: "For Private Holders — Solutions · Global Gold",
+    description:
+      "A compliant pathway to allocated gold ownership — specific bars in professional custody, with on-chain liquidity when you choose, and no games played with your gold.",
+  },
+  hero: {
+    eyebrow: "Solutions · Private Holders",
+    title: "Own the bar. Keep the liquidity.",
+    lede: "A compliant pathway to allocated gold ownership — title to specific bars in professional vault custody, with continuous on-chain liquidity when you want it, and none when you don't.",
+    image: {
+      src: "/images/private-holders.png",
+      alt: "A 1000g allocated gold bar",
+    },
+    primaryCta: { label: "Request Access", href: "/access/" },
+    secondaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+  },
+  challenge: {
+    eyebrow: "The challenge",
+    heading: "Real ownership has meant real friction.",
+    body: [
+      "The traditional choices each take something from you. Coins in a safe give you possession and nothing else — no liquidity, no professional custody, full personal risk. An ETF gives you a ticker, not a bar: a fund's share, inside market hours, with no path to the metal. Single-issuer tokens trade around the clock, but everything depends on one company's solvency, policies, and freeze powers.",
+      "And allocated vault custody — the form of ownership institutions actually use — has historically been built for institutions alone, with selling a bar meaning shipping, re-assay, and a dealer's spread at the end.",
+    ],
+  },
+  benefits: {
+    eyebrow: "How the Standard works for you",
+    heading: "Institutional custody, personal ownership.",
+    columns: 3,
+    items: [
+      {
+        eyebrow: "Ownership",
+        title: "A specific bar, in your name",
+        body: "Title to an identified, allocated bar — serial, refiner, weight, fineness — recorded on the vault's authoritative on-chain ledger. Not a pool. Not an IOU.",
+      },
+      {
+        eyebrow: "Liquidity",
+        title: "Liquid when you choose",
+        body: "Hold title quietly for as long as you like. When you want liquidity, create a claim and mint Standard Metal Units — and burn them later to return to allocated ownership.",
+      },
+      {
+        eyebrow: "Integrity",
+        title: "No games with your gold",
+        body: "Your bar is not pledged, lent, or rehypothecated — by rule, enforced in the protocol itself. The metal does one job: being yours.",
+      },
+    ],
+  },
+  howItWorks: {
+    eyebrow: "How it works for you",
+    heading: "Three steps to allocated ownership.",
+    steps: [
+      {
+        title: "Complete onboarding",
+        body: "Identity verification runs through the network's designated compliance provider — the same framework that governs every participant, institutional or private.",
+      },
+      {
+        title: "Take title to allocated bars",
+        body: "Acquire specific bars in a participating vault. Your ownership is recorded on the vault's on-chain Title Register — verifiable, permanent, and yours.",
+      },
+      {
+        title: "Hold, or go liquid",
+        body: "Leave the bar at rest in professional custody, or mint units against it for continuous on-chain liquidity. The round trip is always open.",
+      },
+    ],
+  },
+  proof: {
+    eyebrow: "Why private holders choose the Standard",
+    heading: "Ownership you can verify.",
+    stats: [
+      { label: "Ownership", value: "Bar-specific title" },
+      { label: "Custody", value: "Allocated, insured, audited" },
+      { label: "Rehypothecation", value: "None" },
+      { label: "Liquidity", value: "24/7, on-chain" },
+    ],
+    statColumns: 4,
+  },
+  faq: {
+    eyebrow: "Questions",
+    heading: "What private holders ask first.",
+    items: [
+      {
+        question: "Is this an IOU from a company?",
+        answer:
+          "No. You hold title to a specific, identified bar in a participating vault, recorded on the vault's authoritative on-chain ledger. No company's balance sheet stands between you and the metal.",
+      },
+      {
+        question: "Can I take physical delivery?",
+        answer:
+          "Yes. Redemption to physical metal is available under the participating vault's terms. Most holders leave bars in allocated custody — but the bar is yours, and so is the choice.",
+      },
+      {
+        question: "What if Global Gold the company went away?",
+        answer:
+          "Your title lives on the vault's ledger, your bar lives in the vault, and the rules live with a nonprofit standards body. The architecture is deliberately built so that no single company — including the one that wrote the software — is a point of failure for your ownership.",
+      },
+      {
+        question: "Who can participate?",
+        answer:
+          "Eligible individuals who complete identity verification under the network's compliance framework. Request access and we will walk you through onboarding for your jurisdiction.",
+      },
+    ],
+  },
+  cta: {
+    eyebrow: "Solutions · Private Holders",
+    heading: "Gold, the way it was meant to be owned.",
+    body: "Request access to begin onboarding for allocated gold ownership.",
+    primaryCta: { label: "Request Access", href: "/access/" },
+    secondaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+    variant: "dark",
+  },
+};
+---
+
+<SolutionPage content={content} />

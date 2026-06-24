@@ -1,0 +1,136 @@
+---
+// [1] Hero block — the page's <h1>. Text-led, left-aligned, with a faint
+// ghosted gold-icon watermark bleeding off the right edge.
+---
+
+<section class="section hero-block" id="standard" aria-labelledby="hero-heading">
+  <img
+    class="hero-block__watermark"
+    src="/images/gold-icon.png"
+    alt=""
+    aria-hidden="true"
+    loading="lazy"
+  />
+  <div class="container hero-block__inner">
+    <p class="eyebrow reveal">The Global Gold Standard</p>
+
+    <h1 class="display display--xl hero-block__title reveal" id="hero-heading" data-reveal-delay="0.05">
+      The market standard for allocated gold.
+    </h1>
+
+    <p class="hero-block__subhead reveal" data-reveal-delay="0.1">
+      Global Gold is building global market infrastructure for allocated
+      physical gold: one shared protocol for liquidity, collateral, clearing,
+      settlement, and governance across vaults, jurisdictions, institutions,
+      and digital markets.
+    </p>
+
+    <p class="hero-block__punchline reveal" data-reveal-delay="0.13">
+      Real gold. Global liquidity. One shared standard.
+    </p>
+
+    <div class="hero-block__actions reveal" data-reveal-delay="0.16">
+      <a class="cta--box" href="/standard/">Explore the Standard</a>
+      <a class="cta" href="/whitepaper">Read the White Paper →</a>
+    </div>
+
+    <p class="hero-block__trust reveal" data-reveal-delay="0.2">
+      <span>Institutional-grade gold</span>
+      <span>No single issuer</span>
+      <span>24/7 global liquidity</span>
+      <span>Backed 1:1, never rehypothecated</span>
+    </p>
+  </div>
+</section>
+
+<style>
+  .hero-block {
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-block__inner {
+    position: relative;
+    z-index: 1;
+  }
+  .hero-block__watermark {
+    position: absolute;
+    z-index: 0;
+    top: 50%;
+    right: clamp(-120px, -4vw, -40px);
+    width: min(48vw, 560px);
+    transform: translateY(-50%);
+    opacity: 0.06;
+    filter: grayscale(1) brightness(0.4);
+    pointer-events: none;
+  }
+
+  .hero-block__title {
+    margin-top: clamp(20px, 2.6vw, 32px);
+    max-width: 16ch;
+    text-wrap: balance;
+  }
+  .hero-block__subhead {
+    margin: clamp(28px, 3.6vw, 44px) 0 0;
+    max-width: 62ch;
+    font-family: var(--serif-body);
+    font-weight: 400;
+    font-size: clamp(1.3rem, 1.9vw, 1.7rem);
+    line-height: 1.5;
+    color: var(--char);
+  }
+  .hero-block__punchline {
+    margin: clamp(22px, 2.6vw, 32px) 0 0;
+    font-family: var(--sans-display);
+    font-weight: 500;
+    font-size: 0.86rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+  }
+
+  .hero-block__actions {
+    margin-top: clamp(32px, 4vw, 48px);
+    display: flex;
+    align-items: center;
+    gap: clamp(20px, 3vw, 40px);
+    flex-wrap: wrap;
+  }
+
+  .hero-block__trust {
+    margin: clamp(40px, 5vw, 64px) 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6em 1.1em;
+    font-family: var(--sans-display);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: var(--graphite);
+  }
+  .hero-block__trust span { position: relative; }
+  .hero-block__trust span + span::before {
+    content: "·";
+    margin-right: 1.1em;
+    color: var(--gold-deep);
+  }
+
+  @media (max-width: 720px) {
+    .hero-block__title { max-width: 100%; }
+    .hero-block__watermark { opacity: 0.04; }
+
+    /* Stack the trust chips vertically; replace the inline middot separators
+       with a leading gold dot on each line so nothing wraps raggedly. */
+    .hero-block__trust {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.6em;
+    }
+    .hero-block__trust span { display: flex; align-items: baseline; }
+    .hero-block__trust span::before,
+    .hero-block__trust span + span::before {
+      content: "·";
+      color: var(--gold-deep);
+      margin-right: 0.55em;
+    }
+  }
+</style>

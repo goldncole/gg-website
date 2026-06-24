@@ -1,0 +1,94 @@
+---
+// [6] The Standard — a quiet statement section. A large, faded grey emblem
+// watermark sits behind the text.
+---
+
+<section class="section the-standard" aria-labelledby="the-standard-heading">
+  <img
+    class="the-standard__emblem"
+    src="/images/gold-icon.png"
+    alt=""
+    aria-hidden="true"
+    loading="lazy"
+  />
+  <div class="container container--narrow the-standard__inner">
+    <p class="eyebrow reveal">One shared rulebook</p>
+    <h2 class="display display--lg the-standard__heading reveal" data-reveal-delay="0.05" id="the-standard-heading">
+      The Global Gold Standard.
+    </h2>
+
+    <div class="the-standard__body reveal" data-reveal-delay="0.1">
+      <p>
+        The Global Gold Standard defines the shared rules, instruments, and
+        infrastructure for allocated physical gold to operate across vaults,
+        jurisdictions, pools, and digital markets.
+      </p>
+      <p>
+        It sets the terms for eligible metal, participating vaults, bar-level
+        claims, Standard Metal Units, collateral, liquidity routing, and
+        governance.
+      </p>
+      <p class="the-standard__statement">
+        The metal remains physical.<br />The market access becomes global.
+      </p>
+    </div>
+
+    <p class="the-standard__closer reveal" data-reveal-delay="0.13">
+      Participating vaults. Multiple jurisdictions. One shared standard.
+    </p>
+  </div>
+</section>
+
+<style>
+  .the-standard {
+    position: relative;
+    overflow: hidden;
+  }
+  .the-standard__inner { position: relative; z-index: 1; text-align: center; }
+  .the-standard__emblem {
+    position: absolute;
+    z-index: 0;
+    top: 50%;
+    left: 50%;
+    width: min(72vw, 720px);
+    transform: translate(-50%, -50%);
+    opacity: 0.12;
+    filter: grayscale(1) brightness(0.55);
+    pointer-events: none;
+  }
+
+  .the-standard__heading { margin-top: 0.5em; }
+  .the-standard__body {
+    margin-top: clamp(28px, 3.6vw, 44px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2em;
+    max-width: 58ch;
+    margin-inline: auto;
+  }
+  .the-standard__body p {
+    margin: 0;
+    font-family: var(--serif-body);
+    font-weight: 400;
+    font-size: clamp(1.2rem, 1.7vw, 1.45rem);
+    line-height: 1.55;
+    color: var(--char);
+  }
+  .the-standard__body .the-standard__statement {
+    margin-top: clamp(12px, 1.6vw, 20px);
+    font-family: var(--serif-display);
+    font-weight: 300;
+    font-size: clamp(1.35rem, 2vw, 1.85rem);
+    line-height: 1.18;
+  }
+  .the-standard__closer {
+    margin: clamp(36px, 4.4vw, 56px) 0 0;
+    font-family: var(--sans-display);
+    font-weight: 500;
+    font-size: 0.92rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+  }
+</style>

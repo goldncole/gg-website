@@ -1,0 +1,196 @@
+---
+// =====================================================================
+// ModulePage — explanatory / educational template.
+// For the Standard's modules (Title Register, Tokenization, Collateral-
+// ization, Liquidity, Security).
+//
+// Section order:
+//   PageHero → Overview (prose) → StepFlow (how it works) →
+//   FeatureGrid (key properties) → PullStatement (why it matters) →
+//   optional full-bleed diagram band → RelatedGrid → CtaBand
+//
+// Fill content by passing a single typed `content` object (below). Any
+// section except the hero is optional — omit a field to drop the section.
+// =====================================================================
+import InnerPage from "../InnerPage.astro";
+import PageHero from "../../components/blocks/PageHero.astro";
+import type { HeroCta } from "../../components/blocks/PageHero.astro";
+import ProseBody from "../../components/blocks/ProseBody.astro";
+import StepFlow from "../../components/blocks/StepFlow.astro";
+import type { Step } from "../../components/blocks/StepFlow.astro";
+import FeatureGrid from "../../components/blocks/FeatureGrid.astro";
+import type { Feature } from "../../components/blocks/FeatureGrid.astro";
+import PullStatement from "../../components/blocks/PullStatement.astro";
+import RelatedGrid from "../../components/blocks/RelatedGrid.astro";
+import type { RelatedItem } from "../../components/blocks/RelatedGrid.astro";
+import CtaBand from "../../components/blocks/CtaBand.astro";
+import type { BandCta } from "../../components/blocks/CtaBand.astro";
+
+export interface ModulePageContent {
+  meta: { title: string; description?: string };
+  hero: {
+    eyebrow?: string;
+    title: string;
+    lede?: string;
+    primaryCta?: HeroCta;
+    secondaryCta?: HeroCta;
+    meta?: string[];
+  };
+  overview?: { eyebrow?: string; heading: string; body: string[] };
+  howItWorks?: { eyebrow?: string; heading: string; lede?: string; steps: Step[] };
+  properties?: {
+    eyebrow?: string;
+    heading?: string;
+    lede?: string;
+    items: Feature[];
+    columns?: 2 | 3 | 4;
+  };
+  whyItMatters?: { eyebrow?: string; statement: string };
+  diagram?: { src: string; alt: string; caption?: string };
+  related?: { eyebrow?: string; heading?: string; items: RelatedItem[]; columns?: 2 | 3 };
+  cta: {
+    eyebrow?: string;
+    heading: string;
+    body?: string;
+    primaryCta?: BandCta;
+    secondaryCta?: BandCta;
+    variant?: "light" | "dark";
+  };
+}
+
+export interface Props {
+  content: ModulePageContent;
+}
+
+const { content } = Astro.props;
+const {
+  meta,
+  hero,
+  overview,
+  howItWorks,
+  properties,
+  whyItMatters,
+  diagram,
+  related,
+  cta,
+} = content;
+---
+
+<InnerPage title={meta.title} description={meta.description}>
+  <PageHero
+    eyebrow={hero.eyebrow}
+    title={hero.title}
+    lede={hero.lede}
+    primaryCta={hero.primaryCta}
+    secondaryCta={hero.secondaryCta}
+    meta={hero.meta}
+  />
+
+  {
+    overview && (
+      <section class="section module-overview" aria-labelledby="module-overview-heading">
+        <div class="container container--narrow module-overview__inner">
+          {overview.eyebrow && <p class="eyebrow reveal">{overview.eyebrow}</p>}
+          <h2
+            class="display display--lg module-overview__heading reveal"
+            id="module-overview-heading"
+            data-reveal-delay="0.05"
+          >
+            {overview.heading}
+          </h2>
+          <div class="module-overview__body reveal" data-reveal-delay="0.1">
+            <ProseBody>
+              {overview.body.map((p) => (
+                <p>{p}</p>
+              ))}
+            </ProseBody>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    howItWorks && (
+      <StepFlow
+        eyebrow={howItWorks.eyebrow}
+        heading={howItWorks.heading}
+        lede={howItWorks.lede}
+        steps={howItWorks.steps}
+      />
+    )
+  }
+
+  {
+    properties && (
+      <FeatureGrid
+        eyebrow={properties.eyebrow}
+        heading={properties.heading}
+        lede={properties.lede}
+        items={properties.items}
+        columns={properties.columns}
+      />
+    )
+  }
+
+  {whyItMatters && <PullStatement eyebrow={whyItMatters.eyebrow} statement={whyItMatters.statement} />}
+
+  {
+    diagram && (
+      <section class="section module-diagram">
+        <div class="container">
+          <figure class="module-diagram__figure reveal">
+            <img src={diagram.src} alt={diagram.alt} loading="lazy" />
+          </figure>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    related && (
+      <RelatedGrid
+        eyebrow={related.eyebrow}
+        heading={related.heading}
+        items={related.items}
+        columns={related.columns}
+      />
+    )
+  }
+
+  <CtaBand
+    eyebrow={cta.eyebrow}
+    heading={cta.heading}
+    body={cta.body}
+    primaryCta={cta.primaryCta}
+    secondaryCta={cta.secondaryCta}
+    variant={cta.variant}
+  />
+</InnerPage>
+
+<style>
+  .module-overview__inner {
+    text-align: center;
+  }
+  .module-overview__heading {
+    margin-top: 0.5em;
+    max-width: 20ch;
+    margin-inline: auto;
+  }
+  .module-overview__body {
+    margin-top: clamp(28px, 3.6vw, 44px);
+    text-align: left;
+  }
+
+  /* Full-bleed diagram / image band. */
+  .module-diagram {
+    padding-block: 0;
+  }
+  .module-diagram__figure {
+    margin: 0;
+  }
+  .module-diagram__figure img {
+    width: 100%;
+    border-radius: var(--radius-img);
+  }
+</style>

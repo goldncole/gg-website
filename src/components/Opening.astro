@@ -1,0 +1,82 @@
+---
+// [2] Opening — split layout: copy on the left, an atmospheric marble hall
+// image on the right with rounded corners.
+---
+
+<section class="section opening" aria-labelledby="opening-heading">
+  <div class="container opening__inner">
+    <div class="opening__copy">
+      <p class="eyebrow reveal">The infrastructure beneath gold</p>
+      <h2 class="display display--lg opening__heading reveal" id="opening-heading" data-reveal-delay="0.05">
+        Gold was never broken. The infrastructure underneath it was.
+      </h2>
+      <div class="opening__body reveal" data-reveal-delay="0.1">
+        <p>
+          For 5,000 years, gold has served as neutral settlement. But the market
+          infrastructure around it remains fragmented: regional hubs,
+          approved-vault lists, physical shipment, re-assay, paper claims, and
+          single-issuer products standing in for a shared standard.
+        </p>
+        <p>
+          Global Gold restores the missing layer: a protocol, rulebook, and
+          market infrastructure standard that lets allocated gold operate
+          globally without ceasing to be allocated gold.
+        </p>
+      </div>
+    </div>
+
+    <figure class="opening__media reveal" data-reveal-delay="0.08">
+      <img
+        src="/images/marble-hall-pillars.png"
+        alt="A monumental marble hall lined with columns"
+        loading="lazy"
+      />
+    </figure>
+  </div>
+</section>
+
+<style>
+  .opening__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    column-gap: clamp(40px, 5vw, 88px);
+  }
+  .opening__heading {
+    margin-top: 0.5em;
+    max-width: 18ch;
+  }
+  .opening__body {
+    margin-top: clamp(24px, 3vw, 40px);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2em;
+    max-width: 52ch;
+  }
+  .opening__body p {
+    margin: 0;
+    font-family: var(--serif-body);
+    font-weight: 400;
+    font-size: 1.2rem;
+    line-height: 1.55;
+    color: var(--char);
+  }
+  .opening__media {
+    margin: 0;
+    border-radius: var(--radius-img);
+    overflow: hidden;
+    background: var(--stone);
+    aspect-ratio: 4 / 5;
+  }
+  .opening__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (max-width: 860px) {
+    .opening__inner { grid-template-columns: 1fr; row-gap: clamp(36px, 6vw, 56px); }
+    .opening__media { aspect-ratio: 16 / 10; order: -1; }
+    .opening__heading { max-width: 100%; }
+  }
+</style>

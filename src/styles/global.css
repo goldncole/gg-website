@@ -1,0 +1,331 @@
+/* =====================================================================
+   GLOBAL GOLD — Website v2  ·  Global stylesheet
+   ---------------------------------------------------------------------
+   One light --paper ground top-to-bottom. Obsidian only inside imagery
+   and the footer. Canela (display) + Neue Haas Grotesk (UI/body).
+   Motion is restrained and disabled under prefers-reduced-motion.
+   ===================================================================== */
+
+/* ---------------------------------------------------------------------
+   FONTS
+   --------------------------------------------------------------------- */
+@font-face { font-family: 'Canela'; src: url('/fonts/Canela-Thin-Trial.otf') format('opentype'); font-weight: 200; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Canela'; src: url('/fonts/Canela-Light-Trial.otf') format('opentype'); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Canela'; src: url('/fonts/Canela-Regular-Trial.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Canela'; src: url('/fonts/Canela-Medium-Trial.otf') format('opentype'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Canela Deck'; src: url('/fonts/CanelaDeck-Light-Trial.otf') format('opentype'); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Canela Deck'; src: url('/fonts/CanelaDeck-Regular-Trial.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Canela Text'; src: url('/fonts/CanelaText-Regular-Trial.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Canela Text'; src: url('/fonts/CanelaText-Medium-Trial.otf') format('opentype'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Neue Haas Grotesk Display'; src: url('/fonts/NeueHaasGrotDisp-45Light-Trial.otf') format('opentype'); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Neue Haas Grotesk Display'; src: url('/fonts/NeueHaasGrotDisp-55Roman-Trial.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Neue Haas Grotesk Display'; src: url('/fonts/NeueHaasGrotDisp-65Medium-Trial.otf') format('opentype'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Neue Haas Grotesk Display'; src: url('/fonts/NeueHaasGrotDisp-75Bold-Trial.otf') format('opentype'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Neue Haas Grotesk Text'; src: url('/fonts/NeueHaasGrotText-55Roman-Trial.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Neue Haas Grotesk Text'; src: url('/fonts/NeueHaasGrotText-65Medium-Trial.otf') format('opentype'); font-weight: 500; font-style: normal; font-display: swap; }
+/* EB Garamond — body / reading typeface. Self-hosted (OFL). */
+@font-face { font-family: 'EB Garamond'; src: url('/fonts/EBGaramond-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'EB Garamond'; src: url('/fonts/EBGaramond-Medium.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'EB Garamond'; src: url('/fonts/EBGaramond-Italic.woff2') format('woff2'); font-weight: 400; font-style: italic; font-display: swap; }
+
+/* ---------------------------------------------------------------------
+   DESIGN TOKENS
+   --------------------------------------------------------------------- */
+:root {
+  /* Gold family */
+  --gold:       #C6A15B;
+  --gold-warm:  #D2B786;
+  --gold-deep:  #8A6A3D;
+  --gold-soft:  #EFE8D6;
+
+  /* Dark family (imagery + footer only) */
+  --obsidian:      #111111;
+  --obsidian-soft: #1B1B1B;
+  --char:          #2A2724;  /* display / headline ink */
+  --graphite:      #4A4A47;  /* canonical body gray */
+
+  /* Light family */
+  --stone:      #D8D2C8;
+  --stone-warm: #C9B38E;
+  --ivory:      #F5F1E8;
+
+  /* Page ground — sampled from auwa.life: oklch(97% .004 95) => #F6F5F2 */
+  --paper: #F6F5F2;
+
+  --rule:       rgba(42, 39, 36, 0.14);
+  --rule-faint: rgba(42, 39, 36, 0.08);
+  --rule-light: rgba(245, 241, 232, 0.16);
+
+  /* Type families */
+  --serif-display: "Canela", "Canela Deck", Georgia, serif;
+  --serif-text:    "Canela Text", "Canela", Georgia, serif;
+  --serif-body:    "EB Garamond", Georgia, "Times New Roman", serif;
+  --sans:          "Neue Haas Grotesk Text", "Neue Haas Grotesk Display", "Inter", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --sans-display:  "Neue Haas Grotesk Display", "Neue Haas Grotesk Text", "Inter", system-ui, -apple-system, sans-serif;
+
+  /* Layout */
+  --radius-img:       12px;  /* rounded corners on imagery (Auwa-style) */
+  --container:        1320px;
+  --container-narrow: 820px;
+  --gutter:           clamp(24px, 5vw, 96px);
+  --section-y:        clamp(96px, 13vw, 180px);
+
+  /* Type scale */
+  --t-eyebrow:    0.78rem;
+  /* Body is set in EB Garamond, which runs small/light — a slight bump keeps
+     reading copy comfortable vs. the old Neue Haas default. */
+  --t-body:       1.125rem;
+  --t-lede:       1.3125rem;
+  --t-display-md: clamp(2rem, 4vw, 3rem);
+  --t-display-lg: clamp(2.5rem, 5.5vw, 4.25rem);
+  --t-display-xl: clamp(3rem, 7.5vw, 6rem);
+
+  --track-eyebrow:  0.22em;
+  --track-wordmark: 0.22em;
+
+  /* Motion */
+  --ease:     cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --t-fast:   160ms;
+  --t-base:   260ms;
+}
+
+/* ---------------------------------------------------------------------
+   RESET / BASE
+   --------------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  /* EB Garamond is the body / reading typeface everywhere. UI chrome
+     (eyebrows, labels, CTAs, nav) opts back into --sans explicitly. */
+  font-family: var(--serif-body);
+  font-weight: 400;
+  font-size: var(--t-body);
+  line-height: 1.62;
+  color: var(--graphite);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+img, svg { display: block; max-width: 100%; height: auto; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+a { color: inherit; text-decoration: none; transition: color var(--t-fast) var(--ease); }
+p { margin: 0 0 1em; }
+h1, h2, h3 { margin: 0; font-weight: 400; }
+::selection { background: var(--gold-soft); color: var(--char); }
+
+/* ---------------------------------------------------------------------
+   LAYOUT HELPERS
+   --------------------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.container--narrow { max-width: var(--container-narrow); }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.section { padding-block: var(--section-y); }
+
+/* Auwa-style faint hairline separating each section. Inset to the gutter
+   (not full-bleed) and skips the first section, so there's no line at the
+   hero/content reveal seam. */
+.page-over main > section + section { position: relative; }
+.page-over main > section + section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: var(--gutter);
+  right: var(--gutter);
+  height: 1px;
+  background: var(--rule-faint);
+}
+
+.eyebrow {
+  font-family: var(--sans-display);
+  font-size: var(--t-eyebrow);
+  font-weight: 500;
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--gold-deep);
+}
+
+.rule { height: 1px; background: var(--rule); border: 0; }
+
+/* Display headings */
+.display {
+  font-family: var(--serif-display);
+  font-weight: 300;
+  color: var(--char);
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+}
+.display--xl { font-size: var(--t-display-xl); }
+.display--lg { font-size: var(--t-display-lg); }
+.display--md { font-size: var(--t-display-md); }
+
+.lede {
+  font-size: var(--t-lede);
+  line-height: 1.6;
+  color: var(--graphite);
+}
+
+/* CTA link with arrow */
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: var(--sans-display);
+  font-weight: 500;
+  font-size: var(--t-body);
+  letter-spacing: 0.01em;
+  color: var(--gold-deep);
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+  transition: gap var(--t-base) var(--ease), color var(--t-fast) var(--ease);
+}
+.cta:hover { color: var(--char); gap: 0.85em; }
+
+/* Auwa-style boxed button: thin outline, uppercase, letter-spaced */
+.cta--box {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 14px 26px;
+  border: 1px solid var(--rule);
+  font-family: var(--sans-display);
+  font-size: 0.76rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--char);
+  transition: background var(--t-base) var(--ease), color var(--t-base) var(--ease),
+    border-color var(--t-base) var(--ease), gap var(--t-base) var(--ease);
+}
+.cta--box::after { content: "→"; }
+.cta--box:hover {
+  color: var(--gold-deep);
+  border-color: var(--gold-deep);
+}
+
+/* ---------------------------------------------------------------------
+   SCROLL REVEAL  (driven by GSAP; graceful default = visible)
+   --------------------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  will-change: opacity, transform;
+}
+.is-ready .reveal { transition: none; }
+
+/* If JS/motion is unavailable, never leave content hidden. */
+.no-motion .reveal,
+html:not(.is-ready) .reveal { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1 !important; transform: none !important; }
+  html { scroll-behavior: auto; }
+}
+
+/* ---------------------------------------------------------------------
+   FOOTER REVEAL  (Auwa-style — the mirror of the pinned hero up top)
+   ---------------------------------------------------------------------
+   The footer is pinned behind the page and progressively UNCOVERED as the
+   content layer slides up at the end of the scroll — the same design
+   language as the homepage hero being COVERED at the top.
+
+   This is engaged only when motion.ts adds `.footer-reveal` to <html>,
+   which happens when JS is running AND the footer fully fits within the
+   viewport (with headroom below the wordmark line). Without the class the
+   footer is a normal in-flow block at the end of the page — the graceful
+   default for no-JS and for viewports too short to ever show a tall footer
+   in full (typically mobile portrait). One shared rule covers every content
+   shell (.page-over on the homepage / inner pages / the standard, plus the
+   docs shell), so there are no per-page reveal hacks.
+
+   --footer-h is the footer's rendered height, measured at runtime by a
+   ResizeObserver (see motion.ts) and consumed as the content layer's bottom
+   spacing. The value below is a pre-JS fallback so there's no layout jump
+   before the measurement lands. */
+:root { --footer-h: 640px; }
+
+/* Pin the footer to the bottom of the viewport, behind the content layer.
+   z-index:-1 keeps it under the content (z-index:1) until the content's
+   bottom gap uncovers it, AND under the homepage's pinned hero (z-index:0)
+   so it never peeks at the top — motion.ts drops the hero from paint once
+   the content has fully risen over it, letting the footer show through the
+   gap at the very bottom. */
+html.footer-reveal .footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+/* The scrolling content layer: a solid paper ground that covers the pinned
+   footer, a transparent bottom gap equal to the footer height that uncovers
+   it exactly at the end of the scroll, and at least one viewport of height
+   so the footer stays hidden until the bottom is actually reached (short
+   pages included — it never shows prematurely or overlaps content). */
+html.footer-reveal :is(.page-over, .docs-page) {
+  position: relative;
+  z-index: 1;
+  background: var(--paper);
+  margin-bottom: var(--footer-h);
+  min-height: 100svh;
+}
+
+/* ---------------------------------------------------------------------
+   PAGE TRANSITIONS  (Astro View Transitions / <ClientRouter />)
+   ---------------------------------------------------------------------
+   Matches auwa.life's navigation feel: a calm full-page crossfade over the
+   ivory --paper ground (never a hard white flash), with the incoming page
+   fading in and settling up a few pixels. No opaque curtain — old content
+   fades out while new content rises into place. Durations sit in the
+   0.4–0.6s range on --ease-out. Keep the paper ground behind everything so
+   the brief crossfade overlap never reveals white.
+   --------------------------------------------------------------------- */
+html { background: var(--paper); }
+
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root) {
+    animation: gg-page-out 420ms var(--ease-out) both;
+  }
+  ::view-transition-new(root) {
+    animation: gg-page-in 560ms var(--ease-out) 40ms both;
+  }
+}
+
+@keyframes gg-page-out {
+  to { opacity: 0; }
+}
+@keyframes gg-page-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Reduced motion: cut straight to an instant swap (no crossfade, no rise). */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}

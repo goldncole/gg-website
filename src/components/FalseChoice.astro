@@ -1,0 +1,175 @@
+---
+// [5] The False Choice — a three-column contrast (allocated custody vs.
+// ETFs vs. single-issuer tokenized) that resolves into the protocol's
+// reconciliation.
+---
+
+<section class="section false-choice" aria-labelledby="false-choice-heading">
+  <div class="container">
+    <div class="false-choice__head">
+      <p class="eyebrow reveal">The trade-off gold holders have been forced to make</p>
+      <h2 class="display display--lg false-choice__heading reveal" id="false-choice-heading" data-reveal-delay="0.05">
+        Real, liquid, or scalable. Rarely all three.
+      </h2>
+    </div>
+
+    <div class="false-choice__contrast">
+      <article class="false-choice__col reveal" data-reveal-delay="0.05">
+        <p class="false-choice__label">Allocated custody</p>
+        <p class="false-choice__col-body">
+          Direct allocated custody gives you the substance of a specific bar,
+          but limited mobility.
+        </p>
+      </article>
+
+      <span class="false-choice__divider" aria-hidden="true"></span>
+
+      <article class="false-choice__col reveal" data-reveal-delay="0.1">
+        <p class="false-choice__label">Gold ETFs</p>
+        <p class="false-choice__col-body">
+          Gold ETFs give listed-market liquidity and institutional scale, but
+          the holder owns shares in a trust, not a claim on a specific allocated
+          bar.
+        </p>
+      </article>
+
+      <span class="false-choice__divider" aria-hidden="true"></span>
+
+      <article class="false-choice__col reveal" data-reveal-delay="0.15">
+        <p class="false-choice__label">Single-issuer tokenized</p>
+        <p class="false-choice__col-body">
+          Single-issuer tokenized gold gives you 24/7 liquidity, but minting,
+          redemption, custody selection, terms, and freeze powers depend on one
+          issuer.
+        </p>
+      </article>
+    </div>
+
+    <div class="false-choice__resolve">
+      <figure class="false-choice__media reveal" data-reveal-delay="0.05">
+        <img
+          src="/images/gold-bar.png"
+          alt="A Global Gold 1000g allocated bar resting on marble"
+          loading="lazy"
+        />
+      </figure>
+
+      <div class="false-choice__resolve-copy">
+        <p class="false-choice__lead reveal" data-reveal-delay="0.05">
+          Global Gold collapses that trade-off.
+        </p>
+        <p class="false-choice__resolve-body reveal" data-reveal-delay="0.08">
+          Allocated bars remain in participating vaults. Conditional claims
+          connect those bars to the protocol. Standard Metal Units make eligible
+          collateral liquid on a continuous global market.
+        </p>
+        <p class="false-choice__closer reveal" data-reveal-delay="0.11">
+          The bar stays in custody. The unit moves globally.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .false-choice__heading { margin-top: 0.5em; }
+
+  .false-choice__contrast {
+    margin-top: clamp(48px, 6vw, 80px);
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    align-items: stretch;
+    gap: clamp(28px, 3.2vw, 56px);
+  }
+  .false-choice__col {
+    display: flex;
+    flex-direction: column;
+    align-self: start;
+  }
+  .false-choice__divider {
+    width: 1px;
+    align-self: stretch;
+    background: var(--rule);
+  }
+  .false-choice__label {
+    margin: 0 0 clamp(14px, 1.6vw, 20px);
+    font-family: var(--sans-display);
+    font-size: var(--t-eyebrow);
+    font-weight: 500;
+    letter-spacing: var(--track-eyebrow);
+    text-transform: uppercase;
+    color: var(--gold-deep);
+  }
+  .false-choice__col-body {
+    margin: 0;
+    font-family: var(--serif-body);
+    font-weight: 400;
+    font-size: clamp(1.05rem, 1.2vw, 1.2rem);
+    line-height: 1.55;
+    color: var(--char);
+    text-wrap: pretty;
+  }
+
+  .false-choice__resolve {
+    margin-top: clamp(56px, 7vw, 96px);
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    align-items: center;
+    column-gap: clamp(40px, 5vw, 80px);
+  }
+  .false-choice__media {
+    margin: 0;
+    border-radius: var(--radius-img);
+    overflow: hidden;
+    background: var(--stone);
+    aspect-ratio: 5 / 4;
+  }
+  .false-choice__media img { width: 100%; height: 100%; object-fit: cover; }
+
+  .false-choice__lead {
+    margin: 0 0 0.8em;
+    font-family: var(--serif-display);
+    font-weight: 300;
+    font-size: clamp(1.6rem, 2.6vw, 2.3rem);
+    line-height: 1.1;
+    color: var(--char);
+  }
+  .false-choice__resolve-body {
+    margin: 0 0 1.2em;
+    max-width: 52ch;
+  }
+  .false-choice__closer {
+    margin: 0;
+    padding-top: clamp(18px, 2vw, 26px);
+    border-top: 1px solid var(--rule-faint);
+    font-family: var(--sans-display);
+    font-weight: 500;
+    font-size: 0.92rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+  }
+
+  /* Below this width three columns get too tight — stack to a single
+     column with horizontal hairline separators. */
+  @media (max-width: 920px) {
+    .false-choice__contrast {
+      grid-template-columns: 1fr;
+      gap: clamp(28px, 5vw, 40px);
+    }
+    .false-choice__col { align-self: auto; }
+    .false-choice__divider { width: auto; height: 1px; align-self: auto; }
+    .false-choice__col-body {
+      font-size: 1.18rem;
+      max-width: 60ch;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .false-choice__resolve {
+      grid-template-columns: 1fr;
+      row-gap: clamp(28px, 6vw, 40px);
+    }
+    .false-choice__media { aspect-ratio: 16 / 10; }
+  }
+</style>

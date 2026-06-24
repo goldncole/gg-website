@@ -1,0 +1,138 @@
+---
+// =====================================================================
+// PAGE — Solutions · Vaults (uses SolutionPage template).
+// Copy v2 — conversion pass. Grounded in Audience Brief 01
+// (Vaults & Refiners). Voice: Network/Protocol, peer-institution.
+// Lead order follows the brief's six questions: title integrity and
+// operational risk first (defensive), reach and revenue second
+// (offense), social proof / "am I late" last. Swap the `/images/*`
+// hero placeholder for final vault photography noted inline.
+// =====================================================================
+import SolutionPage from "../../layouts/templates/SolutionPage.astro";
+import type { SolutionPageContent } from "../../layouts/templates/SolutionPage.astro";
+
+const content: SolutionPageContent = {
+  meta: {
+    title: "For Vaults — Solutions · Global Gold",
+    description:
+      "Give your clients' allocated gold continuous global liquidity and new fee income — while custody, title authority, and the client relationship stay with the vault. The Title Register can be adopted on its own.",
+  },
+  hero: {
+    eyebrow: "Solutions · Vaults",
+    title: "Make allocated gold globally liquid — without moving a bar or surrendering title.",
+    lede: "Participating vaults connect their clients' allocated gold to continuous global liquidity and new fee income — while custody, title authority, and the client relationship stay exactly where they are. The metal does not move until its owner chooses to redeem it.",
+    image: {
+      src: "/images/vaults.png",
+      alt: "An institutional vault door",
+    },
+    primaryCta: { label: "Request Access", href: "/access/" },
+    secondaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+  },
+  challenge: {
+    eyebrow: "The challenge",
+    heading: "The metal is real. The reach is not.",
+    body: [
+      "A vault's gold is only as liquid as the network its facility belongs to. Inside a hub, bars clear only against that hub's approved-vault list and trading window — London and Zurich, COMEX New York, Shanghai, Hong Kong, Dubai, Singapore, each a market unto itself. Outside every hub, the constraint is sharper: allocated metal has no institutional clearing pathway at all, short of shipping it out and re-assaying it into someone else's chain of custody.",
+      "Meanwhile, the demand your clients are voicing — gold-backed, on-chain, settling around the clock — is real and growing. Today it flows to single-issuer token companies. They capture the relationship and the economics; the vault is left holding the metal, the liability, and a question it cannot yet answer. The longer that gap stays open, the more of the client the vault quietly cedes.",
+    ],
+  },
+  benefits: {
+    eyebrow: "How the Standard works for you",
+    heading: "Reach without surrender.",
+    lede: "Everything the token issuers offer your clients — global liquidity, on-chain settlement, a modern record — delivered without the vault giving up title, custody, or the relationship.",
+    columns: 3,
+    items: [
+      {
+        eyebrow: "Title integrity",
+        title: "Title never leaves the vault",
+        body: "The vault operates its own on-chain Title Register as the authoritative book of record and approves every title event under its own Guardian-controlled policy. The protocol takes neither custody nor title — and there is no single issuer to become a sub-custodian to.",
+      },
+      {
+        eyebrow: "New revenue",
+        title: "Fees on metal you already hold",
+        body: "Storage income continues unchanged. On top of it, participation opens recurring fee channels across tokenization, collateralization, settlement, and vault-to-vault migration — revenue earned on inventory already sitting in your custody.",
+      },
+      {
+        eyebrow: "New demand",
+        title: "The client demand, routed to you",
+        body: "The on-chain liquidity your clients now seek elsewhere is delivered through the vault instead. The facility becomes a settlement node in a global network — not the custodian an issuer quietly disintermediates.",
+      },
+    ],
+  },
+  howItWorks: {
+    eyebrow: "How it works for you",
+    heading: "Three steps to a live settlement node.",
+    steps: [
+      {
+        title: "Deploy your Title Register",
+        body: "Register eligible bars to your own on-chain book of record. Nothing moves; the metal stays exactly where it is. The register can be adopted on its own — a modernization of your books — before a single bar is tokenized.",
+      },
+      {
+        title: "Approve under your own policy",
+        body: "Title events are proposed, then approved under Guardian-controlled policy you configure. No single signer, operator, or issuer can move title unilaterally — the protocol included.",
+      },
+      {
+        title: "Connect to global liquidity",
+        body: "Client-initiated claims, and the units minted from them, flow into the network — opening 24/7 liquidity and new fee channels while you remain the registrar of record for every bar in your custody.",
+      },
+    ],
+  },
+  proof: {
+    eyebrow: "Why vaults adopt the Standard",
+    heading: "Engineered to a custodian's standard.",
+    stats: [
+      { label: "Custody model", value: "Allocated, 1:1" },
+      { label: "Title authority", value: "Vault-operated" },
+      { label: "Approval", value: "Guardian-controlled" },
+      { label: "Market access", value: "24/7 global" },
+    ],
+    statColumns: 4,
+  },
+  faq: {
+    eyebrow: "Questions",
+    heading: "What vault operators ask first.",
+    items: [
+      {
+        question: "Does this compete with our business, or extend it?",
+        answer:
+          "It extends it. The vault remains the custodian and the registrar of record; the Standard adds global reach and new fee channels on top of the business you already run. It is infrastructure beneath your vault — not an intermediary between you and your client.",
+      },
+      {
+        question: "Do we keep legal title, or become a sub-custodian to a token issuer?",
+        answer:
+          "You keep it. The vault operates its own Title Register and approves every title event under its own policy. There is no single issuer in the architecture to become a sub-custodian to — title moves only by your explicit, Guardian-approved action, and the protocol never holds it.",
+      },
+      {
+        question: "What does this do to our compliance posture?",
+        answer:
+          "Onboarding, eligibility, and conformance criteria are published by the Global Gold Council — a Wyoming nonprofit standards body — and applied consistently, not decided by any company. KYC/KYB runs through a Council-designated provider under a reliance framework the vault can accept or decline. Objective, documented, and appealable.",
+      },
+      {
+        question: "Do we have to tokenize client gold, or build digital infrastructure?",
+        answer:
+          "No to both. The Title Register can be deployed on its own as a modern book of record, with no bar tokenized. Tokenization is an optional, client-initiated overlay, and the supporting modules are provided under the Standard — so you participate without building digital-asset infrastructure from scratch.",
+      },
+      {
+        question: "What does it cost, and what does it earn?",
+        answer:
+          "Storage fees continue as they are. Participation adds recurring fee channels across tokenization, collateralization, settlement, and vault-to-vault migration — income on assets already in your vault. Onboarding terms are scoped to your facility; request access and the economics are walked through directly.",
+      },
+      {
+        question: "Who else is doing this — are we late?",
+        answer:
+          "The Wyoming Reserve is the first participating vault, and the Standard is forming now, before the incumbent hubs have an equivalent. Standards accrue gravity: the facilities that participate early help set the terms the rest of the market later conforms to.",
+      },
+    ],
+  },
+  cta: {
+    eyebrow: "Solutions · Vaults",
+    heading: "Keep the metal. Gain the market.",
+    body: "Request access to discuss onboarding your facility to the Global Gold Standard — including a standalone Title Register deployment.",
+    primaryCta: { label: "Request Access", href: "/access/" },
+    secondaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+    variant: "dark",
+  },
+};
+---
+
+<SolutionPage content={content} />

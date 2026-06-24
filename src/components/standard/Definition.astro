@@ -1,0 +1,77 @@
+---
+// [2] What The Standard Is — a quiet statement section. Faded emblem
+// watermark behind the narrow column of serif body copy.
+---
+
+<section class="section definition" id="definition" aria-labelledby="definition-heading">
+  <img
+    class="definition__emblem"
+    src="/images/gold-icon.png"
+    alt=""
+    aria-hidden="true"
+    loading="lazy"
+  />
+  <div class="container container--narrow definition__inner">
+    <p class="eyebrow reveal">What The Standard Is</p>
+    <h2
+      class="display display--lg definition__heading reveal"
+      id="definition-heading"
+      data-reveal-delay="0.05"
+    >
+      A protocol rulebook for allocated gold.
+    </h2>
+
+    <div class="definition__body reveal" data-reveal-delay="0.1">
+      <p>
+        The Global Gold Standard is the protocol rulebook for allocated gold. It
+        defines how bars are registered, how claims are created, how Standard
+        Metal Units are minted and burned, how liquidity routes through the
+        market, and how participating vaults maintain control under shared
+        rules. The result is simple: real metal stays in approved vault custody,
+        while its value can move through a 24/7 global market.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .definition {
+    position: relative;
+    overflow: hidden;
+  }
+  .definition__inner {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+  .definition__emblem {
+    position: absolute;
+    z-index: 0;
+    top: 50%;
+    left: 50%;
+    width: min(72vw, 720px);
+    transform: translate(-50%, -50%);
+    opacity: 0.1;
+    filter: grayscale(1) brightness(0.55);
+    pointer-events: none;
+  }
+
+  .definition__heading {
+    margin-top: 0.5em;
+    max-width: 18ch;
+    margin-inline: auto;
+  }
+  .definition__body {
+    margin-top: clamp(28px, 3.6vw, 44px);
+    max-width: 60ch;
+    margin-inline: auto;
+  }
+  .definition__body p {
+    margin: 0;
+    font-family: var(--serif-body);
+    font-weight: 400;
+    font-size: clamp(1.2rem, 1.7vw, 1.45rem);
+    line-height: 1.55;
+    color: var(--char);
+  }
+</style>

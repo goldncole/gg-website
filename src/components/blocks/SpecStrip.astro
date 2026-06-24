@@ -1,0 +1,116 @@
+---
+// =====================================================================
+// SpecStrip — standardized at-a-glance key/value fact strip.
+// Used heavily by tokens (Standard, Backing, Issuer, Redeemable, …) so
+// every token reads in the same shape. Renders as a hairline-ruled grid.
+// =====================================================================
+export interface Spec {
+  label: string;
+  value: string;
+}
+
+export interface Props {
+  eyebrow?: string;
+  heading?: string;
+  specs: Spec[];
+  /** Force a column count; otherwise auto-fits ~220px columns. */
+  columns?: 2 | 3 | 4;
+  headingId?: string;
+}
+
+const { eyebrow, heading, specs, columns, headingId = "specstrip-heading" } = Astro.props;
+const colStyle = columns ? `--spec-cols: ${columns};` : undefined;
+---
+
+<section class="section specstrip" aria-labelledby={heading ? headingId : undefined}>
+  <div class="container">
+    {
+      (eyebrow || heading) && (
+        <header class="specstrip__head">
+          {eyebrow && <p class="eyebrow reveal">{eyebrow}</p>}
+          {heading && (
+            <h2 class="display display--md specstrip__heading reveal" id={headingId} data-reveal-delay="0.05">
+              {heading}
+            </h2>
+          )}
+        </header>
+      )
+    }
+
+    <dl
+      class:list={["specstrip__grid", "reveal", { "specstrip__grid--fixed": Boolean(columns) }]}
+      data-reveal-delay="0.08"
+      style={colStyle}
+    >
+      {
+        specs.map((spec) => (
+          <div class="spec">
+            <dt class="spec__label">{spec.label}</dt>
+            <dd class="spec__value">{spec.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>
+
+<style>
+  .specstrip__head {
+    max-width: 40ch;
+    margin-bottom: clamp(36px, 4.4vw, 56px);
+  }
+  .specstrip__heading {
+    margin-top: 0.4em;
+  }
+
+  .specstrip__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0;
+    border-right: 1px solid var(--rule-faint);
+    border-bottom: 1px solid var(--rule-faint);
+  }
+  .specstrip__grid--fixed {
+    grid-template-columns: repeat(var(--spec-cols, 3), 1fr);
+  }
+
+  .spec {
+    background: var(--paper);
+    border-left: 1px solid var(--rule-faint);
+    border-top: 1px solid var(--rule-faint);
+    padding: clamp(22px, 2.4vw, 34px) clamp(20px, 2vw, 30px);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(8px, 1vw, 12px);
+  }
+  .spec__label {
+    font-family: var(--sans-display);
+    font-size: var(--t-eyebrow);
+    font-weight: 500;
+    letter-spacing: var(--track-eyebrow);
+    text-transform: uppercase;
+    color: var(--gold-deep);
+  }
+  .spec__value {
+    margin: 0;
+    font-family: var(--serif-display);
+    font-weight: 300;
+    font-size: clamp(1.2rem, 1.6vw, 1.5rem);
+    line-height: 1.2;
+    color: var(--char);
+  }
+
+  @media (max-width: 700px) {
+    .specstrip__grid,
+    .specstrip__grid--fixed {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 420px) {
+    .specstrip__grid,
+    .specstrip__grid--fixed {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

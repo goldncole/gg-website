@@ -1,0 +1,778 @@
+---
+// ---------------------------------------------------------------------
+// SITE NAVIGATION — unified multi-level "drill-in panel" menu
+// ---------------------------------------------------------------------
+// Level 0 is the full-screen editorial overlay (centered large serif).
+// Items with children/groups are panel-openers (trailing chevron) that
+// drill into a section panel; leaf items are direct links. Each panel
+// carries a "‹ Back" control, the section title, an "Overview →" row,
+// and its child links. Data below drives all markup.
+// ---------------------------------------------------------------------
+
+type NavLeaf = { label: string; href: string; children?: NavLeaf[] };
+type NavGroup = { label: string; items: NavLeaf[] };
+type NavItem = {
+  label: string;
+  href?: string;
+  /** Stable key used for panel id / aria wiring (panel items only). */
+  key?: string;
+  children?: NavLeaf[];
+  groups?: NavGroup[];
+};
+
+const nav: NavItem[] = [
+  { label: "The Standard", href: "/standard/" },
+  {
+    label: "Modules",
+    key: "modules",
+    children: [
+      { label: "Title Register", href: "/modules/title-register/" },
+      { label: "Tokenize", href: "/modules/tokenization/" },
+      { label: "Mint", href: "/modules/collateralization/" },
+      { label: "The Reserve", href: "/modules/reserve/" },
+      { label: "Liquidity", href: "/modules/liquidity/" },
+      { label: "Security", href: "/modules/security/" },
+    ],
+  },
+  {
+    label: "Tokens",
+    key: "tokens",
+    children: [
+      { label: "Conditional Claim Tokens", href: "/tokens/conditional-claim-tokens/" },
+      {
+        label: "Standard Metal Units",
+        href: "/tokens/standard-metal-units/",
+        children: [
+          { label: "U.S. Gold (USG)", href: "/tokens/standard-metal-units/usg/" },
+        ],
+      },
+      { label: "gGold", href: "/tokens/ggold/" },
+      { label: "gBars", href: "/tokens/gbars/" },
+      { label: "GOLDN", href: "/tokens/goldn/" },
+    ],
+  },
+  {
+    label: "Solutions",
+    key: "solutions",
+    groups: [
+      {
+        label: "Supply & Custody",
+        items: [
+          { label: "Vaults", href: "/solutions/vaults/" },
+          { label: "Refiners", href: "/solutions/refiners/" },
+          { label: "Bullion Dealers", href: "/solutions/bullion-dealers/" },
+        ],
+      },
+      {
+        label: "Capital",
+        items: [
+          { label: "Institutional Allocators", href: "/solutions/institutional-allocators/" },
+          { label: "Private Holders", href: "/solutions/private-holders/" },
+        ],
+      },
+      {
+        label: "On-chain",
+        items: [
+          { label: "Protocols & Ecosystems", href: "/solutions/blockchain-protocols/" },
+          { label: "Market Makers", href: "/solutions/market-makers/" },
+          { label: "Traders", href: "/solutions/traders/" },
+        ],
+      },
+    ],
+  },
+  {
+    label: "Governance",
+    key: "governance",
+    children: [
+      { label: "The Council", href: "/governance/council/" },
+      { label: "The Foundation", href: "/governance/foundation/" },
+      { label: "How It's Governed", href: "/governance/how-its-governed/" },
+    ],
+  },
+  { label: "Documentation", href: "/docs/" },
+  { label: "The Journal", href: "/journal/" },
+  { label: "About", href: "/about/" },
+];
+
+const ctas = [
+  { label: "The White Paper", href: "/white-paper/", variant: "secondary" as const },
+  { label: "Request Access", href: "/access/", variant: "primary" as const },
+];
+
+const isPanel = (item: NavItem) => Boolean(item.children || item.groups);
+const panelId = (key: string) => `menu-panel-${key}`;
+const panelTitleId = (key: string) => `menu-panel-${key}-title`;
+const groupId = (key: string, i: number) => `menu-group-${key}-${i}`;
+
+// Items that resolve to a section panel.
+const panels = nav.filter(isPanel);
+
+interface Props {
+  /** Set on the homepage, whose fixed dark hero requires white chrome from
+   *  the first paint (before JS runs). All light pages leave this false. */
+  overHero?: boolean;
+}
+
+const { overHero = false } = Astro.props;
+---
+
+<header class:list={["site-header", { "is-over-dark": overHero }]} data-site-header>
+  <div class="site-header__inner">
+    <a class="wordmark" href="/">Global&nbsp;Gold</a>
+    <button
+      class="hamburger"
+      type="button"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="site-menu"
+      data-menu-toggle
+    >
+      <span class="hamburger__bar"></span>
+      <span class="hamburger__bar"></span>
+      <span class="hamburger__bar"></span>
+    </button>
+  </div>
+
+  <nav
+    class="menu"
+    id="site-menu"
+    aria-label="Primary"
+    aria-hidden="true"
+    inert
+    data-menu-panel
+  >
+    {/* ---------- Level 0 ---------- */}
+    <div class="menu__level menu__home" data-menu-home>
+      <div class="menu__level-inner">
+        <ul class="menu__list">
+          {
+            nav.map((item) =>
+              isPanel(item) ? (
+                <li>
+                  <button
+                    class="menu__link menu__link--panel"
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls={panelId(item.key!)}
+                    data-panel-open={item.key}
+                  >
+                    <span>{item.label}</span>
+                    <span class="menu__chev" aria-hidden="true">›</span>
+                  </button>
+                </li>
+              ) : (
+                <li>
+                  <a class="menu__link" href={item.href}>
+                    {item.label}
+                  </a>
+                </li>
+              ),
+            )
+          }
+        </ul>
+
+        <div class="menu__ctas">
+          {
+            ctas.map((cta) => (
+              <a
+                class={cta.variant === "primary" ? "cta--box" : "menu__cta menu__cta--secondary"}
+                href={cta.href}
+              >
+                {cta.label}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    {/* ---------- Level 1 panels ---------- */}
+    {
+      panels.map((item) => (
+        <div
+          class="menu__level menu__section"
+          id={panelId(item.key!)}
+          data-panel={item.key}
+          aria-labelledby={panelTitleId(item.key!)}
+          inert
+        >
+          <div class="menu__level-inner">
+            <div class="menu__panel-head">
+              <button class="menu__back" type="button" data-panel-back>
+                <span class="menu__back-chev" aria-hidden="true">‹</span> Back
+              </button>
+              <h2 class="menu__panel-title" id={panelTitleId(item.key!)}>
+                {item.label}
+              </h2>
+            </div>
+
+            {item.children && (
+              <ul class="menu__sublist">
+                {item.children.map((child) => (
+                  <li>
+                    <a class="menu__sublink" href={child.href}>
+                      {child.label}
+                    </a>
+                    {child.children && (
+                      <ul class="menu__subsublist">
+                        {child.children.map((grandchild) => (
+                          <li>
+                            <a class="menu__subsublink" href={grandchild.href}>
+                              {grandchild.label}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            {item.groups && (
+              <div class="menu__groups">
+                {item.groups.map((group, i) => (
+                  <div
+                    class="menu__group"
+                    role="group"
+                    aria-labelledby={groupId(item.key!, i)}
+                  >
+                    <h3 class="menu__group-label eyebrow" id={groupId(item.key!, i)}>
+                      {group.label}
+                    </h3>
+                    <ul class="menu__grouplist">
+                      {group.items.map((leaf) => (
+                        <li>
+                          <a class="menu__sublink menu__sublink--group" href={leaf.href}>
+                            {leaf.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      ))
+    }
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+  }
+
+  .site-header__inner {
+    position: relative;
+    z-index: 110;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: clamp(20px, 3vw, 34px) var(--gutter);
+  }
+
+  .wordmark {
+    font-family: var(--serif-display);
+    font-weight: 400;
+    font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+    text-transform: uppercase;
+    letter-spacing: var(--track-wordmark);
+    /* Default: every page is light (paper) → dark ink from first paint. */
+    color: var(--char);
+    transition: color 0.3s var(--ease);
+  }
+  /* Over an explicitly-dark section → white chrome. */
+  .site-header.is-over-dark .wordmark { color: #fff; }
+  .wordmark:hover { color: var(--gold-deep); }
+  /* Menu open: panel is light, so the wordmark must stay dark/legible. */
+  .site-header.is-open .wordmark { color: var(--char); }
+
+  .hamburger {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+  }
+  .hamburger__bar {
+    display: block;
+    width: 26px;
+    height: 1.5px;
+    margin-inline: auto;
+    /* Default: dark over light (paper) pages. */
+    background: var(--char);
+    transition: transform var(--t-base) var(--ease), opacity var(--t-base) var(--ease),
+      background 0.3s var(--ease);
+  }
+  /* Over an explicitly-dark section → white bars. */
+  .site-header.is-over-dark .hamburger__bar { background: #fff; }
+  /* Menu open: panel is light, so the X must always be dark/legible. */
+  .site-header.is-open .hamburger__bar { background: var(--char); }
+  .site-header.is-open .hamburger__bar:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+  .site-header.is-open .hamburger__bar:nth-child(2) { opacity: 0; }
+  .site-header.is-open .hamburger__bar:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+  /* ---------------------------------------------------------------------
+     OVERLAY
+     --------------------------------------------------------------------- */
+  .menu {
+    position: fixed;
+    inset: 0;
+    background: var(--paper);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity var(--t-base) var(--ease), transform var(--t-base) var(--ease),
+      visibility var(--t-base);
+    z-index: 90;
+  }
+  .site-header.is-open .menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  /* Each "level" (home + every section) is stacked full-screen and scrolls
+     internally if the content is taller than the viewport. */
+  .menu__level {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+  .menu__level-inner {
+    margin: auto;
+    width: 100%;
+    max-width: var(--container);
+    padding: clamp(96px, 14vh, 160px) var(--gutter) clamp(40px, 8vh, 80px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* Drill-in transition: home slides left + fades when a panel opens; the
+     active section slides in from the right. */
+  .menu__home {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity var(--t-base) var(--ease), transform var(--t-base) var(--ease);
+  }
+  .menu.is-panel-open .menu__home {
+    opacity: 0;
+    transform: translateX(-32px);
+    pointer-events: none;
+  }
+
+  .menu__section {
+    opacity: 0;
+    transform: translateX(32px);
+    pointer-events: none;
+    transition: opacity var(--t-base) var(--ease), transform var(--t-base) var(--ease);
+  }
+  .menu__section.is-active {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+
+  /* ---------------------------------------------------------------------
+     LEVEL 0 — large editorial links
+     --------------------------------------------------------------------- */
+  .menu__list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(10px, 1.8vw, 20px);
+  }
+  .menu__link {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.3em;
+    font-family: var(--serif-display);
+    font-weight: 300;
+    font-size: clamp(1.7rem, 4.6vw, 3.1rem);
+    line-height: 1.1;
+    color: var(--char);
+    /* button reset for panel-openers */
+    background: transparent;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    transition: color var(--t-fast) var(--ease);
+  }
+  .menu__link:hover,
+  .menu__link:focus-visible { color: var(--gold-deep); }
+  .menu__chev {
+    font-size: 0.62em;
+    color: var(--gold-deep);
+    transform: translateY(-0.08em);
+    transition: transform var(--t-fast) var(--ease);
+  }
+  .menu__link--panel:hover .menu__chev,
+  .menu__link--panel:focus-visible .menu__chev { transform: translate(0.12em, -0.08em); }
+
+  .menu__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(16px, 2.4vw, 30px);
+    margin-top: clamp(34px, 6vh, 64px);
+    padding-top: clamp(28px, 4vh, 44px);
+    border-top: 1px solid var(--rule-faint);
+    width: min(100%, 540px);
+  }
+  .menu__cta {
+    font-family: var(--sans-display);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+  }
+  .menu__cta--secondary {
+    font-size: var(--t-body);
+    color: var(--gold-deep);
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 2px;
+  }
+  .menu__cta--secondary:hover { color: var(--char); }
+
+  /* ---------------------------------------------------------------------
+     LEVEL 1 — section panels (denser than Level 0)
+     --------------------------------------------------------------------- */
+  .menu__panel-head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(10px, 1.6vw, 18px);
+    margin-bottom: clamp(22px, 3.4vw, 40px);
+  }
+  .menu__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    font-family: var(--sans-display);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: var(--track-eyebrow);
+    text-transform: uppercase;
+    color: var(--graphite);
+    background: transparent;
+    border: 0;
+    padding: 4px 2px;
+    cursor: pointer;
+    transition: color var(--t-fast) var(--ease);
+  }
+  .menu__back:hover,
+  .menu__back:focus-visible { color: var(--char); }
+  .menu__back-chev {
+    font-size: 1.15em;
+    transition: transform var(--t-fast) var(--ease);
+  }
+  .menu__back:hover .menu__back-chev,
+  .menu__back:focus-visible .menu__back-chev { transform: translateX(-0.18em); }
+  .menu__panel-title {
+    font-family: var(--serif-display);
+    font-weight: 300;
+    font-size: clamp(2rem, 5vw, 3.1rem);
+    line-height: 1.05;
+    color: var(--char);
+  }
+
+  .menu__sublist {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(8px, 1.4vw, 16px);
+  }
+  .menu__sublink {
+    font-family: var(--serif-display);
+    font-weight: 300;
+    font-size: clamp(1.3rem, 2.8vw, 2rem);
+    line-height: 1.15;
+    color: var(--char);
+    transition: color var(--t-fast) var(--ease);
+  }
+  .menu__sublink:hover,
+  .menu__sublink:focus-visible { color: var(--gold-deep); }
+
+  /* Inline 3rd-level sub-link (e.g. USG under Standard Metal Units) —
+     shown in the same panel, indented + smaller, NOT a deeper drill. */
+  .menu__subsublist {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    margin-top: 6px;
+  }
+  .menu__subsublink {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.45em;
+    font-family: var(--serif-display);
+    font-weight: 300;
+    font-size: clamp(1rem, 1.7vw, 1.3rem);
+    color: var(--graphite);
+    transition: color var(--t-fast) var(--ease);
+  }
+  .menu__subsublink::before {
+    content: "";
+    width: 18px;
+    height: 1px;
+    background: var(--rule);
+    transform: translateY(-0.35em);
+  }
+  .menu__subsublink:hover,
+  .menu__subsublink:focus-visible { color: var(--gold-deep); }
+
+  /* Solutions: grouped columns on desktop, stacked on mobile. */
+  .menu__groups {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(28px, 4vw, 64px);
+    text-align: center;
+    width: 100%;
+  }
+  .menu__group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(12px, 1.6vw, 18px);
+  }
+  .menu__group-label {
+    margin: 0;
+    color: var(--gold-deep);
+  }
+  .menu__grouplist {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(7px, 1.1vw, 13px);
+  }
+  .menu__sublink--group {
+    font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+  }
+
+  @media (max-width: 720px) {
+    .menu__groups {
+      grid-template-columns: 1fr;
+      gap: clamp(24px, 6vw, 36px);
+    }
+  }
+
+  /* ---------------------------------------------------------------------
+     REDUCED MOTION — instant panel swaps, no slide.
+     --------------------------------------------------------------------- */
+  @media (prefers-reduced-motion: reduce) {
+    .menu,
+    .menu__home,
+    .menu__section { transition: none; }
+    .menu.is-panel-open .menu__home { transform: none; }
+    .menu__section { transform: none; }
+    .menu__section.is-active { transform: none; }
+  }
+</style>
+
+<script>
+  // Document-level delegation so the menu keeps working across <ClientRouter />
+  // view-transition swaps, where the header DOM (and its elements) are replaced
+  // on every navigation. Guarded so the global listeners attach only once even
+  // if this module is re-evaluated.
+  const w = window as typeof window & { __ggHeaderMenuInit?: boolean };
+  if (!w.__ggHeaderMenuInit) {
+    w.__ggHeaderMenuInit = true;
+
+    const getHeader = () => document.querySelector<HTMLElement>("[data-site-header]");
+    const getToggle = () => document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
+    const getOverlay = () => document.querySelector<HTMLElement>("[data-menu-panel]");
+    const getHome = () => document.querySelector<HTMLElement>("[data-menu-home]");
+    const getSections = () =>
+      Array.from(document.querySelectorAll<HTMLElement>("[data-panel]"));
+
+    // The element to restore focus to when the whole menu closes.
+    let lastFocused: HTMLElement | null = null;
+
+    const isOpen = () => Boolean(getHeader()?.classList.contains("is-open"));
+
+    const activeSection = () =>
+      getSections().find((s) => s.classList.contains("is-active")) ?? null;
+
+    // The currently-interactive subtree (active panel, else the Level 0 home).
+    const activeContainer = (): HTMLElement | null => activeSection() ?? getHome();
+
+    function focusables(container: HTMLElement | null): HTMLElement[] {
+      if (!container) return [];
+      return Array.from(
+        container.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ),
+      );
+    }
+
+    // Show a given section by key (null = back to Level 0). Toggles `inert`
+    // so only the visible subtree is focusable/announced, keeps opener
+    // aria-expanded in sync, and moves focus sensibly.
+    function showPanel(key: string | null) {
+      const overlay = getOverlay();
+      const home = getHome();
+      if (!overlay) return;
+
+      let target: HTMLElement | null = null;
+      getSections().forEach((section) => {
+        const match = section.getAttribute("data-panel") === key;
+        section.classList.toggle("is-active", match);
+        section.toggleAttribute("inert", !match);
+        if (match) target = section;
+      });
+
+      overlay.classList.toggle("is-panel-open", Boolean(key));
+      home?.toggleAttribute("inert", Boolean(key));
+
+      overlay
+        .querySelectorAll<HTMLButtonElement>("[data-panel-open]")
+        .forEach((btn) =>
+          btn.setAttribute(
+            "aria-expanded",
+            String(btn.getAttribute("data-panel-open") === key),
+          ),
+        );
+
+      if (key && target) {
+        const back = target.querySelector<HTMLElement>("[data-panel-back]");
+        (back ?? focusables(target)[0])?.focus();
+      }
+    }
+
+    // Back out of a panel to Level 0, returning focus to the opener that
+    // launched it.
+    function closePanel() {
+      const key = activeSection()?.getAttribute("data-panel") ?? null;
+      showPanel(null);
+      if (key) {
+        document
+          .querySelector<HTMLElement>(`[data-panel-open="${key}"]`)
+          ?.focus();
+      }
+    }
+
+    function setOpen(open: boolean) {
+      const header = getHeader();
+      const toggle = getToggle();
+      const overlay = getOverlay();
+      if (!header || !toggle || !overlay) return;
+
+      // If we're hiding the overlay while one of its controls is focused,
+      // move focus out first — otherwise the browser warns about aria-hidden
+      // (and inert) on a focused element's ancestor.
+      if (!open && overlay.contains(document.activeElement)) {
+        (document.activeElement as HTMLElement | null)?.blur();
+      }
+
+      header.classList.toggle("is-open", open);
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      overlay.setAttribute("aria-hidden", String(!open));
+      overlay.toggleAttribute("inert", !open);
+
+      // Always reset to Level 0 on open and on close.
+      showPanel(null);
+
+      if (open) {
+        lastFocused = toggle;
+        // Move focus into the overlay after it becomes visible/focusable.
+        requestAnimationFrame(() => focusables(getHome())[0]?.focus());
+      } else {
+        lastFocused?.focus();
+        lastFocused = null;
+      }
+    }
+
+    document.addEventListener("click", (e) => {
+      const target = e.target as Element | null;
+      if (!target) return;
+
+      if (target.closest("[data-menu-toggle]")) {
+        setOpen(!isOpen());
+        return;
+      }
+
+      const opener = target.closest<HTMLElement>("[data-panel-open]");
+      if (opener) {
+        showPanel(opener.getAttribute("data-panel-open"));
+        return;
+      }
+
+      if (target.closest("[data-panel-back]")) {
+        closePanel();
+        return;
+      }
+
+      // A leaf link was chosen: navigation is handled by the router; just
+      // close the whole menu (harmless if already closed).
+      if (target.closest("[data-menu-panel] a")) {
+        setOpen(false);
+        return;
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (!isOpen()) return;
+
+      if (e.key === "Escape") {
+        e.preventDefault();
+        // Tiered: back out of an open panel first, otherwise close the menu.
+        if (activeSection()) closePanel();
+        else setOpen(false);
+        return;
+      }
+
+      if (e.key === "Tab") {
+        // Trap focus within the overlay: the toggle (the X / close button,
+        // which lives outside the overlay) plus the active subtree.
+        const toggle = getToggle();
+        const list = [toggle, ...focusables(activeContainer())].filter(
+          Boolean,
+        ) as HTMLElement[];
+        if (list.length === 0) return;
+
+        const first = list[0];
+        const last = list[list.length - 1];
+        const current = document.activeElement as HTMLElement | null;
+
+        if (e.shiftKey && current === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && current === last) {
+          e.preventDefault();
+          first.focus();
+        } else if (current && !list.includes(current)) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    });
+
+    // The header DOM is swapped on each view-transition navigation, so the
+    // incoming header starts closed. Reset our persistent state and ensure
+    // Level 0 is the resting state for the next open.
+    const reset = () => {
+      lastFocused = null;
+      showPanel(null);
+    };
+    document.addEventListener("astro:before-swap", reset);
+    document.addEventListener("astro:page-load", reset);
+  }
+</script>

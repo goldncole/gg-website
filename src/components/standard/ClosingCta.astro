@@ -1,0 +1,91 @@
+---
+// [7] Closing CTA — full-bleed dark marble threshold band. The one obsidian
+// moment before the footer, with the standard's defining line.
+---
+
+<section class="section closing" id="closing" aria-labelledby="closing-heading" data-header-dark>
+  <div class="closing__bg" aria-hidden="true">
+    <img src="/images/sacred-marble-threshold.png" alt="" loading="lazy" />
+  </div>
+
+  <div class="container closing__inner reveal">
+    <p class="eyebrow closing__eyebrow">The Global Gold Standard</p>
+    <h2 class="display display--lg closing__heading" id="closing-heading">
+      Real metal. Transparent claims. Fungible units. One shared standard.
+    </h2>
+    <div class="closing__actions">
+      <a class="cta--box cta--box-light" href="/access/">Early Access</a>
+      <a class="cta closing__cta-secondary" href="/">Back to homepage &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .closing {
+    position: relative;
+    width: 100vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+    color: var(--ivory);
+    isolation: isolate;
+    text-align: center;
+    padding-block: clamp(120px, 16vw, 220px);
+  }
+  .closing__bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+  }
+  .closing__bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .closing__bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(17, 17, 17, 0.72), rgba(17, 17, 17, 0.64));
+  }
+
+  .closing__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .closing__eyebrow {
+    color: var(--gold-warm);
+  }
+  .closing__heading {
+    margin-top: 0.5em;
+    color: var(--ivory);
+    max-width: 24ch;
+    text-wrap: balance;
+  }
+  .closing__actions {
+    margin-top: clamp(36px, 4.4vw, 56px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(20px, 3vw, 40px);
+    flex-wrap: wrap;
+  }
+
+  /* Light variant of the boxed CTA for use over the dark band */
+  .cta--box-light {
+    border-color: rgba(245, 241, 232, 0.5);
+    color: var(--ivory);
+  }
+  .cta--box-light:hover {
+    background: var(--ivory);
+    color: var(--char);
+    border-color: var(--ivory);
+  }
+  .closing__cta-secondary {
+    color: var(--gold-warm);
+  }
+  .closing__cta-secondary:hover {
+    color: var(--ivory);
+  }
+</style>

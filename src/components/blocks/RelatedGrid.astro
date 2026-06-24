@@ -1,0 +1,139 @@
+---
+// =====================================================================
+// RelatedGrid — 2–3 cross-link cards (eyebrow + title + blurb + arrow),
+// reusing the editorial card style from Ecosystem (minus imagery). Used
+// to link adjacent modules, related tokens, related entities, or related
+// journal posts.
+// =====================================================================
+export interface RelatedItem {
+  eyebrow?: string;
+  title: string;
+  blurb: string;
+  href: string;
+}
+
+export interface Props {
+  eyebrow?: string;
+  heading?: string;
+  items: RelatedItem[];
+  columns?: 2 | 3;
+  headingId?: string;
+}
+
+const {
+  eyebrow,
+  heading,
+  items,
+  columns = 3,
+  headingId = "relatedgrid-heading",
+} = Astro.props;
+---
+
+<section class="section relatedgrid" aria-labelledby={heading ? headingId : undefined}>
+  <div class="container">
+    {
+      (eyebrow || heading) && (
+        <header class="relatedgrid__head">
+          {eyebrow && <p class="eyebrow reveal">{eyebrow}</p>}
+          {heading && (
+            <h2 class="display display--md relatedgrid__heading reveal" id={headingId} data-reveal-delay="0.05">
+              {heading}
+            </h2>
+          )}
+        </header>
+      )
+    }
+
+    <ul class="relatedgrid__grid" style={`--rg-cols: ${columns};`}>
+      {
+        items.map((item, i) => (
+          <li class="related-card reveal" data-reveal-delay={(0.04 + (i % columns) * 0.04).toFixed(2)}>
+            <a class="related-card__link" href={item.href}>
+              {item.eyebrow && <p class="related-card__eyebrow">{item.eyebrow}</p>}
+              <h3 class="related-card__title">{item.title}</h3>
+              <p class="related-card__blurb">{item.blurb}</p>
+              <span class="related-card__arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .relatedgrid__head {
+    margin-bottom: clamp(36px, 4.4vw, 56px);
+  }
+  .relatedgrid__heading {
+    margin-top: 0.4em;
+  }
+
+  .relatedgrid__grid {
+    display: grid;
+    grid-template-columns: repeat(var(--rg-cols, 3), 1fr);
+    gap: clamp(24px, 2.4vw, 40px);
+  }
+  .related-card {
+    display: flex;
+  }
+  .related-card__link {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 100%;
+    padding-top: clamp(18px, 1.8vw, 24px);
+    border-top: 1px solid var(--rule);
+    color: inherit;
+  }
+  .related-card__eyebrow {
+    font-family: var(--sans-display);
+    font-size: var(--t-eyebrow);
+    font-weight: 500;
+    letter-spacing: var(--track-eyebrow);
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: clamp(10px, 1.2vw, 14px);
+  }
+  .related-card__title {
+    margin: 0 0 clamp(10px, 1.1vw, 14px);
+    font-family: var(--serif-display);
+    font-weight: 300;
+    font-size: clamp(1.25rem, 1.6vw, 1.5rem);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    color: var(--char);
+    transition: color var(--t-base) var(--ease);
+  }
+  .related-card__blurb {
+    margin: 0;
+    font-size: 0.98rem;
+    line-height: 1.5;
+    color: var(--graphite);
+  }
+  .related-card__arrow {
+    margin-top: auto;
+    padding-top: clamp(16px, 1.6vw, 22px);
+    font-size: 1.05rem;
+    line-height: 1;
+    color: var(--gold-deep);
+    transition: transform var(--t-base) var(--ease);
+  }
+  .related-card__link:hover .related-card__title {
+    color: var(--gold-deep);
+  }
+  .related-card__link:hover .related-card__arrow {
+    transform: translateX(5px);
+  }
+
+  @media (max-width: 860px) {
+    .relatedgrid__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 520px) {
+    .relatedgrid__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

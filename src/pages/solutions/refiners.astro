@@ -1,0 +1,143 @@
+---
+// =====================================================================
+// PAGE — Solutions · Refiners (uses SolutionPage template).
+// Copy v2 — conversion + repositioning pass. Target audience moved UP
+// to tier-1 / Good Delivery refiners (Valcambi, MKS PAMP, Metalor,
+// Argor-Heraeus class), per direction. Core thesis, validated by
+// research: large refiners already operate their own allocated,
+// audited vaults, and their sharpest pain is the working-capital lock
+// between doré intake and refined-bar sale (normally ~14 days, but
+// 60-90 in backlogs — financed with revolving credit, leasing, and
+// product-financing that erode ~$1.50-3.50/oz margins). The Standard
+// turns the refiner's vault into a participating node so a bar becomes
+// liquid, financeable collateral the moment it is cast and assayed —
+// compressing the cash-conversion cycle. Voice: Network/Protocol,
+// peer-institution. Accuracy guardrails: (1) own-account metal can be
+// collateralized by the refiner; toll metal belongs to the producer
+// and the rail is extended to them; (2) "liquidity" = financeable /
+// addressable collateral, not a same-day fiat wire. Swap the hero
+// `/images/*` placeholder for final freshly-cast-bar photography.
+// =====================================================================
+import SolutionPage from "../../layouts/templates/SolutionPage.astro";
+import type { SolutionPageContent } from "../../layouts/templates/SolutionPage.astro";
+
+const content: SolutionPageContent = {
+  meta: {
+    title: "For Refiners — Solutions · Global Gold",
+    description:
+      "Your vault already holds the metal. The Standard turns it into a participating node — so every bar you cast becomes liquid, financeable collateral the moment it's assayed, compressing the capital lock between pour and sale. No shipping. No re-assay. No surrender of title.",
+  },
+  hero: {
+    eyebrow: "Solutions · Refiners",
+    title: "Make every bar liquid the moment it's cast — without it leaving your vault.",
+    lede: "Upgrade your refinery into a participating node in the Global Gold network: each bar you produce is registered the moment it's assayed, and your own-account metal can be put to work as liquid, financeable collateral immediately — compressing the capital lock from weeks to the moment of the pour. No shipping. No re-assay. No surrender of title.",
+    image: {
+      src: "/images/refinery.png",
+      alt: "A freshly cast gold bar",
+    },
+    primaryCta: { label: "Request Access", href: "/access/" },
+    secondaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+  },
+  challenge: {
+    eyebrow: "The challenge",
+    heading: "The bar is finished. The capital is not.",
+    body: [
+      "A refiner advances on doré and scrap, then carries that value through the melt-assay-cast window — days when the price is hedged but the cash is locked in metal moving through the circuit. The refined bar is the most liquid asset in the building, and the slowest to pay: nothing is recovered until it's placed with an offtaker and settled. When backlogs push that window from two weeks to two months, finished bars sit on the floor while the credit line keeps accruing interest. Refining, as the industry says, is all about finance.",
+      "The gap is bridged the expensive way — revolving credit, metal leases, product-financing, letters of credit — each a standing claim on margins already measured in a few dollars an ounce. In a rising market the strain compounds: more capital required per ounce, lines pressed to their limits, intake paused when credit tightens. The metal is done. The money waits.",
+    ],
+  },
+  benefits: {
+    eyebrow: "How the Standard works for you",
+    heading: "From the pour to liquidity.",
+    lede: "You already operate the vault. The Standard adds the rail that lets a finished bar work the day it's cast — without moving it, re-assaying it, or surrendering title.",
+    columns: 3,
+    items: [
+      {
+        eyebrow: "Your vault, a node",
+        title: "Become a participating vault",
+        body: "Deploy a Title Register on the allocated, audited vault you already run, and your refinery becomes a node in the network. The metal stays on your floor under your control; the protocol takes neither custody nor title.",
+      },
+      {
+        eyebrow: "Liquidity at the pour",
+        title: "Finished inventory becomes working capital",
+        body: "The moment a bar is cast and assayed, it's registered — and own-account metal can be collateralized into Standard Metal Units and continuous global liquidity at once. Turn finished bars into working capital without waiting to place them with an offtaker.",
+      },
+      {
+        eyebrow: "Less drag, new income",
+        title: "Lighter balance sheet, new fee channels",
+        body: "Convert finished bars directly into liquidity and lean less on revolving credit and leasing for own-account metal. Across the floor, earn recurring fees on tokenization, collateralization, settlement, and migration — and extend the same instant-liquidity rail to the producers you refine for.",
+      },
+    ],
+  },
+  howItWorks: {
+    eyebrow: "How it works for you",
+    heading: "Cast it. Register it. Put it to work.",
+    steps: [
+      {
+        title: "Make your vault a participating node",
+        body: "Deploy your Title Register on your existing allocated custody. Nothing ships; the metal and the title stay exactly where they already are — in your facility, under your policy.",
+      },
+      {
+        title: "Register each bar at the moment of cast",
+        body: "Serial, refiner, weight, and fineness are recorded the moment the bar is assayed. Your provenance becomes a permanent, verifiable attribute of the bar — and the bar becomes globally addressable as it stands.",
+      },
+      {
+        title: "Convert finished metal into liquidity",
+        body: "Own-account bars can be collateralized to mint Standard Metal Units and reach continuous global liquidity immediately — compressing the cash cycle from the offtake window to the moment of the pour. The bar never leaves your vault; only the claim against it moves.",
+      },
+    ],
+  },
+  proof: {
+    eyebrow: "Why refiners adopt the Standard",
+    heading: "Liquidity at the speed of production.",
+    stats: [
+      { label: "Liquidity", value: "From the moment of cast" },
+      { label: "Custody & title", value: "Stay in your vault" },
+      { label: "Capital lock", value: "Compressed to the pour" },
+      { label: "Market access", value: "24/7 global" },
+    ],
+    statColumns: 4,
+  },
+  faq: {
+    eyebrow: "Questions",
+    heading: "What refiners ask first.",
+    items: [
+      {
+        question: "Do we keep custody and title to our metal?",
+        answer:
+          "Yes. The metal never leaves your vault, and you operate your own Title Register as the authoritative book of record. The protocol takes neither custody nor title — participation runs on top of the allocated custody you already operate, not in place of it.",
+      },
+      {
+        question: "Does this apply to metal we own, or to toll metal too?",
+        answer:
+          "Both, in different ways. Metal you own outright — purchased doré, scrap, own-account inventory — you can collateralize into Standard Metal Units and on-chain liquidity the moment it's cast and registered. Toll metal remains the producer's property; as a participating node, you can extend that same instant-liquidity and global-settlement rail to the producers you refine for.",
+      },
+      {
+        question: "What does \u201Cliquid the moment it's cast\u201D actually mean?",
+        answer:
+          "Once a finished bar is registered on your Title Register, its owner can collateralize it to mint Standard Metal Units and reach continuous global liquidity — turning finished inventory into working capital without waiting to place it with an offtaker. The bar stays in your vault throughout; only the claim against it moves.",
+      },
+      {
+        question: "Do we need new accreditation, or to change how we operate?",
+        answer:
+          "No. Eligibility is set by Council-published standards, which Good Delivery refiners meet as a matter of course. The Standard adds a liquidity and settlement rail on top of your existing operation — it does not replace your assay, your brand, or your accreditation.",
+      },
+      {
+        question: "What does participation earn, and what does it save?",
+        answer:
+          "On own-account metal, it reduces reliance on revolving credit, leasing, and product financing by converting finished bars into liquidity directly. Across the floor, it opens recurring fee channels — tokenization, collateralization, settlement, and migration. Request access and the economics are scoped to your operation.",
+      },
+    ],
+  },
+  cta: {
+    eyebrow: "Solutions · Refiners",
+    heading: "The bar leaves the line ready to work.",
+    body: "Request access to discuss becoming a participating vault on the Global Gold Standard — including a standalone Title Register deployment on the custody you already operate.",
+    primaryCta: { label: "Request Access", href: "/access/" },
+    secondaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+    variant: "dark",
+  },
+};
+---
+
+<SolutionPage content={content} />

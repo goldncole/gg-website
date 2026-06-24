@@ -1,0 +1,131 @@
+---
+// =====================================================================
+// PAGE — Tokens · Standard Metal Units (uses TokenPage template).
+// Draft copy v1 — grounded in Messaging Library §6 (Pillar 4) and §10
+// (Collateralization Module: 1:1 invariant). Swap `/images/*`
+// placeholders for the real stack diagram noted inline.
+// =====================================================================
+import TokenPage from "../../layouts/templates/TokenPage.astro";
+import type { TokenPageContent } from "../../layouts/templates/TokenPage.astro";
+
+const content: TokenPageContent = {
+  meta: {
+    title: "Standard Metal Units (SMU) — The Tokens · Global Gold",
+    description:
+      "Standard Metal Units are fungible ounce units backed 1:1 by collateralized claims on specific allocated bars. U.S. Gold (USG) is the first national SMU series.",
+  },
+  hero: {
+    eyebrow: "The Tokens",
+    title: "Standard Metal Units.",
+    badges: ["ERC-20", "Fungible", "SMU"],
+    lede: "Fungible ounce units, each backed 1:1 by a collateralized claim to one troy ounce of fine metal. An SMU is denominated as one fine ounce and trades on a continuous global market while the metal stays vaulted with a bankruptcy-remote collateral agent.",
+    primaryCta: { label: "Request Access", href: "/access/" },
+    secondaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+  },
+  specs: {
+    eyebrow: "At a glance",
+    columns: 3,
+    items: [
+      { label: "Standard", value: "ERC-20 · LayerZero OFT" },
+      { label: "Backing", value: "1:1 collateralized bar claims" },
+      { label: "Unit", value: "1 SMU = 1 troy oz fine metal" },
+      { label: "Issuer", value: "No single issuer" },
+      { label: "Redeemable", value: "Yes — to a bar-specific claim" },
+      { label: "Supply", value: "Elastic — mint on collateralization, burn on redemption" },
+    ],
+  },
+  overview: {
+    eyebrow: "Where it sits in the stack",
+    heading: "The liquid layer over allocated metal.",
+    body: [
+      "A Standard Metal Unit is minted when a Conditional Claim Token — the on-chain claim on a specific allocated bar — is collateralized. One unit is minted per troy ounce of fine metal, and the invariant is enforced in the protocol's arithmetic: units are minted only against collateralized claims, never against other units, and the underlying collateral is not pledged, lent, or rehypothecated. While the units circulate, title to the collateralized claims is held by a bankruptcy-remote collateral agent.",
+      "How many units mint is set by fine-metal content — never gross bar weight. Every eligible bar is registered with both its weight and its fineness (its purity), and the protocol multiplies the two: fine-metal content equals gross weight × fineness, and that is exactly how many SMUs are minted. A 100-ounce bar at 99.99% purity carries 99.99 ounces of fine metal, so it mints 99.99 SMU. Two bars of equal fine content mint the same number of SMUs, whatever their gross weight — because one SMU is always one troy ounce of fine metal.",
+      "Because every unit is backed the same way, units are interchangeable — and that is what makes the market deep. SMUs from every participating vault pool into the same liquidity, trade continuously, and route against the major metal units on-chain. The series system extends the model across jurisdictions: U.S. Gold (USG) is the first national SMU series, with further jurisdictional series following as the Council adopts them — same backing model, same redemption path, same standard.",
+    ],
+    diagram: {
+      src: "/images/module-03-unit.png",
+      alt: "Diagram showing where Standard Metal Units sit in the Global Gold stack",
+      caption: "Bar → Claim → Unit: every SMU traces to a collateralized claim on a specific allocated bar.",
+    },
+  },
+  lifecycle: {
+    eyebrow: "Lifecycle",
+    heading: "Collateralize. Mint. Trade. Redeem.",
+    steps: [
+      {
+        title: "Collateralize",
+        body: "A holder collateralizes a Conditional Claim Token on a specific bar. Title to the collateralized claim moves to the bankruptcy-remote collateral agent.",
+      },
+      {
+        title: "Mint",
+        body: "Standard Metal Units are minted 1:1 against the collateralized claim — one unit per troy ounce of fine metal. No unit exists without metal behind it.",
+      },
+      {
+        title: "Trade",
+        body: "Units move freely across the network's markets and integrated venues — fungible, metal-backed liquidity, continuously open.",
+      },
+      {
+        title: "Burn and redeem",
+        body: "Burning units releases a bar-specific claim on comparable metal of the same caliber — returning the holder to allocated ownership.",
+      },
+    ],
+  },
+  properties: {
+    eyebrow: "Properties",
+    heading: "What makes an SMU an SMU.",
+    columns: 3,
+    items: [
+      {
+        eyebrow: "Backing",
+        title: "1:1, never rehypothecated",
+        body: "Every unit is backed by a collateralized claim on a specific bar. Units are not minted against units, and the collateral does exactly one job.",
+      },
+      {
+        eyebrow: "Fungibility",
+        title: "Interchangeable ounce units",
+        body: "Units from every participating vault are interchangeable, so liquidity pools deeply across the whole network instead of fragmenting vault by vault.",
+      },
+      {
+        eyebrow: "Redemption",
+        title: "A two-way door",
+        body: "Holders can always burn back to a bar-specific claim — liquidity without ever giving up the path to allocated metal.",
+      },
+    ],
+  },
+  related: {
+    eyebrow: "Related tokens",
+    heading: "The rest of the token family.",
+    columns: 3,
+    items: [
+      {
+        eyebrow: "Token",
+        title: "Conditional Claim Tokens",
+        blurb: "The on-chain claim on a specific bar that backs every SMU.",
+        href: "/tokens/conditional-claim-tokens/",
+      },
+      {
+        eyebrow: "Series",
+        title: "U.S. Gold (USG)",
+        blurb: "The first national SMU series, under the same shared standard.",
+        href: "/tokens/standard-metal-units/usg/",
+      },
+      {
+        eyebrow: "Token",
+        title: "gBars",
+        blurb: "KYC-gated bars that bundle gGold ounces — USG is one of gGold's basket constituents.",
+        href: "/tokens/gbars/",
+      },
+    ],
+  },
+  cta: {
+    eyebrow: "The Tokens",
+    heading: "Allocated metal, made liquid.",
+    body: "See how Standard Metal Units connect physical custody to a continuous global market.",
+    primaryCta: { label: "Request Access", href: "/access/" },
+    secondaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+    variant: "dark",
+  },
+};
+---
+
+<TokenPage content={content} />

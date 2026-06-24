@@ -1,0 +1,130 @@
+---
+// =====================================================================
+// PAGE — Solutions · Institutional Allocators (uses SolutionPage
+// template). Draft copy v1 — grounded in Audience Brief 02: lead with
+// structure, distinguish from single-issuer tokens and ETFs in the
+// first beat, neutral-by-construction framing, no overclaimed
+// decentralization.
+// =====================================================================
+import SolutionPage from "../../layouts/templates/SolutionPage.astro";
+import type { SolutionPageContent } from "../../layouts/templates/SolutionPage.astro";
+
+const content: SolutionPageContent = {
+  meta: {
+    title: "For Institutional Allocators — Solutions · Global Gold",
+    description:
+      "Bar-specific ownership with continuous liquidity — no single issuer, no rehypothecation, no fund wrapper. Allocated gold without the structural trade-off.",
+  },
+  hero: {
+    eyebrow: "Solutions · Institutional Allocators",
+    title: "Allocated gold, without the trade-off.",
+    lede: "Bar-specific ownership with continuous liquidity — no single issuer, no rehypothecation, no fund wrapper. The substance of allocated custody and the mobility of a 24/7 market, in one structure.",
+    image: {
+      src: "/images/allocator.png",
+      alt: "An allocated gold bar resting on marble",
+    },
+    primaryCta: { label: "Request Access", href: "/access/" },
+    secondaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+  },
+  challenge: {
+    eyebrow: "The challenge",
+    heading: "Every existing pathway carries a compromise.",
+    body: [
+      "Direct allocated custody gives you the substance of specific bars — and very little mobility. ETFs give you liquid exposure inside market hours — and no bars, no redemption to metal, and a fund wrapper between you and the asset. Single-issuer tokens trade continuously — but minting, redemption, custody selection, and freeze powers all concentrate in one company.",
+      "Gold is re-monetizing: central banks are net buyers at multi-decade highs, and allocated gold now qualifies as a tier-one high-quality liquid asset under Basel III. The asset has institutional standing. The infrastructure for holding it has not kept pace — until now.",
+    ],
+  },
+  benefits: {
+    eyebrow: "How the Standard works for you",
+    heading: "Substance, mobility, and no concentrated counterparty.",
+    columns: 3,
+    items: [
+      {
+        eyebrow: "Ownership",
+        title: "Claims on specific bars",
+        body: "Positions trace to identified, allocated bars on a participating vault's authoritative on-chain ledger — not to a pooled exposure or an issuer's balance sheet.",
+      },
+      {
+        eyebrow: "Integrity",
+        title: "1:1, never rehypothecated",
+        body: "Units are minted 1:1 against collateralized bar claims held by a bankruptcy-remote collateral agent. Eligible collateral is not pledged, lent, or re-used — there is no fractional layer.",
+      },
+      {
+        eyebrow: "Structure",
+        title: "Neutral by construction",
+        body: "Governance sits with a nonprofit standards body; custody is distributed across independent participating vaults; no single issuer or operator controls the system.",
+      },
+    ],
+  },
+  howItWorks: {
+    eyebrow: "How it works for you",
+    heading: "From mandate to position.",
+    steps: [
+      {
+        title: "Acquire allocated positions",
+        body: "Take title to specific bars in participating vaults, or acquire bar-specific claims — eligibility and onboarding run under the Council's published compliance framework.",
+      },
+      {
+        title: "Hold claims, or mint units",
+        body: "Hold bar-specific claims for pure allocated exposure, or collateralize claims to mint Standard Metal Units when the mandate calls for liquidity.",
+      },
+      {
+        title: "Redeem at will",
+        body: "Burn units to reclaim a bar-specific claim on comparable gold of the same caliber — the round trip back to allocated metal is permanent and rule-bound.",
+      },
+    ],
+  },
+  proof: {
+    eyebrow: "Why allocators look at the Standard",
+    heading: "The structure is the diligence.",
+    stats: [
+      { label: "Backing", value: "1:1 collateralized bar claims" },
+      { label: "Rehypothecation", value: "None" },
+      { label: "Governance", value: "Wyoming nonprofit (DUNA)" },
+      { label: "Issuer", value: "No single issuer" },
+    ],
+    statColumns: 4,
+  },
+  faq: {
+    eyebrow: "Questions",
+    heading: "What allocators ask first.",
+    items: [
+      {
+        question: "How is this different from PAXG or XAUT?",
+        answer:
+          "Those are digital IOUs from a centralized issuer — one company controls minting, redemption, custody selection, and freeze powers. Under the Standard, units trace to claims on specific bars held across a network of independent participating vaults, with governance at a nonprofit standards body. There is no single company in the middle.",
+      },
+      {
+        question: "How is this different from a gold ETF?",
+        answer:
+          "An ETF gives you exposure through a fund wrapper, inside market hours, with no path to specific bars. Units under the Standard trade continuously and redeem to bar-specific claims on allocated metal — ownership, not exposure.",
+      },
+      {
+        question: "Who are the actual counterparties?",
+        answer:
+          "Custody sits with participating vaults under their own title authority. Collateralized claims are held by a bankruptcy-remote collateral agent. Rules are set by the Global Gold Council, a Wyoming decentralized unincorporated nonprofit association. The technology is built by a software company under license — it neither issues units nor holds metal.",
+      },
+      {
+        question: "Is the collateral ever lent or re-used?",
+        answer:
+          "No. Eligible collateral is not pledged, lent, or rehypothecated, and the 1:1 mint invariant is enforced in the protocol's arithmetic rather than in a policy document.",
+      },
+      {
+        question: "How do we begin diligence?",
+        answer:
+          "Request access. We provide the white paper, the governance documentation, and the architecture materials, and arrange a briefing sequenced for investment, technical, and legal review.",
+      },
+    ],
+  },
+  cta: {
+    eyebrow: "Solutions · Institutional Allocators",
+    heading: "Diligence the structure.",
+    body: "Request investor materials and a briefing on the Global Gold Standard.",
+    primaryCta: { label: "Request Access", href: "/access/" },
+    secondaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+    variant: "dark",
+  },
+};
+---
+
+<SolutionPage content={content} />

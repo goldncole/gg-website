@@ -1,0 +1,296 @@
+---
+// =====================================================================
+// ProseBody — styled long-form reading container for Journal articles and
+// any rich editorial copy. EB Garamond body, ~64ch measure, generous
+// leading, with sensible defaults for h2/h3, lists, blockquote, links,
+// figures/captions, hr, and code. Pass MDX/markup through the default
+// <slot>. Styling targets slotted content via :global().
+// =====================================================================
+export interface Props {
+  /** Reading measure in ch. Default 64 (sits in the 62–68ch sweet spot). */
+  measure?: number;
+  /** "editorial" = centered Journal column; "docs" = left-aligned, wider
+   *  reference measure with table + copy-button code styling. */
+  variant?: "editorial" | "docs";
+  class?: string;
+}
+
+const { measure, variant = "editorial", class: className } = Astro.props;
+const measureCh = measure ?? (variant === "docs" ? 74 : 64);
+---
+
+<div
+  class:list={["prose", { "prose--docs": variant === "docs" }, className]}
+  style={`--measure: ${measureCh}ch;`}
+>
+  <slot />
+</div>
+
+<style>
+  .prose {
+    max-width: var(--measure, 64ch);
+    margin-inline: auto;
+    font-family: var(--serif-body);
+    font-size: var(--t-lede);
+    line-height: 1.72;
+    color: var(--char);
+  }
+
+  /* Slotted (MDX/markdown) content lives outside the scoped DOM, so target
+     it with :global() under the .prose wrapper. */
+  .prose :global(p) {
+    margin: 0 0 1.25em;
+  }
+  .prose :global(a) {
+    color: var(--gold-deep);
+    border-bottom: 1px solid var(--rule);
+    transition: border-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+  }
+  .prose :global(a:hover) {
+    color: var(--char);
+    border-color: var(--gold-deep);
+  }
+
+  .prose :global(h2) {
+    margin: 1.8em 0 0.5em;
+    font-family: var(--serif-display);
+    font-weight: 300;
+    font-size: var(--t-display-md);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--char);
+  }
+  .prose :global(h3) {
+    margin: 1.6em 0 0.4em;
+    font-family: var(--serif-display);
+    font-weight: 400;
+    font-size: clamp(1.4rem, 2vw, 1.8rem);
+    line-height: 1.15;
+    color: var(--char);
+  }
+  .prose :global(h4) {
+    margin: 1.5em 0 0.4em;
+    font-family: var(--sans-display);
+    font-weight: 500;
+    font-size: 0.86rem;
+    letter-spacing: var(--track-eyebrow);
+    text-transform: uppercase;
+    color: var(--gold-deep);
+  }
+
+  .prose :global(ul),
+  .prose :global(ol) {
+    margin: 0 0 1.25em;
+    padding-left: 1.4em;
+  }
+  .prose :global(ul) {
+    list-style: disc;
+  }
+  .prose :global(ol) {
+    list-style: decimal;
+  }
+  .prose :global(li) {
+    margin-bottom: 0.5em;
+  }
+  .prose :global(li::marker) {
+    color: var(--gold-deep);
+  }
+
+  .prose :global(blockquote) {
+    margin: 1.8em 0;
+    padding-left: clamp(20px, 3vw, 32px);
+    border-left: 2px solid var(--gold-deep);
+    font-family: var(--serif-display);
+    font-weight: 300;
+    font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+    line-height: 1.25;
+    color: var(--char);
+  }
+  .prose :global(blockquote p) {
+    margin: 0;
+  }
+
+  .prose :global(hr) {
+    height: 1px;
+    border: 0;
+    background: var(--rule);
+    margin: clamp(40px, 5vw, 64px) auto;
+    width: 40%;
+  }
+
+  .prose :global(figure) {
+    margin: clamp(36px, 4.4vw, 56px) 0;
+  }
+  .prose :global(img) {
+    border-radius: var(--radius-img);
+    width: 100%;
+  }
+  .prose :global(figcaption) {
+    margin-top: 0.8em;
+    font-family: var(--sans-display);
+    font-size: 0.82rem;
+    letter-spacing: 0.02em;
+    color: var(--graphite);
+    text-align: center;
+  }
+
+  .prose :global(strong) {
+    font-weight: 500;
+    color: var(--char);
+  }
+  .prose :global(em) {
+    font-style: italic;
+  }
+
+  .prose :global(code) {
+    font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+    font-size: 0.86em;
+    background: var(--gold-soft);
+    padding: 0.12em 0.4em;
+    border-radius: 4px;
+    color: var(--gold-deep);
+  }
+  .prose :global(pre) {
+    margin: 1.6em 0;
+    padding: clamp(18px, 2vw, 26px);
+    background: var(--obsidian);
+    border-radius: var(--radius-img);
+    overflow-x: auto;
+  }
+  .prose :global(pre code) {
+    background: transparent;
+    padding: 0;
+    color: var(--ivory);
+  }
+
+  /* ===================================================================
+     DOCS VARIANT — left-aligned, wider measure for reference reading.
+     Body steps down from the editorial lede to --t-body; headings keep
+     the brand serif but tighten the vertical rhythm. Adds table styling
+     and a copy-button code wrapper not needed by the Journal.
+     =================================================================== */
+  .prose--docs {
+    margin-inline: 0;
+    font-size: var(--t-body);
+    line-height: 1.7;
+  }
+  .prose--docs :global(p) {
+    margin: 0 0 1.1em;
+  }
+  .prose--docs :global(h2) {
+    margin: 1.6em 0 0.5em;
+    font-size: clamp(1.7rem, 2.6vw, 2.2rem);
+    padding-top: 0.3em;
+  }
+  .prose--docs :global(h3) {
+    margin: 1.4em 0 0.4em;
+    font-size: clamp(1.25rem, 1.8vw, 1.55rem);
+  }
+  /* Heading offset so in-page anchor jumps + scroll-spy clear the fixed
+     site header and the docs subheader. */
+  .prose--docs :global(h2),
+  .prose--docs :global(h3) {
+    scroll-margin-top: calc(var(--docs-header-h, 76px) + 32px);
+  }
+
+  /* Tables */
+  .prose--docs :global(.docs-table-scroll) {
+    margin: 1.6em 0;
+    overflow-x: auto;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-img);
+  }
+  .prose--docs :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    line-height: 1.45;
+  }
+  .prose--docs :global(thead) {
+    background: var(--gold-soft);
+  }
+  .prose--docs :global(th) {
+    text-align: left;
+    font-family: var(--sans-display);
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    padding: 0.85em 1.1em;
+    border-bottom: 1px solid var(--rule);
+  }
+  .prose--docs :global(td) {
+    padding: 0.8em 1.1em;
+    color: var(--graphite);
+    border-bottom: 1px solid var(--rule-faint);
+    vertical-align: top;
+  }
+  .prose--docs :global(tbody tr:last-child td) {
+    border-bottom: 0;
+  }
+
+  /* Code blocks with a copy button. The button is injected by docs.ts and
+     positioned over the obsidian pre. Shiki sets an inline background on
+     .astro-code; force the brand obsidian so all blocks match. */
+  .prose--docs :global(.docs-code) {
+    position: relative;
+    margin: 1.6em 0;
+  }
+  .prose--docs :global(.docs-code pre),
+  .prose--docs :global(pre.astro-code) {
+    background: var(--obsidian) !important;
+  }
+  .prose--docs :global(.docs-code pre) {
+    margin: 0;
+  }
+  .prose--docs :global(.docs-code__copy) {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    padding: 6px 12px;
+    font-family: var(--sans-display);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--stone);
+    background: rgba(245, 241, 232, 0.06);
+    border: 1px solid var(--rule-light);
+    border-radius: 7px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity var(--t-fast) var(--ease), color var(--t-fast) var(--ease),
+      background var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+  }
+  .prose--docs :global(.docs-code:hover .docs-code__copy),
+  .prose--docs :global(.docs-code__copy:focus-visible) {
+    opacity: 1;
+  }
+  .prose--docs :global(.docs-code__copy:hover) {
+    color: var(--obsidian);
+    background: var(--gold-warm);
+    border-color: var(--gold-warm);
+  }
+  .prose--docs :global(.docs-code__copy.is-copied) {
+    color: var(--obsidian);
+    background: var(--gold-warm);
+    border-color: var(--gold-warm);
+    opacity: 1;
+  }
+
+  .prose--docs :global(hr) {
+    margin: clamp(32px, 4vw, 48px) 0;
+    width: 100%;
+  }
+  .prose--docs :global(blockquote) {
+    font-size: clamp(1.3rem, 2vw, 1.7rem);
+  }
+  .prose--docs :global(img) {
+    border: 1px solid var(--rule-faint);
+  }
+</style>

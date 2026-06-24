@@ -1,0 +1,136 @@
+---
+// =====================================================================
+// PAGE — Tokens · GOLDN (uses TokenPage template).
+// Copy v3 — public-release copywriting pass. Grounded in
+// GOLDN_TECHNICAL_WHITEPAPER_v1.0 (mechanics: implemented behavior is
+// authoritative) + GOLDN_AI_GROUND_TRUTH_BRIEFING_v1.0 (messaging/legal
+// guardrails). Per CEO direction: present-tense, public-facing, NO
+// "in-development" framing.
+//
+// WHAT GOLDN IS: the governance + reward token for Global Gold's on-chain
+// gold markets. Lock GOLDN -> veGOLDN (non-transferable; up to 3.5x for a
+// 10-yr lock). veGOLDN does four things: (1) gauge-vote to direct GOLDN
+// emissions across pools; (2) qualify for fee-discount tiers on gold
+// pairs; (3) earn a share of trading fees (90% LP / 10% delegators);
+// (4) govern pool inclusion. Tier follows the holder cross-chain via
+// LayerZero. 14B fixed supply; ERC-20 + LayerZero OFT; Base hub +
+// Ethereum/Optimism/Arbitrum. Core principle: rewards from participation,
+// never passive holding.
+//
+// LANGUAGE GUARDRAILS STILL HONORED (legal):
+//  - Describe fee-sharing concretely ("share of trading fees", 90/10) —
+//    AVOID bare "yield"/"returns"/"interest"/"APR"/"passive income".
+//    NOTE: whitepaper uses "yield"; briefing flags it as counsel-gated.
+//    Flagged to CEO — counsel to confirm.
+//  - No specific fee %s or tier veGOLDN floors (governance-tunable
+//    calibration stand-ins). Only fixed constants cited (3.5x, 90/10,
+//    14B, 10-yr, 2.5% ceiling).
+//  - GOLDN is NOT gold-backed, NOT redeemable, NOT gGold, NOT an SMU;
+//    carries no claim on metal/vault/ledger. (Hard line preserved.)
+//  - Lean on "rewards from participation, not passive holding" (helps
+//    anti-passive-investment posture).
+// =====================================================================
+import TokenPage from "../../layouts/templates/TokenPage.astro";
+import type { TokenPageContent } from "../../layouts/templates/TokenPage.astro";
+
+const content: TokenPageContent = {
+  meta: {
+    title: "GOLDN — The Tokens · Global Gold",
+    description:
+      "GOLDN is the governance and reward token for Global Gold's on-chain gold markets. Lock GOLDN for veGOLDN to direct rewards, earn a share of trading fees, and trade gGold pairs at the lowest fees — across every chain. A governance and utility token: not gold-backed, not a Standard Metal Unit.",
+  },
+  hero: {
+    eyebrow: "The Tokens",
+    title: "GOLDN.",
+    badges: ["Governance & Rewards", "Omnichain"],
+    lede: "GOLDN is the token that runs the markets around Global Gold. Lock it and you no longer simply hold — you take part: direct where rewards flow across the gGold pairs, earn a share of their trading fees, and trade them at the lowest fees on the network, with your standing carried across every chain. One principle holds throughout — rewards come from participation, never from passive holding. GOLDN is a governance and utility token: not gold-backed, and not a Standard Metal Unit.",
+    primaryCta: { label: "Visit GOLDN", href: "https://goldn.finance" },
+    secondaryCta: { label: "Explore the Standard", href: "/standard/" },
+  },
+  specs: {
+    eyebrow: "At a glance",
+    columns: 3,
+    items: [
+      { label: "Type", value: "Governance & utility token" },
+      { label: "Supply", value: "14,000,000,000 GOLDN (fixed)" },
+      { label: "Standard", value: "ERC-20 · LayerZero OFT" },
+      { label: "Lock for veGOLDN", value: "Up to 10 yrs · to 3.5× weight" },
+      { label: "Networks", value: "Base · Ethereum · Optimism · Arbitrum" },
+      { label: "Claim on gold", value: "None — not an SMU" },
+    ],
+  },
+  overview: {
+    eyebrow: "Where it sits in the stack",
+    heading: "Participation, turned into power.",
+    body: [
+      "GOLDN is the governance and reward token for the on-chain gold markets built around Global Gold. Held on its own, it does nothing — and that is the point. Locking GOLDN mints veGOLDN: non-transferable weight that grows with the length of your commitment, up to 3.5× for a ten-year lock. That weight is the source of everything GOLDN can do.",
+      "With veGOLDN you direct where emissions flow across the market's pools, you earn a share of the trading fees on its gGold pairs, and you qualify for the lowest swap fees on those pairs — a standing that follows you across every chain the network runs on, settled over LayerZero. One rule governs all of it: rewards come from participation, never from passive holding.",
+      "GOLDN's separation from the Standard's monetary instruments is absolute. It is not minted against metal, is not backed by or redeemable for gold, and is not gGold. Standard Metal Units and gGold carry the gold; GOLDN governs and rewards the markets built around them.",
+    ],
+  },
+  properties: {
+    eyebrow: "What veGOLDN does",
+    heading: "Lock once. Three forms of power.",
+    columns: 3,
+    items: [
+      {
+        eyebrow: "Direct the rewards",
+        title: "Steer where emissions go",
+        body: "Delegate veGOLDN as votes across the market's pools. Gauge weight decides each pool's share of GOLDN emissions — so the participants most committed to the network decide where its incentives flow.",
+      },
+      {
+        eyebrow: "Share the fees",
+        title: "Earn from the flow you back",
+        body: "Trading fees on gGold pairs are split with the people who stand behind the market: 90% to liquidity providers, 10% to delegating veGOLDN holders. Lock without delegating and you earn nothing — participation is the price of reward.",
+      },
+      {
+        eyebrow: "Pay less, everywhere",
+        title: "Your tier follows you",
+        body: "Delegated veGOLDN sets a fee-discount tier that lowers your swap fee on the market's gGold pairs — and that tier follows you across every supported chain over LayerZero, resolved once and applied everywhere.",
+      },
+    ],
+  },
+  related: {
+    eyebrow: "Related tokens",
+    heading: "The instruments that carry the gold.",
+    columns: 3,
+    items: [
+      {
+        eyebrow: "Token",
+        title: "Standard Metal Units",
+        blurb: "Fungible ounce units backed 1:1 by claims on allocated bars.",
+        href: "/tokens/standard-metal-units/",
+      },
+      {
+        eyebrow: "Token",
+        title: "Conditional Claim Tokens",
+        blurb: "The on-chain claim on a specific allocated bar.",
+        href: "/tokens/conditional-claim-tokens/",
+      },
+      {
+        eyebrow: "Token",
+        title: "gGold",
+        blurb: "The basket-backed, protocol-native gold unit GOLDN's markets trade against.",
+        href: "/tokens/ggold/",
+      },
+    ],
+  },
+  disclaimer: {
+    heading: "A note on what GOLDN is — and is not",
+    body: [
+      "GOLDN is a governance and utility token. It is not a Standard Metal Unit. It is not minted against, backed by, or redeemable for gold or any other asset, is not gGold, and carries no claim on any bar, vault, ledger entry, or protocol asset.",
+      "Emissions and fee shares accrue only to holders who lock and actively delegate veGOLDN — they are a function of participation, not of passively holding the token, and are not interest or a guaranteed return. Fee tiers, emission rates, and pool parameters are set through governance and may change. Nothing on this page is an offer, a solicitation, or investment, financial, or legal advice.",
+    ],
+  },
+  cta: {
+    eyebrow: "The Tokens",
+    heading: "The market rewards the people who build it.",
+    body: "Lock GOLDN to direct its rewards, lower your fees, and share in the markets you stand behind — across every chain. Begin at goldn.finance.",
+    primaryCta: { label: "Visit GOLDN", href: "https://goldn.finance" },
+    secondaryCta: { label: "Explore the Standard", href: "/standard/" },
+    variant: "dark",
+  },
+};
+---
+
+<TokenPage content={content} />

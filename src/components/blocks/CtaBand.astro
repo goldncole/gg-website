@@ -1,0 +1,134 @@
+---
+// =====================================================================
+// CtaBand — closing conversion band. Heading + body + primary (.cta--box)
+// + secondary link. Two variants:
+//   • light (default) → centered on the paper ground
+//   • dark            → full-bleed obsidian band (the one dark moment)
+// =====================================================================
+export interface BandCta {
+  label: string;
+  href: string;
+}
+
+export interface Props {
+  eyebrow?: string;
+  heading: string;
+  body?: string;
+  primaryCta?: BandCta;
+  secondaryCta?: BandCta;
+  variant?: "light" | "dark";
+  headingId?: string;
+}
+
+const {
+  eyebrow,
+  heading,
+  body,
+  primaryCta,
+  secondaryCta,
+  variant = "light",
+  headingId = "ctaband-heading",
+} = Astro.props;
+
+const isDark = variant === "dark";
+---
+
+<section
+  class:list={["section", "ctaband", { "ctaband--dark": isDark }]}
+  aria-labelledby={headingId}
+  data-header-dark={isDark ? "" : undefined}
+>
+  <div class="container container--narrow ctaband__inner reveal">
+    {eyebrow && <p class="eyebrow ctaband__eyebrow">{eyebrow}</p>}
+    <h2 class="display display--lg ctaband__heading" id={headingId}>{heading}</h2>
+    {body && <p class="ctaband__body">{body}</p>}
+
+    {
+      (primaryCta || secondaryCta) && (
+        <div class="ctaband__actions">
+          {primaryCta && (
+            <a
+              class:list={["cta--box", { "cta--box-light": isDark }]}
+              href={primaryCta.href}
+            >
+              {primaryCta.label}
+            </a>
+          )}
+          {secondaryCta && (
+            <a class:list={["cta", { "ctaband__cta-secondary": isDark }]} href={secondaryCta.href}>
+              {secondaryCta.label} &rarr;
+            </a>
+          )}
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .ctaband__inner {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .ctaband__heading {
+    margin-top: 0.4em;
+    max-width: 22ch;
+    text-wrap: balance;
+  }
+  .ctaband__body {
+    margin: clamp(24px, 3vw, 36px) auto 0;
+    max-width: 56ch;
+    font-size: var(--t-lede);
+    line-height: 1.5;
+    color: var(--graphite);
+  }
+  .ctaband__actions {
+    margin-top: clamp(34px, 4.4vw, 52px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(20px, 3vw, 40px);
+    flex-wrap: wrap;
+  }
+
+  /* ---- dark full-bleed variant ---- */
+  .ctaband--dark {
+    position: relative;
+    width: 100vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+    isolation: isolate;
+    background: var(--obsidian);
+    color: var(--ivory);
+    padding-block: clamp(120px, 16vw, 200px);
+  }
+  .ctaband--dark .ctaband__eyebrow {
+    color: var(--gold-warm);
+  }
+  .ctaband--dark .ctaband__heading {
+    color: var(--ivory);
+  }
+  .ctaband--dark .ctaband__body {
+    color: rgba(245, 241, 232, 0.78);
+  }
+
+  /* Light variant of the boxed CTA for use over the dark band. */
+  .cta--box-light {
+    border-color: rgba(245, 241, 232, 0.5);
+    color: var(--ivory);
+  }
+  .cta--box-light:hover {
+    background: var(--ivory);
+    color: var(--char);
+    border-color: var(--ivory);
+  }
+  .ctaband__cta-secondary {
+    color: var(--gold-warm);
+  }
+  .ctaband__cta-secondary:hover {
+    color: var(--ivory);
+  }
+</style>

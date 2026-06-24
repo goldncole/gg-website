@@ -1,0 +1,125 @@
+---
+// =====================================================================
+// PAGE — Modules · Collateralization (uses ModulePage template).
+// Draft copy v1 — grounded in Messaging Library §10 (Collateralization
+// Module: 1:1 invariant math-enforced; Trust/SPV collateral agent) and
+// the homepage Mechanism section (no pledging, lending,
+// rehypothecation of eligible collateral).
+// =====================================================================
+import ModulePage from "../../layouts/templates/ModulePage.astro";
+import type { ModulePageContent } from "../../layouts/templates/ModulePage.astro";
+
+const content: ModulePageContent = {
+  meta: {
+    title: "Mint — The Standard · Global Gold",
+    description:
+      "The Mint Module collateralizes bar-specific claims to mint Standard Metal Units — 1:1 by construction, never rehypothecated. The bridge between allocated ownership and market liquidity.",
+  },
+  hero: {
+    eyebrow: "The Standard · Module",
+    title: "Mint.",
+    lede: "The module that collateralizes bar-specific claims to mint Standard Metal Units — the bridge between allocated ownership and market liquidity, with a 1:1 backing invariant enforced by the protocol itself.",
+    primaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+    secondaryCta: { label: "Explore the Standard", href: "/standard/" },
+    meta: ["1:1 by construction", "Bankruptcy-remote", "No rehypothecation"],
+  },
+  overview: {
+    eyebrow: "What it is",
+    heading: "The bridge between ownership and liquidity.",
+    body: [
+      "A bar-specific claim is precise, but it is not liquid — one bar, one owner, one vault. The Mint Module resolves that. A holder collateralizes a Conditional Claim Token, and the protocol mints Standard Metal Units against it: one unit per troy ounce of fine gold. While the claim is collateralized, title to it is held by a bankruptcy-remote collateral agent — outside the reach of any operating company's balance sheet.",
+      "How many units mint is set by fine-gold content — not gross weight. Every eligible bar is registered with both its weight and its fineness (its purity), and the protocol multiplies the two: fine-gold content equals gross weight × fineness, and that is exactly how many units are minted. A 100-ounce bar at 99.99% purity carries 99.99 ounces of fine gold, so it backs 99.99 units. Two bars of equal fine content mint the same number of units, whatever their gross weight — because one SMU is one troy ounce of fine gold, always.",
+      "The backing invariant is enforced in the protocol's arithmetic, not in a policy document. Units are minted only against collateralized claims, and never against other units. Eligible collateral is not pledged, lent, or rehypothecated — there is no fractional layer anywhere in the system. When units are burned, the holder reclaims a bar-specific claim on comparable gold of the same caliber, subject to protocol and vault rules. The door swings both ways, permanently.",
+    ],
+  },
+  howItWorks: {
+    eyebrow: "How it works",
+    heading: "Collateralize. Mint. Burn. Reclaim.",
+    lede: "A round trip between allocated ownership and fungible liquidity — enforced 1:1 at every step.",
+    steps: [
+      {
+        title: "Collateralize a claim",
+        body: "A holder collateralizes a Conditional Claim Token on a specific bar. Title to the collateralized claim moves to the bankruptcy-remote collateral agent for the duration.",
+      },
+      {
+        title: "Mint units",
+        body: "Standard Metal Units are minted against the collateralized claim in proportion to the bar's fine-gold content — gross weight × fineness — at one unit per troy ounce of fine gold. No unit exists without metal behind it.",
+      },
+      {
+        title: "Trade or hold",
+        body: "The units are fungible and move freely across the network's markets, while the underlying bar remains allocated in its participating vault.",
+      },
+      {
+        title: "Burn and reclaim",
+        body: "Burning units releases a bar-specific claim on comparable gold of the same caliber — returning the holder to allocated ownership.",
+      },
+    ],
+  },
+  properties: {
+    eyebrow: "Key properties",
+    heading: "Why the backing holds.",
+    columns: 3,
+    items: [
+      {
+        eyebrow: "Invariant",
+        title: "1:1 by construction",
+        body: "The mint-and-burn arithmetic makes under-backing impossible by design. Units are minted against collateralized claims — never against other units, and never against a promise.",
+      },
+      {
+        eyebrow: "Discipline",
+        title: "No rehypothecation",
+        body: "Eligible collateral is not pledged, lent, or re-used. The gold backing a unit does one job: backing that unit.",
+      },
+      {
+        eyebrow: "Remoteness",
+        title: "Collateral held apart",
+        body: "Collateralized claims are held by a bankruptcy-remote collateral agent, structurally separated from any operating company, issuer, or vault balance sheet.",
+      },
+    ],
+  },
+  whyItMatters: {
+    eyebrow: "Why it matters",
+    statement: "Liquidity is created from allocated metal — never from leverage on it.",
+  },
+  diagram: {
+    src: "/images/module-03-unit.png",
+    alt: "Diagram of the claim-to-unit collateralization flow",
+    caption: "Bar → Claim → Unit: the collateralized claim backs the minted units, 1:1.",
+  },
+  related: {
+    eyebrow: "Adjacent modules",
+    heading: "Where collateralization connects.",
+    columns: 3,
+    items: [
+      {
+        eyebrow: "Module",
+        title: "Tokenize",
+        blurb: "How a registered bar becomes the claim this module collateralizes.",
+        href: "/modules/tokenization/",
+      },
+      {
+        eyebrow: "Module",
+        title: "Liquidity",
+        blurb: "Where the minted units trade, route, and settle on a continuous market.",
+        href: "/modules/liquidity/",
+      },
+      {
+        eyebrow: "Token",
+        title: "Standard Metal Units",
+        blurb: "The fungible ounce units this module mints — and redeems.",
+        href: "/tokens/standard-metal-units/",
+      },
+    ],
+  },
+  cta: {
+    eyebrow: "The Standard",
+    heading: "Every unit, backed. Every claim, reclaimable.",
+    body: "See how the Mint Module connects allocated bars to a continuous global market.",
+    primaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+    secondaryCta: { label: "Explore the Standard", href: "/standard/" },
+    variant: "dark",
+  },
+};
+---
+
+<ModulePage content={content} />

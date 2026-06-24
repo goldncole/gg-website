@@ -1,0 +1,144 @@
+---
+// =====================================================================
+// PAGE — Tokens · gGold (uses TokenPage template).
+// Copy v3 — public-facing rewrite per CEO direction (2026-06-23).
+// Prior draft read like the internal brief's spec sheet (oracle-free,
+// un-drainable, proof-of-reserves, admission control, solvency-in-ounces,
+// communal vault, arbitrage loop). Those are MECHANICS, not the pitch.
+// This version sells the one thing a gold buyer actually wants: gold that
+// depends on no one, and that they can always claim back. Mechanics are
+// translated into plain benefits; only trust-building specifics are kept
+// (1 token = 1 oz, the named basket, always redeemable).
+// MODEL (unchanged): permissionless ERC-20 backed 1:1 in real gold ounces
+// by a fixed basket of jurisdictional gold tokens (equal thirds USG /
+// PAXG / XAUT); mint by delivering the basket, redeem for a pro-rata
+// share of it. No CDP / leverage / liquidations. Premium omitted.
+// Honesty note: redemption returns the basket of gold tokens (each itself
+// gold-backed), so copy says "the gold behind it" — NOT physical delivery.
+// =====================================================================
+import TokenPage from "../../layouts/templates/TokenPage.astro";
+import type { TokenPageContent } from "../../layouts/templates/TokenPage.astro";
+
+const content: TokenPageContent = {
+  meta: {
+    title: "gGold — The Tokens · Global Gold",
+    description:
+      "gGold is gold that depends on no one — one token backed one-for-one by real gold, diversified across leading jurisdictions, and redeemable by anyone for the gold that stands behind it.",
+  },
+  hero: {
+    eyebrow: "The Tokens",
+    title: "gGold.",
+    badges: ["One token, one ounce", "Diversified", "Always redeemable"],
+    lede: "People hold gold for one reason above all: it answers to no one. gGold keeps that promise on-chain — one token, backed one-for-one by real gold, spread across leading jurisdictions so no single company or country can put it at risk, and redeemable by anyone for the gold that stands behind it.",
+    primaryCta: { label: "Request Access", href: "/access/" },
+    secondaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+  },
+  specs: {
+    eyebrow: "At a glance",
+    columns: 3,
+    items: [
+      { label: "What it is", value: "One token = one ounce of gold" },
+      { label: "Backing", value: "Real gold, one-for-one" },
+      { label: "Held across", value: "USG · PAXG · XAUT, in equal measure" },
+      { label: "Redemption", value: "Open to anyone, anytime" },
+      { label: "Single point of failure", value: "None" },
+      { label: "Standard", value: "ERC-20" },
+    ],
+  },
+  overview: {
+    eyebrow: "What it is",
+    heading: "Gold that depends on no one.",
+    body: [
+      "Most digital gold quietly reintroduces the very risk gold was meant to escape. Behind the token stands a single company — its solvency, its policies, its power to freeze or to fail. And when confidence wavers, there is often no simple way to hand the token back and take the gold. You are left holding a promise, not the metal.",
+      "gGold is built the other way around. Each token is backed, one-for-one, by real gold — and not one issuer's gold, but a basket drawn from leading jurisdictions and held together so that no single company or country is a point of failure. Spread the trust across many, and you remove the thing that makes reliance on any one of them dangerous.",
+      "And it is always yours to claim. Anyone holding gGold can hand it back for their share of the real gold behind it — no permission, no gatekeeper, no exception. That open door is what keeps gGold honest: its worth is anchored to gold you can always redeem, not to anyone's word that the gold is there.",
+    ],
+    diagram: {
+      src: "/images/module-04-reserve.png",
+      alt: "gGold — one token backed by gold held across multiple jurisdictions",
+      caption: "One token. Real gold behind every ounce. No single company or country to depend on.",
+    },
+  },
+  lifecycle: {
+    eyebrow: "How it works",
+    heading: "Acquire it. Hold it. Redeem it.",
+    steps: [
+      {
+        title: "Acquire",
+        body: "Gold goes in; gGold comes out — one token for every ounce behind it. From that moment you hold diversified gold, not a single company's IOU.",
+      },
+      {
+        title: "Hold and use",
+        body: "Keep it as gold spread across jurisdictions, or put it to work — gGold is the unit the network's gold markets price, trade, and settle in.",
+      },
+      {
+        title: "Redeem",
+        body: "Hand gGold back at any time for your share of the real gold behind it. The door to the metal is open to everyone, always — no permission required.",
+      },
+    ],
+  },
+  properties: {
+    eyebrow: "Why it's different",
+    heading: "The reasons people trust gold — finally kept on-chain.",
+    columns: 3,
+    items: [
+      {
+        eyebrow: "Diversified",
+        title: "No single point of failure",
+        body: "Your gold isn't tied to one company's balance sheet or one country's politics. It's spread across leading jurisdictions, so trouble with any one of them is diluted — never fatal.",
+      },
+      {
+        eyebrow: "Redeemable",
+        title: "Always claimable, by anyone",
+        body: "Every gGold can be handed back for its share of the real gold behind it — no gatekeeper, no exception. The door to the gold is always open, which is what gives the token its floor.",
+      },
+      {
+        eyebrow: "Real",
+        title: "Backed by metal, not by promises",
+        body: "A fall in one country's gold price doesn't crack gGold — the gold is still there, ounce for ounce. Its worth rests on metal you can claim, not on anyone's assurance that it exists.",
+      },
+    ],
+  },
+  related: {
+    eyebrow: "Related tokens",
+    heading: "The rest of the token family.",
+    columns: 3,
+    items: [
+      {
+        eyebrow: "Token",
+        title: "gBars",
+        blurb: "The single, transferable bar that holds forty ounces of gGold.",
+        href: "/tokens/gbars/",
+      },
+      {
+        eyebrow: "Series",
+        title: "U.S. Gold (USG)",
+        blurb: "A bar-backed gold unit, and one of the jurisdictional golds inside gGold.",
+        href: "/tokens/standard-metal-units/usg/",
+      },
+      {
+        eyebrow: "Module",
+        title: "Reserve",
+        blurb: "Where the gold behind gGold is held, and where new gGold is created.",
+        href: "/modules/reserve/",
+      },
+    ],
+  },
+  disclaimer: {
+    heading: "What gGold is — and is not",
+    body: [
+      "gGold is backed one-for-one by real gold, held in a diversified basket of jurisdictional gold tokens, and redeemable for the gold that stands behind it. It is not a Standard Metal Unit, not a claim on any single bar, and not a stablecoin. The composition of the basket changes only through deliberate, published governance. Nothing on this page is an offer, a solicitation, or investment, financial, or legal advice.",
+    ],
+  },
+  cta: {
+    eyebrow: "The Tokens",
+    heading: "Gold that answers to no one.",
+    body: "See why gGold keeps the one promise gold was always meant to make.",
+    primaryCta: { label: "Request Access", href: "/access/" },
+    secondaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+    variant: "dark",
+  },
+};
+---
+
+<TokenPage content={content} />

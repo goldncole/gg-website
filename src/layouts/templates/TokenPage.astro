@@ -1,0 +1,225 @@
+---
+// =====================================================================
+// TokenPage — clarity on a token's role in the stack.
+// For CCT, SMU/USG, gBars, gGold, GOLDN.
+//
+// Section order:
+//   PageHero (name + ticker + token-type badge) →
+//   SpecStrip (standardized at-a-glance facts — same shape every token) →
+//   "What it is / where it sits in the stack" prose (+ optional stack
+//   diagram) → StepFlow (lifecycle: mint / collateralize / burn / redeem) →
+//   FeatureGrid (properties) → RelatedGrid (related tokens) →
+//   optional compliance / disclaimer note → CtaBand
+//
+// IMPORTANT — for GOLDN keep mechanics vague: use the `disclaimer` slot
+// and avoid concrete supply/issuance language.
+// =====================================================================
+import InnerPage from "../InnerPage.astro";
+import PageHero from "../../components/blocks/PageHero.astro";
+import type { HeroCta } from "../../components/blocks/PageHero.astro";
+import SpecStrip from "../../components/blocks/SpecStrip.astro";
+import type { Spec } from "../../components/blocks/SpecStrip.astro";
+import ProseBody from "../../components/blocks/ProseBody.astro";
+import StepFlow from "../../components/blocks/StepFlow.astro";
+import type { Step } from "../../components/blocks/StepFlow.astro";
+import FeatureGrid from "../../components/blocks/FeatureGrid.astro";
+import type { Feature } from "../../components/blocks/FeatureGrid.astro";
+import RelatedGrid from "../../components/blocks/RelatedGrid.astro";
+import type { RelatedItem } from "../../components/blocks/RelatedGrid.astro";
+import CtaBand from "../../components/blocks/CtaBand.astro";
+import type { BandCta } from "../../components/blocks/CtaBand.astro";
+
+export interface TokenPageContent {
+  meta: { title: string; description?: string };
+  hero: {
+    eyebrow?: string;
+    /** e.g. "Standard Metal Units" */
+    title: string;
+    /** Type / standard pills, e.g. ["ERC-20", "Fungible"]. */
+    badges?: string[];
+    lede?: string;
+    primaryCta?: HeroCta;
+    secondaryCta?: HeroCta;
+  };
+  /** Standardized facts — keep the same labels across every token. */
+  specs?: { eyebrow?: string; heading?: string; items: Spec[]; columns?: 2 | 3 | 4 };
+  overview?: {
+    eyebrow?: string;
+    heading: string;
+    body: string[];
+    diagram?: { src: string; alt: string; caption?: string };
+  };
+  lifecycle?: { eyebrow?: string; heading: string; lede?: string; steps: Step[] };
+  properties?: {
+    eyebrow?: string;
+    heading?: string;
+    lede?: string;
+    items: Feature[];
+    columns?: 2 | 3 | 4;
+  };
+  related?: { eyebrow?: string; heading?: string; items: RelatedItem[]; columns?: 2 | 3 };
+  /** Optional compliance / disclaimer note (important for GOLDN). */
+  disclaimer?: { heading?: string; body: string[] };
+  cta: {
+    eyebrow?: string;
+    heading: string;
+    body?: string;
+    primaryCta?: BandCta;
+    secondaryCta?: BandCta;
+    variant?: "light" | "dark";
+  };
+}
+
+export interface Props {
+  content: TokenPageContent;
+}
+
+const { content } = Astro.props;
+const { meta, hero, specs, overview, lifecycle, properties, related, disclaimer, cta } =
+  content;
+---
+
+<InnerPage title={meta.title} description={meta.description}>
+  <PageHero
+    eyebrow={hero.eyebrow}
+    title={hero.title}
+    badges={hero.badges}
+    lede={hero.lede}
+    primaryCta={hero.primaryCta}
+    secondaryCta={hero.secondaryCta}
+  />
+
+  {
+    specs && (
+      <SpecStrip
+        eyebrow={specs.eyebrow}
+        heading={specs.heading}
+        specs={specs.items}
+        columns={specs.columns}
+      />
+    )
+  }
+
+  {
+    overview && (
+      <section class="section token-overview" aria-labelledby="token-overview-heading">
+        <div class="container container--narrow token-overview__inner">
+          {overview.eyebrow && <p class="eyebrow reveal">{overview.eyebrow}</p>}
+          <h2
+            class="display display--lg token-overview__heading reveal"
+            id="token-overview-heading"
+            data-reveal-delay="0.05"
+          >
+            {overview.heading}
+          </h2>
+          <div class="token-overview__body reveal" data-reveal-delay="0.1">
+            <ProseBody>
+              {overview.body.map((p) => (
+                <p>{p}</p>
+              ))}
+            </ProseBody>
+          </div>
+          {overview.diagram && (
+            <figure class="token-overview__diagram reveal" data-reveal-delay="0.13">
+              <img src={overview.diagram.src} alt={overview.diagram.alt} loading="lazy" />
+            </figure>
+          )}
+        </div>
+      </section>
+    )
+  }
+
+  {
+    lifecycle && (
+      <StepFlow
+        eyebrow={lifecycle.eyebrow}
+        heading={lifecycle.heading}
+        lede={lifecycle.lede}
+        steps={lifecycle.steps}
+      />
+    )
+  }
+
+  {
+    properties && (
+      <FeatureGrid
+        eyebrow={properties.eyebrow}
+        heading={properties.heading}
+        lede={properties.lede}
+        items={properties.items}
+        columns={properties.columns}
+      />
+    )
+  }
+
+  {
+    related && (
+      <RelatedGrid
+        eyebrow={related.eyebrow}
+        heading={related.heading}
+        items={related.items}
+        columns={related.columns}
+      />
+    )
+  }
+
+  {
+    disclaimer && (
+      <section class="section token-disclaimer" aria-label="Compliance note">
+        <div class="container container--narrow token-disclaimer__inner reveal">
+          {disclaimer.heading && <p class="eyebrow">{disclaimer.heading}</p>}
+          {disclaimer.body.map((p) => (
+            <p class="token-disclaimer__text">{p}</p>
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  <CtaBand
+    eyebrow={cta.eyebrow}
+    heading={cta.heading}
+    body={cta.body}
+    primaryCta={cta.primaryCta}
+    secondaryCta={cta.secondaryCta}
+    variant={cta.variant}
+  />
+</InnerPage>
+
+<style>
+  .token-overview__inner {
+    text-align: center;
+  }
+  .token-overview__heading {
+    margin-top: 0.5em;
+    max-width: 22ch;
+    margin-inline: auto;
+  }
+  .token-overview__body {
+    margin-top: clamp(28px, 3.6vw, 44px);
+    text-align: left;
+  }
+  .token-overview__diagram {
+    margin: clamp(40px, 5vw, 64px) 0 0;
+  }
+  .token-overview__diagram img {
+    width: 100%;
+    border-radius: var(--radius-img);
+  }
+
+  .token-disclaimer__inner {
+    border: 1px solid var(--rule-faint);
+    border-radius: var(--radius-img);
+    padding: clamp(28px, 3.2vw, 44px);
+    background: rgba(42, 39, 36, 0.02);
+  }
+  .token-disclaimer__text {
+    margin: 0.8em 0 0;
+    font-size: 0.96rem;
+    line-height: 1.6;
+    color: var(--graphite);
+  }
+  .token-disclaimer__text:first-of-type {
+    margin-top: clamp(12px, 1.4vw, 18px);
+  }
+</style>

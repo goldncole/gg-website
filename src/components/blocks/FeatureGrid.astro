@@ -1,0 +1,178 @@
+---
+// =====================================================================
+// FeatureGrid — 2–4 column grid of items (eyebrow/heading + body), for
+// properties, benefits, principles, differentiators. Hairline-ruled grid
+// matching the homepage Modules vocabulary. Items may optionally link.
+// =====================================================================
+export interface Feature {
+  /** Small uppercase label above the title (optional). */
+  eyebrow?: string;
+  title: string;
+  body: string;
+  /** Makes the whole card a link with a trailing arrow. */
+  href?: string;
+}
+
+export interface Props {
+  eyebrow?: string;
+  heading?: string;
+  lede?: string;
+  items: Feature[];
+  columns?: 2 | 3 | 4;
+  headingId?: string;
+}
+
+const {
+  eyebrow,
+  heading,
+  lede,
+  items,
+  columns = 3,
+  headingId = "featuregrid-heading",
+} = Astro.props;
+---
+
+<section class="section featuregrid" aria-labelledby={heading ? headingId : undefined}>
+  <div class="container">
+    {
+      (eyebrow || heading || lede) && (
+        <header class="featuregrid__head">
+          {eyebrow && <p class="eyebrow reveal">{eyebrow}</p>}
+          {heading && (
+            <h2 class="display display--lg featuregrid__heading reveal" id={headingId} data-reveal-delay="0.05">
+              {heading}
+            </h2>
+          )}
+          {lede && <p class="featuregrid__lede reveal" data-reveal-delay="0.1">{lede}</p>}
+        </header>
+      )
+    }
+
+    <div class="featuregrid__grid" style={`--fg-cols: ${columns};`}>
+      {
+        items.map((item, i) => {
+          const inner = (
+            <>
+              {item.eyebrow && <p class="feature__eyebrow">{item.eyebrow}</p>}
+              <h3 class="feature__title">{item.title}</h3>
+              <p class="feature__body">{item.body}</p>
+              {item.href && <span class="feature__arrow" aria-hidden="true">→</span>}
+            </>
+          );
+          return (
+            <article class="feature reveal" data-reveal-delay={(0.04 + (i % columns) * 0.04).toFixed(2)}>
+              {item.href ? (
+                <a class="feature__link" href={item.href}>
+                  {inner}
+                </a>
+              ) : (
+                inner
+              )}
+            </article>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .featuregrid__head {
+    max-width: 44ch;
+  }
+  .featuregrid__heading {
+    margin-top: 0.5em;
+  }
+  .featuregrid__lede {
+    margin-top: clamp(20px, 2.4vw, 30px);
+    max-width: 58ch;
+    font-size: var(--t-lede);
+    line-height: 1.5;
+    color: var(--graphite);
+  }
+
+  /* Hairline grid. Dividers live on each cell's LEADING edges (border-left +
+     border-top); the container closes the frame with its trailing edges
+     (border-right + border-bottom). A leading-edge line is painted by the
+     later cell, so a neighbour can never paint over it — the failure mode that
+     dropped trailing (right/bottom) borders and grid-gap hairlines (always the
+     last one in a row). Every line is drawn exactly once: uniform crisp 1px,
+     with no doubled frame or dropped edge. */
+  .featuregrid__grid {
+    margin-top: clamp(48px, 6vw, 84px);
+    display: grid;
+    grid-template-columns: repeat(var(--fg-cols, 3), 1fr);
+    gap: 0;
+    border-right: 1px solid var(--rule-faint);
+    border-bottom: 1px solid var(--rule-faint);
+  }
+
+  .feature {
+    background: var(--paper);
+    border-left: 1px solid var(--rule-faint);
+    border-top: 1px solid var(--rule-faint);
+  }
+  .feature,
+  .feature__link {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 100%;
+    padding: clamp(28px, 2.6vw, 40px) clamp(22px, 2vw, 32px) clamp(32px, 3.2vw, 44px);
+    color: inherit;
+  }
+  .feature__link {
+    padding: 0;
+  }
+  .feature__eyebrow {
+    font-family: var(--sans-display);
+    font-size: var(--t-eyebrow);
+    font-weight: 500;
+    letter-spacing: var(--track-eyebrow);
+    text-transform: uppercase;
+    color: var(--gold-deep);
+  }
+  .feature__title {
+    margin: 0 0 clamp(12px, 1.4vw, 18px);
+    font-family: var(--serif-display);
+    font-weight: 300;
+    font-size: clamp(1.3rem, 1.8vw, 1.6rem);
+    line-height: 1.12;
+    color: var(--char);
+    transition: color var(--t-base) var(--ease);
+  }
+  .feature__eyebrow + .feature__title {
+    margin-top: clamp(16px, 2vw, 26px);
+  }
+  .feature__body {
+    margin: 0;
+    font-size: 0.98rem;
+    line-height: 1.55;
+    color: var(--graphite);
+  }
+  .feature__arrow {
+    margin-top: auto;
+    padding-top: clamp(16px, 1.8vw, 22px);
+    font-size: 1.05rem;
+    line-height: 1;
+    color: var(--gold-deep);
+    transition: transform var(--t-base) var(--ease);
+  }
+  .feature__link:hover .feature__title {
+    color: var(--gold-deep);
+  }
+  .feature__link:hover .feature__arrow {
+    transform: translateX(5px);
+  }
+
+  @media (max-width: 900px) {
+    .featuregrid__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 540px) {
+    .featuregrid__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

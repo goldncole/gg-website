@@ -1,0 +1,120 @@
+---
+// [6] What It Solves — split layout: copy and a value list on the left, an
+// atmospheric marble-hall image on the right.
+const values = [
+  "Vault custody remains local.",
+  "Users hold claims to specific bars.",
+  "SMUs trade as fungible units.",
+  "Liquidity forms across a network instead of inside one company's product.",
+];
+---
+
+<section class="section standard-solves" id="standard-solves" aria-labelledby="standard-solves-heading">
+  <div class="container standard-solves__inner">
+    <div class="standard-solves__copy">
+      <p class="eyebrow reveal">What It Solves</p>
+      <h2
+        class="display display--lg standard-solves__heading reveal"
+        id="standard-solves-heading"
+        data-reveal-delay="0.05"
+      >
+        Trusted metal, shared market access.
+      </h2>
+      <p class="standard-solves__lede reveal" data-reveal-delay="0.1">
+        Physical gold is trusted, but fragmented. Traditional tokenized gold is
+        liquid, but usually issuer-dependent. Global Gold connects the two by
+        giving allocated physical metal a shared market standard.
+      </p>
+
+      <ul class="standard-solves__list" role="list">
+        {
+          values.map((value, i) => (
+            <li class="standard-solves__item reveal" data-reveal-delay={(0.12 + i * 0.04).toFixed(2)}>
+              <span class="standard-solves__bullet" aria-hidden="true" />
+              <span>{value}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <figure class="standard-solves__media reveal" data-reveal-delay="0.08">
+      <img
+        src="/images/monumental-marble-hall.png"
+        alt="A monumental marble hall"
+        loading="lazy"
+      />
+    </figure>
+  </div>
+</section>
+
+<style>
+  .standard-solves__inner {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    align-items: center;
+    column-gap: clamp(40px, 5vw, 88px);
+  }
+  .standard-solves__heading {
+    margin-top: 0.5em;
+    max-width: 18ch;
+  }
+  .standard-solves__lede {
+    margin-top: clamp(24px, 3vw, 36px);
+    max-width: 52ch;
+    font-size: var(--t-lede);
+    line-height: 1.5;
+    color: var(--graphite);
+  }
+
+  .standard-solves__list {
+    margin-top: clamp(28px, 3.4vw, 44px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(14px, 1.6vw, 20px);
+  }
+  .standard-solves__item {
+    display: flex;
+    align-items: baseline;
+    gap: 0.9em;
+    font-family: var(--sans-display);
+    font-size: 1.0625rem;
+    line-height: 1.45;
+    color: var(--char);
+  }
+  .standard-solves__bullet {
+    flex: none;
+    width: 7px;
+    height: 7px;
+    margin-top: 0.5em;
+    border-radius: 50%;
+    background: var(--gold-deep);
+  }
+
+  .standard-solves__media {
+    margin: 0;
+    border-radius: var(--radius-img);
+    overflow: hidden;
+    background: var(--stone);
+    aspect-ratio: 4 / 5;
+  }
+  .standard-solves__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (max-width: 860px) {
+    .standard-solves__inner {
+      grid-template-columns: 1fr;
+      row-gap: clamp(36px, 6vw, 56px);
+    }
+    .standard-solves__media {
+      aspect-ratio: 16 / 10;
+      order: -1;
+    }
+    .standard-solves__heading {
+      max-width: 100%;
+    }
+  }
+</style>

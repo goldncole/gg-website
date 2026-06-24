@@ -1,0 +1,97 @@
+---
+// [8] Architecture — the four pillars. id="architecture" anchors the hero's
+// secondary CTA. Rendered as a 4-up typographic grid.
+const pillars = [
+  {
+    no: "01",
+    title: "The Allocated Standard",
+    body: "Every Standard Metal Unit is backed 1:1 by a collateralized Conditional Claim Token on a specific, identifiable bar in a participating vault. No single issuer controls supply.",
+  },
+  {
+    no: "02",
+    title: "Title Stays Home",
+    body: "Each participating vault operates its own on-chain Title Register as the authoritative book of record for allocated bars in custody. The vault is the registrar. The chain is the record.",
+  },
+  {
+    no: "03",
+    title: "Neutral by Construction",
+    body: "The protocol is governed by the Global Gold Council, a Wyoming DUNA under Wyo. Stat. § 17-32. No single company collects protocol fees. No single issuer backs supply. No single state authorizes the standard.",
+  },
+  {
+    no: "04",
+    title: "One Standard, Every Vault",
+    body: "On one shared standard, Standard Metal Units from participating vaults and adopted jurisdictions are interchangeable and trade as one market.",
+  },
+];
+---
+
+<section class="section architecture" id="architecture" aria-labelledby="architecture-heading">
+  <div class="container">
+    <p class="eyebrow reveal">The four pillars</p>
+    <h2 class="display display--md architecture__heading reveal" id="architecture-heading" data-reveal-delay="0.05">
+      The first allocated-gold settlement standard where the vault holds title,
+      no single company holds the protocol, and no single hub holds the market.
+    </h2>
+
+    <ol class="architecture__grid">
+      {pillars.map((p, i) => (
+        <li class="pillar reveal" data-reveal-delay={(0.04 + i * 0.04).toFixed(2)}>
+          <span class="pillar__no">{p.no}</span>
+          <h3 class="pillar__title">{p.title}</h3>
+          <p class="pillar__body">{p.body}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .architecture__heading {
+    margin-top: 0.5em;
+    max-width: 34ch;
+  }
+  .architecture__grid {
+    margin-top: clamp(48px, 6vw, 84px);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-right: 1px solid var(--rule-faint);
+    border-bottom: 1px solid var(--rule-faint);
+  }
+  .pillar {
+    background: var(--paper);
+    border-left: 1px solid var(--rule-faint);
+    border-top: 1px solid var(--rule-faint);
+    padding: clamp(28px, 2.6vw, 40px) clamp(22px, 2vw, 32px) clamp(36px, 3.4vw, 48px);
+    display: flex;
+    flex-direction: column;
+  }
+  .pillar__no {
+    font-family: var(--sans-display);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    color: var(--gold-deep);
+  }
+  .pillar__title {
+    margin: clamp(20px, 2.4vw, 32px) 0 clamp(12px, 1.4vw, 18px);
+    font-family: var(--serif-display);
+    font-weight: 300;
+    font-size: clamp(1.3rem, 1.8vw, 1.6rem);
+    line-height: 1.12;
+    color: var(--char);
+  }
+  .pillar__body {
+    margin: 0;
+    font-size: 0.98rem;
+    line-height: 1.55;
+    color: var(--graphite);
+  }
+
+  @media (max-width: 900px) {
+    .architecture__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 540px) {
+    .architecture__grid { grid-template-columns: 1fr; }
+  }
+</style>

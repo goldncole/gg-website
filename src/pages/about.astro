@@ -1,0 +1,208 @@
+---
+// =====================================================================
+// PAGE — About (the narrative + credibility front door).
+// Job: the WHY and the WHO — purpose, worldview, and the credible facts
+// of who stands behind the Standard. It deliberately does NOT re-tell
+// the mechanics (that's /standard/) or the full separation-of-powers
+// (that's /governance/*). Arc: mission/thesis hero → why we exist →
+// the mission line → what we believe (worldview) → a short structural
+// pointer that names the three branches and links out → a credibility
+// "at a glance" strip of established facts → closing CTA.
+// Every concrete claim is grounded in canonical sources: the Governance
+// pages (council = Wyoming nonprofit assoc. under Wyo. Stat. § 17-32;
+// foundation = The Foundation (public name withheld), Swiss Stiftung, Canton of Zug;
+// operating company builds under license; participating vaults hold
+// custody) and the site footer (Global Gold Protocol LLC · Wyoming,
+// USA). No fabricated team, timeline, funding, metrics, or partners.
+// =====================================================================
+import InnerPage from "../layouts/InnerPage.astro";
+import PageHero from "../components/blocks/PageHero.astro";
+import ProseBody from "../components/blocks/ProseBody.astro";
+import PullStatement from "../components/blocks/PullStatement.astro";
+import FeatureGrid from "../components/blocks/FeatureGrid.astro";
+import SpecStrip from "../components/blocks/SpecStrip.astro";
+import RelatedGrid from "../components/blocks/RelatedGrid.astro";
+import CtaBand from "../components/blocks/CtaBand.astro";
+---
+
+<InnerPage
+  title="About — Global Gold"
+  description="Why Global Gold exists: to give allocated, vault-held gold a single shared standard, so the world's most trusted asset can move through a continuous global market without moving the bar or surrendering title."
+>
+  <PageHero
+    eyebrow="About · Global Gold"
+    title="Allocated gold, made globally liquid."
+    lede="Global Gold exists to make the world's most trusted asset move like a modern one. Our purpose is to give allocated, vault-held gold a single shared standard — so it can flow through a continuous global market without moving the bar or surrendering title to any one company."
+    primaryCta={{ label: "Request Access", href: "/access/" }}
+    secondaryCta={{ label: "How the Standard works", href: "/standard/" }}
+  />
+
+  {/* ---- Why we exist (the thesis) ---- */}
+  <section class="section about-mission" aria-labelledby="about-mission-heading">
+    <div class="container container--narrow about-mission__inner">
+      <p class="eyebrow reveal">Why we exist</p>
+      <h2
+        class="display display--lg about-mission__heading reveal"
+        id="about-mission-heading"
+        data-reveal-delay="0.05"
+      >
+        Gold is trusted. Its liquidity is trapped.
+      </h2>
+      <div class="about-mission__body reveal" data-reveal-delay="0.1">
+        <ProseBody>
+          <p>
+            Allocated gold is among the most trusted assets in the world, and one of the
+            least mobile. A bar is only as liquid as the hub its vault belongs to — London
+            and Zurich, New York, Shanghai, Hong Kong, Dubai, Singapore, each a market
+            unto itself. Outside those hubs, allocated metal has no institutional clearing
+            pathway at all, short of shipping it out and re-assaying it into someone else's
+            chain of custody.
+          </p>
+          <p>
+            The modern answer — gold that is on-chain and settles around the clock — has so
+            far meant handing custody to a single-issuer token company: one company that
+            issues the token, selects the custodian, controls redemption, and holds the
+            freeze switch. The metal becomes liquid only by becoming someone else's liability.
+          </p>
+          <p>
+            We believe the world's reserve asset deserves better than that trade-off. Global
+            Gold makes allocated gold globally liquid without moving the bar or surrendering
+            title — custody stays with the vault, the owner keeps a claim to specific metal,
+            and liquidity forms across a neutral network instead of inside one company's
+            product.
+          </p>
+        </ProseBody>
+      </div>
+    </div>
+  </section>
+
+  <PullStatement
+    eyebrow="The mission"
+    statement="Make allocated gold globally liquid — without moving the bar or surrendering title."
+  />
+
+  {/* ---- What we believe (worldview, not governance rules) ---- */}
+  <FeatureGrid
+    eyebrow="What we believe"
+    heading="Convictions we build on."
+    lede="Global Gold is a point of view about how the world's oldest store of value should work in a modern market. Four convictions shape everything we build."
+    columns={4}
+    items={[
+      {
+        eyebrow: "Real gold",
+        title: "One shared standard",
+        body: "Real, allocated metal deserves a single shared standard rather than a dozen incompatible silos — so liquidity pools across the market instead of fragmenting hub by hub.",
+      },
+      {
+        eyebrow: "Neutrality",
+        title: "No single issuer",
+        body: "Neutral by construction: no single issuer, no single operator, governance at a nonprofit, and custody distributed across independent vaults. No one party can mint, freeze, or redeem the standard.",
+      },
+      {
+        eyebrow: "Custody",
+        title: "Custody stays with the vault",
+        body: "Metal never moves to mobilize its value, and never leaves approved vault custody until its owner chooses to redeem it. Title stays on the vault's own Title Register.",
+      },
+      {
+        eyebrow: "Accountability",
+        title: "Everything on the record",
+        body: "An open standard, published and versioned, with approvals recorded on-chain and rulings reasoned and public. The structure is built to be examined, not merely trusted.",
+      },
+    ]}
+  />
+
+  {/* ---- How it's organized: a short pointer, not the full structure ---- */}
+  <section class="section about-structure" aria-labelledby="about-structure-heading">
+    <div class="container container--narrow about-structure__inner">
+      <p class="eyebrow reveal">How it's organized</p>
+      <h2
+        class="display display--lg about-structure__heading reveal"
+        id="about-structure-heading"
+        data-reveal-delay="0.05"
+      >
+        Authority, held apart.
+      </h2>
+      <p class="about-structure__body reveal" data-reveal-delay="0.1">
+        Global Gold is run by a deliberately divided structure, so no single party controls
+        the rules, the metal, and the market at once. A nonprofit Council writes the Standard,
+        the Foundation stewards its purpose and holds the single ecosystem
+        treasury, and the operating company builds the technology under license — while custody
+        stays with independent participating vaults. The full separation of powers lives on the
+        governance pages.
+      </p>
+    </div>
+  </section>
+
+  {/* ---- Credibility / who: established facts only ---- */}
+  <SpecStrip
+    eyebrow="The institutions behind it"
+    heading="Real entities, named jurisdictions."
+    columns={3}
+    specs={[
+      { label: "Standards", value: "Global Gold Council · Wyoming, USA" },
+      { label: "Stewardship", value: "The Foundation · Canton of Zug" },
+      { label: "Technology", value: "The operating company · under license" },
+    ]}
+  />
+
+  <RelatedGrid
+    eyebrow="Go deeper"
+    heading="Governance, in full."
+    columns={3}
+    items={[
+      {
+        eyebrow: "Governance",
+        title: "How It's Governed",
+        blurb: "The full separation of powers across Council, Foundation, the operating company, and Vaults.",
+        href: "/governance/how-its-governed/",
+      },
+      {
+        eyebrow: "Governance",
+        title: "The Council",
+        blurb: "The standards body that writes the rules of the Global Gold Standard.",
+        href: "/governance/council/",
+      },
+      {
+        eyebrow: "Governance",
+        title: "The Foundation",
+        blurb: "The permanent, neutral steward of the ecosystem and its single treasury.",
+        href: "/governance/foundation/",
+      },
+    ]}
+  />
+
+  <CtaBand
+    eyebrow="About · Global Gold"
+    heading="See the Standard for yourself."
+    body="Request access to participate, or read the white paper for the full architecture behind the Global Gold Standard."
+    primaryCta={{ label: "Request Access", href: "/access/" }}
+    secondaryCta={{ label: "Read the White Paper", href: "/white-paper/" }}
+    variant="dark"
+  />
+</InnerPage>
+
+<style>
+  /* Mission + structure sections share the governance-mandate vocabulary:
+     narrow measure, display--lg heading, long-form copy underneath. */
+  .about-mission__heading,
+  .about-structure__heading {
+    margin-top: 0.5em;
+    max-width: 22ch;
+  }
+  .about-mission__body {
+    margin-top: clamp(28px, 3.6vw, 44px);
+  }
+  /* ProseBody centers itself by default; the mission reads left-aligned to
+     match the governance mandate. */
+  .about-mission__body :global(.prose) {
+    margin-inline: 0;
+  }
+  .about-structure__body {
+    margin-top: clamp(28px, 3.6vw, 44px);
+    max-width: 62ch;
+    font-family: var(--serif-body);
+    font-size: var(--t-lede);
+    line-height: 1.6;
+    color: var(--char);
+  }
+</style>

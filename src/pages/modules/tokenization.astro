@@ -1,0 +1,124 @@
+---
+// =====================================================================
+// PAGE — Modules · Tokenization (uses ModulePage template).
+// Draft copy v1 — grounded in Messaging Library §10 (Tokenization
+// Module: CCT factory, reversible, client-initiated, no
+// auto-tokenization) and the Standard page module descriptions.
+// =====================================================================
+import ModulePage from "../../layouts/templates/ModulePage.astro";
+import type { ModulePageContent } from "../../layouts/templates/ModulePage.astro";
+
+const content: ModulePageContent = {
+  meta: {
+    title: "Tokenize — The Standard · Global Gold",
+    description:
+      "The Tokenize Module creates Conditional Claim Tokens against registered bars — optional, client-initiated, and reversible. This is how allocated gold becomes addressable on-chain.",
+  },
+  hero: {
+    eyebrow: "The Standard · Module",
+    title: "Tokenize.",
+    lede: "The module that turns a registered bar into a Conditional Claim Token — a bar-specific, on-chain claim the owner creates, controls, and can reverse. Always optional. Always client-initiated. Never automatic.",
+    primaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+    secondaryCta: { label: "Explore the Standard", href: "/standard/" },
+    meta: ["Client-initiated", "Reversible", "Vault-approved"],
+  },
+  overview: {
+    eyebrow: "What it is",
+    heading: "From a ledger entry to an addressable claim.",
+    body: [
+      "The Tokenize Module creates Conditional Claim Tokens against bars registered on a participating vault's Title Register. A CCT represents a claim tied to one specific, identifiable bar — and the right to request title transfer of that bar under protocol and vault rules. This is how allocated gold becomes addressable on-chain without pretending the token itself is legal title. The ledger remains the book of record; the claim is the instrument that moves.",
+      "Tokenization is an overlay, not an obligation. A vault can run its Title Register without tokenizing a single bar. An owner chooses when to create a claim, and can reverse the decision at any time — the claim is burned, and the bar remains exactly where it has been all along, recorded on the vault's ledger. Nothing is tokenized automatically when a bar enters custody.",
+    ],
+  },
+  howItWorks: {
+    eyebrow: "How it works",
+    heading: "Four steps, all of them the owner's choice.",
+    lede: "Each step is executed under protocol rules and approved by the vault under Guardian-controlled policy.",
+    steps: [
+      {
+        title: "Select a registered bar",
+        body: "The owner of record selects an eligible bar on the vault's Title Register — identified by serial, refiner, weight, and fineness.",
+      },
+      {
+        title: "Mint the claim",
+        body: "A Conditional Claim Token is created against the ledger entry, hard-coupled to that specific bar. The vault approves the event under its Guardian-controlled policy.",
+      },
+      {
+        title: "Hold, transfer, or collateralize",
+        body: "The claim can be held, transferred, or collateralized in the Mint Module to mint Standard Metal Units — while the bar never moves.",
+      },
+      {
+        title: "Reverse at will",
+        body: "The owner can untokenize at any time. The claim is burned, the ledger entry stands, and the bar remains in allocated custody — unchanged.",
+      },
+    ],
+  },
+  properties: {
+    eyebrow: "Key properties",
+    heading: "Designed for owners, not issuers.",
+    columns: 3,
+    items: [
+      {
+        eyebrow: "Specificity",
+        title: "One claim, one bar",
+        body: "Every Conditional Claim Token is tied to a single identified bar on a single vault's ledger. There are no pooled claims and no unallocated exposure.",
+      },
+      {
+        eyebrow: "Consent",
+        title: "Client-initiated, reversible",
+        body: "Claims are created by the owner, never by the vault or the protocol on the owner's behalf. Tokenize when you choose. Untokenize when you choose.",
+      },
+      {
+        eyebrow: "Honesty",
+        title: "A claim, not a pretense",
+        body: "The token does not claim to be legal title. It is the right to request title transfer under protocol and vault rules — and the ledger remains the authoritative record.",
+      },
+    ],
+  },
+  whyItMatters: {
+    eyebrow: "Why it matters",
+    statement: "Allocated gold becomes addressable on-chain — on the owner's terms, under the vault's authority.",
+  },
+  diagram: {
+    // PLACEHOLDER IMAGE — replace with the real Tokenization flow diagram.
+    src: "/images/module-02-claim.png",
+    alt: "Diagram of the tokenize and untokenize flow",
+    caption: "Tokenize and untokenize: a reversible state machine between the ledger entry and the claim.",
+  },
+  related: {
+    eyebrow: "Adjacent modules",
+    heading: "Where tokenization connects.",
+    columns: 3,
+    items: [
+      {
+        eyebrow: "Module",
+        title: "Title Register",
+        blurb: "The vault-operated book of record every claim is created against.",
+        href: "/modules/title-register/",
+      },
+      {
+        eyebrow: "Module",
+        title: "Mint",
+        blurb: "How claims are collateralized to mint fungible Standard Metal Units.",
+        href: "/modules/collateralization/",
+      },
+      {
+        eyebrow: "Token",
+        title: "Conditional Claim Tokens",
+        blurb: "The instrument this module creates — bar-specific and reversible.",
+        href: "/tokens/conditional-claim-tokens/",
+      },
+    ],
+  },
+  cta: {
+    eyebrow: "The Standard",
+    heading: "The bar stays put. The claim goes to work.",
+    body: "See how Conditional Claim Tokens connect allocated custody to the rest of the Global Gold Standard.",
+    primaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+    secondaryCta: { label: "Explore the Standard", href: "/standard/" },
+    variant: "dark",
+  },
+};
+---
+
+<ModulePage content={content} />

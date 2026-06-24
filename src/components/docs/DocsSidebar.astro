@@ -1,0 +1,227 @@
+---
+// =====================================================================
+// DocsSidebar — grouped navigation tree driven by docs-nav.ts. Group
+// eyebrow headings, nested item links, an active-page highlight with a
+// gold accent bar, and a search trigger (⌘K). This same markup is the
+// mobile drawer content; the drawer open/close state is a class toggled
+// on [data-docs-sidebar] by docs.ts. The sidebar is transition:persist'd
+// by DocsLayout, so the active state is re-synced in JS on navigation.
+// =====================================================================
+import { docsNav, docsHref } from "../../config/docs-nav";
+
+export interface Props {
+  /** Active entry slug, or null on the docs index. */
+  currentSlug: string | null;
+}
+
+const { currentSlug } = Astro.props;
+---
+
+<aside class="docs-sidebar" id="docs-sidebar" data-docs-sidebar aria-label="Documentation">
+  <div class="docs-sidebar__backdrop" data-docs-sidebar-backdrop aria-hidden="true"></div>
+  <div class="docs-sidebar__inner">
+    <button class="docs-search-trigger" type="button" data-docs-search-open aria-label="Search documentation">
+      <span class="docs-search-trigger__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="m20 20-3.2-3.2"></path>
+        </svg>
+      </span>
+      <span class="docs-search-trigger__label">Search</span>
+      <kbd class="docs-search-trigger__kbd" aria-hidden="true">⌘K</kbd>
+    </button>
+
+    <nav class="docs-nav" aria-label="Documentation sections">
+      {
+        docsNav.map((group) => (
+          <div class="docs-nav__group">
+            <p class="docs-nav__group-label eyebrow">{group.label}</p>
+            <ul class="docs-nav__list">
+              {group.items.map((item) => {
+                const active = item.slug === currentSlug;
+                return (
+                  <li>
+                    <a
+                      class:list={["docs-nav__link", { "is-active": active }]}
+                      href={docsHref(item.slug)}
+                      data-docs-nav-link
+                      data-slug={item.slug}
+                      aria-current={active ? "page" : undefined}
+                    >
+                      {item.label}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ))
+      }
+    </nav>
+  </div>
+</aside>
+
+<style>
+  /* Desktop: a sticky column inside the docs grid, offset below the fixed
+     site header and independently scrollable. */
+  .docs-sidebar {
+    position: sticky;
+    top: calc(var(--docs-header-h, 78px) + 26px);
+    align-self: start;
+    max-height: calc(100dvh - var(--docs-header-h, 78px) - 46px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-right: 6px;
+  }
+  .docs-sidebar__backdrop {
+    display: none;
+  }
+  .docs-sidebar__inner {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(22px, 2.4vw, 30px);
+  }
+
+  /* Mobile: off-canvas drawer. The aside spans the viewport (overlay layer),
+     the backdrop dims the page, and the inner panel slides in from the left.
+     Open state is the .is-open class toggled by docs.ts. */
+  @media (max-width: 860px) {
+    .docs-sidebar {
+      position: fixed;
+      inset: 0;
+      top: 0;
+      max-height: none;
+      overflow: visible;
+      z-index: 150;
+      padding: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .docs-sidebar.is-open {
+      visibility: visible;
+      pointer-events: auto;
+    }
+    .docs-sidebar__backdrop {
+      display: block;
+      position: absolute;
+      inset: 0;
+      background: rgba(17, 17, 17, 0.34);
+      backdrop-filter: blur(2px);
+      opacity: 0;
+      transition: opacity var(--t-base) var(--ease);
+    }
+    .docs-sidebar.is-open .docs-sidebar__backdrop {
+      opacity: 1;
+    }
+    .docs-sidebar__inner {
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: min(84vw, 320px);
+      padding: clamp(84px, 14vh, 104px) clamp(22px, 5vw, 30px) 32px;
+      background: var(--paper);
+      border-right: 1px solid var(--rule);
+      box-shadow: 24px 0 60px -28px rgba(17, 17, 17, 0.45);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      transform: translateX(-100%);
+      transition: transform var(--t-base) var(--ease);
+    }
+    .docs-sidebar.is-open .docs-sidebar__inner {
+      transform: translateX(0);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .docs-sidebar__inner,
+      .docs-sidebar__backdrop {
+        transition: none;
+      }
+    }
+  }
+
+  /* ---- search trigger ---- */
+  .docs-search-trigger {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    width: 100%;
+    padding: 11px 14px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: var(--sans-display);
+    color: var(--graphite);
+    transition: border-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+  }
+  .docs-search-trigger:hover {
+    border-color: var(--gold-deep);
+    color: var(--char);
+  }
+  .docs-search-trigger__icon {
+    width: 17px;
+    height: 17px;
+    flex: 0 0 auto;
+    color: var(--gold-deep);
+  }
+  .docs-search-trigger__icon :global(svg) {
+    width: 100%;
+    height: 100%;
+  }
+  .docs-search-trigger__label {
+    font-size: 0.9rem;
+    letter-spacing: 0.01em;
+  }
+  .docs-search-trigger__kbd {
+    margin-left: auto;
+    font-family: var(--sans-display);
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    color: var(--graphite);
+    background: var(--gold-soft);
+    border: 1px solid var(--rule-faint);
+    border-radius: 5px;
+    padding: 2px 7px;
+  }
+
+  /* ---- nav tree ---- */
+  .docs-nav {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(20px, 2.2vw, 28px);
+  }
+  .docs-nav__group-label {
+    margin: 0 0 0.7em;
+    color: var(--gold-deep);
+  }
+  .docs-nav__list {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    border-left: 1px solid var(--rule-faint);
+  }
+  .docs-nav__link {
+    position: relative;
+    display: block;
+    padding: 6px 0 6px 16px;
+    margin-left: -1px;
+    border-left: 2px solid transparent;
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    line-height: 1.35;
+    color: var(--graphite);
+    transition: color var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+  }
+  .docs-nav__link:hover {
+    color: var(--char);
+    border-left-color: var(--stone-warm);
+  }
+  .docs-nav__link.is-active {
+    color: var(--gold-deep);
+    font-weight: 500;
+    border-left-color: var(--gold);
+  }
+  .docs-nav__link:focus-visible {
+    outline: 2px solid var(--gold-deep);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+</style>

@@ -1,0 +1,488 @@
+---
+// =====================================================================
+// GovernancePage — credibility / authority template.
+// For The Council, The Foundation, How It's Governed. Formal,
+// authoritative tone for regulators, counsel, and institutions.
+//
+// Section order:
+//   PageHero → Mandate (prose) →
+//   Responsibilities ("What it does" + optional "What it does not do") →
+//   Structure / Composition (prose + optional tri-branch diagram or
+//   branch cards) → Principles / safeguards (FeatureGrid) →
+//   Related entities (RelatedGrid) → Documents / references (linked) →
+//   CtaBand
+// =====================================================================
+import InnerPage from "../InnerPage.astro";
+import type { PinnedHero } from "../InnerPage.astro";
+import PageHero from "../../components/blocks/PageHero.astro";
+import type { HeroCta } from "../../components/blocks/PageHero.astro";
+import ProseBody from "../../components/blocks/ProseBody.astro";
+import FeatureGrid from "../../components/blocks/FeatureGrid.astro";
+import type { Feature } from "../../components/blocks/FeatureGrid.astro";
+import RelatedGrid from "../../components/blocks/RelatedGrid.astro";
+import type { RelatedItem } from "../../components/blocks/RelatedGrid.astro";
+import CtaBand from "../../components/blocks/CtaBand.astro";
+import type { BandCta } from "../../components/blocks/CtaBand.astro";
+
+export interface GovBranch {
+  /** e.g. "01" or "I". */
+  label?: string;
+  title: string;
+  body: string;
+}
+
+export interface GovDocument {
+  title: string;
+  href: string;
+  note?: string;
+}
+
+export interface GovernancePageContent {
+  meta: { title: string; description?: string };
+  /** Optional full-bleed pinned hero image above the fold (mirrors the
+   *  homepage). When set, the page renders white header chrome over the image
+   *  and the content scrolls up over it. Omit for the default inner-page look. */
+  pinnedHero?: PinnedHero;
+  hero: {
+    eyebrow?: string;
+    title: string;
+    lede?: string;
+    primaryCta?: HeroCta;
+    secondaryCta?: HeroCta;
+  };
+  mandate?: { eyebrow?: string; heading: string; body: string[] };
+  responsibilities?: {
+    eyebrow?: string;
+    heading?: string;
+    /** "What it does" list. */
+    does: { heading?: string; items: string[] };
+    /** Optional "What it does not do" list — strengthens regulatory framing. */
+    doesNot?: { heading?: string; items: string[] };
+  };
+  structure?: {
+    eyebrow?: string;
+    heading: string;
+    body?: string[];
+    /** Tri-branch (or N-branch) diagram rendered as labeled cards. */
+    branches?: GovBranch[];
+    /** Or an image diagram instead of/above the branch cards. */
+    diagram?: { src: string; alt: string; caption?: string };
+  };
+  principles?: {
+    eyebrow?: string;
+    heading?: string;
+    lede?: string;
+    items: Feature[];
+    columns?: 2 | 3 | 4;
+  };
+  related?: { eyebrow?: string; heading?: string; items: RelatedItem[]; columns?: 2 | 3 };
+  documents?: { eyebrow?: string; heading?: string; items: GovDocument[] };
+  cta: {
+    eyebrow?: string;
+    heading: string;
+    body?: string;
+    primaryCta?: BandCta;
+    secondaryCta?: BandCta;
+    variant?: "light" | "dark";
+  };
+}
+
+export interface Props {
+  content: GovernancePageContent;
+}
+
+const { content } = Astro.props;
+const {
+  meta,
+  pinnedHero,
+  hero,
+  mandate,
+  responsibilities,
+  structure,
+  principles,
+  related,
+  documents,
+  cta,
+} = content;
+---
+
+<InnerPage title={meta.title} description={meta.description} pinnedHero={pinnedHero}>
+  <PageHero
+    eyebrow={hero.eyebrow}
+    title={hero.title}
+    lede={hero.lede}
+    primaryCta={hero.primaryCta}
+    secondaryCta={hero.secondaryCta}
+  />
+
+  {
+    mandate && (
+      <section class="section gov-mandate" aria-labelledby="gov-mandate-heading">
+        <div class="container container--narrow gov-mandate__inner">
+          {mandate.eyebrow && <p class="eyebrow reveal">{mandate.eyebrow}</p>}
+          <h2
+            class="display display--lg gov-mandate__heading reveal"
+            id="gov-mandate-heading"
+            data-reveal-delay="0.05"
+          >
+            {mandate.heading}
+          </h2>
+          <div class="gov-mandate__body reveal" data-reveal-delay="0.1">
+            <ProseBody>
+              {mandate.body.map((p) => (
+                <p>{p}</p>
+              ))}
+            </ProseBody>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    responsibilities && (
+      <section class="section gov-resp" aria-labelledby="gov-resp-heading">
+        <div class="container">
+          <header class="gov-resp__head">
+            {responsibilities.eyebrow && <p class="eyebrow reveal">{responsibilities.eyebrow}</p>}
+            {responsibilities.heading && (
+              <h2
+                class="display display--lg gov-resp__heading reveal"
+                id="gov-resp-heading"
+                data-reveal-delay="0.05"
+              >
+                {responsibilities.heading}
+              </h2>
+            )}
+          </header>
+
+          <div class="gov-resp__cols">
+            <div class="gov-resp__col reveal" data-reveal-delay="0.06">
+              <h3 class="gov-resp__col-title gov-resp__col-title--does">
+                {responsibilities.does.heading ?? "What it does"}
+              </h3>
+              <ul class="gov-resp__list">
+                {responsibilities.does.items.map((item) => (
+                  <li class="gov-resp__li gov-resp__li--does">{item}</li>
+                ))}
+              </ul>
+            </div>
+
+            {responsibilities.doesNot && (
+              <div class="gov-resp__col reveal" data-reveal-delay="0.1">
+                <h3 class="gov-resp__col-title gov-resp__col-title--not">
+                  {responsibilities.doesNot.heading ?? "What it does not do"}
+                </h3>
+                <ul class="gov-resp__list">
+                  {responsibilities.doesNot.items.map((item) => (
+                    <li class="gov-resp__li gov-resp__li--not">{item}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    structure && (
+      <section class="section gov-structure" aria-labelledby="gov-structure-heading">
+        <div class="container">
+          <div class="gov-structure__head container--narrow">
+            {structure.eyebrow && <p class="eyebrow reveal">{structure.eyebrow}</p>}
+            <h2
+              class="display display--lg gov-structure__heading reveal"
+              id="gov-structure-heading"
+              data-reveal-delay="0.05"
+            >
+              {structure.heading}
+            </h2>
+            {structure.body && (
+              <div class="gov-structure__body reveal" data-reveal-delay="0.1">
+                {structure.body.map((p) => (
+                  <p>{p}</p>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {structure.diagram && (
+            <figure class="gov-structure__diagram reveal" data-reveal-delay="0.12">
+              <img src={structure.diagram.src} alt={structure.diagram.alt} loading="lazy" />
+            </figure>
+          )}
+
+          {structure.branches && (
+            <ol class="gov-branches" aria-label="Governance structure">
+              {structure.branches.map((b, i) => (
+                <li class="gov-branch reveal" data-reveal-delay={(0.04 + i * 0.04).toFixed(2)}>
+                  {b.label && <span class="gov-branch__label">{b.label}</span>}
+                  <h3 class="gov-branch__title">{b.title}</h3>
+                  <p class="gov-branch__body">{b.body}</p>
+                </li>
+              ))}
+            </ol>
+          )}
+        </div>
+      </section>
+    )
+  }
+
+  {
+    principles && (
+      <FeatureGrid
+        eyebrow={principles.eyebrow}
+        heading={principles.heading}
+        lede={principles.lede}
+        items={principles.items}
+        columns={principles.columns}
+      />
+    )
+  }
+
+  {
+    related && (
+      <RelatedGrid
+        eyebrow={related.eyebrow}
+        heading={related.heading}
+        items={related.items}
+        columns={related.columns}
+      />
+    )
+  }
+
+  {
+    documents && (
+      <section class="section gov-docs" aria-labelledby="gov-docs-heading">
+        <div class="container">
+          <header class="gov-docs__head">
+            {documents.eyebrow && <p class="eyebrow reveal">{documents.eyebrow}</p>}
+            {documents.heading && (
+              <h2
+                class="display display--md gov-docs__heading reveal"
+                id="gov-docs-heading"
+                data-reveal-delay="0.05"
+              >
+                {documents.heading}
+              </h2>
+            )}
+          </header>
+          <ul class="gov-docs__list">
+            {documents.items.map((doc, i) => (
+              <li class="gov-doc reveal" data-reveal-delay={(0.03 + (i % 4) * 0.03).toFixed(2)}>
+                <a class="gov-doc__link" href={doc.href}>
+                  <span class="gov-doc__title">{doc.title}</span>
+                  {doc.note && <span class="gov-doc__note">{doc.note}</span>}
+                  <span class="gov-doc__arrow" aria-hidden="true">→</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
+
+  <CtaBand
+    eyebrow={cta.eyebrow}
+    heading={cta.heading}
+    body={cta.body}
+    primaryCta={cta.primaryCta}
+    secondaryCta={cta.secondaryCta}
+    variant={cta.variant}
+  />
+</InnerPage>
+
+<style>
+  /* ---- mandate ---- */
+  .gov-mandate__heading {
+    margin-top: 0.5em;
+    max-width: 22ch;
+  }
+  .gov-mandate__body {
+    margin-top: clamp(28px, 3.6vw, 44px);
+  }
+
+  /* ---- responsibilities: does / does not ---- */
+  .gov-resp__head {
+    max-width: 40ch;
+    margin-bottom: clamp(40px, 5vw, 64px);
+  }
+  .gov-resp__heading {
+    margin-top: 0.5em;
+  }
+  .gov-resp__cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(32px, 4vw, 72px);
+  }
+  .gov-resp__col-title {
+    font-family: var(--sans-display);
+    font-size: 0.86rem;
+    font-weight: 500;
+    letter-spacing: var(--track-eyebrow);
+    text-transform: uppercase;
+    padding-bottom: clamp(16px, 1.8vw, 22px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .gov-resp__col-title--does {
+    color: var(--gold-deep);
+  }
+  .gov-resp__col-title--not {
+    color: var(--graphite);
+  }
+  .gov-resp__list {
+    margin-top: clamp(20px, 2.4vw, 28px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(14px, 1.6vw, 20px);
+  }
+  .gov-resp__li {
+    position: relative;
+    padding-left: 1.8em;
+    font-size: var(--t-body);
+    line-height: 1.5;
+    color: var(--char);
+  }
+  .gov-resp__li::before {
+    position: absolute;
+    left: 0;
+    top: 0.02em;
+    font-family: var(--sans-display);
+    font-weight: 500;
+  }
+  .gov-resp__li--does::before {
+    content: "✓";
+    color: var(--gold-deep);
+  }
+  .gov-resp__li--not::before {
+    content: "—";
+    color: var(--graphite);
+  }
+
+  /* ---- structure ---- */
+  .gov-structure__head {
+    margin-inline: 0;
+    max-width: var(--container-narrow);
+  }
+  .gov-structure__heading {
+    margin-top: 0.5em;
+    max-width: 20ch;
+  }
+  .gov-structure__body {
+    margin-top: clamp(24px, 3vw, 36px);
+    max-width: 60ch;
+  }
+  .gov-structure__body p {
+    margin: 0 0 1em;
+    font-family: var(--serif-body);
+    font-size: clamp(1.15rem, 1.6vw, 1.35rem);
+    line-height: 1.6;
+    color: var(--char);
+  }
+  .gov-structure__diagram {
+    margin: clamp(40px, 5vw, 64px) 0 0;
+  }
+  .gov-structure__diagram img {
+    width: 100%;
+    border-radius: var(--radius-img);
+  }
+
+  .gov-branches {
+    margin-top: clamp(40px, 5vw, 64px);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0;
+    border-right: 1px solid var(--rule-faint);
+    border-bottom: 1px solid var(--rule-faint);
+  }
+  .gov-branch {
+    background: var(--paper);
+    border-left: 1px solid var(--rule-faint);
+    border-top: 1px solid var(--rule-faint);
+    padding: clamp(26px, 2.6vw, 38px) clamp(22px, 2vw, 30px) clamp(30px, 3vw, 42px);
+    display: flex;
+    flex-direction: column;
+  }
+  .gov-branch__label {
+    font-family: var(--sans-display);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    color: var(--gold-deep);
+  }
+  .gov-branch__title {
+    margin: clamp(16px, 2vw, 24px) 0 clamp(10px, 1.2vw, 14px);
+    font-family: var(--serif-display);
+    font-weight: 300;
+    font-size: clamp(1.3rem, 1.8vw, 1.6rem);
+    line-height: 1.12;
+    color: var(--char);
+  }
+  .gov-branch__body {
+    margin: 0;
+    font-size: 0.96rem;
+    line-height: 1.55;
+    color: var(--graphite);
+  }
+
+  /* ---- documents ---- */
+  .gov-docs__head {
+    margin-bottom: clamp(32px, 3.6vw, 48px);
+  }
+  .gov-docs__heading {
+    margin-top: 0.4em;
+  }
+  .gov-docs__list {
+    border-top: 1px solid var(--rule);
+  }
+  .gov-doc {
+    border-bottom: 1px solid var(--rule);
+  }
+  .gov-doc__link {
+    display: flex;
+    align-items: baseline;
+    gap: clamp(12px, 2vw, 24px);
+    padding: clamp(20px, 2.4vw, 30px) 0;
+    color: var(--char);
+    transition: color var(--t-fast) var(--ease);
+  }
+  .gov-doc__link:hover {
+    color: var(--gold-deep);
+  }
+  .gov-doc__title {
+    font-family: var(--serif-display);
+    font-weight: 300;
+    font-size: clamp(1.2rem, 1.7vw, 1.5rem);
+    line-height: 1.2;
+  }
+  .gov-doc__note {
+    font-family: var(--sans-display);
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    color: var(--graphite);
+  }
+  .gov-doc__arrow {
+    margin-left: auto;
+    color: var(--gold-deep);
+    transition: transform var(--t-base) var(--ease);
+  }
+  .gov-doc__link:hover .gov-doc__arrow {
+    transform: translateX(5px);
+  }
+
+  @media (max-width: 720px) {
+    .gov-resp__cols {
+      grid-template-columns: 1fr;
+    }
+    .gov-doc__link {
+      flex-wrap: wrap;
+      gap: 4px 16px;
+    }
+    .gov-doc__arrow {
+      margin-left: 0;
+    }
+  }
+</style>

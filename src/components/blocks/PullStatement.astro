@@ -1,0 +1,98 @@
+---
+// =====================================================================
+// PullStatement — large centered editorial statement (also serves as the
+// pull-quote). Optional eyebrow and attribution. When `attribution` is
+// present it renders as a <blockquote>/<figure>; otherwise a plain
+// emphatic statement.
+// =====================================================================
+export interface Props {
+  eyebrow?: string;
+  statement: string;
+  /** When set, renders as an attributed quote. */
+  attribution?: string;
+  /** Secondary attribution line (role / organization). */
+  attributionDetail?: string;
+}
+
+const { eyebrow, statement, attribution, attributionDetail } = Astro.props;
+const isQuote = Boolean(attribution);
+---
+
+<section class="section pullstatement">
+  <div class="container container--narrow pullstatement__inner">
+    {eyebrow && <p class="eyebrow reveal">{eyebrow}</p>}
+
+    {
+      isQuote ? (
+        <figure class="pullstatement__figure reveal" data-reveal-delay="0.05">
+          <blockquote class="pullstatement__quote">{statement}</blockquote>
+          <figcaption class="pullstatement__cite">
+            <span class="pullstatement__cite-name">{attribution}</span>
+            {attributionDetail && (
+              <span class="pullstatement__cite-detail">{attributionDetail}</span>
+            )}
+          </figcaption>
+        </figure>
+      ) : (
+        <p class="pullstatement__text reveal" data-reveal-delay="0.05">
+          {statement}
+        </p>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .pullstatement__inner {
+    text-align: center;
+  }
+
+  .pullstatement__text,
+  .pullstatement__quote {
+    margin: 0.5em auto 0;
+    max-width: 22ch;
+    font-family: var(--serif-display);
+    font-weight: 300;
+    font-size: var(--t-display-md);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    color: var(--char);
+    text-wrap: balance;
+  }
+  .pullstatement__quote {
+    max-width: 26ch;
+    quotes: "\201C" "\201D";
+  }
+  .pullstatement__quote::before {
+    content: open-quote;
+    color: var(--gold-deep);
+  }
+  .pullstatement__quote::after {
+    content: close-quote;
+    color: var(--gold-deep);
+  }
+
+  .pullstatement__figure {
+    margin: 0;
+  }
+  .pullstatement__cite {
+    margin-top: clamp(24px, 3vw, 36px);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .pullstatement__cite-name {
+    font-family: var(--sans-display);
+    font-size: 0.86rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+  }
+  .pullstatement__cite-detail {
+    font-family: var(--sans-display);
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    color: var(--graphite);
+  }
+</style>

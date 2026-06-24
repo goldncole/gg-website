@@ -1,0 +1,113 @@
+---
+// =====================================================================
+// DocsPager — prev/next cards at the foot of a doc page, derived from
+// the IA order (docs-nav.ts). Either side may be absent at the ends.
+// =====================================================================
+import type { DocsNavItem } from "../../config/docs-nav";
+import { docsHref } from "../../config/docs-nav";
+
+export interface Props {
+  prev: DocsNavItem | null;
+  next: DocsNavItem | null;
+}
+
+const { prev, next } = Astro.props;
+---
+
+{
+  (prev || next) && (
+    <nav class="pager" aria-label="Pagination" data-pagefind-ignore>
+      {prev ? (
+        <a class="pager__card pager__card--prev" href={docsHref(prev.slug)} rel="prev">
+          <span class="pager__dir">
+            <span class="pager__arrow" aria-hidden="true">←</span> Previous
+          </span>
+          <span class="pager__label">{prev.label}</span>
+        </a>
+      ) : (
+        <span class="pager__spacer" />
+      )}
+      {next ? (
+        <a class="pager__card pager__card--next" href={docsHref(next.slug)} rel="next">
+          <span class="pager__dir">
+            Next <span class="pager__arrow" aria-hidden="true">→</span>
+          </span>
+          <span class="pager__label">{next.label}</span>
+        </a>
+      ) : (
+        <span class="pager__spacer" />
+      )}
+    </nav>
+  )
+}
+
+<style>
+  .pager {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(14px, 1.6vw, 20px);
+    margin-top: clamp(40px, 5vw, 64px);
+    padding-top: clamp(28px, 3vw, 40px);
+    border-top: 1px solid var(--rule);
+  }
+  .pager__card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    padding: clamp(16px, 1.8vw, 22px) clamp(18px, 2vw, 24px);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-img);
+    transition: border-color var(--t-base) var(--ease), background var(--t-base) var(--ease);
+  }
+  .pager__card--next {
+    text-align: right;
+    align-items: flex-end;
+  }
+  .pager__card:hover {
+    border-color: var(--gold-deep);
+    background: rgba(198, 161, 91, 0.05);
+  }
+  .pager__spacer {
+    display: block;
+  }
+  .pager__dir {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    font-family: var(--sans-display);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+  }
+  .pager__label {
+    font-family: var(--serif-display);
+    font-weight: 300;
+    font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+    line-height: 1.15;
+    color: var(--char);
+    transition: color var(--t-fast) var(--ease);
+  }
+  .pager__card:hover .pager__label {
+    color: var(--gold-deep);
+  }
+  .pager__arrow {
+    transition: transform var(--t-base) var(--ease);
+  }
+  .pager__card--prev:hover .pager__arrow {
+    transform: translateX(-4px);
+  }
+  .pager__card--next:hover .pager__arrow {
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 560px) {
+    .pager {
+      grid-template-columns: 1fr;
+    }
+    .pager__spacer {
+      display: none;
+    }
+  }
+</style>

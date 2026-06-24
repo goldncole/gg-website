@@ -1,0 +1,176 @@
+---
+// =====================================================================
+// PAGE — Governance · The Foundation (uses GovernancePage template).
+// Copy v2 — accuracy + conversion pass. UPDATED to the SD-21 Tri-Branch
+// Refactor (Foundation Constitution v0.4; SD-19 Three-Entity
+// Architecture; Entity Structure doc §0 — authoritative current model).
+// Key additions vs v1: the Foundation now holds the SINGLE ECOSYSTEM
+// TREASURY and exercises a COUNTERPARTY ADMISSIONS FUNCTION — applying
+// each protocol's Council-set criteria to admit/deny/suspend/terminate
+// participants (vaults, CCT issuers, refiners, custodians) and
+// maintaining the canonical Approved Counterparty Registry, via its
+// Admissions Committee + Tribunal (judicial branch). Subsidiarity
+// preserved: the Foundation sets only umbrella standards; each
+// protocol's Council writes its own rules. Swiss charitable Stiftung,
+// Canton of Zug (ZGB Art. 80-89). Purpose: steward decentralized
+// infrastructure for sound money, sovereign property, and the long-term
+// welfare of humanity. Global Gold is the inaugural Stewarded Protocol.
+// NOTE: source docs are current drafts (v0.4) — confirm before publish.
+// =====================================================================
+import GovernancePage from "../../layouts/templates/GovernancePage.astro";
+import type { GovernancePageContent } from "../../layouts/templates/GovernancePage.astro";
+
+const content: GovernancePageContent = {
+  meta: {
+    title: "The Foundation — Governance · Global Gold",
+    description:
+      "The Foundation is the permanent, neutral steward of the ecosystem — a Swiss charitable foundation that conserves doctrine, sets umbrella standards, holds the single ecosystem treasury, and adjudicates admission to the network. Global Gold is its inaugural Stewarded Protocol.",
+  },
+  hero: {
+    eyebrow: "Governance",
+    title: "The Foundation.",
+    lede: "The Foundation is the permanent, neutral steward of the ecosystem — a Swiss charitable foundation built to conserve sound money across decades. It holds the single ecosystem treasury and adjudicates admission to the network, while operating no protocol itself. Global Gold is its inaugural Stewarded Protocol.",
+    primaryCta: { label: "Read the Governance Docs", href: "/docs/" },
+    secondaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+  },
+  mandate: {
+    eyebrow: "Mandate",
+    heading: "Stewardship, not operation.",
+    body: [
+      "Sound money has always needed a steward. Bretton Woods gave it the IMF; central banking gave it the BIS. Each endured because it stood for something larger than any single member, and because it did not operate what it stewarded. Decentralized monetary infrastructure has reached the scale that requires the same kind of institution — not an operator, not a regulator, not a counterparty, but a permanent and neutral steward, existing to steward decentralized infrastructure for sound money, sovereign property, and the long-term welfare of humanity.",
+      "The Foundation is that institution — a charitable foundation (Stiftung) constituted under Swiss law, registered in the Canton of Zug, and supervised by the Swiss foundation authority. It conserves the doctrine and founding principles of the ecosystem, sets the umbrella standards beneath every protocol it stewards, holds the single ecosystem treasury, adjudicates which participants are admitted to the network, and defends the ecosystem against capture. It stewards protocols; it does not operate them.",
+    ],
+  },
+  responsibilities: {
+    eyebrow: "Responsibilities",
+    heading: "Authority through doctrine, not control.",
+    does: {
+      heading: "What it does",
+      items: [
+        "Conserves the doctrine and founding principles of the ecosystem it stewards.",
+        "Sets the Foundation Standards — the custody, audit, transparency, governance, and sound-money floor beneath every Stewarded Protocol.",
+        "Holds and administers the single ecosystem treasury, under codified treasury policy and annual external audit.",
+        "Adjudicates admission to the network — admitting, denying, suspending, or restoring vaults, issuers, refiners, and custodians by applying each protocol's criteria — and maintains the canonical Approved Counterparty Registry.",
+        "Adjudicates disputes beyond any single protocol's scope and defends the ecosystem against actors incompatible with its purpose, through reasoned, published rulings.",
+      ],
+    },
+    doesNot: {
+      heading: "What it does not do",
+      items: [
+        "Does not operate protocols — each Stewarded Protocol governs itself.",
+        "Does not write a protocol's standards — it sets only the umbrella; each protocol's Council writes its own rules.",
+        "Does not take custody of participant gold or user assets — custody stays with the vaults.",
+        "Does not issue, mint, or redeem tokens or currency.",
+        "Does not engage in commercial competition with the protocols it stewards.",
+      ],
+    },
+  },
+  structure: {
+    eyebrow: "Structure",
+    heading: "Built for permanence.",
+    body: [
+      "The Foundation's bodies are designed to outlast their founders — permanent governance, locked founding principles, and a charitable form that no commercial decision can dissolve.",
+    ],
+    branches: [
+      {
+        label: "01",
+        title: "The Foundation Council",
+        body: "The supreme governing body — twenty-four permanent seats, filled with deliberate care, serving without terms under an oath bound to purpose rather than to any member's interest.",
+      },
+      {
+        label: "02",
+        title: "The Presidency",
+        body: "Three Co-Chairs who carry the Foundation's strategic direction and doctrinal interpretation — permanent seats, accountable to the Council and the Constitution.",
+      },
+      {
+        label: "03",
+        title: "The Foundation Tribunal",
+        body: "The judicial body. It adjudicates admissions and defense-of-purpose cases, and publishes every ruling in full with reasoning — a public record of doctrine, built case by case.",
+      },
+      {
+        label: "04",
+        title: "The Treasury",
+        body: "The single ecosystem treasury — a perpetual endowment under codified policy, audited annually, with disbursements published. Funding stewardship, never speculation.",
+      },
+    ],
+  },
+  principles: {
+    eyebrow: "Principles",
+    heading: "Why the stewardship holds.",
+    columns: 3,
+    items: [
+      {
+        eyebrow: "Permanence",
+        title: "Built to outlast its founders",
+        body: "A perpetual charitable foundation with permanent governance and locked founding principles — an institution designed for centuries, not market cycles.",
+      },
+      {
+        eyebrow: "Neutrality",
+        title: "No stake in what it stewards",
+        body: "The Foundation holds no protocol equity and competes with no one. It holds the treasury and admits participants in service of the ecosystem — never for its own gain.",
+      },
+      {
+        eyebrow: "Transparency",
+        title: "Public by default",
+        body: "Published standards, reasoned rulings, audited books, and disclosed disbursements — the Foundation is built to be examined, not merely trusted.",
+      },
+    ],
+  },
+  related: {
+    eyebrow: "Related entities",
+    heading: "The rest of the governance structure.",
+    columns: 3,
+    items: [
+      {
+        eyebrow: "Governance",
+        title: "The Council",
+        blurb: "The standards body that writes the rules of the Global Gold Standard.",
+        href: "/governance/council/",
+      },
+      {
+        eyebrow: "Governance",
+        title: "How It's Governed",
+        blurb: "The full separation of powers across Council, Foundation, Protocol, and Vaults.",
+        href: "/governance/how-its-governed/",
+      },
+      {
+        eyebrow: "The Standard",
+        title: "The Standard",
+        blurb: "The shared rulebook the Foundation stewards for the long term.",
+        href: "/standard/",
+      },
+    ],
+  },
+  documents: {
+    eyebrow: "References",
+    heading: "Documents & references.",
+    items: [
+      {
+        title: "Foundation Constitution",
+        href: "/docs/",
+        note: "PDF — final link pending",
+      },
+      {
+        title: "Foundation Standards",
+        href: "/docs/",
+        note: "PDF — final link pending",
+      },
+      {
+        title: "Stewardship Agreement — Global Gold Protocol",
+        href: "/docs/",
+        note: "PDF — final link pending",
+      },
+    ],
+  },
+  cta: {
+    eyebrow: "Governance",
+    heading: "An institution built to outlast its founders.",
+    body: "Review the constitutional documents behind the Foundation's stewardship of the Standard.",
+    primaryCta: { label: "Read the Governance Docs", href: "/docs/" },
+    secondaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+    variant: "dark",
+  },
+};
+---
+
+<GovernancePage content={content} />

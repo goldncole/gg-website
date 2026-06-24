@@ -1,0 +1,170 @@
+---
+// =====================================================================
+// PAGE — Governance · How It's Governed (uses GovernancePage template).
+// Draft copy v1 — the full separation-of-powers story: Council
+// (standards, Wyoming DUNA), Foundation (stewardship, Swiss Stiftung),
+// Protocol LLC (technology under license), Vaults (custody + title),
+// Guardians (approval architecture). Grounded in the Messaging Library
+// and the entity-structure / tri-branch documents.
+// =====================================================================
+import GovernancePage from "../../layouts/templates/GovernancePage.astro";
+import type { GovernancePageContent } from "../../layouts/templates/GovernancePage.astro";
+
+const content: GovernancePageContent = {
+  meta: {
+    title: "How It's Governed — Governance · Global Gold",
+    description:
+      "Authority over the Global Gold Standard is deliberately divided: standards, stewardship, technology, and custody are held by separate entities, so no single party controls the rules, the metal, and the market at once.",
+  },
+  hero: {
+    eyebrow: "Governance",
+    title: "How It's Governed.",
+    lede: "Authority over the Standard is deliberately divided. Standards, stewardship, technology, and custody are held by separate entities — so no single company, issuer, vault, or state controls the rules, the metal, and the market at once.",
+    primaryCta: { label: "Read the Governance Docs", href: "/docs/" },
+    secondaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+  },
+  mandate: {
+    eyebrow: "The design",
+    heading: "Separation of powers, by construction.",
+    body: [
+      "Every failure mode in the tokenized-gold category traces to the same cause: concentration. One company that issues the token, selects the custodian, controls redemption, and holds the freeze switch. Whatever that company's intentions, the market inherits its solvency, its regulator, and its discretion. The Global Gold Standard is built on the opposite premise — that infrastructure deserves the same separation of powers we demand of any institution that matters.",
+      "So the powers are separated — structurally, not contractually. The body that writes the rules holds no metal. The institution that stewards the purpose operates nothing. The company that builds the technology cannot issue a unit or move a bar. The vaults that hold the gold answer to their own ledgers and their own approval policies. And beneath all of it, a Guardian approval architecture enforces in code what the structure declares on paper: no consequential action happens on one signature.",
+    ],
+  },
+  responsibilities: {
+    eyebrow: "The guarantees",
+    heading: "What the structure makes impossible.",
+    does: {
+      heading: "What each power holds",
+      items: [
+        "The Council — a Wyoming nonprofit association — defines the standards: vault participation, bar eligibility, unit series, conformance.",
+        "The Foundation — a Swiss charitable foundation — conserves the Standard's purpose and doctrine across decades.",
+        "The operating company builds and maintains the technology under license, inside the rules the Council publishes.",
+        "Participating vaults hold custody, operate their own Title Registers, and approve every title event.",
+        "Guardians enforce multi-approval thresholds on every consequential action, on-chain.",
+      ],
+    },
+    doesNot: {
+      heading: "What no participant can do",
+      items: [
+        "No single signer can move title to a bar — at any vault, ever.",
+        "No company can mint units, select custodians, and control redemption at once.",
+        "No issuer holds a freeze switch over the standard — because there is no single issuer.",
+        "No vault, company, or state defines eligibility or rewrites the rules alone.",
+        "No operator can reach across the governance separation — Council-controlled and infrastructure-controlled actions are approved apart.",
+      ],
+    },
+  },
+  structure: {
+    eyebrow: "The structure",
+    heading: "Five powers, held apart.",
+    body: [
+      "Each entity is confined to its function. The integrity of the Standard rests not on anyone's good behavior, but on the fact that no one holds two of these roles at once.",
+    ],
+    branches: [
+      {
+        label: "01",
+        title: "The Council",
+        body: "The standards body. A Wyoming decentralized unincorporated nonprofit association (Wyo. Stat. § 17-32) that publishes the rules of participation — and holds no metal, no tokens, and no operations.",
+      },
+      {
+        label: "02",
+        title: "The Foundation",
+        body: "The steward. A Swiss charitable foundation that conserves the Standard's long-term purpose — permanent, neutral, and barred by its own constitution from operating what it stewards.",
+      },
+      {
+        label: "03",
+        title: "The operating company",
+        body: "The builder. A software company that develops the protocol under a long-term license, within the Council's rules. It does not issue units, hold custody, or collect protocol fees from users.",
+      },
+      {
+        label: "04",
+        title: "Participating Vaults",
+        body: "The custodians. Each vault operates its own on-chain Title Register as the authoritative book of record and approves every title event under its own Guardian-controlled policy.",
+      },
+      {
+        label: "05",
+        title: "The Guardians",
+        body: "The enforcement layer. Multi-approval thresholds govern every consequential action — title movements, claim creation, parameter changes — so the separation of powers is enforced in code, not just in charters.",
+      },
+    ],
+  },
+  principles: {
+    eyebrow: "Principles",
+    heading: "What the division buys.",
+    columns: 3,
+    items: [
+      {
+        eyebrow: "Neutrality",
+        title: "No single point of control",
+        body: "Neutral by construction: no single issuer, no single operator, governance at a nonprofit, custody distributed across independent vaults.",
+      },
+      {
+        eyebrow: "Durability",
+        title: "No single point of failure",
+        body: "Title lives on vault ledgers; rules live with the Council; purpose lives with the Foundation. The system survives the failure — or departure — of any one participant, including the company that built it.",
+      },
+      {
+        eyebrow: "Accountability",
+        title: "Everything on the record",
+        body: "Standards are published. Approvals are recorded on-chain. Rulings are reasoned and public. The structure can be examined by anyone it asks to trust it.",
+      },
+    ],
+  },
+  related: {
+    eyebrow: "Go deeper",
+    heading: "The entities, in detail.",
+    columns: 3,
+    items: [
+      {
+        eyebrow: "Governance",
+        title: "The Council",
+        blurb: "The standards body for vault participation, eligibility, and conformance.",
+        href: "/governance/council/",
+      },
+      {
+        eyebrow: "Governance",
+        title: "The Foundation",
+        blurb: "The permanent, neutral steward of the Standard's purpose.",
+        href: "/governance/foundation/",
+      },
+      {
+        eyebrow: "Module",
+        title: "Security",
+        blurb: "The Guardian architecture that enforces the separation in code.",
+        href: "/modules/security/",
+      },
+    ],
+  },
+  documents: {
+    eyebrow: "References",
+    heading: "Documents & references.",
+    items: [
+      {
+        title: "Council Governance Constitution",
+        href: "/docs/",
+        note: "PDF — final link pending",
+      },
+      {
+        title: "Foundation Constitution",
+        href: "/docs/",
+        note: "PDF — final link pending",
+      },
+      {
+        title: "Global Gold White Paper",
+        href: "/white-paper/",
+      },
+    ],
+  },
+  cta: {
+    eyebrow: "Governance",
+    heading: "Trust the structure, not a promise.",
+    body: "Review the full governance documentation behind the Global Gold Standard.",
+    primaryCta: { label: "Read the Governance Docs", href: "/docs/" },
+    secondaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+    variant: "dark",
+  },
+};
+---
+
+<GovernancePage content={content} />

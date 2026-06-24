@@ -1,0 +1,150 @@
+---
+// =====================================================================
+// PAGE — Solutions · DeFi Protocols (uses SolutionPage template).
+// Copy v2 — conversion + repositioning pass. New spine, per direction:
+// what DeFi wants most is MORE LIQUIDITY and BETTER COLLATERAL. The
+// differentiated angle (validated by research) is "fresh blood": most
+// on-chain liquidity is recycled — crypto looped into crypto, and
+// ~93.5% of stablecoin supply concentrated in USDT/USDC. DeFi is
+// "structurally reflexive"; the prescribed fix across the literature
+// is integrating external real-world assets. Gold is the ONE RWA that
+// already circulates permissionlessly in DeFi (PAXG), but PAXG/XAUT
+// carry single-issuer risk and other RWAs (treasuries) sit in
+// permissioned silos (~9-12% of RWA value is DeFi-active). Global Gold
+// brings net-new, real-world, uncorrelated gold collateral into the
+// system as vaults tokenize — protocol-native gGold (backed 1:1 by a
+// fixed basket of jurisdictional gold tokens, with a permissionless,
+// oracle-free redemption floor) + bar-backed USG, no single issuer,
+// composable. NOTE: gGold model updated 2026-06-22 per
+// 10D_GGOLD_GBAR_INSTITUTIONAL_BRIEF — basket-backed, NOT a 125% CDP.
+// Audience is crypto-native: DeFi vocabulary is appropriate here.
+// LANE (differentiation pass 2026-06-23): this page = the INTEGRATOR
+// pitch (collateral & gold markets for YOUR protocol and its users).
+// The Blockchain Protocols page owns the ECOSYSTEM pitch (sticky TVL +
+// a settlement standard to build on). Keep the PAXG/composability/
+// no-liquidation story HERE; keep TVL/standard/category story THERE.
+// =====================================================================
+import SolutionPage from "../../layouts/templates/SolutionPage.astro";
+import type { SolutionPageContent } from "../../layouts/templates/SolutionPage.astro";
+
+const content: SolutionPageContent = {
+  meta: {
+    title: "For DeFi Protocols — Solutions · Global Gold",
+    description:
+      "Add fresh, real-world collateral from outside the loop. As participating vaults tokenize allocated gold, net-new, uncorrelated gold collateral enters the system — protocol-native gGold (backed 1:1 by a diversified basket of jurisdictional gold) and bar-backed USG, with no single issuer at the core.",
+  },
+  hero: {
+    eyebrow: "Solutions · DeFi Protocols",
+    title: "Bring fresh collateral into your protocol — real gold, not recycled liquidity.",
+    lede: "DeFi runs on the same capital, looped: crypto borrowed against crypto, liquidity tracing back to one or two stablecoin issuers. Global Gold opens a different source — a growing pipeline of freshly tokenized allocated gold flowing in from independent vaults worldwide. Net-new, real-world, uncorrelated collateral: protocol-native, diversified across jurisdictions, with no single issuer at its core.",
+    image: {
+      // PLACEHOLDER IMAGE — replace with final architecture / abstract imagery.
+      src: "/images/gold-bar-marble.png",
+      alt: "Gold collateral represented on-chain",
+    },
+    primaryCta: { label: "Request Access", href: "/access/" },
+    secondaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+  },
+  challenge: {
+    eyebrow: "The challenge",
+    heading: "DeFi keeps recycling the same liquidity.",
+    body: [
+      "Most on-chain liquidity is the same capital in a loop. Crypto is deposited to borrow stablecoins, which buy more crypto, which is redeposited — inflating TVL without adding anything external to the system. It compounds while prices rise and cascades when they fall: correlated collateral, liquidated together, at the speed of the chain. And even the \u201Ccash\u201D is concentrated, with the overwhelming majority of stablecoin supply resting on two issuers — one depeg has frozen markets for days.",
+      "The real-world assets meant to diversify all this mostly sit in permissioned silos: tokenized, but illiquid and non-composable, with the compliance structure as the product. Gold is the exception — the one real-world asset that already circulates and composes in DeFi — but today it reaches your protocol through a single issuer's token. What's missing isn't more of the same liquidity. It's new, real collateral from outside the loop.",
+    ],
+  },
+  benefits: {
+    eyebrow: "How the Standard works for you",
+    heading: "Collateral from outside the loop.",
+    lede: "Net-new, uncorrelated gold collateral for your markets — with no single issuer at the core, full composability on-chain, and a new gold market for your users.",
+    columns: 3,
+    items: [
+      {
+        eyebrow: "Fresh source",
+        title: "Net-new collateral, not looped capital",
+        body: "As participating vaults tokenize allocated bars, real-world gold enters the system as external collateral — not crypto recycled into crypto. The base deepens as more vaults and jurisdictions join, rather than inflating off the same on-chain capital.",
+      },
+      {
+        eyebrow: "Quality",
+        title: "Collateral that holds when crypto doesn't",
+        body: "Gold's price isn't driven by on-chain leverage cycles, so it doesn't cascade with the correlated crypto collateral around it. Real-asset depth that behaves differently from the rest of your book — exactly when that matters most.",
+      },
+      {
+        eyebrow: "No single issuer",
+        title: "No company at the core, composable by design",
+        body: "gGold is protocol-native and backed 1:1 by a fixed basket of jurisdictional gold tokens — diversified across issuers and jurisdictions, with a permissionless, oracle-free path to redeem real ounces; USG traces 1:1 to allocated bars across independent vaults. No Paxos, Tether, or Circle dependency — and the units compose like any ERC-20, with compliance at the title and claim layer, not a freeze over the unit you integrate.",
+      },
+    ],
+  },
+  howItWorks: {
+    eyebrow: "How it works for you",
+    heading: "From integration to live markets.",
+    steps: [
+      {
+        title: "Integrate the assets",
+        body: "List gGold or USG as collateral, a quote asset, or a market — standard ERC-20 surfaces, documented parameters, audited contracts.",
+      },
+      {
+        title: "Tap the gold-to-gold liquidity hub",
+        body: "Pools route USG and the incumbent gold tokens through gGold at the center, so your integration draws on concentrated, deepening liquidity rather than a thin, isolated pair.",
+      },
+      {
+        title: "Redeem to real ounces, by rule",
+        body: "gGold is backed 1:1 by the basket and redeemable — permissionlessly and oracle-free — for a pro-rata slice of the gold behind it. No price feed can un-back it and there are no liquidations to cascade. You compose with rules, not an issuer's operations desk.",
+      },
+    ],
+  },
+  proof: {
+    eyebrow: "Why protocols integrate the stack",
+    heading: "The numbers that matter.",
+    stats: [
+      { label: "Collateral", value: "Net-new real-world gold" },
+      { label: "Backing (gGold)", value: "1:1 diversified basket" },
+      { label: "Issuer", value: "None — protocol-native" },
+      { label: "Redemption", value: "Permissionless · oracle-free" },
+    ],
+    statColumns: 4,
+  },
+  faq: {
+    eyebrow: "Questions",
+    heading: "What integrators ask first.",
+    items: [
+      {
+        question: "How is this different from PAXG or XAUT?",
+        answer:
+          "Those are single-issuer tokens: one company controls minting, redemption, and freeze powers, and your gold market inherits its posture in full. gGold is protocol-native and backed 1:1 by a fixed basket of jurisdictional gold tokens diversified across independent vaults and jurisdictions — and redeemable permissionlessly for the ounces inside it; USG traces 1:1 to allocated bars. No single company can switch it off.",
+      },
+      {
+        question: "What do you mean by \u201Cfresh\u201D or \u201Cnet-new\u201D collateral?",
+        answer:
+          "Most on-chain collateral is crypto recycled into crypto, or liquidity that traces back to a couple of stablecoin issuers. Global Gold onboards independent vaults that tokenize previously-offline allocated gold — so the collateral entering your protocol is external, real-world value, and the base deepens as more vaults and jurisdictions join.",
+      },
+      {
+        question: "Is it actually composable, or permissioned like other RWAs?",
+        answer:
+          "The integrable units compose like any ERC-20 — compliance lives at the title and claim layer, not as a unilateral freeze over the unit. Unlike permissioned treasury tokens that sit in silos, this is built to circulate, route, and compose across your protocol.",
+      },
+      {
+        question: "What is the oracle and liquidation dependency?",
+        answer:
+          "There is none of the usual kind. gGold is not a CDP — it is backed 1:1 by gold held in a communal vault, and redemption returns a pro-rata slice of that basket, permissionlessly and oracle-free. There are no liquidations to cascade, and no price feed can un-back the asset; solvency is a function of ounces held and is defended by proof-of-reserves, not a price oracle.",
+      },
+      {
+        question: "How do we start an integration?",
+        answer:
+          "Request access for the technical documentation, contract addresses, audit reports, and integration support. The architecture is designed to compose — most integrations begin with a listing or a pool.",
+      },
+    ],
+  },
+  cta: {
+    eyebrow: "Solutions · DeFi Protocols",
+    heading: "Add collateral from outside the loop.",
+    body: "Request access to integration documentation for gGold, USG, and the Global Gold stack.",
+    primaryCta: { label: "Request Access", href: "/access/" },
+    secondaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+    variant: "dark",
+  },
+};
+---
+
+<SolutionPage content={content} />

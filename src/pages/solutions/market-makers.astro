@@ -1,0 +1,141 @@
+---
+// =====================================================================
+// PAGE — Solutions · Market Makers (uses SolutionPage template).
+// New page (2026-06-23). Audience: professional crypto market-making
+// desks / automated LPs (the GSR / Wintermute tier — never named).
+// BIG IDEA (per CEO + research): the market maker's structural enemy is
+// impermanent loss / LVR, which is driven by DIVERGENCE between a pair's
+// two assets. On gold-to-gold pairs (USG vs PAXG / XAUT / gGold, SMU vs
+// gGold, etc.) both legs are claims on an ounce of gold, so they trade
+// near parity and only drift by small, mean-reverting BASIS — the IL
+// driver is largely removed (same reason stablecoin pairs have minimal
+// IL). Supporting wants: (2) a whole STACK to quote — CCTs, SMUs, gGold,
+// gBars — spot + cross-issuer basis + the hub; (3) inventory is real
+// gold you'd hold anyway, with a hard redemption floor; (4) LP fee share
+// + GOLDN gauge-directed emissions.
+// HONESTY: do NOT claim "zero IL" (basis is real) — say "all but
+// disappears / structurally minimal." GOLDN rewards = participation, not
+// yield/APR/returns/guarantee. "Request access" for live venues/depth.
+// =====================================================================
+import SolutionPage from "../../layouts/templates/SolutionPage.astro";
+import type { SolutionPageContent } from "../../layouts/templates/SolutionPage.astro";
+
+const content: SolutionPageContent = {
+  meta: {
+    title: "For Market Makers — Solutions · Global Gold",
+    description:
+      "Make markets in gold-to-gold pairs, where impermanent loss all but disappears because both sides are an ounce of gold. Quote SMUs, gGold, and bar-level claims around the clock — and earn a share of the trading fees on top.",
+  },
+  hero: {
+    eyebrow: "Solutions · Market Makers",
+    title: "Make markets where both sides are gold.",
+    lede: "Every liquidity provider fights the same drag: impermanent loss — the slow bleed that comes when the two sides of a pair pull apart. Quote gold against gold and there is almost nothing to pull apart; both sides are an ounce of the same metal. You capture the spread on a book that behaves like a single asset, and hold an inventory you'd want either way.",
+    image: {
+      src: "/images/market-maker.png",
+      alt: "Gold-to-gold liquidity, continuously quoted",
+    },
+    primaryCta: { label: "Request Access", href: "/access/" },
+    secondaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+  },
+  challenge: {
+    eyebrow: "The challenge",
+    heading: "You earn the spread. The pair takes it back.",
+    body: [
+      "In crypto, the spread is rarely the hard part — keeping it is. Provide liquidity to a volatile pair and divergence does its quiet work: the further the two assets move apart, the more the pool rebalances you into the one that's falling, until impermanent loss has eaten the fees you came for. So you hedge, you monitor, you carry inventory risk on assets you would never otherwise choose to hold.",
+      "Gold has none of that volatility — but the physical market has the opposite problem. It keeps hub hours and settles through regional rails that don't interoperate, and moving between gold instruments usually means routing out to a dollar leg and back, paying the spread twice. Neither venue was built for the desk whose job is to quote gold, continuously, and keep what it earns.",
+    ],
+  },
+  benefits: {
+    eyebrow: "How the Standard works for you",
+    heading: "A book that behaves like one asset.",
+    columns: 3,
+    items: [
+      {
+        eyebrow: "Impermanent loss",
+        title: "Both sides are gold",
+        body: "Provide to a gold-to-gold pair — USG against PAXG, XAUT, or gGold — and both legs are claims on an ounce of gold. They trade near parity, drifting only by small, mean-reverting basis, so the divergence that drives impermanent loss is structurally minimal. You keep the spread instead of bleeding it — and whichever way basis moves, you are still holding gold on both sides, never rebalanced into a falling token.",
+      },
+      {
+        eyebrow: "Surface area",
+        title: "A whole stack to quote",
+        body: "There isn't one market here — there's a stack. Make markets in the fungible ounce units (USG and the SMU series), the gGold routing hub, bar-specific Conditional Claim Tokens, and wholesale gBars. Spot, cross-issuer basis, and the hub: a full surface to price, not a single thin pair.",
+      },
+      {
+        eyebrow: "Incentives",
+        title: "Paid to provide",
+        body: "The pools pay a share of their trading fees to the liquidity behind them. On top, GOLDN's gauge system lets holders direct emissions toward chosen pools — so you can steer incentives to the very markets you make. Rewards come from providing liquidity, not from holding a token.",
+      },
+    ],
+  },
+  howItWorks: {
+    eyebrow: "How it works for you",
+    heading: "From onboarding to a live book.",
+    steps: [
+      {
+        title: "Onboard once",
+        body: "Eligibility runs through the network's compliance framework once — then the market is open to you on-chain, continuously.",
+      },
+      {
+        title: "Quote the pairs, 24/7",
+        body: "Provide to the gold-to-gold pools — USG against the major gold tokens, with gGold at the hub — and make markets in SMUs, gGold, and bar-level claims. Settle on-chain, any hour, any day.",
+      },
+      {
+        title: "Earn fees, steer emissions",
+        body: "Collect a share of the trading fees on the pools you back. Lock GOLDN for veGOLDN to direct emissions toward them — concentrating rewards where you provide depth.",
+      },
+    ],
+  },
+  proof: {
+    eyebrow: "Why market makers use the Standard",
+    heading: "The market structure, in brief.",
+    stats: [
+      { label: "Pair divergence", value: "Gold vs gold — minimal" },
+      { label: "Market hours", value: "24/7, on-chain" },
+      { label: "Markets to make", value: "SMUs · gGold · CCTs · gBars" },
+      { label: "LP rewards", value: "Fee share + emissions" },
+    ],
+    statColumns: 4,
+  },
+  faq: {
+    eyebrow: "Questions",
+    heading: "What market makers ask first.",
+    items: [
+      {
+        question: "Is impermanent loss really not a factor?",
+        answer:
+          "Impermanent loss is driven by divergence between a pair's two assets. On a gold-to-gold pair, both legs are claims on an ounce of gold, so they trade near parity and move apart only by small, mean-reverting basis — issuer premium, liquidity, jurisdiction. The result is a fraction of the impermanent loss of a typical crypto pair, and even when basis moves, you are rebalancing between two forms of gold, not into a depreciating token. It is not literally zero — basis is real — but the structural driver of IL is largely removed.",
+      },
+      {
+        question: "What can I make markets in?",
+        answer:
+          "Standard Metal Units (USG and the SMU series) as the fungible ounce surface; gGold as the routing hub; Conditional Claim Tokens for bar-specific, claim-level liquidity; and gBars at the wholesale end. Spot, cross-issuer basis, and the hub — request access for current venues, pairs, and depth.",
+      },
+      {
+        question: "How is the liquidity I provide rewarded?",
+        answer:
+          "Pools pay a share of their trading fees to the liquidity behind them. On top, GOLDN's gauge system lets holders direct emissions toward chosen pools, so you can concentrate incentives on the markets you make. Rewards come from providing liquidity and participating — not from passively holding a token — and are not interest or a guaranteed return.",
+      },
+      {
+        question: "What is my inventory, and can I always get out?",
+        answer:
+          "Your inventory is gold and claims on it. gGold redeems for its basket of real gold; SMUs burn to a bar-specific claim; gBars unwrap to gGold. Every position has a path back to metal — so inventory risk is a position in gold with a hard floor, not a token that can strand.",
+      },
+      {
+        question: "Who is my counterparty, and how does it settle?",
+        answer:
+          "Trades settle on-chain against pooled liquidity — there is no bilateral counterparty, no settlement window, and no redemption desk in the path. Continuous, 24/7.",
+      },
+    ],
+  },
+  cta: {
+    eyebrow: "Solutions · Market Makers",
+    heading: "Quote gold. Keep the spread.",
+    body: "Request access to provide liquidity across the network's gold markets.",
+    primaryCta: { label: "Request Access", href: "/access/" },
+    secondaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+    variant: "dark",
+  },
+};
+---
+
+<SolutionPage content={content} />

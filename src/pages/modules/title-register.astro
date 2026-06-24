@@ -1,0 +1,124 @@
+---
+// =====================================================================
+// PAGE — Modules · Title Register (uses ModulePage template).
+// Draft copy v1 — grounded in Messaging Library §10 (Title Register
+// Module) and Audience Brief 01 (Vaults & Refiners). Swap `/images/*`
+// placeholders for the real diagrams noted inline.
+// =====================================================================
+import ModulePage from "../../layouts/templates/ModulePage.astro";
+import type { ModulePageContent } from "../../layouts/templates/ModulePage.astro";
+
+const content: ModulePageContent = {
+  meta: {
+    title: "Title Register — The Standard · Global Gold",
+    description:
+      "The Title Register is each participating vault's own on-chain book of record for allocated bars in custody — the authoritative source of title under the Global Gold Standard.",
+  },
+  hero: {
+    eyebrow: "The Standard · Module",
+    title: "The Title Register.",
+    lede: "Each participating vault keeps its own on-chain book of record for the allocated bars in its custody — bar identity, ownership, claim status, and every vault-approved title event, written to one authoritative source.",
+    primaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+    secondaryCta: { label: "Explore the Standard", href: "/standard/" },
+    meta: ["Vault-operated", "On-chain record", "Guardian-controlled policy"],
+  },
+  overview: {
+    eyebrow: "What it is",
+    heading: "An authoritative register, operated by the vault.",
+    body: [
+      "The Title Register is the foundation of the Global Gold Standard. It is not a copy of the vault's records, and it is not a parallel shadow of an off-chain database. It is the vault's book of record — the authoritative answer to who holds title to which bar — maintained by the vault itself and written on-chain, where the record is transparent and tamper-evident.",
+      "The protocol does not take custody, does not take title, and does not become the registrar. The vault remains in control of its metal, its records, and its approval process. The ledger makes that authority legible to the wider market under one shared standard — and a vault can adopt it on its own, as a modernization of its books, before a single bar is ever tokenized.",
+    ],
+  },
+  howItWorks: {
+    eyebrow: "How it works",
+    heading: "From a registered bar to a verifiable title.",
+    lede: "Every entry is approved by the vault under Guardian-controlled policy and recorded on-chain for the market to verify.",
+    steps: [
+      {
+        title: "Register the bar",
+        body: "An eligible bar in allocated custody is registered to the vault's Title Register with its identifying attributes — serial, refiner, weight, and fineness.",
+      },
+      {
+        title: "Record ownership",
+        body: "The ledger reflects the bar's current owner of record and its claim status — a single, authoritative answer to the question every counterparty asks first: who holds title to this bar?",
+      },
+      {
+        title: "Approve title events",
+        body: "Title transfers are proposed, then approved by the vault under Guardian-controlled policy. No single signer — inside the vault or outside it — can move title unilaterally.",
+      },
+      {
+        title: "Publish on-chain",
+        body: "Each approved event is written on-chain, so any counterparty can verify the state of title without privileged access — and without the vault surrendering control of its register.",
+      },
+    ],
+  },
+  properties: {
+    eyebrow: "Key properties",
+    heading: "Why the ledger holds up.",
+    columns: 3,
+    items: [
+      {
+        eyebrow: "Authority",
+        title: "The vault remains registrar",
+        body: "The vault is the authoritative registrar for the bars in its custody. The chain is the record, not the owner. No third party stands between the vault and its clients.",
+      },
+      {
+        eyebrow: "Control",
+        title: "No unilateral movement",
+        body: "Title events require vault approval under Guardian-controlled policy. The architecture is designed so no single operator, signer, or issuer can move title alone.",
+      },
+      {
+        eyebrow: "Transparency",
+        title: "Verifiable by default",
+        body: "Approved events are published on-chain, giving counterparties, auditors, and regulators a verifiable view of title without privileged access.",
+      },
+    ],
+  },
+  whyItMatters: {
+    eyebrow: "Why it matters",
+    statement: "Allocated gold becomes legible to the whole market — without the vault ever giving up control of its register.",
+  },
+  diagram: {
+    // PLACEHOLDER IMAGE — replace with the real Title Register architecture diagram.
+    src: "/images/vault-hall.png",
+    alt: "Diagram of the Title Register architecture",
+    caption: "The Title Register: the vault's authoritative book of record, written on-chain.",
+  },
+  related: {
+    eyebrow: "Adjacent modules",
+    heading: "Where the ledger connects.",
+    columns: 3,
+    items: [
+      {
+        eyebrow: "Module",
+        title: "Tokenize",
+        blurb: "How a registered bar becomes a Conditional Claim Token — optional, client-initiated, reversible.",
+        href: "/modules/tokenization/",
+      },
+      {
+        eyebrow: "Module",
+        title: "Mint",
+        blurb: "How bar-specific claims are collateralized to mint fungible Standard Metal Units.",
+        href: "/modules/collateralization/",
+      },
+      {
+        eyebrow: "Token",
+        title: "Conditional Claim Tokens",
+        blurb: "The on-chain claim tied to a specific registered bar.",
+        href: "/tokens/conditional-claim-tokens/",
+      },
+    ],
+  },
+  cta: {
+    eyebrow: "The Standard",
+    heading: "One ledger. One authoritative record of title.",
+    body: "See how the Title Register anchors the full architecture of the Global Gold Standard.",
+    primaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+    secondaryCta: { label: "Explore the Standard", href: "/standard/" },
+    variant: "dark",
+  },
+};
+---
+
+<ModulePage content={content} />

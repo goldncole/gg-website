@@ -1,0 +1,90 @@
+---
+// [6] The Round Trip — a centered statement. The two-way flow reads as an
+// elegant typographic row above a single serif paragraph.
+---
+
+<section class="section roundtrip" aria-labelledby="roundtrip-heading">
+  <div class="container container--narrow roundtrip__inner">
+    <header class="roundtrip__head">
+      <p class="eyebrow reveal">The Round Trip</p>
+      <h2
+        class="display display--lg roundtrip__heading reveal"
+        id="roundtrip-heading"
+        data-reveal-delay="0.05"
+      >
+        Global Gold is designed as a two-way door.
+      </h2>
+    </header>
+
+    <div class="roundtrip__flow reveal" data-reveal-delay="0.1" aria-label="Bar to Claim to Unit, and back again">
+      <span class="roundtrip__node">Bar</span>
+      <span class="roundtrip__arrow" aria-hidden="true">&harr;</span>
+      <span class="roundtrip__node">Claim</span>
+      <span class="roundtrip__arrow" aria-hidden="true">&harr;</span>
+      <span class="roundtrip__node">Unit</span>
+    </div>
+
+    <div class="roundtrip__body reveal" data-reveal-delay="0.13">
+      <p>
+        Users can move from allocated bar ownership into liquid Standard Metal
+        Units, and back again. They can access market liquidity when they need
+        it, and return to bar-specific claims when they want allocated ownership.
+        Global Gold does not ask users to choose between the substance of
+        physical gold and the liquidity of digital markets.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .roundtrip__inner {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .roundtrip__heading {
+    margin-top: 0.5em;
+    max-width: 20ch;
+  }
+  .roundtrip__flow {
+    margin-top: clamp(36px, 4.4vw, 56px);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(14px, 2.4vw, 28px);
+  }
+  .roundtrip__node {
+    font-family: var(--serif-display);
+    font-weight: 300;
+    font-size: clamp(1.5rem, 2.6vw, 2.2rem);
+    color: var(--char);
+    padding: clamp(10px, 1.2vw, 14px) clamp(20px, 2.6vw, 34px);
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+  }
+  .roundtrip__arrow {
+    font-size: clamp(1.3rem, 2vw, 1.7rem);
+    color: var(--gold-deep);
+  }
+  .roundtrip__body {
+    margin-top: clamp(36px, 4.4vw, 56px);
+    max-width: 56ch;
+  }
+  .roundtrip__body p {
+    margin: 0;
+    font-family: var(--serif-body);
+    font-weight: 400;
+    font-size: clamp(1.2rem, 1.7vw, 1.45rem);
+    line-height: 1.55;
+    color: var(--char);
+  }
+
+  @media (max-width: 480px) {
+    .roundtrip__node {
+      font-size: 1.3rem;
+      padding: 8px 18px;
+    }
+  }
+</style>

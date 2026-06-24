@@ -1,0 +1,52 @@
+---
+import Base from "../layouts/Base.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import HeroMark from "../components/HeroMark.astro";
+import HeroBlock from "../components/HeroBlock.astro";
+import Opening from "../components/Opening.astro";
+import MarketFailure from "../components/MarketFailure.astro";
+import Proof from "../components/Proof.astro";
+import FalseChoice from "../components/FalseChoice.astro";
+import TheStandard from "../components/TheStandard.astro";
+import Modules from "../components/Modules.astro";
+import Ecosystem from "../components/Ecosystem.astro";
+import Governance from "../components/Governance.astro";
+import CallToAction from "../components/CallToAction.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+---
+
+<Base>
+  <SiteHeader overHero />
+  <HeroMark />
+  <div class="page-over">
+    <main>
+      <HeroBlock />
+      <Ecosystem />
+      <Modules />
+      <Opening />
+      <MarketFailure />
+      <Proof />
+      <FalseChoice />
+      <TheStandard />
+      <Governance />
+      <CallToAction />
+    </main>
+  </div>
+  <SiteFooter />
+</Base>
+
+<style>
+  /* Auwa-style reveal: the hero is pinned behind, and everything after it
+     scrolls up over the static marble image. The solid background keeps the
+     hero from showing through between sections. The footer is its mirror at
+     the bottom — pinned behind (see global.css `.footer-reveal`) and lifted
+     into view at the end of the scroll; it lives OUTSIDE .page-over so the
+     two pinned layers (hero + footer) sit cleanly at the body's root
+     stacking context, with the content scrolling between them. */
+  .page-over {
+    position: relative;
+    z-index: 1;
+    margin-top: 100svh;
+    background: var(--paper);
+  }
+</style>

@@ -1,0 +1,177 @@
+---
+// [9] Ecosystem — eight institution cards. Each card is a single link: image,
+// gold eyebrow (category), serif hook headline, body, and a gold arrow.
+const cards = [
+  {
+    title: "Vaults",
+    href: "/solutions/vaults/",
+    img: "/images/vaults.png",
+    hook: "From storage facility to settlement node.",
+    body: "Extend allocated custody into global liquidity, new fee channels, and client demand while title and custody remain with the vault.",
+  },
+  {
+    title: "Refiners",
+    href: "/solutions/refiners/",
+    img: "/images/refinery.png",
+    hook: "From finished bar to market-ready collateral.",
+    body: "Connect eligible, verified inventory to a global liquidity network without moving metal into another chain of custody.",
+  },
+  {
+    title: "Protocols & Ecosystems",
+    href: "/solutions/blockchain-protocols/",
+    img: "/images/blockchain-protocol.png",
+    hook: "Net-new liquidity. High-quality collateral.",
+    body: "Bring allocated-gold collateral and net-new liquidity to your chain or your protocol — without depending on a single issuer or recycled on-chain capital.",
+  },
+  {
+    title: "Market Makers",
+    href: "/solutions/market-makers/",
+    img: "/images/market-maker.png",
+    hook: "Both sides of the pair are gold.",
+    body: "Quote gold-to-gold pairs where impermanent loss all but disappears, across SMUs, gGold, and bar-level claims — and earn a share of the trading fees.",
+  },
+  {
+    title: "Traders",
+    href: "/solutions/traders/",
+    img: "/images/trader.png",
+    hook: "The gold market, without the closing bell.",
+    body: "Take positions in fungible ounce units, route gold-to-gold against the major tokens, and exit to a claim on allocated metal — around the clock.",
+  },
+  {
+    title: "Bullion Dealers",
+    href: "/solutions/bullion-dealers/",
+    img: "/images/bullion-dealer.png",
+    hook: "A global market behind your counter.",
+    body: "Source and offload allocated gold through a 24/7 market without building digital infrastructure yourself.",
+  },
+  {
+    title: "Institutional Allocators",
+    href: "/solutions/institutional-allocators/",
+    img: "/images/allocator.png",
+    hook: "Allocated gold with modern market access.",
+    body: "Hold exposure to real allocated gold while gaining continuous liquidity, reserve transparency, and no single issuer behind supply.",
+  },
+  {
+    title: "Private Holders",
+    href: "/solutions/private-holders/",
+    img: "/images/private-holders.png",
+    hook: "The substance of a bar. The liquidity of a unit.",
+    body: "Hold allocated gold with a pathway into global liquidity, and burn units to return to a claim on comparable physical metal.",
+  },
+];
+---
+
+<section class="section ecosystem" id="industry" aria-labelledby="ecosystem-heading">
+  <div class="container">
+    <p class="eyebrow reveal">Built for the gold market</p>
+    <h2 class="display display--lg ecosystem__heading reveal" id="ecosystem-heading" data-reveal-delay="0.05">
+      A standard for every institution that holds, moves, allocates, or makes
+      markets in gold.
+    </h2>
+
+    <ul class="ecosystem__grid">
+      {cards.map((card, i) => (
+        <li class="eco-card reveal" data-reveal-delay={(0.04 + (i % 4) * 0.04).toFixed(2)}>
+          <a class="eco-card__link-wrap" href={card.href}>
+            <figure class="eco-card__media">
+              <img src={card.img} alt={card.title} loading="lazy" />
+            </figure>
+            <div class="eco-card__body">
+              <p class="eco-card__eyebrow">{card.title}</p>
+              <h3 class="eco-card__hook">{card.hook}</h3>
+              <p class="eco-card__text">{card.body}</p>
+              <span class="eco-card__arrow" aria-hidden="true">→</span>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .ecosystem__heading {
+    margin-top: 0.5em;
+    max-width: 26ch;
+  }
+  .ecosystem__grid {
+    margin-top: clamp(48px, 6vw, 84px);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(28px, 2.6vw, 44px) clamp(24px, 2vw, 36px);
+  }
+  .eco-card { display: flex; }
+  .eco-card__link-wrap {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+  }
+  .eco-card__media {
+    margin: 0;
+    border-radius: var(--radius-img);
+    overflow: hidden;
+    background: var(--stone);
+    aspect-ratio: 4 / 5;
+  }
+  .eco-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 600ms var(--ease);
+  }
+
+  .eco-card__body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-top: clamp(18px, 1.8vw, 24px);
+    padding-top: clamp(18px, 1.8vw, 24px);
+    border-top: 1px solid var(--rule-faint);
+  }
+  .eco-card__eyebrow {
+    font-family: var(--sans-display);
+    font-size: var(--t-eyebrow);
+    font-weight: 500;
+    letter-spacing: var(--track-eyebrow);
+    text-transform: uppercase;
+    color: var(--gold-deep);
+  }
+  .eco-card__hook {
+    margin: clamp(10px, 1.2vw, 14px) 0 clamp(10px, 1.1vw, 14px);
+    font-family: var(--serif-display);
+    font-weight: 300;
+    font-size: clamp(1.25rem, 1.6vw, 1.5rem);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    color: var(--char);
+    transition: color var(--t-base) var(--ease);
+  }
+  .eco-card__text {
+    margin: 0;
+    font-size: clamp(0.95rem, 1vw, 1rem);
+    line-height: 1.5;
+    color: var(--graphite);
+  }
+  .eco-card__arrow {
+    margin-top: auto;
+    padding-top: clamp(16px, 1.6vw, 22px);
+    font-size: 1.05rem;
+    line-height: 1;
+    color: var(--gold-deep);
+    transition: transform var(--t-base) var(--ease);
+  }
+
+  .eco-card__link-wrap:hover .eco-card__media img { transform: scale(1.04); }
+  .eco-card__link-wrap:hover .eco-card__hook { color: var(--gold-deep); }
+  .eco-card__link-wrap:hover .eco-card__arrow { transform: translateX(5px); }
+
+  @media (max-width: 1000px) {
+    .ecosystem__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 520px) {
+    .ecosystem__grid { grid-template-columns: 1fr; }
+  }
+</style>

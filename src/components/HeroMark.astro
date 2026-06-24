@@ -1,0 +1,111 @@
+---
+// ① Above-the-fold — full-bleed pinned hero image with the emblem baked into
+// the artwork. Generic: any page that mounts this (marked [data-hero]) plus a
+// `.page-over` wrapper gets the shared Auwa-style reveal (see motion.ts).
+// Defaults reproduce the homepage hero exactly; other pages (e.g. the Council
+// governance page) override `src` / `alt` / `scrollHref`.
+export interface Props {
+  /** Full-bleed background image. Defaults to the homepage marble hall. */
+  src?: string;
+  /** Alt text — empty by default since the hero is decorative (no overlay). */
+  alt?: string;
+  /** Anchor the scroll cue jumps to. Defaults to the homepage's first panel. */
+  scrollHref?: string;
+}
+
+const {
+  src = "/images/Hero-hall3.png",
+  alt = "",
+  scrollHref = "#standard",
+} = Astro.props;
+---
+
+<section class="hero" data-hero aria-label="Global Gold">
+  <div class="hero__bg" aria-hidden="true">
+    <img
+      class="hero__bg-img"
+      data-hero-bg
+      src={src}
+      alt={alt}
+      fetchpriority="high"
+    />
+  </div>
+
+  <a class="hero__scroll" href={scrollHref} aria-label="Scroll to content">
+    <span class="hero__scroll-label">Scroll</span>
+    <span class="hero__scroll-line" aria-hidden="true"></span>
+  </a>
+</section>
+
+<style>
+  .hero {
+    /* pinned behind the page — content scrolls up over this static image */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100svh;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--paper);
+    overflow: hidden;
+    /* progressively raised by scroll (see motion.ts) to blur the pinned hero */
+    --hero-blur: 0px;
+  }
+
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .hero__bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* keep the glowing marble wall panel centered in the frame */
+    object-position: center 42%;
+    /* slight overscale so the blur never reveals faded edges */
+    transform: scale(1.06);
+    filter: blur(var(--hero-blur));
+  }
+
+  .hero__scroll {
+    position: absolute;
+    bottom: clamp(12px, 2.4vh, 24px);
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    /* Cue lives on the dark hero — always white. */
+    color: #fff;
+  }
+  .hero__scroll-label {
+    font-family: var(--sans-display);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    animation: hero-bob 2.4s var(--ease) infinite;
+  }
+  .hero__scroll-line {
+    width: 1px;
+    height: 38px;
+    background: linear-gradient(to bottom, #fff, transparent);
+    animation: hero-bob 2.4s var(--ease) infinite;
+  }
+  .hero__scroll:hover { color: var(--gold-deep); }
+
+  @keyframes hero-bob {
+    0%, 100% { transform: translateY(0); opacity: 0.85; }
+    50% { transform: translateY(6px); opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__scroll-label,
+    .hero__scroll-line { animation: none; }
+  }
+</style>

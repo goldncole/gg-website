@@ -1,0 +1,141 @@
+---
+// =====================================================================
+// DocsToc — "On this page", generated from the rendered MDX headings
+// (h2/h3). Two variants: a sticky desktop rail and a collapsible inline
+// version shown above content on mobile. IntersectionObserver scroll-spy
+// (in docs.ts) highlights the in-view section across whichever variant
+// is visible. Astro auto-assigns ids to MDX headings, used as anchors.
+// =====================================================================
+import type { MarkdownHeading } from "astro";
+
+export interface Props {
+  headings: MarkdownHeading[];
+  /** "rail" = sticky desktop column; "inline" = collapsible mobile block. */
+  variant?: "rail" | "inline";
+}
+
+const { headings, variant = "rail" } = Astro.props;
+const items = headings.filter((h) => h.depth === 2 || h.depth === 3);
+---
+
+{
+  items.length > 0 &&
+    (variant === "rail" ? (
+      <nav class="docs-toc" aria-label="On this page" data-docs-toc>
+        <p class="docs-toc__title">On this page</p>
+        <ul class="docs-toc__list">
+          {items.map((h) => (
+            <li class:list={["docs-toc__item", { "docs-toc__item--sub": h.depth === 3 }]}>
+              <a class="docs-toc__link" href={`#${h.slug}`} data-toc-link data-target={h.slug}>
+                {h.text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    ) : (
+      <details class="docs-toc-inline" data-docs-toc data-pagefind-ignore>
+        <summary class="docs-toc-inline__summary">
+          <span>On this page</span>
+          <span class="docs-toc-inline__chev" aria-hidden="true">›</span>
+        </summary>
+        <nav aria-label="On this page">
+          <ul class="docs-toc__list">
+            {items.map((h) => (
+              <li class:list={["docs-toc__item", { "docs-toc__item--sub": h.depth === 3 }]}>
+                <a class="docs-toc__link" href={`#${h.slug}`} data-toc-link data-target={h.slug}>
+                  {h.text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </details>
+    ))
+}
+
+<style>
+  .docs-toc__title {
+    margin: 0 0 0.9em;
+    font-family: var(--sans-display);
+    font-size: var(--t-eyebrow);
+    font-weight: 500;
+    letter-spacing: var(--track-eyebrow);
+    text-transform: uppercase;
+    color: var(--gold-deep);
+  }
+  .docs-toc__list {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    border-left: 1px solid var(--rule-faint);
+  }
+  .docs-toc__item--sub .docs-toc__link {
+    padding-left: 26px;
+    font-size: 0.82rem;
+  }
+  .docs-toc__link {
+    display: block;
+    padding: 5px 0 5px 14px;
+    margin-left: -1px;
+    border-left: 2px solid transparent;
+    font-family: var(--sans);
+    font-size: 0.86rem;
+    line-height: 1.35;
+    color: var(--graphite);
+    transition: color var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+  }
+  .docs-toc__link:hover {
+    color: var(--char);
+    border-left-color: var(--stone-warm);
+  }
+  .docs-toc__link.is-active {
+    color: var(--gold-deep);
+    border-left-color: var(--gold);
+  }
+  .docs-toc__link:focus-visible {
+    outline: 2px solid var(--gold-deep);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* ---- inline (shown when the rail is hidden, i.e. ≤1100px) ---- */
+  .docs-toc-inline {
+    margin: 0 0 clamp(28px, 4vw, 40px);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-img);
+    background: rgba(216, 210, 200, 0.1);
+  }
+  @media (min-width: 1101px) {
+    .docs-toc-inline {
+      display: none;
+    }
+  }
+  .docs-toc-inline__summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px 16px;
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--sans-display);
+    font-size: 0.74rem;
+    font-weight: 500;
+    letter-spacing: var(--track-eyebrow);
+    text-transform: uppercase;
+    color: var(--gold-deep);
+  }
+  .docs-toc-inline__summary::-webkit-details-marker {
+    display: none;
+  }
+  .docs-toc-inline__chev {
+    color: var(--gold-deep);
+    transition: transform var(--t-fast) var(--ease);
+  }
+  .docs-toc-inline[open] .docs-toc-inline__chev {
+    transform: rotate(90deg);
+  }
+  .docs-toc-inline nav {
+    padding: 0 16px 14px;
+  }
+</style>

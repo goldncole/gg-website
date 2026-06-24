@@ -1,0 +1,142 @@
+---
+// [5] Four Layers — the path from a specific bar to a liquid unit, rendered
+// as a four-up numbered card grid with a hairline gutter.
+const layers = [
+  {
+    no: "01",
+    title: "The Bar",
+    body: "Every unit begins with real allocated gold. A specific, identifiable bar sits in approved vault custody. The metal does not need to move for its value to become usable in the market.",
+    closer: "Real metal. Known vault. Specific bar.",
+  },
+  {
+    no: "02",
+    title: "The Register",
+    body: "Each participating vault operates its own on-chain Title Register. The Register is the vault's authoritative record for allocated bars in its custody. Title movements are approved by the vault under Guardian-controlled policy and recorded on-chain for transparency.",
+    closer: "The vault remains the registrar. The chain becomes the record.",
+  },
+  {
+    no: "03",
+    title: "The Claim",
+    body: "A Conditional Claim Token represents the right to request title transfer to a specific bar. The CCT is not the title itself; it is the on-chain claim that connects a user to an identifiable bar under the rules of the vault and the protocol.",
+    closer: "One bar. One claim. Clear rules for title transfer.",
+  },
+  {
+    no: "04",
+    title: "The Unit",
+    body: "A CCT can be collateralized to mint Standard Metal Units. SMUs are fungible ounce units backed 1:1 by collateralized claims on specific bars. One SMU equals one troy ounce of fine gold, allowing units to trade across the network while the underlying metal remains in custody.",
+    closer: "Allocated gold becomes liquid without becoming issuer-dependent.",
+  },
+];
+---
+
+<section class="section layers" id="layers" aria-labelledby="layers-heading">
+  <div class="container">
+    <header class="layers__head">
+      <p class="eyebrow reveal">Four Layers</p>
+      <h2
+        class="display display--lg layers__heading reveal"
+        id="layers-heading"
+        data-reveal-delay="0.05"
+      >
+        From a specific bar to a liquid unit.
+      </h2>
+      <p class="layers__lede reveal" data-reveal-delay="0.1">
+        The standard connects physical custody, vault-controlled records,
+        bar-specific claims, and fungible settlement units in one architecture.
+      </p>
+    </header>
+
+    <ol class="layers__grid">
+      {
+        layers.map((layer, i) => (
+          <li class="layer-card reveal" data-reveal-delay={(0.04 + i * 0.04).toFixed(2)}>
+            <span class="layer-card__step">{layer.no}</span>
+            <h3 class="layer-card__title">{layer.title}</h3>
+            <p class="layer-card__body">{layer.body}</p>
+            <p class="layer-card__closer">{layer.closer}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .layers__head {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .layers__heading {
+    margin-top: 0.5em;
+    max-width: 18ch;
+  }
+  .layers__lede {
+    margin-top: clamp(20px, 2.4vw, 30px);
+    max-width: 58ch;
+    font-size: var(--t-lede);
+    line-height: 1.5;
+    color: var(--graphite);
+  }
+
+  .layers__grid {
+    margin-top: clamp(48px, 6vw, 84px);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-right: 1px solid var(--rule-faint);
+    border-bottom: 1px solid var(--rule-faint);
+  }
+  .layer-card {
+    background: var(--paper);
+    border-left: 1px solid var(--rule-faint);
+    border-top: 1px solid var(--rule-faint);
+    padding: clamp(28px, 2.6vw, 40px) clamp(22px, 2vw, 32px) clamp(36px, 3.4vw, 48px);
+    display: flex;
+    flex-direction: column;
+  }
+  .layer-card__step {
+    font-family: var(--sans-display);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    color: var(--gold-deep);
+  }
+  .layer-card__title {
+    margin: clamp(20px, 2.4vw, 32px) 0 clamp(12px, 1.4vw, 18px);
+    font-family: var(--serif-display);
+    font-weight: 300;
+    font-size: clamp(1.4rem, 1.9vw, 1.7rem);
+    line-height: 1.12;
+    color: var(--char);
+  }
+  .layer-card__body {
+    margin: 0 0 clamp(20px, 2.2vw, 28px);
+    font-size: 0.98rem;
+    line-height: 1.55;
+    color: var(--graphite);
+  }
+  .layer-card__closer {
+    margin: auto 0 0;
+    padding-top: clamp(16px, 1.8vw, 22px);
+    border-top: 1px solid var(--rule-faint);
+    font-family: var(--sans-display);
+    font-weight: 500;
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+    color: var(--gold-deep);
+  }
+
+  @media (max-width: 900px) {
+    .layers__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 540px) {
+    .layers__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

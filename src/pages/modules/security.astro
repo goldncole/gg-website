@@ -1,0 +1,127 @@
+---
+// =====================================================================
+// PAGE — Modules · Security (uses ModulePage template).
+// Draft copy v1 — covers the Guardian system, dual-approval separation
+// (Council-controlled governance / LLC-controlled infrastructure),
+// user-configurable Guardian security, and audit posture. Grounded in Messaging
+// Library §10 (Protocol-wide) and the Standard page (Guardian Security
+// Module).
+// =====================================================================
+import ModulePage from "../../layouts/templates/ModulePage.astro";
+import type { ModulePageContent } from "../../layouts/templates/ModulePage.astro";
+
+const content: ModulePageContent = {
+  meta: {
+    title: "Security — The Standard · Global Gold",
+    description:
+      "The Guardian system applies institutional-grade controls to every consequential action under the Global Gold Standard — designed so no single signer, operator, or issuer can act alone.",
+  },
+  hero: {
+    eyebrow: "The Standard · Module",
+    title: "Security.",
+    lede: "Institutional-grade security on every consequential action — title movements, claim creation, unit minting, and rule changes — designed so no single signer, operator, or issuer can act alone.",
+    primaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+    secondaryCta: { label: "Explore the Standard", href: "/standard/" },
+    meta: ["Guardian-controlled", "Multi-approval", "Independently audited"],
+  },
+  overview: {
+    eyebrow: "What it is",
+    heading: "No unilateral action, by architecture.",
+    body: [
+      "Every consequential action in the network — a title movement, a claim creation, a corrective transfer, a parameter change — passes through the Guardian system: a multi-approval architecture in which actions are proposed, approved against a published policy threshold, and only then executed. The question the architecture is built to answer is simple: what can one person do alone? The answer, by design, is nothing that matters.",
+      "Authority is also separated horizontally. Governance actions sit under Council-controlled approval; infrastructure operations sit under separately-controlled approval. Neither side can reach across into the other's domain. The same separation runs through every vault: each participating vault configures its own Guardian policy for the bars in its custody, so the controls protecting a vault's clients are the vault's own.",
+      "That same architecture is available to you. The Guardian technology that secures the protocol and its vaults is the technology you can apply to your own holdings — your own signers, your own approval thresholds — so moving your gold takes the approvals you set, never a single key that can be lost, phished, or coerced. And because it is the same system throughout, every approved action is recorded on-chain and the technology is independently audited: security you can verify, not merely trust.",
+    ],
+  },
+  howItWorks: {
+    eyebrow: "How it works",
+    heading: "Propose. Approve. Execute. Record.",
+    lede: "The lifecycle of every consequential action under the Standard.",
+    steps: [
+      {
+        title: "Propose",
+        body: "An action — a title event, a claim creation, a parameter change — is submitted as a request. Nothing executes on submission.",
+      },
+      {
+        title: "Approve",
+        body: "Guardians review and approve against a published policy threshold. Below the threshold, the action cannot proceed — regardless of who proposed it.",
+      },
+      {
+        title: "Execute",
+        body: "Once the threshold is met, the action executes exactly as approved. There is no discretionary step between approval and execution.",
+      },
+      {
+        title: "Record",
+        body: "The action is written on-chain — a permanent, public record that counterparties, auditors, and regulators can verify without privileged access.",
+      },
+    ],
+  },
+  properties: {
+    eyebrow: "Key properties",
+    heading: "How the controls hold.",
+    columns: 3,
+    items: [
+      {
+        eyebrow: "Approval",
+        title: "Thresholds, not trust",
+        body: "Multi-approval policies govern every consequential action. No single signer — at the protocol, at a vault, or anywhere else — can move title, mint units, or change the rules alone.",
+      },
+      {
+        eyebrow: "Separation",
+        title: "Divided authority",
+        body: "Council-controlled governance and separately-controlled infrastructure operations are held apart by design, so no one party holds both the rulebook and the machinery.",
+      },
+      {
+        eyebrow: "Ownership",
+        title: "Your gold, your Guardians",
+        body: "The same Guardian technology that protects the protocol is available to you — configure your own signers and approval thresholds, so no single key, lost or stolen, can move your gold alone.",
+      },
+    ],
+  },
+  whyItMatters: {
+    eyebrow: "Why it matters",
+    statement: "Market infrastructure is only as strong as the controls on the people who operate it.",
+  },
+  diagram: {
+    // PLACEHOLDER IMAGE — replace with the real Guardian approval-flow diagram.
+    src: "/images/vault-hall.png",
+    alt: "Diagram of the Guardian approval architecture",
+    caption: "The Guardian architecture: proposed actions meet published approval thresholds before execution.",
+  },
+  related: {
+    eyebrow: "Adjacent modules",
+    heading: "Where security connects.",
+    columns: 3,
+    items: [
+      {
+        eyebrow: "Module",
+        title: "Title Register",
+        blurb: "Every title event on the ledger executes under Guardian-controlled vault policy.",
+        href: "/modules/title-register/",
+      },
+      {
+        eyebrow: "Module",
+        title: "Mint",
+        blurb: "Minting and redemption run inside the same approval architecture.",
+        href: "/modules/collateralization/",
+      },
+      {
+        eyebrow: "Governance",
+        title: "How It's Governed",
+        blurb: "The separation of powers that the Guardian system enforces in code.",
+        href: "/governance/how-its-governed/",
+      },
+    ],
+  },
+  cta: {
+    eyebrow: "The Standard",
+    heading: "Trust the architecture, not the operator.",
+    body: "See how Guardian-controlled approvals secure every layer of the Global Gold Standard.",
+    primaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+    secondaryCta: { label: "Explore the Standard", href: "/standard/" },
+    variant: "dark",
+  },
+};
+---
+
+<ModulePage content={content} />

@@ -1,0 +1,132 @@
+---
+// =====================================================================
+// PAGE — Modules · Reserve (uses ModulePage template).
+// Copy v2 — REWRITTEN to the basket-vault model per
+// 10D_GGOLD_GBAR_INSTITUTIONAL_BRIEF (model approved 2026-06-22). The
+// Reserve layer is where gGold is minted: a single communal vault holds
+// a FIXED BASKET of jurisdictional gold tokens (launch: equal thirds
+// USG / PAXG / XAUT); deliver the basket to mint gGold 1:1, and redeem
+// any gGold for a pro-rata slice of the basket. NO CDP, NO 125% ratio,
+// NO liquidations (all superseded).
+// >>> ARCHITECTURE FLAG: the brief defines the gGold/gBar TOKENS, not
+//     the module taxonomy. This page assumes "Reserve" remains the
+//     module that mints gGold. Confirm whether the module names/split
+//     (Reserve vs Liquidity) still hold under the new model.
+// =====================================================================
+import ModulePage from "../../layouts/templates/ModulePage.astro";
+import type { ModulePageContent } from "../../layouts/templates/ModulePage.astro";
+
+const content: ModulePageContent = {
+  meta: {
+    title: "Reserve — The Standard · Global Gold",
+    description:
+      "The reserve layer of the Global Gold Standard. A communal vault holds a fixed basket of jurisdictional gold tokens; deliver the basket to mint gGold one-for-one, and redeem any gGold for a pro-rata slice of the basket.",
+  },
+  hero: {
+    eyebrow: "The Standard · Module",
+    title: "Reserve.",
+    lede: "The protocol's native reserve layer. A communal vault holds a fixed basket of jurisdictional gold tokens; deliver the basket to mint gGold one-for-one, and redeem any gGold for a pro-rata slice of the gold inside it — a credibly-neutral gold unit owned by no single issuer.",
+    primaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+    secondaryCta: { label: "Explore the Standard", href: "/standard/" },
+    meta: ["Backed 1:1", "Diversified basket", "Permissionless redemption"],
+  },
+  overview: {
+    eyebrow: "What it is",
+    heading: "Where allocated gold becomes money.",
+    body: [
+      "gGold is the protocol-native, credibly-neutral gold unit, backed one-for-one in real ounces by a fixed basket of jurisdictional gold tokens — at launch, equal thirds USG, PAXG, and XAUT — held in a single communal vault. It is not an SMU, not a 1:1 claim on a specific allocated bar, and not a stablecoin. Do not conflate it with USG: both measure one troy ounce of gold, but they are not substitutes. USG is a 1:1 specific allocated bar that redeems to metal; gGold is a diversified basket of gold built to be composable money. They complement each other — one anchors title to a specific bar, the other circulates as a neutral gold unit. There is no CDP, no leverage, and no liquidations.",
+      "The safety insight is diversification plus a hard floor. Backing is one ounce per token, spread across multiple jurisdictions' gold, so idiosyncratic issuer and jurisdiction risk is distributed rather than concentrated. And every holder can burn gGold for a pro-rata slice of the actual basket — permissionless, oracle-free, and un-drainable. A market-price discount on one jurisdiction's gold is not a depeg: the gold is still in the vault and the backing holds ounce-for-ounce. Solvency is defended by proof-of-reserves and admission control, not a price feed.",
+      "And gGold is the routing layer. As more gold tokens join the network, gGold becomes the unit the gold economy routes and settles through — the common denominator that lets any gold token reach any other, gold to gold, without ever leaving gold or passing through fiat. Reserve sits at the top of the stack: the layer where the Standard's gold turns into money the open market composes with.",
+    ],
+  },
+  howItWorks: {
+    eyebrow: "How it works",
+    heading: "From a delivered basket to a neutral gold unit.",
+    lede: "The reserve loop, end to end — backed 1:1, diversified, and redeemable to real ounces.",
+    steps: [
+      {
+        title: "Deliver the basket",
+        body: "Deliver the basket in its fixed weights — equal thirds USG, PAXG, and XAUT — into the communal vault. Backing is gold on every side; supply only ever exists against gold actually held.",
+      },
+      {
+        title: "Mint gGold",
+        body: "gGold is minted one-for-one with the ounces delivered. No over-collateralization, no debt — one token, one ounce of the basket.",
+      },
+      {
+        title: "Route and settle",
+        body: "gGold is the unit the gold market routes and settles through. Move between gold tokens gold-to-gold, with no single issuer in the path.",
+      },
+      {
+        title: "Redeem",
+        body: "Burn gGold for a pro-rata slice of the actual basket — permissionless, oracle-free, and un-drainable. If gGold ever trades below its redeemable ounces, arbitrage redeems and burns supply, pulling price back to intrinsic.",
+      },
+    ],
+  },
+  properties: {
+    eyebrow: "Key properties",
+    heading: "What makes the reserve credibly neutral.",
+    columns: 3,
+    items: [
+      {
+        eyebrow: "Diversification",
+        title: "A basket, not a bet",
+        body: "Backing is a fixed basket of multiple jurisdictions' gold, so a problem with any one issuer or jurisdiction is diluted, not fatal. Weights change only by deliberate, time-locked governance.",
+      },
+      {
+        eyebrow: "Redemption",
+        title: "A hard floor to real ounces",
+        body: "Any holder can burn gGold for a pro-rata slice of the basket — permissionless and oracle-free. The floor is always intrinsic ounces, which also prevents a large holder from cascading the price.",
+      },
+      {
+        eyebrow: "Neutrality",
+        title: "Owned by no one",
+        body: "Minting and redemption are protocol functions against a communal vault — no issuer can mint, freeze, or redeem at will. Credible neutrality is a property of the architecture, not a promise from a counterparty.",
+      },
+    ],
+  },
+  whyItMatters: {
+    eyebrow: "Why it matters",
+    statement:
+      "Reserve is where allocated gold stops being an asset you hold and becomes money the open market routes through — diversified, backed one-for-one, redeemable to real ounces, and owned by no single issuer.",
+  },
+  diagram: {
+    src: "/images/module-04-reserve.png",
+    alt: "Diagram of the gGold communal basket vault and redemption loop",
+  },
+  related: {
+    eyebrow: "Adjacent layers",
+    heading: "Where the reserve connects.",
+    columns: 3,
+    items: [
+      {
+        eyebrow: "Token",
+        title: "gGold",
+        blurb: "The basket-backed gold unit this layer mints and routes.",
+        href: "/tokens/ggold/",
+      },
+      {
+        eyebrow: "Module",
+        title: "Liquidity",
+        blurb: "The market layer where gold tokens and bars clear, settled in gGold.",
+        href: "/modules/liquidity/",
+      },
+      {
+        eyebrow: "Token",
+        title: "gBars",
+        blurb: "The KYC-gated bar that bundles gGold ounces for transfer at size.",
+        href: "/tokens/gbars/",
+      },
+    ],
+  },
+  cta: {
+    eyebrow: "The Standard",
+    heading: "Gold, made composable.",
+    body: "See how the Reserve layer turns a fixed basket of gold into a neutral, one-for-one gold unit the market routes through.",
+    primaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+    secondaryCta: { label: "Explore the Standard", href: "/standard/" },
+    variant: "dark",
+  },
+};
+---
+
+<ModulePage content={content} />

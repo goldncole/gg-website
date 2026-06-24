@@ -1,0 +1,137 @@
+---
+// =====================================================================
+// PAGE — Modules · Liquidity (uses ModulePage template).
+// Copy v5 — REFRAMED (2026-06-23) per direction: this page is now about
+// LIQUIDITY PROVISION across the ecosystem, not just gGold-as-settlement.
+// Lead story: anyone can supply a pair of gold tokens (or gGold + crypto)
+// to the market's pools and receive a pro-rata share of the swap fees
+// those pools collect. Gold-to-gold pairs (USG/PAXG, USG/XAUT, PAXG/XAUT,
+// gGold paired with each) barely diverge, so the structural drag of
+// impermanent loss is largely removed; gGold/crypto pairs behave like
+// ordinary crypto pairs (divergence risk disclosed honestly).
+// MECHANISM (internal note, do NOT surface): standard Uniswap-style AMM —
+// LPs deposit a pair, traders swap, fees accrue pro-rata, withdraw anytime.
+// >>> COMPLIANCE: describe fee MECHANICS only (pro-rata share of swap
+//     fees). NO "yield / returns / APY / profit / passive income /
+//     guaranteed." Disclose divergence / impermanent-loss risk plainly.
+//     No template disclaimer slot — risk language is woven into the copy.
+// >>> ARCHITECTURE FLAG: the P2P bar-clearing story moved off the lead;
+//     gGold-as-settlement is kept only as the REASON gold/gold pairs sit
+//     close. Confirm scope before publish.
+// =====================================================================
+import ModulePage from "../../layouts/templates/ModulePage.astro";
+import type { ModulePageContent } from "../../layouts/templates/ModulePage.astro";
+
+const content: ModulePageContent = {
+  meta: {
+    title: "Liquidity — The Standard · Global Gold",
+    description:
+      "The liquidity layer of the Global Gold Standard. Supply a pair of gold tokens — USG/PAXG, USG/XAUT, PAXG/XAUT, or gGold paired with crypto — to the market's pools and receive a pro-rata share of the fees every trade pays, while title to allocated metal stays with the vault.",
+  },
+  hero: {
+    eyebrow: "The Standard · Module",
+    title: "Liquidity.",
+    lede: "Every market runs on the liquidity behind it — and here, that liquidity comes from its participants. Add a pair of gold tokens to a pool and you become part of the market's depth: traders swap against your liquidity, and each swap pays a fee shared among everyone who supplied it. Your gold stops sitting idle and starts doing the market's work — and you can take it back whenever you choose.",
+    primaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+    secondaryCta: { label: "Explore the Standard", href: "/standard/" },
+    meta: ["Provide liquidity", "Share of trading fees", "Gold-to-gold pairs"],
+  },
+  overview: {
+    eyebrow: "What it is",
+    heading: "Liquidity supplied by the market itself.",
+    body: [
+      "Every trade needs something to trade against. In the Standard, that depth is not rented from a single desk — it is supplied by the participants. When you add a pair of gold tokens to a pool, you become part of the market's plumbing: traders swap against the liquidity you provided, and every swap pays a small fee that is divided, pro-rata, among everyone who supplied that pool. The more the market trades, the more fees the pool collects to share.",
+      "Most liquidity provision carries a quiet catch: when the two sides of a pair drift apart in price, a provider can end up worse off than simply holding. Gold-to-gold pairs are built differently. USG, PAXG, XAUT, gGold — each is a claim on an ounce of gold, so the two sides barely diverge. You are providing liquidity between two forms of the same metal, holding an inventory you would be comfortable holding anyway, with little of the drift that erodes an ordinary position.",
+      "You choose where to contribute. Supply the gold-to-gold pairs the market clears through — USG/PAXG, USG/XAUT, PAXG/XAUT, and gGold paired with each — or pair gGold with crypto to serve traders moving between gold and the rest of the on-chain economy. A gold-and-crypto pair behaves like any crypto market: the two sides can move apart, so it suits providers who want that exposure, while gold-to-gold pairs stay close by nature. Either way, your position remains yours — withdraw it, with the fees it has accrued, whenever you like.",
+    ],
+  },
+  howItWorks: {
+    eyebrow: "How it works",
+    heading: "From your gold to the market's depth.",
+    lede: "Four steps — you stay in control of your position the whole way through.",
+    steps: [
+      {
+        title: "Choose a pair",
+        body: "Pick what you want to supply: a gold-to-gold pair like USG/PAXG, USG/XAUT, or PAXG/XAUT, gGold paired with another gold, or gGold paired with crypto.",
+      },
+      {
+        title: "Add your liquidity",
+        body: "Deposit the pair into the pool. Your gold joins the shared depth that traders across the ecosystem trade against — no intermediary takes custody of it.",
+      },
+      {
+        title: "Share in the trading fees",
+        body: "Every trade through the pool pays a fee, divided pro-rata among everyone who supplied it. Your share accrues to your position as the market does its work.",
+      },
+      {
+        title: "Withdraw whenever you choose",
+        body: "Your position stays yours. Withdraw your liquidity, along with the fees it has accrued, at any time — there is no lockup.",
+      },
+    ],
+  },
+  properties: {
+    eyebrow: "Key properties",
+    heading: "Why provide liquidity here.",
+    columns: 3,
+    items: [
+      {
+        eyebrow: "Both sides are gold",
+        title: "Provide between two forms of one metal",
+        body: "On a gold-to-gold pair, both legs are a claim on an ounce of gold, so they sit close and move apart only by small basis. The structural drag of impermanent loss that erodes ordinary pairs is largely removed.",
+      },
+      {
+        eyebrow: "A share of every trade",
+        title: "Fees, divided pro-rata",
+        body: "Each swap pays a fee, and providers receive a share in proportion to the liquidity they supplied. It accrues to your position automatically — a mechanical share of activity, not a promised return.",
+      },
+      {
+        eyebrow: "Yours throughout",
+        title: "Non-custodial, no lockup",
+        body: "Your liquidity is never taken into custody and never locked. You hold your position, you can add to it or withdraw it at any time, and title to any allocated bar never moves — markets move units, not metal.",
+      },
+    ],
+  },
+  whyItMatters: {
+    eyebrow: "Why it matters",
+    statement: "The deeper the shared liquidity, the better gold trades for everyone — and that depth is built by participants, not rented from a desk. Provide liquidity to the pairs that move the market, share in the fees each trade pays, and keep a position you can withdraw whenever you choose.",
+  },
+  diagram: {
+    src: "/images/market-maker.png",
+    alt: "Diagram of participants supplying gold pairs to the ecosystem's liquidity pools",
+  },
+  related: {
+    eyebrow: "Adjacent layers",
+    heading: "Where the market connects.",
+    columns: 3,
+    items: [
+      {
+        eyebrow: "Token",
+        title: "gGold",
+        blurb: "The basket-backed gold unit that pairs across the ecosystem route through.",
+        href: "/tokens/ggold/",
+      },
+      {
+        eyebrow: "Solutions",
+        title: "Market Makers",
+        blurb: "Provision at professional scale across the full stack of gold pairs.",
+        href: "/solutions/market-makers/",
+      },
+      {
+        eyebrow: "Module",
+        title: "Reserve",
+        blurb: "Where gGold is minted against the basket and the communal vault is held.",
+        href: "/modules/reserve/",
+      },
+    ],
+  },
+  cta: {
+    eyebrow: "The Standard",
+    heading: "Become part of the market's depth.",
+    body: "See how supplying gold to the ecosystem's pools works — and how providers share in the fees that every trade pays.",
+    primaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+    secondaryCta: { label: "Explore the Standard", href: "/standard/" },
+    variant: "dark",
+  },
+};
+---
+
+<ModulePage content={content} />

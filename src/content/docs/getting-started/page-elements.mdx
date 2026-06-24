@@ -1,0 +1,93 @@
+---
+title: Page Elements
+description: A kitchen-sink reference demonstrating every styled element available in the docs.
+order: 4
+---
+
+This page exists to demonstrate the docs design system end to end: callouts in
+every variant, code blocks with copy, tables, an image, a blockquote, and
+nested headings for the "On this page" table of contents.
+
+## Callouts
+
+Four variants, each with a subtle left border and icon.
+
+<Callout type="note">
+A **note** carries neutral, supporting context — the stone-bordered default.
+</Callout>
+
+<Callout type="tip">
+A **tip** highlights a recommended path or a shortcut worth knowing.
+</Callout>
+
+<Callout type="warning">
+A **warning** flags something that can bite you if ignored.
+</Callout>
+
+<Callout type="important">
+An **important** callout marks a load-bearing fact you should not skip.
+</Callout>
+
+## Typography
+
+Body copy is set in EB Garamond for comfortable reference reading, left-aligned
+on a wider measure than the editorial Journal. Inline elements include
+**bold**, *italic*, `inline code`, and [internal links](/docs/getting-started/introduction/).
+
+### Lists
+
+Ordered and unordered lists share the brand's gold markers:
+
+1. Register title in the Title Register.
+2. Tokenize verified metal.
+3. Make it liquid.
+
+- Allocated, not pooled.
+- Standardized across venues.
+- Auditable end to end.
+
+## Blockquote
+
+> A shared standard is worth more than any single venue's liquidity — because
+> the standard is what lets every venue's liquidity add up.
+
+## Code
+
+A fenced block, themed toward the obsidian palette, with a copy button:
+
+```ts
+import { getDocsLocation } from "../config/docs-nav";
+
+const here = getDocsLocation("protocol/title-register");
+console.log(here?.next?.label); // "Tokenization"
+```
+
+```bash
+npm run build   # astro build && pagefind --site dist
+```
+
+## Tables
+
+| Module | Responsibility | Status |
+| --- | --- | --- |
+| Title Register | Authoritative record of gold title | Placeholder |
+| Tokenization | On-chain representation of verified metal | Placeholder |
+| Collateralization | Posting tokens as collateral | Placeholder |
+| Liquidity | Connecting holders to markets | Placeholder |
+
+## Images
+
+Imagery uses the brand's rounded treatment:
+
+![Detail of a vault door](/images/vault-door-detail.png)
+
+## Nested headings
+
+### A third-level heading
+
+Third-level headings also appear in the table of contents, indented under their
+parent so the page outline stays scannable.
+
+### Another third-level heading
+
+Scroll-spy highlights whichever section is currently in view.

@@ -1,0 +1,76 @@
+---
+// =====================================================================
+// Docs page route — renders a `docs` collection entry into DocsLayout
+// with breadcrumb, title/lede, the docs ProseBody variant (MDX), the
+// scroll-spy TOC, and a prev/next pager. Ordering and grouping come from
+// docs-nav.ts via getDocsLocation. Hidden entries are excluded.
+// =====================================================================
+import { getCollection, render } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import DocsLayout from "../../layouts/DocsLayout.astro";
+import DocsBreadcrumbs from "../../components/docs/DocsBreadcrumbs.astro";
+import DocsPager from "../../components/docs/DocsPager.astro";
+import DocsToc from "../../components/docs/DocsToc.astro";
+import ProseBody from "../../components/blocks/ProseBody.astro";
+import Callout from "../../components/docs/Callout.astro";
+import { getDocsLocation } from "../../config/docs-nav";
+
+export const getStaticPaths = (async () => {
+  const entries = await getCollection("docs", ({ data }) => !data.hidden);
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}) satisfies GetStaticPaths;
+
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+
+const location = getDocsLocation(entry.id);
+const group = location?.group ?? "Documentation";
+const prev = location?.prev ?? null;
+const next = location?.next ?? null;
+---
+
+<DocsLayout
+  title={`${entry.data.title} — Documentation · Global Gold`}
+  description={entry.data.description}
+  currentSlug={entry.id}
+>
+  <DocsToc slot="toc" headings={headings} variant="rail" />
+
+  <article class="doc-article">
+    <DocsBreadcrumbs group={group} label={entry.data.title} />
+
+    <header class="doc-article__head">
+      <h1 class="display display--md doc-article__title">{entry.data.title}</h1>
+      <p class="doc-article__lede">{entry.data.description}</p>
+    </header>
+
+    <DocsToc headings={headings} variant="inline" />
+
+    <ProseBody variant="docs">
+      <Content components={{ Callout }} />
+    </ProseBody>
+
+    <DocsPager prev={prev} next={next} />
+  </article>
+</DocsLayout>
+
+<style>
+  .doc-article__head {
+    margin: clamp(18px, 2.4vw, 26px) 0 clamp(26px, 3.4vw, 40px);
+  }
+  .doc-article__title {
+    max-width: 22ch;
+    text-wrap: balance;
+  }
+  .doc-article__lede {
+    margin: clamp(14px, 1.8vw, 22px) 0 0;
+    max-width: 60ch;
+    font-family: var(--serif-body);
+    font-size: var(--t-lede);
+    line-height: 1.5;
+    color: var(--graphite);
+  }
+</style>

@@ -1,0 +1,134 @@
+---
+// =====================================================================
+// Docs index — the documentation landing page. An on-brand overview
+// with a hero and one card per IA group (from docs-nav.ts), each listing
+// its pages. Built on DocsLayout with the TOC rail suppressed.
+// =====================================================================
+import DocsLayout from "../../layouts/DocsLayout.astro";
+import { docsNav, docsHref } from "../../config/docs-nav";
+---
+
+<DocsLayout
+  title="Documentation — Global Gold"
+  description="The Global Gold documentation: the protocol's modules, the tokens it issues, and how the standard is governed."
+  currentSlug={null}
+  showToc={false}
+>
+  <div class="docs-index">
+    <header class="docs-index__head">
+      <p class="eyebrow">Documentation</p>
+      <h1 class="display display--lg docs-index__title">
+        The Global Gold standard, documented.
+      </h1>
+      <p class="docs-index__lede">
+        How allocated gold is registered, represented, collateralized, and made
+        liquid — the protocol's modules, the tokens it issues, and how the
+        standard is governed. This release uses placeholder content to validate
+        the experience; final docs are drafted from the white paper.
+      </p>
+    </header>
+
+    <div class="docs-index__grid">
+      {
+        docsNav.map((group) => (
+          <section class="docs-card">
+            <h2 class="docs-card__title">{group.label}</h2>
+            <ul class="docs-card__list">
+              {group.items.map((item) => (
+                <li>
+                  <a class="docs-card__link" href={docsHref(item.slug)}>
+                    <span>{item.label}</span>
+                    <span class="docs-card__arrow" aria-hidden="true">→</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
+    </div>
+  </div>
+</DocsLayout>
+
+<style>
+  .docs-index__head {
+    max-width: 32ch;
+  }
+  .docs-index__title {
+    margin-top: 0.5em;
+    text-wrap: balance;
+  }
+  .docs-index__lede {
+    margin-top: clamp(22px, 2.6vw, 32px);
+    max-width: 60ch;
+    font-family: var(--serif-body);
+    font-size: var(--t-lede);
+    line-height: 1.55;
+    color: var(--graphite);
+  }
+
+  .docs-index__grid {
+    margin-top: clamp(44px, 5.5vw, 72px);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(18px, 2vw, 28px);
+  }
+  .docs-card {
+    padding: clamp(24px, 2.6vw, 34px);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-img);
+    background: var(--paper);
+    transition: border-color var(--t-base) var(--ease);
+  }
+  .docs-card:hover {
+    border-color: var(--stone-warm);
+  }
+  .docs-card__title {
+    font-family: var(--serif-display);
+    font-weight: 300;
+    font-size: clamp(1.5rem, 2.2vw, 1.9rem);
+    line-height: 1.1;
+    color: var(--char);
+    padding-bottom: clamp(14px, 1.6vw, 20px);
+    margin-bottom: clamp(8px, 1vw, 12px);
+    border-bottom: 1px solid var(--rule-faint);
+  }
+  .docs-card__list {
+    display: flex;
+    flex-direction: column;
+  }
+  .docs-card__link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1em;
+    padding: 9px 0;
+    font-family: var(--sans);
+    font-size: 1rem;
+    color: var(--graphite);
+    border-bottom: 1px solid var(--rule-faint);
+    transition: color var(--t-fast) var(--ease);
+  }
+  .docs-card__list li:last-child .docs-card__link {
+    border-bottom: 0;
+  }
+  .docs-card__link:hover {
+    color: var(--gold-deep);
+  }
+  .docs-card__arrow {
+    color: var(--gold-deep);
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: opacity var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
+  }
+  .docs-card__link:hover .docs-card__arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  @media (max-width: 720px) {
+    .docs-index__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

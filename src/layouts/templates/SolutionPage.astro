@@ -1,0 +1,186 @@
+---
+// =====================================================================
+// SolutionPage — sales / conversion landing page, per audience.
+// For Vaults, Refiners, Bullion Dealers, Institutional Allocators,
+// Private Holders, DeFi Protocols, Traders, Blockchain Protocols.
+//
+// Optimized for conversion: outcome-led hero, status-quo pain, benefits,
+// 3-step path to value, proof/trust, objection handling, strong close.
+//
+// Section order:
+//   PageHero (image, outcome headline, Request Access + White Paper) →
+//   Challenge (status-quo pain) → Benefits (FeatureGrid) →
+//   StepFlow (how it works for you) → Proof (SpecStrip stats + optional
+//   quote + differentiators) → FaqAccordion → CtaBand (Request Access)
+// =====================================================================
+import InnerPage from "../InnerPage.astro";
+import PageHero from "../../components/blocks/PageHero.astro";
+import type { HeroCta, HeroImage } from "../../components/blocks/PageHero.astro";
+import FeatureGrid from "../../components/blocks/FeatureGrid.astro";
+import type { Feature } from "../../components/blocks/FeatureGrid.astro";
+import StepFlow from "../../components/blocks/StepFlow.astro";
+import type { Step } from "../../components/blocks/StepFlow.astro";
+import SpecStrip from "../../components/blocks/SpecStrip.astro";
+import type { Spec } from "../../components/blocks/SpecStrip.astro";
+import PullStatement from "../../components/blocks/PullStatement.astro";
+import FaqAccordion from "../../components/blocks/FaqAccordion.astro";
+import type { FaqItem } from "../../components/blocks/FaqAccordion.astro";
+import CtaBand from "../../components/blocks/CtaBand.astro";
+import type { BandCta } from "../../components/blocks/CtaBand.astro";
+
+export interface SolutionPageContent {
+  meta: { title: string; description?: string };
+  hero: {
+    /** Audience eyebrow, e.g. "Solutions · Vaults". */
+    eyebrow?: string;
+    /** Outcome-oriented headline. */
+    title: string;
+    lede?: string;
+    image?: HeroImage;
+    primaryCta?: HeroCta;
+    secondaryCta?: HeroCta;
+  };
+  challenge?: { eyebrow?: string; heading: string; body: string[] };
+  benefits?: {
+    eyebrow?: string;
+    heading?: string;
+    lede?: string;
+    items: Feature[];
+    columns?: 2 | 3 | 4;
+  };
+  howItWorks?: { eyebrow?: string; heading: string; lede?: string; steps: Step[] };
+  proof?: {
+    eyebrow?: string;
+    heading?: string;
+    stats?: Spec[];
+    statColumns?: 2 | 3 | 4;
+    quote?: { statement: string; attribution: string; attributionDetail?: string };
+  };
+  faq?: { eyebrow?: string; heading?: string; items: FaqItem[] };
+  cta: {
+    eyebrow?: string;
+    heading: string;
+    body?: string;
+    primaryCta?: BandCta;
+    secondaryCta?: BandCta;
+    variant?: "light" | "dark";
+  };
+}
+
+export interface Props {
+  content: SolutionPageContent;
+}
+
+const { content } = Astro.props;
+const { meta, hero, challenge, benefits, howItWorks, proof, faq, cta } = content;
+---
+
+<InnerPage title={meta.title} description={meta.description}>
+  <PageHero
+    eyebrow={hero.eyebrow}
+    title={hero.title}
+    lede={hero.lede}
+    image={hero.image}
+    primaryCta={hero.primaryCta}
+    secondaryCta={hero.secondaryCta}
+  />
+
+  {
+    challenge && (
+      <section class="section solution-challenge" aria-labelledby="solution-challenge-heading">
+        <div class="container container--narrow solution-challenge__inner">
+          {challenge.eyebrow && <p class="eyebrow reveal">{challenge.eyebrow}</p>}
+          <h2
+            class="display display--lg solution-challenge__heading reveal"
+            id="solution-challenge-heading"
+            data-reveal-delay="0.05"
+          >
+            {challenge.heading}
+          </h2>
+          <div class="solution-challenge__body reveal" data-reveal-delay="0.1">
+            {challenge.body.map((p) => (
+              <p>{p}</p>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    benefits && (
+      <FeatureGrid
+        eyebrow={benefits.eyebrow}
+        heading={benefits.heading}
+        lede={benefits.lede}
+        items={benefits.items}
+        columns={benefits.columns}
+      />
+    )
+  }
+
+  {
+    howItWorks && (
+      <StepFlow
+        eyebrow={howItWorks.eyebrow}
+        heading={howItWorks.heading}
+        lede={howItWorks.lede}
+        steps={howItWorks.steps}
+      />
+    )
+  }
+
+  {
+    proof && (proof.stats || proof.quote) && (
+      <>
+        {proof.stats && (
+          <SpecStrip
+            eyebrow={proof.eyebrow}
+            heading={proof.heading}
+            specs={proof.stats}
+            columns={proof.statColumns}
+          />
+        )}
+        {proof.quote && (
+          <PullStatement
+            statement={proof.quote.statement}
+            attribution={proof.quote.attribution}
+            attributionDetail={proof.quote.attributionDetail}
+          />
+        )}
+      </>
+    )
+  }
+
+  {faq && <FaqAccordion eyebrow={faq.eyebrow} heading={faq.heading} items={faq.items} idBase="solution-faq" />}
+
+  <CtaBand
+    eyebrow={cta.eyebrow}
+    heading={cta.heading}
+    body={cta.body}
+    primaryCta={cta.primaryCta}
+    secondaryCta={cta.secondaryCta}
+    variant={cta.variant}
+  />
+</InnerPage>
+
+<style>
+  .solution-challenge__heading {
+    margin-top: 0.5em;
+    max-width: 22ch;
+  }
+  .solution-challenge__body {
+    margin-top: clamp(28px, 3.6vw, 44px);
+    max-width: 62ch;
+  }
+  .solution-challenge__body p {
+    margin: 0 0 1em;
+    font-family: var(--serif-body);
+    font-size: clamp(1.2rem, 1.7vw, 1.45rem);
+    line-height: 1.6;
+    color: var(--char);
+  }
+  .solution-challenge__body p:last-child {
+    margin-bottom: 0;
+  }
+</style>

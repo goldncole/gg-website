@@ -1,0 +1,242 @@
+---
+// =====================================================================
+// SiteFooter — the one dark/obsidian moment. A multi-column editorial
+// footer mirroring the header's navigation IA (the header is the source
+// of truth). All hrefs match SiteHeader.astro exactly.
+//
+// `data-site-footer` is the hook motion.ts uses to measure the footer
+// height (→ --footer-h) and pin it behind the content for the Auwa-style
+// scroll reveal (see global.css `.footer-reveal`). When the reveal is
+// engaged the footer is position:fixed at the very bottom, so it never
+// sits under the wordmark line — the `data-header-dark` straddle check
+// simply never fires for it. `data-header-dark` is retained for the
+// graceful fallback (no-JS / very short viewport) where the footer is a
+// normal in-flow block that scrolls under the header and must flip the
+// chrome white.
+// =====================================================================
+type FooterLink = { label: string; href: string };
+type FooterColumn = { title: string; links: FooterLink[] };
+
+const columns: FooterColumn[] = [
+  {
+    title: "Modules",
+    links: [
+      { label: "Title Register", href: "/modules/title-register/" },
+      { label: "Tokenize", href: "/modules/tokenization/" },
+      { label: "Mint", href: "/modules/collateralization/" },
+      { label: "The Reserve", href: "/modules/reserve/" },
+      { label: "Liquidity", href: "/modules/liquidity/" },
+      { label: "Security", href: "/modules/security/" },
+    ],
+  },
+  {
+    title: "Tokens",
+    links: [
+      { label: "Conditional Claim Tokens", href: "/tokens/conditional-claim-tokens/" },
+      { label: "Standard Metal Units", href: "/tokens/standard-metal-units/" },
+      { label: "U.S. Gold (USG)", href: "/tokens/standard-metal-units/usg/" },
+      { label: "gBars", href: "/tokens/gbars/" },
+      { label: "gGold", href: "/tokens/ggold/" },
+      { label: "GOLDN", href: "/tokens/goldn/" },
+    ],
+  },
+  {
+    title: "Solutions",
+    links: [
+      { label: "Vaults", href: "/solutions/vaults/" },
+      { label: "Refiners", href: "/solutions/refiners/" },
+      { label: "Protocols & Ecosystems", href: "/solutions/blockchain-protocols/" },
+      { label: "Market Makers", href: "/solutions/market-makers/" },
+      { label: "Traders", href: "/solutions/traders/" },
+      { label: "Bullion Dealers", href: "/solutions/bullion-dealers/" },
+      { label: "Institutional Allocators", href: "/solutions/institutional-allocators/" },
+      { label: "Private Holders", href: "/solutions/private-holders/" },
+    ],
+  },
+  {
+    title: "Governance",
+    links: [
+      { label: "The Council", href: "/governance/council/" },
+      { label: "The Foundation", href: "/governance/foundation/" },
+      { label: "How It's Governed", href: "/governance/how-its-governed/" },
+    ],
+  },
+  {
+    title: "Resources",
+    links: [
+      { label: "The Standard", href: "/standard/" },
+      { label: "Documentation", href: "/docs/" },
+      { label: "The White Paper", href: "/white-paper/" },
+      { label: "The Journal", href: "/journal/" },
+      { label: "About", href: "/about/" },
+    ],
+  },
+];
+---
+
+<footer class="footer" aria-labelledby="footer-heading" data-header-dark data-site-footer>
+  <div class="container footer__inner">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a class="footer__wordmark" href="/">Global&nbsp;Gold</a>
+        <h2 class="display display--md footer__heading" id="footer-heading">
+          The market standard for allocated gold.
+        </h2>
+        <a class="cta--box footer__cta" href="/access/">Request Access</a>
+      </div>
+
+      <nav class="footer__nav" aria-label="Footer">
+        <div class="footer__cols">
+          {
+            columns.map((col) => (
+              <div class="footer__col">
+                <h3 class="footer__col-title eyebrow">{col.title}</h3>
+                <ul class="footer__list">
+                  {col.links.map((link) => (
+                    <li>
+                      <a href={link.href}>{link.label}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
+      </nav>
+    </div>
+
+    <hr class="footer__rule" />
+
+    <div class="footer__bottom">
+      <p class="footer__legal">© 2026 Global Gold Protocol LLC · Wyoming, USA</p>
+      <p class="footer__tagline">Real gold. Global liquidity. One shared standard.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--obsidian);
+    color: var(--stone);
+    padding-block: clamp(72px, 9vw, 128px);
+  }
+
+  /* ---- top: brand zone + link columns ---- */
+  .footer__top {
+    display: grid;
+    grid-template-columns: minmax(260px, 1fr) 2fr;
+    gap: clamp(48px, 6vw, 104px);
+    align-items: start;
+  }
+
+  .footer__brand {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .footer__wordmark {
+    font-family: var(--serif-display);
+    font-weight: 400;
+    font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+    text-transform: uppercase;
+    letter-spacing: var(--track-wordmark);
+    color: var(--ivory);
+  }
+  .footer__wordmark:hover { color: var(--gold-warm); }
+  .footer__heading {
+    margin-top: clamp(20px, 2.4vw, 30px);
+    max-width: 14ch;
+    color: var(--ivory);
+    text-wrap: balance;
+  }
+  .footer__cta {
+    margin-top: clamp(28px, 3.2vw, 40px);
+    /* Light treatment of the boxed CTA over the dark ground. */
+    border-color: rgba(245, 241, 232, 0.5);
+    color: var(--ivory);
+  }
+  .footer__cta:hover {
+    background: var(--ivory);
+    color: var(--char);
+    border-color: var(--ivory);
+  }
+
+  /* ---- link columns ---- */
+  .footer__cols {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: clamp(32px, 3vw, 48px) clamp(22px, 2vw, 36px);
+  }
+  .footer__col-title {
+    margin: 0 0 clamp(16px, 1.6vw, 22px);
+    color: var(--gold-warm);
+  }
+  .footer__list {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(10px, 1vw, 14px);
+  }
+  .footer__list a {
+    font-family: var(--sans-display);
+    font-size: 0.94rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    color: var(--stone);
+    transition: color var(--t-fast) var(--ease);
+  }
+  .footer__list a:hover { color: var(--ivory); }
+
+  /* ---- divider ---- */
+  .footer__rule {
+    border: 0;
+    height: 1px;
+    background: var(--rule-light);
+    margin-block: clamp(48px, 6vw, 80px) clamp(28px, 3vw, 40px);
+  }
+
+  /* ---- bottom legal bar ---- */
+  .footer__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px clamp(24px, 4vw, 48px);
+  }
+  .footer__legal,
+  .footer__tagline {
+    margin: 0;
+    font-family: var(--sans-display);
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+  }
+  .footer__legal { color: rgba(216, 210, 200, 0.55); }
+  .footer__tagline {
+    color: var(--gold-warm);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.74rem;
+  }
+
+  /* ---- focus-visible (legible on the dark ground) ---- */
+  .footer a:focus-visible {
+    outline: 2px solid var(--gold-warm);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* ---- responsive ---- */
+  @media (max-width: 960px) {
+    .footer__top {
+      grid-template-columns: 1fr;
+      gap: clamp(44px, 8vw, 64px);
+    }
+    .footer__cols {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 520px) {
+    .footer__cols {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

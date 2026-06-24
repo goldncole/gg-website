@@ -1,0 +1,178 @@
+---
+// =====================================================================
+// PAGE — Governance · The Council (uses GovernancePage template).
+// Copy v2 — accuracy + conversion pass. UPDATED to the SD-21 Tri-Branch
+// Refactor (Global Gold Council Constitution v3.1; Foundation
+// Constitution v0.4; Entity Structure doc §0 — authoritative current
+// model). Key correction vs v1: the Council is a PURE STANDARDS BODY.
+// It sets standards, criteria, parameters, and fee AMOUNTS, and
+// declares Counterparty Categories + their eligibility criteria. It
+// does NOT hold a treasury (the single ecosystem treasury is at the
+// Foundation) and does NOT adjudicate individual
+// counterparty admissions (the Foundation applies the Council's
+// criteria and maintains the canonical Approved Counterparty Registry).
+// Through-line: the Council writes the rules; the Foundation applies
+// them. NOTE: source docs are current drafts (v3.1 "not adopted",
+// v0.4 "draft") — confirm before publishing.
+// =====================================================================
+import GovernancePage from "../../layouts/templates/GovernancePage.astro";
+import type { GovernancePageContent } from "../../layouts/templates/GovernancePage.astro";
+
+const content: GovernancePageContent = {
+  meta: {
+    title: "The Council — Governance · Global Gold",
+    description:
+      "The Global Gold Council is the standards body for the Global Gold Standard — a Wyoming nonprofit association that sets the rules, criteria, parameters, and fee amounts every participant conforms to. It writes the standard; it holds no treasury and runs no vaults.",
+  },
+  // Above-the-fold mirrors the homepage: a full-bleed pinned hero image (no
+  // text overlay) that the content scrolls up over (see InnerPage pinnedHero +
+  // motion.ts). The PageHero below becomes the first panel in the reveal.
+  pinnedHero: {
+    src: "/images/governance-hero2.png",
+    alt: "",
+  },
+  hero: {
+    eyebrow: "Governance",
+    title: "The Council.",
+    lede: "The standards body for the Global Gold Standard — a Wyoming nonprofit association that sets the rules, criteria, and parameters every participant conforms to. It writes the standard; it does not hold the treasury, run the vaults, or issue the tokens.",
+    primaryCta: { label: "Read the Governance Docs", href: "/docs/" },
+    secondaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+  },
+  mandate: {
+    eyebrow: "Mandate",
+    heading: "The standards body.",
+    body: [
+      "The Global Gold Council is a decentralized unincorporated nonprofit association organized under Wyoming Statute § 17-32 — a legal form with its own personality, its own governance, and standing independent of any operating company. Its mandate is to set and maintain the rules of the Standard: bar eligibility, the definitions and parameters of each Standard Metal Unit series, the eligibility criteria for every category of participant, protocol parameters, and the fee amounts that fund the ecosystem. It is the body that keeps the Standard coherent as the network grows across vaults and jurisdictions — operating within the umbrella standards of the Foundation, which stewards the wider ecosystem.",
+      "The Council writes rules; it does not run the system, hold the money, or decide who gets in. It takes no custody of metal, operates no vaults, issues no tokens, and holds no treasury. It sets the criteria for participation — and the Foundation applies them, admitting participants and maintaining the network's registry. Authority deliberately confined to standards-setting: the same posture that made LBMA, ISDA, and ISO the quiet centers of their markets.",
+    ],
+  },
+  responsibilities: {
+    eyebrow: "Responsibilities",
+    heading: "A clearly bounded role.",
+    does: {
+      heading: "What it does",
+      items: [
+        "Sets bar eligibility criteria and the definitions and parameters for each Standard Metal Unit series — USG today, with future jurisdictional and metal series as the network grows.",
+        "Declares the categories of participant — approved vaults, CCT issuers, refiners, and custodians — and writes the eligibility and conformance criteria for each.",
+        "Sets the Protocol's parameters and the fee amounts that fund the ecosystem.",
+        "Governs how the Standard evolves, through a multi-stakeholder governance process with published, versioned rules.",
+      ],
+    },
+    doesNot: {
+      heading: "What it does not do",
+      items: [
+        "Does not hold or operate a treasury — the single ecosystem treasury is held by the Foundation.",
+        "Does not adjudicate individual admissions — the Foundation applies the Council's criteria and maintains the canonical Approved Counterparty Registry.",
+        "Does not take custody of gold, operate vaults, or issue, mint, or redeem tokens.",
+        "Does not approve individual title transfers — that authority stays with each vault.",
+      ],
+    },
+  },
+  structure: {
+    eyebrow: "Structure",
+    heading: "Authority is distributed by design.",
+    body: [
+      "The Council is one branch of a deliberately divided structure. Rule-making, stewardship, technology, and custody are held by separate entities — so no single party can control the rules, the metal, the treasury, and the market at once.",
+    ],
+    branches: [
+      {
+        label: "01",
+        title: "The Council",
+        body: "Writes and maintains the Standard. A Wyoming nonprofit association — standards-setting only, with no treasury, no custody, and no issuance.",
+      },
+      {
+        label: "02",
+        title: "The Foundation",
+        body: "The Foundation — parent steward of the ecosystem. Holds the single treasury, adjudicates participant admissions, and maintains the Approved Counterparty Registry.",
+      },
+      {
+        label: "03",
+        title: "The operating company",
+        body: "Builds and licenses the protocol technology within the rules the Council defines. A software company — not an issuer, not a custodian.",
+      },
+      {
+        label: "04",
+        title: "Participating Vaults",
+        body: "Operate their own Title Registers and retain custody and title authority over every bar they safeguard.",
+      },
+    ],
+  },
+  principles: {
+    eyebrow: "Safeguards",
+    heading: "Principles that hold the standard accountable.",
+    columns: 3,
+    items: [
+      {
+        eyebrow: "Separation",
+        title: "No concentration of power",
+        body: "Rule-making, stewardship, treasury, admissions, technology, and custody sit with separate entities. No participant holds both the rulebook and the machinery — or both the rules and the money.",
+      },
+      {
+        eyebrow: "Conformance",
+        title: "Rules apply to everyone",
+        body: "Participation is conditioned on conformance to published standards — written by the Council, applied by the Foundation, and enforced consistently across every vault, jurisdiction, and market participant.",
+      },
+      {
+        eyebrow: "Transparency",
+        title: "Public, documented rules",
+        body: "The standards are published and versioned, so counterparties, auditors, and regulators can evaluate the Standard directly rather than take it on trust.",
+      },
+    ],
+  },
+  related: {
+    eyebrow: "Related entities",
+    heading: "The rest of the governance structure.",
+    columns: 3,
+    items: [
+      {
+        eyebrow: "Governance",
+        title: "The Foundation",
+        blurb: "The permanent steward that holds the treasury and adjudicates admission to the network.",
+        href: "/governance/foundation/",
+      },
+      {
+        eyebrow: "Governance",
+        title: "How It's Governed",
+        blurb: "The full separation of powers across Council, Foundation, Protocol, and Vaults.",
+        href: "/governance/how-its-governed/",
+      },
+      {
+        eyebrow: "The Standard",
+        title: "The Standard",
+        blurb: "The shared rulebook the Council defines and maintains.",
+        href: "/standard/",
+      },
+    ],
+  },
+  documents: {
+    eyebrow: "References",
+    heading: "Documents & references.",
+    items: [
+      {
+        title: "Council Governance Constitution",
+        href: "/docs/",
+        note: "PDF — final link pending",
+      },
+      {
+        title: "Protocol Standards & Conformance Framework",
+        href: "/docs/",
+        note: "PDF — final link pending",
+      },
+      {
+        title: "Global Gold White Paper",
+        href: "/white-paper/",
+      },
+    ],
+  },
+  cta: {
+    eyebrow: "Governance",
+    heading: "Rules the whole market can trust.",
+    body: "Review the governance documentation behind the Global Gold Standard.",
+    primaryCta: { label: "Read the Governance Docs", href: "/docs/" },
+    secondaryCta: { label: "Read the White Paper", href: "/white-paper/" },
+    variant: "dark",
+  },
+};
+---
+
+<GovernancePage content={content} />

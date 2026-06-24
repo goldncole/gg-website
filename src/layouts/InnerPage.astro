@@ -1,0 +1,86 @@
+---
+// =====================================================================
+// InnerPage — shared shell for every inner (non-home) page.
+// Wraps Base, mounts the SiteHeader + SiteFooter, and puts the page
+// content inside a `.page-over` > `<main>` wrapper. That wrapper is what
+// the motion system keys off (initHeaderTheme): because there is no
+// pinned dark hero, the header stays in its default dark-ink state from
+// the first paint (white chrome is reserved for explicitly-dark
+// [data-header-dark] sections). It also restores the Auwa-style inset
+// hairline separators between sibling sections. All five page templates
+// build on this.
+// =====================================================================
+import Base from "./Base.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import HeroMark from "../components/HeroMark.astro";
+
+/** Optional full-bleed pinned hero, mirroring the homepage's above-the-fold
+ *  (see HeroMark + motion.ts). When set, the header renders white chrome
+ *  (`overHero`) over the image and the `.page-over` content scrolls up over the
+ *  pinned hero. Omit for the default light-from-top inner page. */
+export interface PinnedHero {
+  src: string;
+  alt?: string;
+  /** Anchor the scroll cue jumps to. Defaults to the content wrapper. */
+  scrollHref?: string;
+}
+
+export interface Props {
+  title?: string;
+  description?: string;
+  pinnedHero?: PinnedHero;
+}
+
+const { title, description, pinnedHero } = Astro.props;
+---
+
+<Base title={title} description={description}>
+  {
+    pinnedHero ? (
+      <>
+        <SiteHeader overHero />
+        <HeroMark
+          src={pinnedHero.src}
+          alt={pinnedHero.alt}
+          scrollHref={pinnedHero.scrollHref ?? "#page-content"}
+        />
+      </>
+    ) : (
+      <SiteHeader />
+    )
+  }
+  <div
+    class:list={["page-over", { "page-over--pinned": pinnedHero }]}
+    id={pinnedHero ? "page-content" : undefined}
+  >
+    <main>
+      <slot />
+    </main>
+  </div>
+  <SiteFooter />
+</Base>
+
+<style>
+  /* Non-pinned hero: content sits at the top of the document. The
+     .page-over > main wrapper keeps the shared inset hairline separators
+     between sibling sections and anchors header theming. The SiteFooter is
+     a sibling (outside .page-over) so it can be pinned behind the content
+     for the shared Auwa-style scroll reveal (see global.css
+     `.footer-reveal`); the content layer's bottom spacing + reveal are
+     applied once there, not per page. */
+  .page-over {
+    position: relative;
+    z-index: 1;
+    background: var(--paper);
+  }
+
+  /* Opt-in pinned-hero mode (mirrors the homepage): push the content down a
+     full viewport so it scrolls up over the fixed [data-hero] image. The solid
+     `background` above keeps the hero from showing through between sections,
+     and motion.ts's generic initHeroReveal / initHeaderTheme handle the blur +
+     header chrome flip off [data-hero] + .page-over. */
+  .page-over--pinned {
+    margin-top: 100svh;
+  }
+</style>

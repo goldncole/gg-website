@@ -1,0 +1,134 @@
+---
+// [3] The Market Failure — full-bleed cinematic image band with a dark overlay.
+// The five gold hubs read as an elegant typographic row. Visual centerpiece.
+const hubs = [
+  "London",
+  "Zurich",
+  "New York",
+  "Shanghai",
+  "Hong Kong",
+  "Dubai",
+  "Singapore",
+];
+---
+
+<section class="section market-failure" aria-labelledby="market-failure-heading" data-header-dark>
+  <div class="market-failure__bg" aria-hidden="true">
+    <img src="/images/sacred-marble-threshold.png" alt="" loading="lazy" />
+  </div>
+
+  <div class="container market-failure__inner">
+    <p class="eyebrow market-failure__eyebrow reveal">Fragmented by design</p>
+    <h2 class="display display--lg market-failure__heading reveal" id="market-failure-heading" data-reveal-delay="0.05">
+      Gold is global.<br />Its markets are not.
+    </h2>
+
+    <div class="market-failure__body reveal" data-reveal-delay="0.1">
+      <p>
+        London, Zurich, New York, Shanghai, Hong Kong, Dubai, and Singapore
+        each operate through their own settlement rails, approved-facility
+        networks, custody conventions, and liquidity centers.
+      </p>
+      <p>
+        Inside a hub, gold is liquid only within that hub's market structure.
+        Outside the hubs, the constraint is sharper: an entire class of
+        allocated-custody vaults has no institutional clearing pathway at all.
+      </p>
+    </div>
+
+    <p class="market-failure__closer reveal" data-reveal-delay="0.13">
+      The metal is universal.<br />The infrastructure is regional.
+    </p>
+
+    <ul class="market-failure__hubs reveal" data-reveal-delay="0.16">
+      {hubs.map((hub) => (<li>{hub}</li>))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .market-failure {
+    position: relative;
+    width: 100vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+    color: var(--ivory);
+    isolation: isolate;
+  }
+  .market-failure__bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+  }
+  .market-failure__bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .market-failure__bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(17, 17, 17, 0.78), rgba(17, 17, 17, 0.62));
+  }
+
+  .market-failure__eyebrow { color: var(--gold-warm); }
+  .market-failure__heading {
+    margin-top: 0.5em;
+    color: var(--ivory);
+    max-width: 16ch;
+  }
+  .market-failure__body {
+    margin-top: clamp(28px, 3.4vw, 44px);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2em;
+    max-width: 60ch;
+  }
+  .market-failure__body p {
+    margin: 0;
+    font-size: var(--t-lede);
+    line-height: 1.55;
+    color: rgba(245, 241, 232, 0.88);
+  }
+  .market-failure__closer {
+    margin: clamp(36px, 4.4vw, 56px) 0 0;
+    font-family: var(--serif-display);
+    font-weight: 300;
+    font-size: clamp(1.5rem, 2.6vw, 2.2rem);
+    line-height: 1.15;
+    color: var(--ivory);
+    max-width: 22ch;
+  }
+  .market-failure__hubs {
+    margin-top: clamp(40px, 5vw, 64px);
+    padding-top: clamp(28px, 3vw, 40px);
+    border-top: 1px solid var(--rule-light);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8em 0;
+    align-items: center;
+    font-family: var(--sans-display);
+    font-size: clamp(0.8rem, 1vw, 0.95rem);
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ivory);
+  }
+  .market-failure__hubs li { display: inline-flex; align-items: center; }
+  .market-failure__hubs li:not(:last-child)::after {
+    content: "·";
+    margin: 0 clamp(0.8em, 2vw, 1.4em);
+    color: var(--gold-warm);
+  }
+
+  @media (max-width: 600px) {
+    .market-failure__hubs {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.7em;
+    }
+    .market-failure__hubs li:not(:last-child)::after { content: none; }
+  }
+</style>

@@ -1,0 +1,97 @@
+---
+// [4] Proof — split layout: a real vault door image beside the non-hub
+// vault constraint. Image leads on the left, copy on the right.
+---
+
+<section class="section proof" aria-labelledby="proof-heading">
+  <div class="container proof__inner">
+    <figure class="proof__media reveal" data-reveal-delay="0.05">
+      <img
+        src="/images/vaults.png"
+        alt="A precious metals depository vault door at the end of a marble hall"
+        loading="lazy"
+      />
+    </figure>
+
+    <div class="proof__copy">
+      <p class="eyebrow reveal">The constraint is real</p>
+      <h2 class="display display--md proof__heading reveal" id="proof-heading" data-reveal-delay="0.05">
+        Institutional-grade gold can still sit outside the market.
+      </h2>
+      <div class="proof__body reveal" data-reveal-delay="0.1">
+        <p>
+          Across the gold market, clearing access is determined less by the
+          quality of the metal than by the pathway attached to the vault that
+          holds it.
+        </p>
+        <p>
+          A bar may be allocated, insured, audited, and held in a purpose-built
+          facility, yet still sit outside the major hub pathways: COMEX New
+          York, the London-Zurich OTC chain, SGE Shanghai, Hong Kong's
+          recognized-depository system, DMCC Dubai, and the Singapore kilobar
+          market. To reach those markets, the bar usually has to move:
+          physically shipped, re-assayed, and accepted into another chain of
+          custody.
+        </p>
+        <p>
+          Global Gold is designed for that gap.
+        </p>
+        <p>
+          The Standard gives participating vaults a pathway to connect allocated
+          gold to global liquidity without moving the metal into another hub's
+          chain of custody.
+        </p>
+      </div>
+      <p class="proof__closer reveal" data-reveal-delay="0.13">
+        The metal stays where it is.<br />The market pathway opens.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .proof__inner {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    align-items: center;
+    column-gap: clamp(40px, 5vw, 88px);
+  }
+  .proof__media {
+    margin: 0;
+    border-radius: var(--radius-img);
+    overflow: hidden;
+    background: var(--stone);
+    aspect-ratio: 4 / 5;
+  }
+  .proof__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .proof__heading {
+    margin-top: 0.5em;
+    max-width: 20ch;
+  }
+  .proof__body {
+    margin-top: clamp(24px, 3vw, 36px);
+    display: flex;
+    flex-direction: column;
+    gap: 1.1em;
+    max-width: 56ch;
+  }
+  .proof__body p { margin: 0; }
+  .proof__closer {
+    margin: clamp(28px, 3.2vw, 42px) 0 0;
+    font-family: var(--serif-display);
+    font-weight: 300;
+    font-size: clamp(1.35rem, 2vw, 1.85rem);
+    line-height: 1.18;
+    color: var(--ink);
+  }
+
+  @media (max-width: 860px) {
+    .proof__inner { grid-template-columns: 1fr; row-gap: clamp(32px, 6vw, 48px); }
+    .proof__media { aspect-ratio: 16 / 10; }
+    .proof__heading { max-width: 100%; }
+  }
+</style>

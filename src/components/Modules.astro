@@ -1,0 +1,480 @@
+---
+// [7] Mechanism — Auwa-style auto-rotating tabbed carousel. Bar → Claim →
+// Unit → Reserve. Reuses the four module images and the existing UX/JS.
+const modules = [
+  {
+    no: "01",
+    title: "Bar",
+    cat: "The Bar",
+    headline: "The bar.",
+    body: "A specific, identifiable gold bar sits allocated in a participating vault. Eligible collateral is not pledged, lent, or rehypothecated.",
+    cta: "Explore the Standard",
+    href: "/standard/",
+    img: "/images/module-01.png",
+  },
+  {
+    no: "02",
+    title: "Claim",
+    cat: "The Claim",
+    headline: "The claim.",
+    body: "A Conditional Claim Token represents the right to request title transfer of that exact bar. One bar, one claim.",
+    cta: "Explore the Standard",
+    href: "/standard/",
+    img: "/images/module-02.png",
+  },
+  {
+    no: "03",
+    title: "Unit",
+    cat: "The Unit",
+    headline: "The unit.",
+    body: "Collateralize the claim to mint Standard Metal Units. Title to the collateral moves to a bankruptcy-remote collateral agent, and the collateralized claims back the units 1:1. One SMU equals one troy ounce of fine gold.",
+    cta: "Explore the Standard",
+    href: "/standard/",
+    img: "/images/module-03.png",
+  },
+  {
+    no: "04",
+    title: "Reserve",
+    cat: "The Reserve",
+    headline: "The reserve.",
+    body: "Deposit approved gold tokens into the Reserve and receive gGold — one token for every ounce. The result is gold that answers to no single issuer or country: diversified across leading jurisdictions, and redeemable by anyone for the real metal behind it.",
+    cta: "Explore the Standard",
+    href: "/standard/",
+    img: "/images/module-04-reserve.png",
+  },
+];
+---
+
+<section class="section modules" id="modules" aria-labelledby="modules-heading" data-modules>
+  <div class="container">
+    <p class="eyebrow reveal">How the standard works</p>
+    <h2 class="display display--lg reveal" id="modules-heading" data-reveal-delay="0.05">
+      Bar. Claim. Unit. Reserve.
+    </h2>
+
+    <div class="mod reveal" data-reveal-delay="0.1">
+      <div class="mod__media">
+        {
+          modules.map((m, i) => (
+            <figure class:list={["mod__slide", i === 0 && "is-active"]} data-mod-slide>
+              <img src={m.img} alt={`${m.title} module`} width="1122" height="1402" loading="lazy" />
+              <span class="mod__count">
+                <span class="mod__count-no">{m.no}</span>
+                <span class="mod__count-total"> / 04</span>
+              </span>
+            </figure>
+          ))
+        }
+      </div>
+
+      <div class="mod__content">
+        {
+          modules.map((m, i) => (
+            <article class:list={["mod__panel", i === 0 && "is-active"]} data-mod-panel>
+              <p class="mod__cat">{m.cat}</p>
+              <h3 class="mod__headline">{m.headline}</h3>
+              <p class="mod__body">{m.body}</p>
+              <a class="cta--box" href={m.href}>{m.cta}</a>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="mod__tabs" role="tablist" aria-label="Modules">
+        {
+          modules.map((m, i) => (
+            <button
+              type="button"
+              class:list={["mod__tab", i === 0 && "is-active"]}
+              data-mod-tab
+              role="tab"
+              aria-selected={i === 0 ? "true" : "false"}
+            >
+              <span class="mod__tab-no">{m.no}</span>
+              <span class="mod__tab-dot" aria-hidden="true">·</span>
+              <span class="mod__tab-name">{m.title}</span>
+            </button>
+          ))
+        }
+      </div>
+    </div>
+
+    {/* Mobile-only horizontal scroll carousel (Auwa-style). Hidden on desktop. */}
+    <div class="mod__scroller reveal" data-mod-scroller data-reveal-delay="0.1" aria-label="Mechanism">
+      {
+        modules.map((m) => (
+          <a class="mod__card" href={m.href} data-mod-card>
+            <img src={m.img} alt={`${m.title} module`} width="1122" height="1402" loading="lazy" />
+            <span class="mod__card-label">
+              <span class="mod__card-no">{m.no}</span>
+              <span class="mod__card-dot" aria-hidden="true">·</span>
+              <span class="mod__card-name">{m.title}</span>
+            </span>
+          </a>
+        ))
+      }
+    </div>
+    <div class="mod__dots" aria-hidden="true" data-mod-dots>
+      {
+        modules.map((_, i) => (
+          <span class:list={["mod__dot", i === 0 && "is-active"]} data-mod-dot />
+        ))
+      }
+    </div>
+
+    <p class="mod__closer reveal" data-reveal-delay="0.1">
+      The liquidity of a token. The substance of a bar.
+    </p>
+  </div>
+</section>
+
+<style>
+  .mod {
+    margin-top: clamp(48px, 6vw, 84px);
+    display: grid;
+    grid-template-columns: clamp(280px, 40%, 460px) 1fr;
+    grid-template-rows: 1fr auto;
+    column-gap: clamp(40px, 5vw, 80px);
+    row-gap: 0;
+  }
+
+  /* Media column — spans both rows; its aspect-ratio defines the row height,
+     so the tab row lines up with the bottom of the image. */
+  .mod__media {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    position: relative;
+    aspect-ratio: 4 / 5;
+    border-radius: var(--radius-img);
+    overflow: hidden;
+    background: var(--stone);
+  }
+  .mod__slide {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    opacity: 0;
+    transition: opacity 700ms var(--ease);
+  }
+  .mod__slide.is-active { opacity: 1; }
+  .mod__slide img { width: 100%; height: 100%; object-fit: cover; }
+
+  .mod__count {
+    position: absolute;
+    top: 16px;
+    left: 18px;
+    font-family: var(--sans-display);
+    color: var(--ivory);
+    text-shadow: 0 1px 10px rgba(17, 17, 17, 0.45);
+    letter-spacing: 0.04em;
+  }
+  .mod__count-no { font-size: 1.15rem; font-weight: 500; }
+  .mod__count-total { font-size: 0.85rem; opacity: 0.8; }
+
+  /* Content column — panels crossfade, top-aligned against the image */
+  .mod__content {
+    grid-column: 2;
+    grid-row: 1;
+    position: relative;
+  }
+  .mod__panel {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 700ms var(--ease);
+  }
+  .mod__panel.is-active { opacity: 1; pointer-events: auto; }
+
+  .mod__cat {
+    font-family: var(--sans-display);
+    font-size: var(--t-eyebrow);
+    font-weight: 500;
+    letter-spacing: var(--track-eyebrow);
+    text-transform: uppercase;
+    color: var(--graphite);
+    margin: 0 0 clamp(14px, 1.6vw, 20px);
+  }
+  .mod__headline {
+    font-family: var(--serif-display);
+    font-weight: 300;
+    color: var(--char);
+    line-height: 1.06;
+    letter-spacing: -0.01em;
+    font-size: clamp(1.75rem, 2.4vw, 2.5rem);
+    margin: 0;
+  }
+  .mod__body {
+    margin: clamp(16px, 1.6vw, 22px) 0 clamp(24px, 2.4vw, 32px);
+    max-width: 48ch;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--graphite);
+  }
+  /* Panel CTA uses the global .cta--box; only the panel-specific spacing
+     (keep it left-aligned, not stretched by the flex column) lives here. */
+  .mod__panel .cta--box { align-self: flex-start; }
+
+  /* Tab bar — bottom of the content column, aligned with the image bottom.
+     Column gap separates each tab's top-line so they don't run together. */
+  .mod__tabs {
+    grid-column: 2;
+    grid-row: 2;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: clamp(18px, 2.4vw, 44px);
+  }
+  .mod__tab {
+    appearance: none;
+    background: none;
+    border: 0;
+    border-top: 1px solid var(--rule-faint);
+    padding: 16px 0 0 0;
+    text-align: left;
+    cursor: pointer;
+    font-family: var(--sans-display);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--graphite);
+    opacity: 0.5;
+    transition: opacity var(--t-base) var(--ease), color var(--t-base) var(--ease), border-color var(--t-base) var(--ease);
+  }
+  .mod__tab:hover { opacity: 0.85; }
+  .mod__tab.is-active {
+    opacity: 1;
+    color: var(--char);
+    border-top-color: var(--char);
+  }
+  .mod__tab-dot { margin: 0 0.5em; opacity: 0.5; }
+
+  .mod__closer {
+    /* Top gap matches the section's bottom padding so the line sits
+       centered in the trailing whitespace rather than hugging the carousel. */
+    margin: var(--section-y) auto 0;
+    max-width: 24ch;
+    text-align: center;
+    font-family: var(--serif-display);
+    font-weight: 300;
+    font-size: clamp(1.4rem, 2.4vw, 2rem);
+    line-height: 1.2;
+    color: var(--char);
+    text-wrap: balance;
+  }
+
+  /* Mobile carousel scaffolding — hidden on desktop, shown ≤820px. */
+  .mod__scroller,
+  .mod__dots { display: none; }
+
+  /* ── Mobile: replace the crossfade/tab layout with a horizontal,
+     scroll-snap row of tappable image cards + a text-less line indicator. ── */
+  @media (max-width: 820px) {
+    .mod { display: none; }
+
+    .mod__scroller {
+      display: flex;
+      gap: clamp(12px, 4vw, 20px);
+      margin-top: clamp(32px, 8vw, 48px);
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      /* Bleed to the viewport gutter so the first/last card sit flush. */
+      margin-inline: calc(-1 * var(--gutter));
+      padding-inline: var(--gutter);
+    }
+    .mod__scroller::-webkit-scrollbar { display: none; }
+
+    .mod__card {
+      flex: 0 0 82vw;
+      max-width: 380px;
+      scroll-snap-align: center;
+      position: relative;
+      aspect-ratio: 4 / 5;
+      border-radius: var(--radius-img);
+      overflow: hidden;
+      background: var(--stone);
+      display: block;
+    }
+    .mod__card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .mod__card-label {
+      position: absolute;
+      top: 16px;
+      left: 18px;
+      display: inline-flex;
+      align-items: baseline;
+      font-family: var(--sans-display);
+      font-weight: 500;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      color: var(--ivory);
+      text-shadow: 0 1px 10px rgba(17, 17, 17, 0.45);
+    }
+    .mod__card-dot { margin: 0 0.5em; opacity: 0.7; }
+    .mod__card-name { font-weight: 400; opacity: 0.92; }
+
+    .mod__dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: clamp(20px, 5vw, 28px);
+    }
+    .mod__dot {
+      width: 22px;
+      height: 2px;
+      background: var(--rule);
+      transition: background var(--t-base) var(--ease);
+    }
+    .mod__dot.is-active { background: var(--char); }
+  }
+</style>
+
+<script>
+  // The carousel binds listeners + an auto-rotate interval to homepage-only
+  // DOM. With <ClientRouter /> that DOM is destroyed/recreated on navigation,
+  // so we (re)initialize on every astro:page-load and fully clean up
+  // (interval, observer, media-query listener) on astro:before-swap — otherwise
+  // a stale interval leaks and the carousel is dead after navigating back.
+  let cleanup: (() => void) | null = null;
+
+  function initModules() {
+    const section = document.querySelector<HTMLElement>("[data-modules]");
+    if (!section) return;
+
+    const slides = Array.from(section.querySelectorAll<HTMLElement>("[data-mod-slide]"));
+    const panels = Array.from(section.querySelectorAll<HTMLElement>("[data-mod-panel]"));
+    const tabs = Array.from(section.querySelectorAll<HTMLElement>("[data-mod-tab]"));
+    const total = tabs.length;
+    const INTERVAL = 8000;
+
+    let index = 0;
+    let timer: ReturnType<typeof setInterval> | undefined;
+    // Auto-rotate is gated on the section being scrolled into view, so a
+    // visitor always lands on "01 — The Bar" rather than whatever slide a
+    // background timer had already advanced to before they arrived.
+    let inView = false;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // Desktop = the crossfade/tab layout; ≤820px = the mobile scroll carousel.
+    const desktopMQ = window.matchMedia("(min-width: 821px)");
+
+    function setActive(i: number) {
+      index = ((i % total) + total) % total;
+      slides.forEach((el, n) => el.classList.toggle("is-active", n === index));
+      panels.forEach((el, n) => el.classList.toggle("is-active", n === index));
+      tabs.forEach((el, n) => {
+        const on = n === index;
+        el.classList.toggle("is-active", on);
+        el.setAttribute("aria-selected", on ? "true" : "false");
+      });
+    }
+
+    function stop() {
+      if (timer) clearInterval(timer);
+      timer = undefined;
+    }
+    function start() {
+      // Auto-rotate only runs on desktop, in view, and never with reduced motion.
+      if (reduceMotion || !desktopMQ.matches || !inView) return;
+      stop();
+      timer = setInterval(() => setActive(index + 1), INTERVAL);
+    }
+
+    tabs.forEach((tab, n) =>
+      tab.addEventListener("click", () => {
+        setActive(n);
+        start();
+      }),
+    );
+
+    // Pause the rotation while the visitor is hovering the section.
+    section.addEventListener("mouseenter", stop);
+    section.addEventListener("mouseleave", start);
+
+    // ── Mobile carousel: track the in-view card and emphasize its indicator. ──
+    const scroller = section.querySelector<HTMLElement>("[data-mod-scroller]");
+    const cards = Array.from(section.querySelectorAll<HTMLElement>("[data-mod-card]"));
+    const dots = Array.from(section.querySelectorAll<HTMLElement>("[data-mod-dot]"));
+
+    function setDot(i: number) {
+      dots.forEach((el, n) => el.classList.toggle("is-active", n === i));
+    }
+
+    let io: IntersectionObserver | undefined;
+    if (scroller && cards.length && "IntersectionObserver" in window) {
+      const ratios = new Map<Element, number>();
+      io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) ratios.set(e.target, e.intersectionRatio);
+          let best = 0;
+          let bestRatio = -1;
+          cards.forEach((card, n) => {
+            const r = ratios.get(card) ?? 0;
+            if (r > bestRatio) {
+              bestRatio = r;
+              best = n;
+            }
+          });
+          setDot(best);
+        },
+        { root: scroller, threshold: [0.25, 0.5, 0.75, 1] },
+      );
+      cards.forEach((card) => io!.observe(card));
+    }
+
+    // Only let the carousel auto-rotate while the section is on screen. It
+    // starts paused on "01" and begins rotating the moment the visitor
+    // scrolls it into view; it pauses again if they scroll away.
+    let sectionIO: IntersectionObserver | undefined;
+    if ("IntersectionObserver" in window) {
+      sectionIO = new IntersectionObserver(
+        (entries) => {
+          inView = entries.some((e) => e.isIntersecting);
+          if (inView) start();
+          else stop();
+        },
+        { threshold: 0.25 },
+      );
+      sectionIO.observe(section);
+    } else {
+      // No IntersectionObserver support: fall back to always-on behavior.
+      inView = true;
+    }
+
+    // Switch behaviors cleanly when crossing the breakpoint.
+    function applyMode() {
+      if (desktopMQ.matches) {
+        setActive(index);
+        start();
+      } else {
+        stop();
+        setActive(index);
+      }
+    }
+    desktopMQ.addEventListener("change", applyMode);
+
+    applyMode();
+
+    cleanup = () => {
+      stop();
+      io?.disconnect();
+      sectionIO?.disconnect();
+      desktopMQ.removeEventListener("change", applyMode);
+    };
+  }
+
+  document.addEventListener("astro:page-load", initModules);
+  document.addEventListener("astro:before-swap", () => {
+    cleanup?.();
+    cleanup = null;
+  });
+</script>
