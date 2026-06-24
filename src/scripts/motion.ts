@@ -4,9 +4,23 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// iOS/Android browsers show/hide their address bar mid-scroll, which changes
+// window.innerHeight and fires `resize`. By default ScrollTrigger would
+// auto-refresh on that resize, recomputing every start/end position and — in
+// combination with Lenis — snapping the scroll position into a visible
+// downward "jump". `ignoreMobileResize` is GSAP's purpose-built guard: it
+// ignores the mobile browser-bar height change while still honouring genuine
+// orientation/width changes. (Available since gsap 3.10; installed is 3.15.)
+ScrollTrigger.config({ ignoreMobileResize: true });
+
 const prefersReducedMotion = window.matchMedia(
   "(prefers-reduced-motion: reduce)",
 ).matches;
+
+// Coarse pointer = touch device (phones/tablets). We keep Lenis smooth scroll
+// for wheel/desktop, but skip it on touch so native momentum scrolling runs
+// unimpeded (see setup()).
+const isTouch = window.matchMedia("(pointer: coarse)").matches;
 
 // Live instances for the current page. With <ClientRouter /> the page swaps in
 // place, so we must explicitly tear these down before each navigation and
@@ -150,11 +164,24 @@ function initFooterReveal() {
   measure();
 
   // ResizeObserver catches footer reflow (responsive columns, late fonts);
-  // the resize listener catches viewport-height changes that flip `fits`.
-  // Both defer to the next frame to avoid "ResizeObserver loop" warnings.
+  // the resize listener catches viewport changes that flip `fits`. Both defer
+  // to the next frame to avoid "ResizeObserver loop" warnings.
   footerObserver = new ResizeObserver(() => requestAnimationFrame(measure));
   footerObserver.observe(footer);
-  onFooterViewportResize = () => requestAnimationFrame(measure);
+  // On mobile the iOS/Android address bar shows/hides while scrolling, which
+  // changes innerHeight (a pure HEIGHT change) and fires `resize`. Re-measuring
+  // on those would call ScrollTrigger.refresh() repeatedly mid-scroll and churn
+  // the layout. Only re-measure when the viewport WIDTH actually changes
+  // (orientation change, desktop window resize) — a real layout event. Footer
+  // content reflow is still caught by the ResizeObserver above, and late fonts
+  // by document.fonts.ready below.
+  let lastWidth = window.innerWidth;
+  onFooterViewportResize = () => {
+    const w = window.innerWidth;
+    if (w === lastWidth) return; // height-only change (address bar) — ignore
+    lastWidth = w;
+    requestAnimationFrame(measure);
+  };
   window.addEventListener("resize", onFooterViewportResize);
   if (document.fonts?.ready) {
     document.fonts.ready.then(() => requestAnimationFrame(measure));
@@ -275,17 +302,26 @@ function setup() {
     return;
   }
 
-  // Smooth scroll
-  lenis = new Lenis({
-    duration: 1.1,
-    easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    smoothWheel: true,
-  });
+  // Smooth scroll for wheel/desktop only. On touch devices Lenis is NOT engaged:
+  // in Lenis v1 touch is not smoothed by default (smoothTouch is off), so it adds
+  // no smoothing there, but its scroll interception + RAF loop still run alongside
+  // native momentum scrolling, which can fight iOS rubber-banding and contribute
+  // to the mid-scroll jank. We therefore use native scroll on touch. ScrollTrigger
+  // listens to native scroll by default (no scroller proxy here), so the pinned
+  // hero blur, header theming and footer reveal still update normally — none of
+  // them depend on a Lenis instance existing.
+  if (!isTouch) {
+    lenis = new Lenis({
+      duration: 1.1,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+    });
 
-  lenis.on("scroll", ScrollTrigger.update);
-  lenisRaf = (time: number) => lenis?.raf(time * 1000);
-  gsap.ticker.add(lenisRaf);
-  gsap.ticker.lagSmoothing(0);
+    lenis.on("scroll", ScrollTrigger.update);
+    lenisRaf = (time: number) => lenis?.raf(time * 1000);
+    gsap.ticker.add(lenisRaf);
+    gsap.ticker.lagSmoothing(0);
+  }
 
   initReveals();
   initHeroReveal();
