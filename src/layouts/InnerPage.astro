@@ -14,6 +14,7 @@ import Base from "./Base.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import HeroMark from "../components/HeroMark.astro";
+import { imgProps } from "../lib/img";
 
 /** Optional full-bleed pinned hero, mirroring the homepage's above-the-fold
  *  (see HeroMark + motion.ts). When set, the header renders white chrome
@@ -33,9 +34,15 @@ export interface Props {
 }
 
 const { title, description, pinnedHero } = Astro.props;
+
+// A pinned full-bleed hero is the page's LCP — preload it.
+const pinned = pinnedHero ? imgProps(pinnedHero.src, "100vw") : null;
+const heroPreload = pinned
+  ? { href: pinned.src, imagesrcset: pinned.srcset, imagesizes: pinned.sizes }
+  : undefined;
 ---
 
-<Base title={title} description={description}>
+<Base title={title} description={description} heroPreload={heroPreload}>
   {
     pinnedHero ? (
       <>

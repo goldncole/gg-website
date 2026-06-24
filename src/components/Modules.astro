@@ -1,6 +1,10 @@
 ---
 // [7] Mechanism — Auwa-style auto-rotating tabbed carousel. Bar → Claim →
 // Unit → Reserve. Reuses the four module images and the existing UX/JS.
+import { imgProps } from "../lib/img";
+
+// Desktop media column ~40% of the container; mobile card is 82vw.
+const MOD_SIZES = "(max-width: 820px) 82vw, 460px";
 const modules = [
   {
     no: "01",
@@ -10,7 +14,7 @@ const modules = [
     body: "A specific, identifiable gold bar sits allocated in a participating vault. Eligible collateral is not pledged, lent, or rehypothecated.",
     cta: "Explore the Standard",
     href: "/standard/",
-    img: "/images/module-01.png",
+    img: "/images/module-01.webp",
   },
   {
     no: "02",
@@ -20,7 +24,7 @@ const modules = [
     body: "A Conditional Claim Token represents the right to request title transfer of that exact bar. One bar, one claim.",
     cta: "Explore the Standard",
     href: "/standard/",
-    img: "/images/module-02.png",
+    img: "/images/module-02.webp",
   },
   {
     no: "03",
@@ -30,7 +34,7 @@ const modules = [
     body: "Collateralize the claim to mint Standard Metal Units. Title to the collateral moves to a bankruptcy-remote collateral agent, and the collateralized claims back the units 1:1. One SMU equals one troy ounce of fine gold.",
     cta: "Explore the Standard",
     href: "/standard/",
-    img: "/images/module-03.png",
+    img: "/images/module-03.webp",
   },
   {
     no: "04",
@@ -40,7 +44,7 @@ const modules = [
     body: "Deposit approved gold tokens into the Reserve and receive gGold — one token for every ounce. The result is gold that answers to no single issuer or country: diversified across leading jurisdictions, and redeemable by anyone for the real metal behind it.",
     cta: "Explore the Standard",
     href: "/standard/",
-    img: "/images/module-04-reserve.png",
+    img: "/images/module-04-reserve.webp",
   },
 ];
 ---
@@ -57,7 +61,7 @@ const modules = [
         {
           modules.map((m, i) => (
             <figure class:list={["mod__slide", i === 0 && "is-active"]} data-mod-slide>
-              <img src={m.img} alt={`${m.title} module`} width="1122" height="1402" loading="lazy" />
+              <img {...imgProps(m.img, MOD_SIZES)} alt={`${m.title} module`} loading="lazy" decoding="async" />
               <span class="mod__count">
                 <span class="mod__count-no">{m.no}</span>
                 <span class="mod__count-total"> / 04</span>
@@ -104,7 +108,7 @@ const modules = [
       {
         modules.map((m) => (
           <a class="mod__card" href={m.href} data-mod-card>
-            <img src={m.img} alt={`${m.title} module`} width="1122" height="1402" loading="lazy" />
+            <img {...imgProps(m.img, MOD_SIZES)} alt={`${m.title} module`} loading="lazy" decoding="async" />
             <span class="mod__card-label">
               <span class="mod__card-no">{m.no}</span>
               <span class="mod__card-dot" aria-hidden="true">·</span>

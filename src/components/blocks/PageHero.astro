@@ -17,6 +17,8 @@ export interface HeroImage {
   alt: string;
 }
 
+import { imgProps } from "../../lib/img";
+
 export interface Props {
   eyebrow?: string;
   title: string;
@@ -45,6 +47,8 @@ const {
 } = Astro.props;
 
 const hasImage = Boolean(image);
+// Split layout: image is ~half the container on desktop, full-width ≤900px.
+const heroImg = image ? imgProps(image.src, "(max-width: 900px) 100vw, 50vw") : null;
 ---
 
 <section
@@ -55,10 +59,11 @@ const hasImage = Boolean(image);
     !hasImage && (
       <img
         class="page-hero__watermark"
-        src="/images/gold-icon.png"
+        src="/images/gold-icon.webp"
         alt=""
         aria-hidden="true"
         loading="lazy"
+        decoding="async"
       />
     )
   }
@@ -114,7 +119,7 @@ const hasImage = Boolean(image);
     {
       hasImage && (
         <figure class="page-hero__media reveal" data-reveal-delay="0.12">
-          <img src={image!.src} alt={image!.alt} loading="eager" />
+          <img {...heroImg!} alt={image!.alt} loading="eager" fetchpriority="high" decoding="async" />
         </figure>
       )
     }

@@ -1,0 +1,562 @@
+{
+  "Hero-hall3": {
+    "width": 1672,
+    "height": 941,
+    "src": "/images/Hero-hall3.webp",
+    "srcset": "/images/Hero-hall3-768.webp 768w, /images/Hero-hall3-1280.webp 1280w, /images/Hero-hall3.webp 1672w",
+    "variants": [
+      {
+        "w": 768,
+        "h": 432,
+        "src": "/images/Hero-hall3-768.webp"
+      },
+      {
+        "w": 1280,
+        "h": 720,
+        "src": "/images/Hero-hall3-1280.webp"
+      },
+      {
+        "w": 1672,
+        "h": 941,
+        "src": "/images/Hero-hall3.webp"
+      }
+    ]
+  },
+  "sacred-marble-threshold": {
+    "width": 1672,
+    "height": 941,
+    "src": "/images/sacred-marble-threshold.webp",
+    "srcset": "/images/sacred-marble-threshold-768.webp 768w, /images/sacred-marble-threshold-1280.webp 1280w, /images/sacred-marble-threshold.webp 1672w",
+    "variants": [
+      {
+        "w": 768,
+        "h": 432,
+        "src": "/images/sacred-marble-threshold-768.webp"
+      },
+      {
+        "w": 1280,
+        "h": 720,
+        "src": "/images/sacred-marble-threshold-1280.webp"
+      },
+      {
+        "w": 1672,
+        "h": 941,
+        "src": "/images/sacred-marble-threshold.webp"
+      }
+    ]
+  },
+  "governance-hero2": {
+    "width": 1536,
+    "height": 1024,
+    "src": "/images/governance-hero2.webp",
+    "srcset": "/images/governance-hero2-768.webp 768w, /images/governance-hero2-1280.webp 1280w, /images/governance-hero2.webp 1536w",
+    "variants": [
+      {
+        "w": 768,
+        "h": 512,
+        "src": "/images/governance-hero2-768.webp"
+      },
+      {
+        "w": 1280,
+        "h": 853,
+        "src": "/images/governance-hero2-1280.webp"
+      },
+      {
+        "w": 1536,
+        "h": 1024,
+        "src": "/images/governance-hero2.webp"
+      }
+    ]
+  },
+  "gold-icon": {
+    "width": 640,
+    "height": 640,
+    "src": "/images/gold-icon.webp",
+    "srcset": "/images/gold-icon.webp 640w",
+    "variants": [
+      {
+        "w": 640,
+        "h": 640,
+        "src": "/images/gold-icon.webp"
+      }
+    ]
+  },
+  "vaults": {
+    "width": 1122,
+    "height": 1402,
+    "src": "/images/vaults.webp",
+    "srcset": "/images/vaults-400.webp 400w, /images/vaults-800.webp 800w, /images/vaults.webp 1122w",
+    "variants": [
+      {
+        "w": 400,
+        "h": 500,
+        "src": "/images/vaults-400.webp"
+      },
+      {
+        "w": 800,
+        "h": 1000,
+        "src": "/images/vaults-800.webp"
+      },
+      {
+        "w": 1122,
+        "h": 1402,
+        "src": "/images/vaults.webp"
+      }
+    ]
+  },
+  "refinery": {
+    "width": 941,
+    "height": 1672,
+    "src": "/images/refinery.webp",
+    "srcset": "/images/refinery-400.webp 400w, /images/refinery-800.webp 800w, /images/refinery.webp 941w",
+    "variants": [
+      {
+        "w": 400,
+        "h": 711,
+        "src": "/images/refinery-400.webp"
+      },
+      {
+        "w": 800,
+        "h": 1421,
+        "src": "/images/refinery-800.webp"
+      },
+      {
+        "w": 941,
+        "h": 1672,
+        "src": "/images/refinery.webp"
+      }
+    ]
+  },
+  "blockchain-protocol": {
+    "width": 1122,
+    "height": 1402,
+    "src": "/images/blockchain-protocol.webp",
+    "srcset": "/images/blockchain-protocol-400.webp 400w, /images/blockchain-protocol-800.webp 800w, /images/blockchain-protocol.webp 1122w",
+    "variants": [
+      {
+        "w": 400,
+        "h": 500,
+        "src": "/images/blockchain-protocol-400.webp"
+      },
+      {
+        "w": 800,
+        "h": 1000,
+        "src": "/images/blockchain-protocol-800.webp"
+      },
+      {
+        "w": 1122,
+        "h": 1402,
+        "src": "/images/blockchain-protocol.webp"
+      }
+    ]
+  },
+  "market-maker": {
+    "width": 1122,
+    "height": 1402,
+    "src": "/images/market-maker.webp",
+    "srcset": "/images/market-maker-400.webp 400w, /images/market-maker-800.webp 800w, /images/market-maker.webp 1122w",
+    "variants": [
+      {
+        "w": 400,
+        "h": 500,
+        "src": "/images/market-maker-400.webp"
+      },
+      {
+        "w": 800,
+        "h": 1000,
+        "src": "/images/market-maker-800.webp"
+      },
+      {
+        "w": 1122,
+        "h": 1402,
+        "src": "/images/market-maker.webp"
+      }
+    ]
+  },
+  "trader": {
+    "width": 1122,
+    "height": 1402,
+    "src": "/images/trader.webp",
+    "srcset": "/images/trader-400.webp 400w, /images/trader-800.webp 800w, /images/trader.webp 1122w",
+    "variants": [
+      {
+        "w": 400,
+        "h": 500,
+        "src": "/images/trader-400.webp"
+      },
+      {
+        "w": 800,
+        "h": 1000,
+        "src": "/images/trader-800.webp"
+      },
+      {
+        "w": 1122,
+        "h": 1402,
+        "src": "/images/trader.webp"
+      }
+    ]
+  },
+  "bullion-dealer": {
+    "width": 1122,
+    "height": 1402,
+    "src": "/images/bullion-dealer.webp",
+    "srcset": "/images/bullion-dealer-400.webp 400w, /images/bullion-dealer-800.webp 800w, /images/bullion-dealer.webp 1122w",
+    "variants": [
+      {
+        "w": 400,
+        "h": 500,
+        "src": "/images/bullion-dealer-400.webp"
+      },
+      {
+        "w": 800,
+        "h": 1000,
+        "src": "/images/bullion-dealer-800.webp"
+      },
+      {
+        "w": 1122,
+        "h": 1402,
+        "src": "/images/bullion-dealer.webp"
+      }
+    ]
+  },
+  "allocator": {
+    "width": 1114,
+    "height": 1412,
+    "src": "/images/allocator.webp",
+    "srcset": "/images/allocator-400.webp 400w, /images/allocator-800.webp 800w, /images/allocator.webp 1114w",
+    "variants": [
+      {
+        "w": 400,
+        "h": 507,
+        "src": "/images/allocator-400.webp"
+      },
+      {
+        "w": 800,
+        "h": 1014,
+        "src": "/images/allocator-800.webp"
+      },
+      {
+        "w": 1114,
+        "h": 1412,
+        "src": "/images/allocator.webp"
+      }
+    ]
+  },
+  "private-holders": {
+    "width": 1122,
+    "height": 1402,
+    "src": "/images/private-holders.webp",
+    "srcset": "/images/private-holders-400.webp 400w, /images/private-holders-800.webp 800w, /images/private-holders.webp 1122w",
+    "variants": [
+      {
+        "w": 400,
+        "h": 500,
+        "src": "/images/private-holders-400.webp"
+      },
+      {
+        "w": 800,
+        "h": 1000,
+        "src": "/images/private-holders-800.webp"
+      },
+      {
+        "w": 1122,
+        "h": 1402,
+        "src": "/images/private-holders.webp"
+      }
+    ]
+  },
+  "module-01": {
+    "width": 1073,
+    "height": 1466,
+    "src": "/images/module-01.webp",
+    "srcset": "/images/module-01-400.webp 400w, /images/module-01-800.webp 800w, /images/module-01.webp 1073w",
+    "variants": [
+      {
+        "w": 400,
+        "h": 547,
+        "src": "/images/module-01-400.webp"
+      },
+      {
+        "w": 800,
+        "h": 1093,
+        "src": "/images/module-01-800.webp"
+      },
+      {
+        "w": 1073,
+        "h": 1466,
+        "src": "/images/module-01.webp"
+      }
+    ]
+  },
+  "module-02": {
+    "width": 1070,
+    "height": 1470,
+    "src": "/images/module-02.webp",
+    "srcset": "/images/module-02-400.webp 400w, /images/module-02-800.webp 800w, /images/module-02.webp 1070w",
+    "variants": [
+      {
+        "w": 400,
+        "h": 550,
+        "src": "/images/module-02-400.webp"
+      },
+      {
+        "w": 800,
+        "h": 1099,
+        "src": "/images/module-02-800.webp"
+      },
+      {
+        "w": 1070,
+        "h": 1470,
+        "src": "/images/module-02.webp"
+      }
+    ]
+  },
+  "module-03": {
+    "width": 1122,
+    "height": 1402,
+    "src": "/images/module-03.webp",
+    "srcset": "/images/module-03-400.webp 400w, /images/module-03-800.webp 800w, /images/module-03.webp 1122w",
+    "variants": [
+      {
+        "w": 400,
+        "h": 500,
+        "src": "/images/module-03-400.webp"
+      },
+      {
+        "w": 800,
+        "h": 1000,
+        "src": "/images/module-03-800.webp"
+      },
+      {
+        "w": 1122,
+        "h": 1402,
+        "src": "/images/module-03.webp"
+      }
+    ]
+  },
+  "module-04-reserve": {
+    "width": 1086,
+    "height": 1448,
+    "src": "/images/module-04-reserve.webp",
+    "srcset": "/images/module-04-reserve-400.webp 400w, /images/module-04-reserve-800.webp 800w, /images/module-04-reserve.webp 1086w",
+    "variants": [
+      {
+        "w": 400,
+        "h": 533,
+        "src": "/images/module-04-reserve-400.webp"
+      },
+      {
+        "w": 800,
+        "h": 1067,
+        "src": "/images/module-04-reserve-800.webp"
+      },
+      {
+        "w": 1086,
+        "h": 1448,
+        "src": "/images/module-04-reserve.webp"
+      }
+    ]
+  },
+  "module-02-claim": {
+    "width": 1070,
+    "height": 1470,
+    "src": "/images/module-02-claim.webp",
+    "srcset": "/images/module-02-claim-400.webp 400w, /images/module-02-claim-800.webp 800w, /images/module-02-claim.webp 1070w",
+    "variants": [
+      {
+        "w": 400,
+        "h": 550,
+        "src": "/images/module-02-claim-400.webp"
+      },
+      {
+        "w": 800,
+        "h": 1099,
+        "src": "/images/module-02-claim-800.webp"
+      },
+      {
+        "w": 1070,
+        "h": 1470,
+        "src": "/images/module-02-claim.webp"
+      }
+    ]
+  },
+  "module-03-unit": {
+    "width": 1122,
+    "height": 1402,
+    "src": "/images/module-03-unit.webp",
+    "srcset": "/images/module-03-unit-400.webp 400w, /images/module-03-unit-800.webp 800w, /images/module-03-unit.webp 1122w",
+    "variants": [
+      {
+        "w": 400,
+        "h": 500,
+        "src": "/images/module-03-unit-400.webp"
+      },
+      {
+        "w": 800,
+        "h": 1000,
+        "src": "/images/module-03-unit-800.webp"
+      },
+      {
+        "w": 1122,
+        "h": 1402,
+        "src": "/images/module-03-unit.webp"
+      }
+    ]
+  },
+  "vault-hall": {
+    "width": 1122,
+    "height": 1402,
+    "src": "/images/vault-hall.webp",
+    "srcset": "/images/vault-hall-400.webp 400w, /images/vault-hall-800.webp 800w, /images/vault-hall.webp 1122w",
+    "variants": [
+      {
+        "w": 400,
+        "h": 500,
+        "src": "/images/vault-hall-400.webp"
+      },
+      {
+        "w": 800,
+        "h": 1000,
+        "src": "/images/vault-hall-800.webp"
+      },
+      {
+        "w": 1122,
+        "h": 1402,
+        "src": "/images/vault-hall.webp"
+      }
+    ]
+  },
+  "usg": {
+    "width": 1122,
+    "height": 1402,
+    "src": "/images/usg.webp",
+    "srcset": "/images/usg-400.webp 400w, /images/usg-800.webp 800w, /images/usg.webp 1122w",
+    "variants": [
+      {
+        "w": 400,
+        "h": 500,
+        "src": "/images/usg-400.webp"
+      },
+      {
+        "w": 800,
+        "h": 1000,
+        "src": "/images/usg-800.webp"
+      },
+      {
+        "w": 1122,
+        "h": 1402,
+        "src": "/images/usg.webp"
+      }
+    ]
+  },
+  "gold-bar-marble": {
+    "width": 759,
+    "height": 1024,
+    "src": "/images/gold-bar-marble.webp",
+    "srcset": "/images/gold-bar-marble-400.webp 400w, /images/gold-bar-marble.webp 759w",
+    "variants": [
+      {
+        "w": 400,
+        "h": 540,
+        "src": "/images/gold-bar-marble-400.webp"
+      },
+      {
+        "w": 759,
+        "h": 1024,
+        "src": "/images/gold-bar-marble.webp"
+      }
+    ]
+  },
+  "gold-bar": {
+    "width": 1400,
+    "height": 1120,
+    "src": "/images/gold-bar.webp",
+    "srcset": "/images/gold-bar-400.webp 400w, /images/gold-bar-800.webp 800w, /images/gold-bar.webp 1400w",
+    "variants": [
+      {
+        "w": 400,
+        "h": 320,
+        "src": "/images/gold-bar-400.webp"
+      },
+      {
+        "w": 800,
+        "h": 640,
+        "src": "/images/gold-bar-800.webp"
+      },
+      {
+        "w": 1400,
+        "h": 1120,
+        "src": "/images/gold-bar.webp"
+      }
+    ]
+  },
+  "marble-hall-pillars": {
+    "width": 1122,
+    "height": 1402,
+    "src": "/images/marble-hall-pillars.webp",
+    "srcset": "/images/marble-hall-pillars-400.webp 400w, /images/marble-hall-pillars-800.webp 800w, /images/marble-hall-pillars.webp 1122w",
+    "variants": [
+      {
+        "w": 400,
+        "h": 500,
+        "src": "/images/marble-hall-pillars-400.webp"
+      },
+      {
+        "w": 800,
+        "h": 1000,
+        "src": "/images/marble-hall-pillars-800.webp"
+      },
+      {
+        "w": 1122,
+        "h": 1402,
+        "src": "/images/marble-hall-pillars.webp"
+      }
+    ]
+  },
+  "monumental-marble-hall": {
+    "width": 1024,
+    "height": 682,
+    "src": "/images/monumental-marble-hall.webp",
+    "srcset": "/images/monumental-marble-hall-400.webp 400w, /images/monumental-marble-hall-800.webp 800w, /images/monumental-marble-hall.webp 1024w",
+    "variants": [
+      {
+        "w": 400,
+        "h": 266,
+        "src": "/images/monumental-marble-hall-400.webp"
+      },
+      {
+        "w": 800,
+        "h": 533,
+        "src": "/images/monumental-marble-hall-800.webp"
+      },
+      {
+        "w": 1024,
+        "h": 682,
+        "src": "/images/monumental-marble-hall.webp"
+      }
+    ]
+  },
+  "vault-door-detail": {
+    "width": 1024,
+    "height": 682,
+    "src": "/images/vault-door-detail.webp",
+    "srcset": "/images/vault-door-detail-400.webp 400w, /images/vault-door-detail-800.webp 800w, /images/vault-door-detail.webp 1024w",
+    "variants": [
+      {
+        "w": 400,
+        "h": 266,
+        "src": "/images/vault-door-detail-400.webp"
+      },
+      {
+        "w": 800,
+        "h": 533,
+        "src": "/images/vault-door-detail-800.webp"
+      },
+      {
+        "w": 1024,
+        "h": 682,
+        "src": "/images/vault-door-detail.webp"
+      }
+    ]
+  }
+}

@@ -7,6 +7,7 @@ const values = [
   "SMUs trade as fungible units.",
   "Liquidity forms across a network instead of inside one company's product.",
 ];
+import { imgProps } from "../../lib/img";
 ---
 
 <section class="section standard-solves" id="standard-solves" aria-labelledby="standard-solves-heading">
@@ -40,9 +41,10 @@ const values = [
 
     <figure class="standard-solves__media reveal" data-reveal-delay="0.08">
       <img
-        src="/images/monumental-marble-hall.png"
+        {...imgProps("/images/monumental-marble-hall.png", "(max-width: 860px) 100vw, 45vw")}
         alt="A monumental marble hall"
         loading="lazy"
+        decoding="async"
       />
     </figure>
   </div>

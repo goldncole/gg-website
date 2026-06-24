@@ -1,15 +1,17 @@
 ---
 // [4] Proof — split layout: a real vault door image beside the non-hub
 // vault constraint. Image leads on the left, copy on the right.
+import { imgProps } from "../lib/img";
 ---
 
 <section class="section proof" aria-labelledby="proof-heading">
   <div class="container proof__inner">
     <figure class="proof__media reveal" data-reveal-delay="0.05">
       <img
-        src="/images/vaults.png"
+        {...imgProps("/images/vaults.png", "(max-width: 860px) 100vw, 45vw")}
         alt="A precious metals depository vault door at the end of a marble hall"
         loading="lazy"
+        decoding="async"
       />
     </figure>
 

@@ -2,6 +2,7 @@
 // [5] The False Choice — a three-column contrast (allocated custody vs.
 // ETFs vs. single-issuer tokenized) that resolves into the protocol's
 // reconciliation.
+import { imgProps } from "../lib/img";
 ---
 
 <section class="section false-choice" aria-labelledby="false-choice-heading">
@@ -48,9 +49,10 @@
     <div class="false-choice__resolve">
       <figure class="false-choice__media reveal" data-reveal-delay="0.05">
         <img
-          src="/images/gold-bar.png"
+          {...imgProps("/images/gold-bar.png", "(max-width: 760px) 100vw, 45vw")}
           alt="A Global Gold 1000g allocated bar resting on marble"
           loading="lazy"
+          decoding="async"
         />
       </figure>
 

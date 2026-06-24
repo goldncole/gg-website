@@ -10,11 +10,12 @@ const hubs = [
   "Dubai",
   "Singapore",
 ];
+import { imgProps } from "../lib/img";
 ---
 
 <section class="section market-failure" aria-labelledby="market-failure-heading" data-header-dark>
   <div class="market-failure__bg" aria-hidden="true">
-    <img src="/images/sacred-marble-threshold.png" alt="" loading="lazy" />
+    <img {...imgProps("/images/sacred-marble-threshold.png", "100vw")} alt="" loading="lazy" decoding="async" />
   </div>
 
   <div class="container market-failure__inner">

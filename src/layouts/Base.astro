@@ -2,14 +2,26 @@
 import "../styles/global.css";
 import { ClientRouter } from "astro:transitions";
 
+interface HeroPreload {
+  /** Fallback href for the preloaded image (largest variant). */
+  href: string;
+  /** Responsive candidate set, mirrors the hero <img> srcset. */
+  imagesrcset?: string;
+  /** Sizes hint, mirrors the hero <img> sizes. */
+  imagesizes?: string;
+}
+
 interface Props {
   title?: string;
   description?: string;
+  /** Preload the above-the-fold LCP image (pinned hero) for faster first paint. */
+  heroPreload?: HeroPreload;
 }
 
 const {
   title = "Global Gold — The Global Gold Standard",
   description = "Global market infrastructure for allocated gold. One shared standard for how the world's gold is registered, represented, collateralized, and made liquid.",
+  heroPreload,
 } = Astro.props;
 ---
 
@@ -21,6 +33,18 @@ const {
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/png" href="/images/gold-icon.png" />
+    {
+      heroPreload && (
+        <link
+          rel="preload"
+          as="image"
+          href={heroPreload.href}
+          imagesrcset={heroPreload.imagesrcset}
+          imagesizes={heroPreload.imagesizes}
+          fetchpriority="high"
+        />
+      )
+    }
     <title>{title}</title>
     <ClientRouter />
   </head>

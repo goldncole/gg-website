@@ -13,11 +13,16 @@ export interface Props {
   scrollHref?: string;
 }
 
+import { imgProps } from "../lib/img";
+
 const {
   src = "/images/Hero-hall3.png",
   alt = "",
   scrollHref = "#standard",
 } = Astro.props;
+
+// Full-bleed pinned hero — the homepage LCP. Responsive across the viewport.
+const hero = imgProps(src, "100vw");
 ---
 
 <section class="hero" data-hero aria-label="Global Gold">
@@ -25,9 +30,15 @@ const {
     <img
       class="hero__bg-img"
       data-hero-bg
-      src={src}
+      src={hero.src}
+      srcset={hero.srcset}
+      sizes={hero.sizes}
+      width={hero.width}
+      height={hero.height}
       alt={alt}
+      loading="eager"
       fetchpriority="high"
+      decoding="async"
     />
   </div>
 

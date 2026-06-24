@@ -22,11 +22,18 @@ let onFooterViewportResize: (() => void) | null = null;
 
 function initReveals() {
   const items = gsap.utils.toArray<HTMLElement>(".reveal");
+  // On mobile the iOS dynamic address bar resizes the viewport mid-scroll,
+  // which recomputes ScrollTrigger positions and makes a y-translated reveal
+  // visibly "jump". Fade only (no vertical slide) on small viewports, or when
+  // the user prefers reduced motion; keep the y-slide on desktop with motion on.
+  const fadeOnly =
+    window.matchMedia("(max-width: 768px)").matches || prefersReducedMotion;
+  const fromY = fadeOnly ? 0 : 22;
   items.forEach((el) => {
     const delay = parseFloat(el.dataset.revealDelay ?? "0");
     gsap.fromTo(
       el,
-      { opacity: 0, y: 22 },
+      { opacity: 0, y: fromY },
       {
         opacity: 1,
         y: 0,

@@ -1,60 +1,64 @@
 ---
 // [9] Ecosystem — eight institution cards. Each card is a single link: image,
 // gold eyebrow (category), serif hook headline, body, and a gold arrow.
+import { imgProps } from "../lib/img";
+
+// 4-up desktop, 2-up ≤1000px, 1-up ≤520px (see grid below).
+const CARD_SIZES = "(max-width: 520px) 100vw, (max-width: 1000px) 50vw, 25vw";
 const cards = [
   {
     title: "Vaults",
     href: "/solutions/vaults/",
-    img: "/images/vaults.png",
+    img: "/images/vaults.webp",
     hook: "From storage facility to settlement node.",
     body: "Extend allocated custody into global liquidity, new fee channels, and client demand while title and custody remain with the vault.",
   },
   {
     title: "Refiners",
     href: "/solutions/refiners/",
-    img: "/images/refinery.png",
+    img: "/images/refinery.webp",
     hook: "From finished bar to market-ready collateral.",
     body: "Connect eligible, verified inventory to a global liquidity network without moving metal into another chain of custody.",
   },
   {
     title: "Protocols & Ecosystems",
     href: "/solutions/blockchain-protocols/",
-    img: "/images/blockchain-protocol.png",
+    img: "/images/blockchain-protocol.webp",
     hook: "Net-new liquidity. High-quality collateral.",
     body: "Bring allocated-gold collateral and net-new liquidity to your chain or your protocol — without depending on a single issuer or recycled on-chain capital.",
   },
   {
     title: "Market Makers",
     href: "/solutions/market-makers/",
-    img: "/images/market-maker.png",
+    img: "/images/market-maker.webp",
     hook: "Both sides of the pair are gold.",
     body: "Quote gold-to-gold pairs where impermanent loss all but disappears, across SMUs, gGold, and bar-level claims — and earn a share of the trading fees.",
   },
   {
     title: "Traders",
     href: "/solutions/traders/",
-    img: "/images/trader.png",
+    img: "/images/trader.webp",
     hook: "The gold market, without the closing bell.",
     body: "Take positions in fungible ounce units, route gold-to-gold against the major tokens, and exit to a claim on allocated metal — around the clock.",
   },
   {
     title: "Bullion Dealers",
     href: "/solutions/bullion-dealers/",
-    img: "/images/bullion-dealer.png",
+    img: "/images/bullion-dealer.webp",
     hook: "A global market behind your counter.",
     body: "Source and offload allocated gold through a 24/7 market without building digital infrastructure yourself.",
   },
   {
     title: "Institutional Allocators",
     href: "/solutions/institutional-allocators/",
-    img: "/images/allocator.png",
+    img: "/images/allocator.webp",
     hook: "Allocated gold with modern market access.",
     body: "Hold exposure to real allocated gold while gaining continuous liquidity, reserve transparency, and no single issuer behind supply.",
   },
   {
     title: "Private Holders",
     href: "/solutions/private-holders/",
-    img: "/images/private-holders.png",
+    img: "/images/private-holders.webp",
     hook: "The substance of a bar. The liquidity of a unit.",
     body: "Hold allocated gold with a pathway into global liquidity, and burn units to return to a claim on comparable physical metal.",
   },
@@ -74,7 +78,7 @@ const cards = [
         <li class="eco-card reveal" data-reveal-delay={(0.04 + (i % 4) * 0.04).toFixed(2)}>
           <a class="eco-card__link-wrap" href={card.href}>
             <figure class="eco-card__media">
-              <img src={card.img} alt={card.title} loading="lazy" />
+              <img {...imgProps(card.img, CARD_SIZES)} alt={card.title} loading="lazy" decoding="async" />
             </figure>
             <div class="eco-card__body">
               <p class="eco-card__eyebrow">{card.title}</p>
@@ -177,6 +181,7 @@ const cards = [
   /* Lift card body to a comfortable mobile reading floor (~17px); desktop
      keeps the clamp (≈16px max). */
   @media (max-width: 768px) {
-    .eco-card__text { font-size: 1.0625rem; }
+    .eco-card__text { font-size: 1.1875rem; line-height: 1.55; }
+    .eco-card__eyebrow { font-size: 0.84rem; }
   }
 </style>

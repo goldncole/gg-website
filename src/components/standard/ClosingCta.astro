@@ -1,11 +1,12 @@
 ---
 // [7] Closing CTA — full-bleed dark marble threshold band. The one obsidian
 // moment before the footer, with the standard's defining line.
+import { imgProps } from "../../lib/img";
 ---
 
 <section class="section closing" id="closing" aria-labelledby="closing-heading" data-header-dark>
   <div class="closing__bg" aria-hidden="true">
-    <img src="/images/sacred-marble-threshold.png" alt="" loading="lazy" />
+    <img {...imgProps("/images/sacred-marble-threshold.png", "100vw")} alt="" loading="lazy" decoding="async" />
   </div>
 
   <div class="container closing__inner reveal">

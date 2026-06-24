@@ -1,6 +1,7 @@
 ---
 // [2] Opening — split layout: copy on the left, an atmospheric marble hall
 // image on the right with rounded corners.
+import { imgProps } from "../lib/img";
 ---
 
 <section class="section opening" aria-labelledby="opening-heading">
@@ -27,9 +28,10 @@
 
     <figure class="opening__media reveal" data-reveal-delay="0.08">
       <img
-        src="/images/marble-hall-pillars.png"
+        {...imgProps("/images/marble-hall-pillars.png", "(max-width: 860px) 100vw, 50vw")}
         alt="A monumental marble hall lined with columns"
         loading="lazy"
+        decoding="async"
       />
     </figure>
   </div>

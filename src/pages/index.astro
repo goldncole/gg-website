@@ -13,9 +13,13 @@ import Ecosystem from "../components/Ecosystem.astro";
 import Governance from "../components/Governance.astro";
 import CallToAction from "../components/CallToAction.astro";
 import SiteFooter from "../components/SiteFooter.astro";
+import { imgProps } from "../lib/img";
+
+// Preload the pinned marble hero — it's the homepage LCP.
+const hero = imgProps("/images/Hero-hall3.png", "100vw");
 ---
 
-<Base>
+<Base heroPreload={{ href: hero.src, imagesrcset: hero.srcset, imagesizes: hero.sizes }}>
   <SiteHeader overHero />
   <HeroMark />
   <div class="page-over">

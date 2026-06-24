@@ -17,6 +17,10 @@ pnpm-debug.log*
 .env
 .env.production
 
+# Source PNGs kept only for regenerating optimized WebP via scripts/optimize-images.mjs.
+# These are large (~77MB) and never served (the build ships only dist/ WebP) — keep out of git.
+image-originals/
+
 # macOS-specific files
 .DS_Store
 
