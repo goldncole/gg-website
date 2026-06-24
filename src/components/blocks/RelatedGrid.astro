@@ -136,4 +136,9 @@ const {
       grid-template-columns: 1fr;
     }
   }
+  /* Lift blurb to a comfortable mobile reading floor (~17px); desktop stays
+     at 0.98rem. */
+  @media (max-width: 768px) {
+    .related-card__blurb { font-size: 1.0625rem; }
+  }
 </style>

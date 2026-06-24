@@ -76,7 +76,14 @@ function initHeroReveal() {
 
   ScrollTrigger.create({
     trigger: pageOver,
-    start: "top bottom", // content base enters from the bottom (scroll ≈ 0)
+    // Anchor the start to the actual top of the scroll (scroll position 0), not
+    // to the content's geometry. The content sits `margin-top: 100svh` down, but
+    // on mobile the iOS dynamic address bar makes `svh` (the small viewport)
+    // smaller than the live `innerHeight` (the large viewport). A geometric
+    // "top bottom" start then resolves to a NEGATIVE scroll position, so
+    // progress — and thus blur — is already > 0 at rest. Pinning start to 0
+    // guarantees the hero is perfectly sharp at the top on every viewport.
+    start: 0,
     end: "top top", // content fully covers the hero (scrolled ~100svh)
     scrub: true,
     onUpdate: (self) => apply(self.progress),

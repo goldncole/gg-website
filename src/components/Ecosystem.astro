@@ -174,4 +174,9 @@ const cards = [
   @media (max-width: 520px) {
     .ecosystem__grid { grid-template-columns: 1fr; }
   }
+  /* Lift card body to a comfortable mobile reading floor (~17px); desktop
+     keeps the clamp (≈16px max). */
+  @media (max-width: 768px) {
+    .eco-card__text { font-size: 1.0625rem; }
+  }
 </style>

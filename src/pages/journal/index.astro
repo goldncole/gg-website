@@ -152,4 +152,9 @@ const fmt = new Intl.DateTimeFormat("en-US", {
       grid-template-columns: 1fr;
     }
   }
+  /* Lift dek to a comfortable mobile reading floor (~17px); desktop stays
+     at 0.98rem. */
+  @media (max-width: 768px) {
+    .journal-card__dek { font-size: 1.0625rem; }
+  }
 </style>

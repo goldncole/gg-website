@@ -129,4 +129,9 @@ const modules = [
       grid-template-columns: 1fr;
     }
   }
+  /* Lift card body to a comfortable mobile reading floor (~17px); desktop
+     stays at 0.96rem. */
+  @media (max-width: 768px) {
+    .module-card__body { font-size: 1.0625rem; }
+  }
 </style>

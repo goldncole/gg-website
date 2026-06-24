@@ -175,4 +175,11 @@ const {
       grid-template-columns: 1fr;
     }
   }
+  /* Lift body copy to a comfortable mobile reading floor (~17px); desktop
+     stays at 0.98rem. */
+  @media (max-width: 768px) {
+    .feature__body {
+      font-size: 1.0625rem;
+    }
+  }
 </style>
