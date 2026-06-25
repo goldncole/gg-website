@@ -10,24 +10,79 @@ heroImageAlt: "Placeholder hero — gold-veined marble"
 draft: false
 ---
 
-> [Placeholder article] Representative placeholder content for review.
-
 The first question every vault asks is the right one: *do we have to give up
-custody?* The answer is no. The standard is designed so that the metal stays in
-approved custody and the vault remains the authoritative registrar.
+custody?* The answer is no. The Global Gold Standard is built so the metal stays
+in approved custody and the vault remains the authoritative registrar of its own
+book. Liquidity arrives not because the vault surrenders control, but because the
+vault makes title legible. Those are different acts, and the distinction is the
+whole point.
+
+Most attempts to put gold on programmable rails ask the holder to trade control
+for access. A bar is handed to an issuer; the issuer mints, selects custody, sets
+terms, and retains freeze powers. Access is real, but so is the new dependency.
+The standard takes the opposite path: control stays with the vault, and only the
+*record* of title becomes something the wider market can read.
 
 ## The vault stays the registrar
 
-Each participating vault operates its own Title Register — the authoritative,
-on-chain record of allocated bars in its custody. The protocol does not take
-possession of bars and does not become the registrar.
+Each participating vault operates its own **Title Register** — the authoritative,
+on-chain book of record for the allocated bars in its custody. It is not a copy
+of the vault's records and not a shadow database running alongside them. It is
+the vault's book of record, written where any counterparty can verify it. The
+protocol does not take possession of bars, does not take title, and does not
+become the registrar.
 
-1. The vault registers eligible bars.
-2. The vault approves title events under Guardian-controlled policy.
-3. Approved events are published on-chain for transparency.
+1. The vault registers eligible bars with their identifying attributes — serial,
+   refiner, weight, and fineness.
+2. The Title Register reflects the current owner of record and each bar's claim
+   status, giving one authoritative answer to the question every counterparty
+   asks first.
+3. Title events are proposed and then approved by the vault under
+   Guardian-controlled policy, and each approved event is published on-chain.
 
-## Why this matters
+Crucially, a vault can adopt the Title Register on its own — as a modernization
+of its books — before a single bar is ever tokenized. Legibility comes first;
+everything downstream is optional.
 
-Legibility, not possession, is what unlocks liquidity. Once title is legible to
-the wider market under one shared standard, allocated gold can reach a global
-network without ever leaving the vault.
+## Guardian-controlled policy
+
+Authority that cannot be moved unilaterally is what makes the register
+trustworthy. Title events run through Guardian-controlled policy, so no single
+signer — inside the vault or outside it — can move title alone. The arrangement
+is designed so that approval reflects the vault's own controls rather than any
+external operator's discretion.
+
+> The chain is the record, not the owner. The vault remains the registrar; the
+> ledger simply makes that authority legible to everyone who needs to read it.
+
+This is why the model holds up under scrutiny. An auditor, a counterparty, or a
+regulator can verify the state of title without privileged access and without the
+vault handing over its register. Transparency and control are not in tension
+here. The vault keeps its authority precisely because the record of that
+authority is open.
+
+## Legibility, not possession
+
+Legibility — not possession — is what unlocks liquidity. The single-issuer model
+assumes the two are the same: to make gold tradable, someone must hold it and
+control it. The standard separates them. Once title is legible to the wider
+market under one shared rulebook — the case set out in
+[the case for a shared standard](/journal/the-case-for-a-gold-standard/) — an
+allocated bar can be represented, collateralized, and reach a global network
+without ever leaving the vault that safeguards it.
+
+The consequence is that quality metal no longer has to choose between staying
+allocated and becoming useful. A vault's inventory can remain exactly where it
+is, under exactly the controls it has always had, and still participate in a
+market far larger than any single hub — which is what changes for metal that has
+long sat
+[outside the market](/journal/institutional-grade-gold-outside-the-market/).
+
+## What this means for the vault
+
+For a vault operator, the proposition is narrow on purpose. Adopt an on-chain
+book of record. Keep custody, keep approval authority, keep the client
+relationship. Gain a record the rest of the market can verify, and with it a path
+to liquidity that was never available to stranded inventory before. The metal
+does not move. What the vault can *do* with it does. Custody is not the price of
+participation — it is the thing the standard is designed to protect.
