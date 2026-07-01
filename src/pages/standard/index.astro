@@ -1,7 +1,9 @@
 ---
-import Base from "../../layouts/Base.astro";
-import SiteHeader from "../../components/SiteHeader.astro";
-import SiteFooter from "../../components/SiteFooter.astro";
+// Above-the-fold mirrors the homepage / Council: a full-bleed pinned hero image
+// (no text overlay) that the page content scrolls up over (see InnerPage
+// pinnedHero + HeroMark + motion.ts). StandardHero becomes the first panel in
+// the reveal, riding up over the pinned image on the paper background.
+import InnerPage from "../../layouts/InnerPage.astro";
 import StandardHero from "../../components/standard/StandardHero.astro";
 import Definition from "../../components/standard/Definition.astro";
 import Layers from "../../components/standard/Layers.astro";
@@ -11,34 +13,19 @@ import StandardSolves from "../../components/standard/StandardSolves.astro";
 import ClosingCta from "../../components/standard/ClosingCta.astro";
 ---
 
-<Base
+<InnerPage
   title="The Standard — Global Gold"
   description="The Global Gold Standard defines how approved vault-held bars, on-chain claims, and fungible settlement units work together to make allocated physical gold globally liquid."
+  pinnedHero={{
+    src: "/images/the-standard-hero.png",
+    alt: "An open rulebook on a lectern in a sunlit marble hall, with the Global Gold emblem on the wall behind it.",
+  }}
 >
-  <SiteHeader />
-  <div class="page-over">
-    <main>
-      <StandardHero />
-      <Definition />
-      <Layers />
-      <RoundTrip />
-      <StandardModules />
-      <StandardSolves />
-      <ClosingCta />
-    </main>
-  </div>
-  <SiteFooter />
-</Base>
-
-<style>
-  /* This page uses a normal (non-pinned) hero, so the content sits at the top
-     of the document. The .page-over>main wrapper keeps the shared Auwa-style
-     inset hairline separators between sibling sections. The SiteFooter sits
-     outside .page-over so it can be pinned behind for the shared scroll
-     reveal (see global.css `.footer-reveal`). */
-  .page-over {
-    position: relative;
-    z-index: 1;
-    background: var(--paper);
-  }
-</style>
+  <StandardHero />
+  <Definition />
+  <Layers />
+  <RoundTrip />
+  <StandardModules />
+  <StandardSolves />
+  <ClosingCta />
+</InnerPage>

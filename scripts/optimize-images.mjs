@@ -39,6 +39,7 @@ const ROLE = {
   "Hero-hall3": "full",
   "sacred-marble-threshold": "full",
   "governance-hero2": "full",
+  "the-standard-hero": "full",
   // emblem watermark + favicon
   "gold-icon": "icon",
 };

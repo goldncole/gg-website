@@ -68,6 +68,29 @@
       }
     ]
   },
+  "the-standard-hero": {
+    "width": 1672,
+    "height": 941,
+    "src": "/images/the-standard-hero.webp",
+    "srcset": "/images/the-standard-hero-768.webp 768w, /images/the-standard-hero-1280.webp 1280w, /images/the-standard-hero.webp 1672w",
+    "variants": [
+      {
+        "w": 768,
+        "h": 432,
+        "src": "/images/the-standard-hero-768.webp"
+      },
+      {
+        "w": 1280,
+        "h": 720,
+        "src": "/images/the-standard-hero-1280.webp"
+      },
+      {
+        "w": 1672,
+        "h": 941,
+        "src": "/images/the-standard-hero.webp"
+      }
+    ]
+  },
   "gold-icon": {
     "width": 640,
     "height": 640,
