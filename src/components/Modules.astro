@@ -389,12 +389,13 @@ const modules = [
       margin-top: clamp(36px, 9vw, 52px);
     }
     .mod__dot {
-      width: 22px;
-      height: 2px;
+      width: 10px;
+      height: 3px;
+      border-radius: 2px;
       background: var(--rule);
-      transition: background var(--t-base) var(--ease);
+      transition: width 220ms var(--ease), background-color 220ms var(--ease);
     }
-    .mod__dot.is-active { background: var(--char); }
+    .mod__dot.is-active { width: 28px; background: var(--char); }
   }
 </style>
 

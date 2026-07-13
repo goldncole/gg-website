@@ -255,26 +255,23 @@ const cards = [
     .eco-dots {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 6px;
     }
     .eco-dot {
       appearance: none;
       -webkit-appearance: none;
       padding: 0;
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      border: 1px solid var(--rule-faint);
-      background: var(--stone);
+      width: 10px;
+      height: 3px;
+      border-radius: 2px;
+      border: 0;
+      background: var(--rule);
       cursor: pointer;
-      transition: background var(--t-base) var(--ease),
-        border-color var(--t-base) var(--ease),
-        transform var(--t-base) var(--ease);
+      transition: width 220ms var(--ease), background-color 220ms var(--ease);
     }
     .eco-dot.is-active {
-      background: var(--gold-deep);
-      border-color: var(--gold-deep);
-      transform: scale(1.15);
+      width: 28px;
+      background: var(--char);
     }
     .eco-counter {
       margin: 0;
