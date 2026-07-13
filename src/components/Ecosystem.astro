@@ -73,7 +73,7 @@ const cards = [
       markets in gold.
     </h2>
 
-    <ul class="ecosystem__grid">
+    <ul class="ecosystem__grid" data-eco-scroller aria-label="Audiences, swipe horizontally">
       {cards.map((card, i) => (
         <li class="eco-card reveal" data-reveal-delay={(0.04 + (i % 4) * 0.04).toFixed(2)}>
           <a class="eco-card__link-wrap" href={card.href}>
@@ -90,6 +90,23 @@ const cards = [
         </li>
       ))}
     </ul>
+
+    {/* Mobile-only carousel controls — dots + counter. Hidden ≥769px. */}
+    <div class="eco-controls" data-eco-controls>
+      <div class="eco-dots" role="tablist" aria-label="Audiences">
+        {cards.map((card, i) => (
+          <button
+            type="button"
+            class:list={["eco-dot", i === 0 && "is-active"]}
+            data-eco-dot
+            role="tab"
+            aria-selected={i === 0 ? "true" : "false"}
+            aria-label={`Go to audience ${i + 1}: ${card.title}`}
+          />
+        ))}
+      </div>
+      <p class="eco-counter" aria-live="polite" data-eco-counter>1 / {cards.length}</p>
+    </div>
   </div>
 </section>
 
@@ -172,16 +189,220 @@ const cards = [
   .eco-card__link-wrap:hover .eco-card__hook { color: var(--gold-deep); }
   .eco-card__link-wrap:hover .eco-card__arrow { transform: translateX(5px); }
 
+  /* Mobile carousel controls (dots + counter) — hidden on desktop/tablet. */
+  .eco-controls { display: none; }
+
   @media (max-width: 1000px) {
     .ecosystem__grid { grid-template-columns: repeat(2, 1fr); }
   }
   @media (max-width: 520px) {
     .ecosystem__grid { grid-template-columns: 1fr; }
   }
-  /* Lift card body to a comfortable mobile reading floor (~17px); desktop
-     keeps the clamp (≈16px max). */
+
+  /* ── Mobile (≤768px): collapse the tall one-per-row stack into a single
+     horizontal scroll-snap carousel. The full image + full body copy of every
+     card is preserved; only the layout changes. Desktop/tablet grid above is
+     left untouched. ── */
   @media (max-width: 768px) {
+    /* Lift card body to a comfortable mobile reading floor (~17px); desktop
+       keeps the clamp (≈16px max). */
     .eco-card__text { font-size: 1.1875rem; line-height: 1.55; }
     .eco-card__eyebrow { font-size: 0.84rem; }
+
+    .ecosystem__grid {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: clamp(14px, 4vw, 22px);
+      /* Horizontal scroller with snap. overflow-y stays visible so the GSAP
+         `.reveal` fade isn't clipped on the vertical axis. */
+      overflow-x: auto;
+      overflow-y: visible;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      /* Bleed to the viewport gutter so the first card sits flush with the
+         container edge and the peek is visible at the right edge. */
+      margin-inline: calc(-1 * var(--gutter));
+      padding-inline: var(--gutter);
+      scroll-padding-inline-start: var(--gutter);
+    }
+    .ecosystem__grid::-webkit-scrollbar { display: none; }
+    /* Trailing spacer: gives enough scroll distance for the LAST card to snap
+       flush to the left edge (start alignment) with no dead space, and keeps it
+       off the viewport edge. Sized to the leftover viewport width beyond one
+       card, so at max scroll the last card lands exactly at the gutter. */
+    .ecosystem__grid::after {
+      content: "";
+      flex: 0 0
+        max(0px, calc(100vw - 2 * var(--gutter) - min(85vw, 340px) - clamp(14px, 4vw, 22px)));
+    }
+
+    .eco-card {
+      /* Reset the grid-era flex so the fixed track width wins. */
+      display: block;
+      flex: 0 0 85vw;
+      max-width: 340px;
+      scroll-snap-align: start;
+    }
+
+    .eco-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(16px, 5vw, 28px);
+      margin-top: clamp(28px, 8vw, 44px);
+    }
+    .eco-dots {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .eco-dot {
+      appearance: none;
+      -webkit-appearance: none;
+      padding: 0;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      border: 1px solid var(--rule-faint);
+      background: var(--stone);
+      cursor: pointer;
+      transition: background var(--t-base) var(--ease),
+        border-color var(--t-base) var(--ease),
+        transform var(--t-base) var(--ease);
+    }
+    .eco-dot.is-active {
+      background: var(--gold-deep);
+      border-color: var(--gold-deep);
+      transform: scale(1.15);
+    }
+    .eco-counter {
+      margin: 0;
+      font-family: var(--sans-display);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--graphite);
+      font-variant-numeric: tabular-nums;
+    }
+  }
+
+  /* Smooth programmatic scrolling (dot taps) only when motion is welcome. */
+  @media (max-width: 768px) and (prefers-reduced-motion: no-preference) {
+    .ecosystem__grid { scroll-behavior: smooth; }
   }
 </style>
+
+<script>
+  // Mobile-only: drive the audience carousel's dots + counter from the card
+  // most in view. Desktop keeps the static grid, so this no-ops there (the
+  // controls are display:none and the observer is only bound at ≤768px).
+  //
+  // With <ClientRouter /> the homepage DOM is destroyed/recreated on navigation,
+  // so we (re)initialize on every astro:page-load and fully disconnect the
+  // observer + rAF + media-query listener on astro:before-swap to avoid leaks
+  // and double-binding.
+  let ecoCleanup: (() => void) | null = null;
+
+  function initEcosystem() {
+    const grid = document.querySelector<HTMLElement>("[data-eco-scroller]");
+    const controls = document.querySelector<HTMLElement>("[data-eco-controls]");
+    if (!grid || !controls) return;
+    // Guard against double-binding if page-load somehow fires twice on the
+    // same DOM (cleanup clears the flag before the DOM is swapped out).
+    if (grid.dataset.ecoBound === "1") return;
+    grid.dataset.ecoBound = "1";
+
+    const cards = Array.from(grid.querySelectorAll<HTMLElement>(".eco-card"));
+    const dots = Array.from(controls.querySelectorAll<HTMLButtonElement>("[data-eco-dot]"));
+    const counter = controls.querySelector<HTMLElement>("[data-eco-counter]");
+    const total = cards.length;
+    if (!total) return;
+
+    const mobileMQ = window.matchMedia("(max-width: 768px)");
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    let current = -1;
+    function setActive(i: number) {
+      if (i === current) return;
+      current = i;
+      dots.forEach((d, n) => {
+        const on = n === i;
+        d.classList.toggle("is-active", on);
+        d.setAttribute("aria-selected", on ? "true" : "false");
+      });
+      if (counter) counter.textContent = `${i + 1} / ${total}`;
+    }
+
+    // Track intersection ratio per card against the scroller; the card with the
+    // highest ratio is the "current" one. rAF-debounced so a burst of entries
+    // during a swipe only recomputes once per frame.
+    const ratios = new Map<Element, number>();
+    let raf = 0;
+    function recompute() {
+      raf = 0;
+      let best = 0;
+      let bestRatio = -1;
+      cards.forEach((card, n) => {
+        const r = ratios.get(card) ?? 0;
+        if (r > bestRatio) {
+          bestRatio = r;
+          best = n;
+        }
+      });
+      setActive(best);
+    }
+
+    let io: IntersectionObserver | undefined;
+    function bindObserver() {
+      if (io || !("IntersectionObserver" in window)) return;
+      io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) ratios.set(e.target, e.intersectionRatio);
+          if (!raf) raf = requestAnimationFrame(recompute);
+        },
+        { root: grid, threshold: [0, 0.25, 0.5, 0.6, 0.75, 1] },
+      );
+      cards.forEach((c) => io!.observe(c));
+    }
+    function unbindObserver() {
+      io?.disconnect();
+      io = undefined;
+      ratios.clear();
+    }
+
+    // Dot tap → bring that card into view. Manual only; no auto-advance.
+    dots.forEach((dot, n) =>
+      dot.addEventListener("click", () => {
+        cards[n]?.scrollIntoView({
+          inline: "start",
+          block: "nearest",
+          behavior: reduceMotion ? "auto" : "smooth",
+        });
+        setActive(n);
+      }),
+    );
+
+    // Only observe on mobile; disconnect when crossing up to desktop.
+    function applyMode() {
+      if (mobileMQ.matches) bindObserver();
+      else unbindObserver();
+    }
+    mobileMQ.addEventListener("change", applyMode);
+    applyMode();
+    setActive(0);
+
+    ecoCleanup = () => {
+      unbindObserver();
+      if (raf) cancelAnimationFrame(raf);
+      mobileMQ.removeEventListener("change", applyMode);
+      grid.dataset.ecoBound = "";
+    };
+  }
+
+  document.addEventListener("astro:page-load", initEcosystem);
+  document.addEventListener("astro:before-swap", () => {
+    ecoCleanup?.();
+    ecoCleanup = null;
+  });
+</script>
