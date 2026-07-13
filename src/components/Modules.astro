@@ -301,6 +301,9 @@ const modules = [
       /* Bleed to the viewport gutter so the first/last card sit flush. */
       margin-inline: calc(-1 * var(--gutter));
       padding-inline: var(--gutter);
+      /* Inset the snap start so the first card rests at the gutter, matching
+         the audience carousel instead of snapping flush to the screen edge. */
+      scroll-padding-inline-start: var(--gutter);
     }
     .mod__scroller::-webkit-scrollbar { display: none; }
 
