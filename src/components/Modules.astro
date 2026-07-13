@@ -108,11 +108,20 @@ const modules = [
       {
         modules.map((m) => (
           <a class="mod__card" href={m.href} data-mod-card>
-            <img {...imgProps(m.img, MOD_SIZES)} alt={`${m.title} module`} loading="lazy" decoding="async" />
-            <span class="mod__card-label">
-              <span class="mod__card-no">{m.no}</span>
-              <span class="mod__card-dot" aria-hidden="true">·</span>
-              <span class="mod__card-name">{m.title}</span>
+            <span class="mod__card-media">
+              <img {...imgProps(m.img, MOD_SIZES)} alt={`${m.title} module`} loading="lazy" decoding="async" />
+              <span class="mod__card-label">
+                <span class="mod__card-no">{m.no}</span>
+                <span class="mod__card-total"> / 04</span>
+              </span>
+            </span>
+            <span class="mod__card-text">
+              <span class="mod__card-headline">{m.headline}</span>
+              <span class="mod__card-body">{m.body}</span>
+              <span class="mod__card-more" aria-hidden="true">
+                Explore the Standard
+                <span class="mod__card-arrow">→</span>
+              </span>
             </span>
           </a>
         ))
@@ -281,10 +290,11 @@ const modules = [
 
     .mod__scroller {
       display: flex;
+      align-items: stretch;
       gap: clamp(12px, 4vw, 20px);
       margin-top: clamp(32px, 8vw, 48px);
       overflow-x: auto;
-      overflow-y: hidden;
+      overflow-y: visible;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
@@ -297,20 +307,29 @@ const modules = [
     .mod__card {
       flex: 0 0 82vw;
       max-width: 380px;
-      scroll-snap-align: center;
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      color: inherit;
+      text-decoration: none;
+    }
+    /* Image area — holds the 4/5 aspect ratio, rounding, and overlay label. */
+    .mod__card-media {
       position: relative;
+      flex: 0 0 auto;
       aspect-ratio: 4 / 5;
       border-radius: var(--radius-img);
       overflow: hidden;
       background: var(--stone);
-      display: block;
     }
-    .mod__card img {
+    .mod__card-media img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
+    /* Number-only overlay (mirrors the desktop .mod__count); the name lives in
+       the headline below, so the overlay stays free of redundant labelling. */
     .mod__card-label {
       position: absolute;
       top: 16px;
@@ -318,14 +337,50 @@ const modules = [
       display: inline-flex;
       align-items: baseline;
       font-family: var(--sans-display);
-      font-weight: 500;
-      font-size: 0.95rem;
-      letter-spacing: 0.04em;
       color: var(--ivory);
       text-shadow: 0 1px 10px rgba(17, 17, 17, 0.45);
+      letter-spacing: 0.04em;
     }
-    .mod__card-dot { margin: 0 0.5em; opacity: 0.7; }
-    .mod__card-name { font-weight: 400; opacity: 0.92; }
+    .mod__card-no { font-size: 1.15rem; font-weight: 500; }
+    .mod__card-total { font-size: 0.85rem; opacity: 0.8; }
+
+    /* Text area below the image. */
+    .mod__card-text {
+      display: flex;
+      flex-direction: column;
+      padding-top: clamp(16px, 4vw, 20px);
+    }
+    .mod__card-headline {
+      font-family: var(--serif-display);
+      font-weight: 300;
+      color: var(--char);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      font-size: clamp(1.35rem, 5.4vw, 1.6rem);
+    }
+    .mod__card-body {
+      margin-top: clamp(10px, 3vw, 14px);
+      font-size: 1.0625rem;
+      line-height: 1.55;
+      color: var(--graphite);
+    }
+    .mod__card-more {
+      margin-top: auto;
+      padding-top: clamp(14px, 4vw, 18px);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5em;
+      font-family: var(--sans-display);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--char);
+    }
+    .mod__card-arrow {
+      font-size: 0.95rem;
+      letter-spacing: 0;
+    }
 
     .mod__dots {
       display: flex;
