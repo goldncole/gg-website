@@ -255,7 +255,9 @@ const menu = [
               Demand.</strong> PAXG and XAUT — together the multi-billion-dollar
               tokenized-gold market — each depend on a single issuer to mint,
               redeem, select custody, set terms, and freeze balances. Global Gold
-              runs on one shared standard across many participating vaults. The
+              is built the other way: a multi-issuer, multi-vault standard where
+              approved issuers can bring allocated gold into one shared market
+              without any single company controlling the asset class. The
               incumbents proved the demand; their architecture is structurally
               locked into the position we counter. The market they built is our
               floor, not our ceiling.
@@ -616,7 +618,7 @@ const menu = [
               </thead>
               <tbody>
                 <tr><td>Gold — LP treasury (6 gold/gold pools)</td><td>$2,000,000</td><td>40%</td></tr>
-                <tr><td>Team &amp; payroll (loaded)</td><td>$1,159,000</td><td>23%</td></tr>
+                <tr><td>Team &amp; payroll</td><td>$1,159,000</td><td>23%</td></tr>
                 <tr><td>Entity setup, audits &amp; attestations</td><td>$622,000</td><td>12%</td></tr>
                 <tr><td>Marketing, BD &amp; vault acquisition</td><td>$447,000</td><td>9%</td></tr>
                 <tr><td>Legal &amp; regulatory</td><td>$333,000</td><td>7%</td></tr>
@@ -820,9 +822,7 @@ const menu = [
             builds and commercializes the technology; the Global Gold Council, a
             Wyoming DUNA under Wyo. Stat. § 17-32, sets and maintains the protocol
             standards; and a neutral Foundation, structured as a Swiss charitable
-            Stiftung, serves as the ecosystem's permanent steward. The Council
-            already has 2,045 on-chain members constituting its statutory
-            membership — distribution that exists before the raise, not after it.
+            Stiftung, serves as the ecosystem's permanent steward.
           </p>
           <p>
             The Foundation holds the single ecosystem treasury, applies the
@@ -1525,14 +1525,16 @@ const menu = [
       color: #000;
     }
 
-    /* Legible print serif. */
+    /* Body copy prints in the same sans face used on screen; titles stay serif. */
     .memo-content,
     .memo-content p,
     .memo-content li,
     .memo-footnote,
-    .memo-confidential,
+    .memo-confidential {
+      font-family: var(--sans) !important;
+      color: #000 !important;
+    }
     .memo-subtitle {
-      font-family: "Georgia", "Times New Roman", serif !important;
       color: #000 !important;
     }
     .memo-content p,
