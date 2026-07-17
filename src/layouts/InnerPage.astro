@@ -31,9 +31,11 @@ export interface Props {
   title?: string;
   description?: string;
   pinnedHero?: PinnedHero;
+  /** Emit `robots: noindex, nofollow` — for private/unlisted pages. */
+  noindex?: boolean;
 }
 
-const { title, description, pinnedHero } = Astro.props;
+const { title, description, pinnedHero, noindex = false } = Astro.props;
 
 // A pinned full-bleed hero is the page's LCP — preload it.
 const pinned = pinnedHero ? imgProps(pinnedHero.src, "100vw") : null;
@@ -42,7 +44,7 @@ const heroPreload = pinned
   : undefined;
 ---
 
-<Base title={title} description={description} heroPreload={heroPreload}>
+<Base title={title} description={description} heroPreload={heroPreload} noindex={noindex}>
   {
     pinnedHero ? (
       <>

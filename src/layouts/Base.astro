@@ -16,12 +16,15 @@ interface Props {
   description?: string;
   /** Preload the above-the-fold LCP image (pinned hero) for faster first paint. */
   heroPreload?: HeroPreload;
+  /** Emit `robots: noindex, nofollow` — for private/unlisted pages. */
+  noindex?: boolean;
 }
 
 const {
   title = "Global Gold — The Global Gold Standard",
   description = "Global market infrastructure for allocated gold. One shared standard for how the world's gold is registered, represented, collateralized, and made liquid.",
   heroPreload,
+  noindex = false,
 } = Astro.props;
 ---
 
@@ -31,6 +34,7 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/png" href="/images/gold-icon.png" />
     {

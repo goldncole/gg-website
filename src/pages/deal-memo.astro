@@ -1,0 +1,1446 @@
+---
+// =====================================================================
+// PAGE — /deal-memo/ (PRIVATE, unlisted).
+// A single-page, on-brand rendering of the confidential v5.0 Seed Round
+// Deal Memorandum. Reuses the homepage pinned scroll-over hero via
+// InnerPage(pinnedHero) and, below it, a docs-style two-column layout:
+// a sticky left section menu (scroll-spy highlighted, no visible
+// scrollbar) + the full memo content on the right.
+//
+// PRIVACY: noindex/nofollow (Base noindex prop). NOT linked from any
+// nav/header/footer. The site has no @astrojs/sitemap integration, so
+// the route is absent from any sitemap by construction. The password
+// gate is handled separately in functions/_middleware.js (untouched).
+//
+// Content is transcribed to semantic HTML from the source markdown
+// (Investor Docs/Seed Round Deal Memo v5.md) — every section, table,
+// blockquote, and the footnote. The 12 section ids drive the left menu.
+// =====================================================================
+import InnerPage from "../layouts/InnerPage.astro";
+
+// Left-menu items — id must match each <section id>; label is the visible text.
+const menu = [
+  { id: "summary", label: "Summary" },
+  { id: "highlights", label: "Highlights" },
+  { id: "thesis", label: "The Thesis" },
+  { id: "why-now", label: "Why Now" },
+  { id: "business-model", label: "Business Model" },
+  { id: "financial-plan", label: "Financial Plan" },
+  { id: "gold-position", label: "Gold Position" },
+  { id: "returns", label: "Returns" },
+  { id: "moat", label: "The Moat" },
+  { id: "risks", label: "Risks" },
+  { id: "team", label: "Team & Governance" },
+  { id: "round", label: "The Round" },
+];
+---
+
+<InnerPage
+  title="Seed Round Deal Memorandum — Global Gold (Confidential)"
+  description="Confidential v5.0 Seed Round Deal Memorandum for Global Gold. For accredited investors only."
+  noindex={true}
+  pinnedHero={{
+    src: "/images/Hero-hall3.png",
+    alt: "",
+    scrollHref: "#summary",
+  }}
+>
+  <div class="memo" data-memo>
+    <!-- Print-only document header (hidden on screen). -->
+    <div class="memo-printhead" aria-hidden="true">
+      Global Gold — Seed Round Deal Memorandum · Confidential
+    </div>
+
+    <div class="memo-shell">
+      <!-- ===== LEFT: sticky section menu (scroll-spy) ===== -->
+      <aside class="memo-menu" data-memo-menu aria-label="Memorandum sections">
+        <button
+          class="memo-menu__toggle"
+          type="button"
+          data-memo-toggle
+          aria-expanded="false"
+          aria-controls="memo-nav-panel"
+        >
+          <span class="memo-menu__toggle-label">Sections</span>
+          <span class="memo-menu__toggle-chev" aria-hidden="true">›</span>
+        </button>
+
+        <div class="memo-menu__panel" id="memo-nav-panel">
+          <p class="memo-menu__eyebrow eyebrow">Deal Memorandum</p>
+          <nav class="memo-nav" aria-label="On this memo">
+            {
+              menu.map((m) => (
+                <a
+                  class="memo-nav__link"
+                  href={`#${m.id}`}
+                  data-memo-link
+                  data-target={m.id}
+                >
+                  {m.label}
+                </a>
+              ))
+            }
+          </nav>
+          <button class="memo-print" type="button" data-memo-print>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M6 9V3h12v6"></path>
+              <path d="M6 18H4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2"></path>
+              <rect x="6" y="14" width="12" height="7"></rect>
+            </svg>
+            Print / Save as PDF
+          </button>
+        </div>
+      </aside>
+
+      <!-- ===== RIGHT: full memo content ===== -->
+      <div class="memo-content" data-memo-content>
+        <div class="memo-content__toolbar">
+          <button class="memo-print memo-print--inline" type="button" data-memo-print>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M6 9V3h12v6"></path>
+              <path d="M6 18H4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2"></path>
+              <rect x="6" y="14" width="12" height="7"></rect>
+            </svg>
+            Print / Save as PDF
+          </button>
+        </div>
+
+        <!-- 1 · SUMMARY -->
+        <section id="summary" class="memo-section" data-memo-section>
+          <header class="memo-head">
+            <p class="eyebrow">Global Gold</p>
+            <h1 class="display display--lg">Seed Round Deal Memorandum</h1>
+            <p class="memo-subtitle">
+              The Global Gold Standard — Global Market Infrastructure for
+              Allocated Gold
+            </p>
+          </header>
+
+          <blockquote class="memo-quote memo-quote--epigraph">
+            Gold was never broken. The infrastructure underneath it was.
+          </blockquote>
+
+          <p>
+            The world holds $34 trillion in above-ground gold and still clears
+            it through regional hubs that cannot talk to each other. Global Gold
+            is building the shared layer the market never had: one protocol for
+            liquidity, collateral, clearing, and settlement across vaults and
+            jurisdictions. Demand is already proven in billions of dollars of
+            single-issuer gold tokens. Supply sits stranded in dozens of
+            institutional vaults with no pathway into that demand. This round
+            connects the two.
+          </p>
+
+          <div class="memo-table-wrap">
+            <table class="memo-table memo-table--terms">
+              <tbody>
+                <tr><th scope="row">Raising</th><td>$5,000,000</td></tr>
+                <tr><th scope="row">Post-Money Valuation</th><td>$50,000,000</td></tr>
+                <tr><th scope="row">Instrument</th><td>Priced equity — Series Seed Preferred</td></tr>
+                <tr><th scope="row">Round Dilution</th><td>10%</td></tr>
+                <tr><th scope="row">Minimum Investment</th><td>$100,000</td></tr>
+                <tr><th scope="row">Closings</th><td>One or more closings, identical terms</td></tr>
+                <tr><th scope="row">Liquidation Pref.</th><td>1x non-participating (market standard)</td></tr>
+                <tr><th scope="row">Counsel</th><td>Paul Hastings LLP</td></tr>
+                <tr><th scope="row">Document Version</th><td>5.0 — July 2026 — Confidential</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 2 · HIGHLIGHTS -->
+        <section id="highlights" class="memo-section" data-memo-section>
+          <h2 class="display display--md">Investment Highlights</h2>
+          <ol class="memo-list memo-list--numbered">
+            <li>
+              <strong>The first global gold market.</strong> New York, London,
+              Shanghai, and Dubai are each multi-billion-dollar-a-day gold
+              markets — but each is trapped inside its own regional vault
+              network, trading hours, delivery rules, and settlement rails.
+              Global Gold tokenizes allocated gold from vaults around the world
+              and brings it onto one always-on global market. The result is not
+              another gold token and not a fifth regional hub; it is the first
+              unified global gold market — structurally larger than any single
+              venue, and positioned to exceed any two major regional hubs
+              combined.
+            </li>
+            <li>
+              <strong>A clean wedge into stranded supply.</strong> 40–80
+              institutional-grade allocated-custody vaults worldwide sit outside
+              every incumbent hub, with no clearing pathway at all (Global Gold
+              Research Census, May 2026 — 66 named facilities across 13
+              jurisdictions). The first is signed: the Wyoming Reserve, a
+              precious-metals depository in Casper. Today a bar inside its walls
+              cannot reach institutional liquidity without being physically
+              shipped out and re-assayed into someone else's chain of custody.
+              Our Title Register Module gives these vaults their first credible
+              pathway into global markets. The beachhead is finite, nameable,
+              and unserved.
+            </li>
+            <li>
+              <strong>Counter-positioned against a multi-billion-dollar proof of
+              demand.</strong> PAXG and XAUT — together the multi-billion-dollar
+              tokenized-gold market — each depend on a single issuer to mint,
+              redeem, select custody, set terms, and freeze balances. Global Gold
+              runs on one shared standard across many participating vaults. The
+              incumbents proved the demand; their architecture is structurally
+              locked into the position we counter. The market they built is our
+              floor, not our ceiling.
+            </li>
+            <li>
+              <strong>A digital gold mine.</strong> Nearly every fee the network
+              charges is denominated in gold — tokenization, collateralization,
+              minting, and trading are each levied as a share of the metal moving
+              through the protocol. The treasury does not merely book revenue; it
+              receives gold as the network transacts. It is the economics of a
+              gold mine without the mine: no exploration risk, no declining ore
+              grade, no rising cost per ounce — and an ore body that grows with
+              every vault that joins.
+            </li>
+            <li>
+              <strong>Profitable on the seed alone.</strong> Base case:
+              EBITDA-positive in month 11, then $174M revenue and $161M EBITDA in
+              Year 5 — with the Series A ($18M at $90–120M post) funding
+              acceleration, not survival. Even the downside case reaches
+              profitability and returns ~2.9x to seed investors; the Base case
+              returns ~51x and the Accelerated case ~157x. The scenarios disagree
+              about how big, not whether the business works.
+            </li>
+            <li>
+              <strong>40% of the round is a gold position, not burn.</strong> $2M
+              of the $5M deploys at platform launch into six gold/gold liquidity
+              pools — the seed liquidity that makes the gold pairs tradable from
+              day one. The position is designed to minimize impermanent loss,
+              earn trading fees, and rise with gold ($2M → ~$5.1M by Year 5 on
+              the Base path, appreciation plus fees), while doubling as a
+              contractual runway backstop. If your thesis is that gold goes up,
+              40% of your check is exposed to that thesis while it works.
+            </li>
+            <li>
+              <strong>Legally credible from day one.</strong> Paul Hastings LLP
+              as counsel of record. Governance through the Global Gold Council —
+              a Wyoming DUNA under Wyo. Stat. § 17-32, a standards body with real
+              legal personality. Patents pending on the Conditional Claim Token
+              and the Guardian multi-sig framework. The operating company does
+              not operate the protocol, custody metal, or issue instruments. The
+              posture is designed for regulators, not against them.
+            </li>
+          </ol>
+        </section>
+
+        <!-- 3 · THESIS -->
+        <section id="thesis" class="memo-section" data-memo-section>
+          <h2 class="display display--md">I. The Thesis</h2>
+          <p>
+            <strong>The category.</strong> Global Gold is building the Global
+            Gold Standard — global market infrastructure for allocated gold. The
+            shared protocol, rulebook, and infrastructure layer for eligibility,
+            collateral, liquidity, clearing, settlement, and governance. The
+            right analogies are LBMA, DTCC, CLS, and SWIFT — in an asset class
+            where no equivalent exists.
+          </p>
+          <p>
+            <strong>The size of the prize.</strong> New York, London, Shanghai,
+            and Dubai are each multi-billion-dollar-a-day gold markets — and each
+            is boxed in twice over. A hub can only trade the metal held in its
+            own regional vaults, and only during its own trading hours. No single
+            one sees the world's gold, and no two are ever fully open at once.
+            Tokenize allocated bars from every jurisdiction and place them on one
+            always-on exchange, and those walls fall away. What emerges is not a
+            fifth regional hub competing with the other four — it is the first
+            genuinely global gold market: aggregating liquidity no single venue
+            can reach, trading around the clock, and structurally positioned to
+            dwarf the regional markets it unifies. That is the upside this round
+            underwrites.
+          </p>
+          <p>
+            <strong>The problem, concretely.</strong> The institutional gold
+            market is an archipelago. LBMA-accredited vaults clear into LBMA.
+            COMEX-approved vaults clear into COMEX. SGE members clear into SGE.
+            None of these hubs interoperates at the settlement layer — and in
+            March 2020, the market showed what that costs. COMEX gold futures
+            traded at sustained premiums of ~$70/oz over LBMA spot for three
+            days, between hubs holding metal from the same refineries, because
+            the physical re-casting chain between them broke. The CME had to
+            amend its own delivery rules in real time. Clearing-pathway friction
+            — not bar quality — is the dominant pricing variable in institutional
+            gold.
+          </p>
+          <p>
+            The dislocation is not history. Through December 2025 and January
+            2026, silver repeated the pattern at larger scale: Shanghai physical
+            traded roughly $10/oz over the COMEX settlement,¹ Indian retail rose
+            21% in two weeks on delivery delays, and physical silver in Tokyo and
+            the UAE changed hands at $120–130/oz against a COMEX print in the low
+            $70s — regional markets walking away from the paper benchmark because
+            no clearing pathway connects them. Congress's response — the SILVER
+            Act (H.R. 8007 / S. 4621), which mandates COMEX depository expansion
+            beyond the 11 facilities clustered within 150 miles of New York, and
+            which the CFTC Chairman has endorsed — is an admission that the market
+            structure itself is the problem. It is also a preview of our second
+            metal: the protocol replicates onto silver in Year 2 of the plan.
+          </p>
+          <p>
+            Outside the hubs entirely sits the wedge — state depositories, SPDIs,
+            private depositories, refiner inventories: 40–80 facilities that
+            matter, holding real metal with <strong>no</strong> pathway into
+            global liquidity. Their only route today is to ship the bar and
+            re-assay it into someone else's chain of custody.
+          </p>
+          <p><strong>The mechanism.</strong> Our architecture is a two-way door between allocation and liquidity:</p>
+          <ol class="memo-list memo-list--numbered">
+            <li>
+              <strong>The bar.</strong> A specific, identifiable bar, allocated
+              in a participating vault's on-chain Title Register — the vault's
+              authoritative book of record. The vault is the registrar; title
+              stays home.
+            </li>
+            <li>
+              <strong>The claim.</strong> A Conditional Claim Token (CCT) — an
+              on-chain claim to that exact bar, and the right to request its title
+              transfer. One bar, one claim. Not title, not a warehouse receipt: a
+              patent-pending instrument engineered for regulatory defensibility.
+            </li>
+            <li>
+              <strong>The unit.</strong> Collateralize the claim to mint Standard
+              Metal Units — 1 SMU = 1 troy ounce of fine gold, backed 1:1 by
+              locked claims on specific bars held by a bankruptcy-remote
+              collateral agent and tradable on a continuous global market. U.S.
+              Gold (USG) is the first jurisdiction-specific SMU and the flagship
+              token: U.S.-vaulted gold made fungible, transferable, and liquid.
+              As new jurisdictions join, each can issue its own SMU — UK gold,
+              Swiss gold, Singapore gold — creating the foreign-exchange market of
+              gold: one ounce, many jurisdictions, continuously priced against
+              each other. Burn the units at any time to reclaim a claim on a
+              comparable bar.
+            </li>
+            <li>
+              <strong>The Reserve &amp; Global Gold Token (gGold).</strong> If
+              SMUs create the foreign-exchange market of gold, gGold becomes its
+              reserve currency. A fixed basket of approved gold tokens — the
+              protocol's own SMUs alongside leading issuers' units, spread across
+              independent issuers and jurisdictions — is held in the Reserve and
+              minted into gGold: one neutral gold unit, backed one-for-one in real
+              ounces and redeemable by anyone for a pro-rata share of the basket.
+              Local gold becomes global settlement money.
+            </li>
+          </ol>
+          <p>
+            <strong>Why gGold matters.</strong> A market with USG, future
+            jurisdictional SMUs, PAXG, XAUT, and other approved gold tokens needs
+            a denominator. Without one, liquidity fragments into dozens of thin
+            local pairs. gGold is that denominator: a reserve-backed unit that
+            lets every gold trade through one neutral asset instead of routing
+            through dollars or relying on a single issuer. The Reserve makes the
+            neutrality credible — backing diversified across approved gold tokens,
+            issuers, and jurisdictions; mint and redeem by rule; no single company
+            able to freeze, gate, or break the unit. For users, gGold is gold that
+            can move anywhere. For the network, it is the settlement asset that
+            concentrates liquidity, routes volume, and turns local gold markets
+            into one global market.
+          </p>
+          <blockquote class="memo-quote">
+            <strong>Your bar never leaves the vault. The market never closes.</strong>
+          </blockquote>
+          <p>
+            <strong>Why the position is defensible.</strong> Four pillars, each
+            architectural: every unit backed by a specific bar (<em>The Allocated
+            Standard</em>); the vault keeps title and its customer relationships
+            (<em>Title Stays Home</em>); no single company, issuer, or state can
+            end the protocol (<em>Neutral by Construction</em>); units from any
+            participating vault trade as one market (<em>One Standard, Every
+            Vault</em>). PAXG cannot become this without ceasing to be a Paxos
+            product. The incumbent hubs cannot become this without dissolving
+            their regional charters. The position is not defended by secrecy — it
+            is defended by what our competitors would have to stop being.
+          </p>
+        </section>
+
+        <!-- 4 · WHY NOW -->
+        <section id="why-now" class="memo-section" data-memo-section>
+          <h2 class="display display--md">II. Why Now</h2>
+          <p>
+            <strong>Gold is re-monetizing.</strong> Central banks are net buyers
+            at multi-decade highs. BIS Basel III moved allocated gold to Tier 1
+            HQLA status. Sovereign reserves are diversifying away from USD assets.
+            Gold crossed $4,100/oz in 2026. And vaults are watching storage
+            margins compress at precisely the moment their institutional customers
+            are increasing physical allocation — that mismatch is the wedge
+            customer's urgency.
+          </p>
+          <p>
+            <strong>The legal rails just opened.</strong> Wyoming Stat. § 17-32
+            created the first U.S. framework for decentralized governance with
+            legal personality. The GENIUS Act separated fiat-pegged stablecoins
+            from commodity-referenced instruments. The March 2026 SEC–CFTC
+            harmonization — a Memorandum of Understanding plus an interpretive
+            release (Release No. 33-11412) joined by both agencies — confirmed
+            most digital assets are not securities and treats fully-reserved,
+            1:1-redeemable tokens as receipts under CFTC spot-market jurisdiction.
+            The WGC + BCG March 2026 paper validated the shared-infrastructure
+            thesis outright — while every incumbent remains at concept stage.
+          </p>
+          <p>
+            <strong>The window is a standards window.</strong> The first credible
+            neutral standard sets the standard. The last vaults to join, join
+            someone else's network — on someone else's terms.
+          </p>
+        </section>
+
+        <!-- 5 · BUSINESS MODEL -->
+        <section id="business-model" class="memo-section" data-memo-section>
+          <h2 class="display display--md">III. The Business Model</h2>
+          <p>
+            The operating company (Global Gold OpCo) is the software company
+            behind the protocol. It licenses technology, operates an optional
+            frontend, and provides KYC rails. It does not operate the protocol,
+            custody metal, or issue instruments. Every revenue line is
+            recipient-tagged in the financial model, so investors can see exactly
+            what belongs to whom:
+          </p>
+          <div class="memo-table-wrap">
+            <table class="memo-table">
+              <thead>
+                <tr>
+                  <th scope="col">Revenue line</th>
+                  <th scope="col">Rate</th>
+                  <th scope="col">Recipient</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Tokenization fee (at CCT mint)</td><td>40 bps of bar value</td><td>50% vault / 50% OpCo</td></tr>
+                <tr><td>Collateralization fee (at SMU mint)</td><td>20 bps</td><td>50% vault / 50% OpCo</td></tr>
+                <tr><td>gGold mint/burn — frontend</td><td>10 bps</td><td>OpCo</td></tr>
+                <tr><td>gGold mint/burn — protocol</td><td>12.5 bps</td><td>Protocol treasury</td></tr>
+                <tr><td>DEX routing — frontend</td><td>.25 bps of routed volume</td><td>OpCo</td></tr>
+                <tr><td>Marketplace take (Year 2+)</td><td>75 bps</td><td>OpCo</td></tr>
+                <tr><td>Perpetuals trading (Year 3+, Series A funded)</td><td>2.5 bps</td><td>OpCo</td></tr>
+                <tr><td>KYC verification rails</td><td>30% of $75/verification</td><td>OpCo</td></tr>
+                <tr><td>Title Register</td><td><strong>Free, forever</strong></td><td>— (the wedge)</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Three design choices matter to an investor:</p>
+          <ul class="memo-list">
+            <li>
+              <strong>The Title Register is free forever.</strong> It is the door
+              through which every vault enters the network — deliberately
+              unmonetized, the way the best infrastructure wedges always are.
+            </li>
+            <li>
+              <strong>The vault earns more as a node than as a warehouse.</strong>
+              A vault's legacy business earns ~0.2%/yr on stored AUM. As a network
+              node — earning tokenization shares, collateralization shares,
+              title-transfer fees, KYC fees, and storage on non-collateralized
+              bars — the model shows vaults earning <strong>1.3–3.5x their legacy
+              storage revenue</strong>, with an automated floor check that
+              guarantees the pitch never inverts. That is the sales conversation:
+              not "adopt our software," but "upgrade your business model."
+            </li>
+            <li>
+              <strong>No rented TVL in the model.</strong> Every dollar of modeled
+              revenue is a fee on a real action against real metal —
+              tokenization, collateralization, routing, verification, marketplace
+              activity, and trading. The business case does not depend on
+              subsidized liquidity or emissions-driven growth.
+            </li>
+          </ul>
+          <p>
+            <strong>Go-to-market.</strong> Launch with the Wyoming Reserve at
+            platform go-live (month 4); 3 vaults by end of Year 1, 10 by end of
+            Year 2, 40 by Year 5 — driven by two BD leads (gold industry and
+            Web3), a two-sided referral engine (25% of later vaults arrive by
+            referral, at half the acquisition cost), and Foundation grants funding
+            DeFi integrations. Vault CAC runs ~$50k against OpCo revenue per vault
+            of ~$340–385k in the first two years: <strong>roughly two-month CAC
+            payback and a 26x LTV/CAC ratio.</strong>
+          </p>
+        </section>
+
+        <!-- 6 · FINANCIAL PLAN -->
+        <section id="financial-plan" class="memo-section" data-memo-section>
+          <h2 class="display display--md">IV. The Financial Plan</h2>
+          <p>
+            The full model is a 21-tab institutional workbook — a monthly engine
+            across 60 months, three scenarios, and 26 automated integrity checks,
+            all passing in every scenario. Its central discipline: <strong>TVL is
+            an output.</strong> Demand from five modeled customer segments meets
+            vault capacity through MIN(demand, supply) each month; bars enter
+            custody only when there is demand for them; unmet demand queues as
+            backlog. Nothing is asserted top-down.
+          </p>
+          <p>
+            <strong>Base case</strong> (gold $4,187/oz today → $9,000 by Year 5; a
+            flat-gold toggle strips the price effect out of demand):
+          </p>
+          <div class="memo-table-wrap">
+            <table class="memo-table">
+              <thead>
+                <tr>
+                  <th scope="col">Year</th>
+                  <th scope="col">Vaults</th>
+                  <th scope="col">TVL</th>
+                  <th scope="col">OpCo Revenue</th>
+                  <th scope="col">OpCo EBITDA</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>1</td><td>3</td><td>$353M</td><td>$1.2M</td><td>($2.1M)</td></tr>
+                <tr><td>2</td><td>10</td><td>$1.6B</td><td>$9.3M</td><td>$2.2M</td></tr>
+                <tr><td>3</td><td>18</td><td>$4.1B</td><td>$32.2M</td><td>$24.7M</td></tr>
+                <tr><td>4</td><td>28</td><td>$9.8B</td><td>$74.3M</td><td>$64.8M</td></tr>
+                <tr><td>5</td><td>40</td><td>$23.4B</td><td>$174.3M</td><td>$161.3M</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            For context: ~72 tonnes on-rails in Year 5 is 2% of one year's mine
+            supply and 0.032% of above-ground stock — roughly 9% of where
+            McKinsey projects the tokenized-gold market alone by 2030 ($200B), in
+            a model that treats that projection as a floor, not a ceiling.
+            EBITDA-positive in month 11; blended take rate of 108 bps,
+            sanity-checked against incumbents.
+          </p>
+          <p><strong>All three scenarios, Year 5:</strong></p>
+          <div class="memo-table-wrap">
+            <table class="memo-table">
+              <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col">Bear</th>
+                  <th scope="col">Base</th>
+                  <th scope="col">Accelerated</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Vaults live</th><td>18</td><td>40</td><td>55</td></tr>
+                <tr><th scope="row">TVL</th><td>$3.5B</td><td>$23.4B</td><td>$65.1B</td></tr>
+                <tr><th scope="row">OpCo revenue</th><td>$14.6M</td><td>$174M</td><td>$511M</td></tr>
+                <tr><th scope="row">OpCo EBITDA</th><td>$7.2M</td><td>$161M</td><td>$492M</td></tr>
+                <tr><th scope="row">Seed MOIC (post-dilution)</th><td><strong>2.9x</strong></td><td><strong>51x</strong></td><td><strong>157x</strong></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            The Bear case is the sentence that matters most. Gold rises only to
+            $6,500, adoption is slow, and the Series A lands seven months late —
+            and the company still reaches profitability in Year 4, never runs out
+            of cash (the gold treasury auto-bridges), and returns ~2.9x to the
+            seed. <strong>The downside case is a profitable company that roughly
+            triples invested capital.</strong>
+          </p>
+          <p><strong>Use of the $5M</strong> (engine-derived; sums to the raise):</p>
+          <div class="memo-table-wrap">
+            <table class="memo-table">
+              <thead>
+                <tr>
+                  <th scope="col">Category</th>
+                  <th scope="col">$</th>
+                  <th scope="col">%</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Gold — LP treasury (6 gold/gold pools)</td><td>$2,000,000</td><td>40%</td></tr>
+                <tr><td>Team &amp; payroll (loaded)</td><td>$1,159,000</td><td>23%</td></tr>
+                <tr><td>Entity setup, audits &amp; attestations</td><td>$622,000</td><td>12%</td></tr>
+                <tr><td>Marketing, BD &amp; vault acquisition</td><td>$447,000</td><td>9%</td></tr>
+                <tr><td>Legal &amp; regulatory</td><td>$333,000</td><td>7%</td></tr>
+                <tr><td>Tech, G&amp;A, insurance</td><td>$291,000</td><td>6%</td></tr>
+                <tr><td>Contingency</td><td>$148,000</td><td>3%</td></tr>
+                <tr><td><strong>Total</strong></td><td><strong>$5,000,000</strong></td><td><strong>100%</strong></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Founders take $20k/month each; the CTO $120k/year — below-market and
+            equity-aligned. Operating revenue earned before the Series A (~$2.5M
+            modeled) funds the balance of the pre-A plan. No bridge required in
+            any scenario.
+          </p>
+        </section>
+
+        <!-- 7 · GOLD POSITION -->
+        <section id="gold-position" class="memo-section" data-memo-section>
+          <h2 class="display display--md">V. The Gold Position — Why 40% of This Round Is De-Risked</h2>
+          <p>
+            The $2M treasury deployment is not working capital. It is a gold
+            position with three jobs:
+          </p>
+          <ol class="memo-list memo-list--numbered">
+            <li>
+              <strong>Gold appreciation.</strong> $2M marked on the modeled gold
+              path reaches ~$4.3M by Year 5 — the "you believe gold goes up"
+              payoff, aligned with the thesis that brought investors to the memo.
+            </li>
+            <li>
+              <strong>Fee income.</strong> The pools earn trading fees, recycled
+              and compounding — ~$0.8M more by Year 5.
+            </li>
+            <li>
+              <strong>Runway insurance.</strong> A needs-based drawdown policy —
+              contractual, under the term sheet's Treasury Policy covenant — tops
+              up operating cash automatically if the Series A slips. In the Bear
+              case it bridges the company to a late A; in the Base case it is
+              never touched.
+            </li>
+          </ol>
+          <p>
+            Idle operating cash above working-capital needs sweeps into the same
+            instruments. Operating risk is confined to roughly $3M of the round —
+            and on the Base gold path, the treasury alone returns approximately
+            the entire operating budget.
+          </p>
+        </section>
+
+        <!-- 8 · RETURNS -->
+        <section id="returns" class="memo-section" data-memo-section>
+          <h2 class="display display--md">VI. Returns Analysis</h2>
+          <p>
+            Applying protocol/infrastructure multiples (10–20x revenue; 15–30x
+            EBITDA) to Year-5 Base financials implies a valuation of
+            <strong>$1.6B–$3.7B (mid: ~$3.1B)</strong>. After post-Series-A
+            dilution and an ESOP refresh, seed ownership at exit is ~8.3%:
+          </p>
+          <div class="memo-table-wrap">
+            <table class="memo-table">
+              <thead>
+                <tr>
+                  <th scope="col">Exit value</th>
+                  <th scope="col">Seed proceeds</th>
+                  <th scope="col">Seed MOIC</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>$250M</td><td>$21M</td><td>4.1x</td></tr>
+                <tr><td>$500M</td><td>$41M</td><td>8.3x</td></tr>
+                <tr><td>$1.0B</td><td>$83M</td><td>16.6x</td></tr>
+                <tr><td>$2.0B</td><td>$166M</td><td>33.1x</td></tr>
+                <tr><td>Base-case implied (~$3.1B)</td><td>~$255M</td><td><strong>~51x</strong></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            The 1x non-participating preference protects the legal floor; the Bear
+            case protects it operationally at ~2.9x. The Series A is planned at
+            $18M on $90–120M post — a 2.1x step-up, priced so the A investor
+            underwrites observable month-15 milestones rather than this model.
+          </p>
+        </section>
+
+        <!-- 9 · MOAT -->
+        <section id="moat" class="memo-section" data-memo-section>
+          <h2 class="display display--md">VII. The Moat</h2>
+          <p>Three legs. Each alone is replicable. Together, they are not.</p>
+          <ol class="memo-list memo-list--numbered">
+            <li>
+              <strong>Legal architecture.</strong> The CCT is a per-bar claim
+              instrument that is not title, not a warehouse receipt, and not a
+              security — patent pending. It creates a two-layer separation of the
+              title instrument from the settlement instrument, each with its own
+              classification. Counsel of record: Paul Hastings, LLP.
+            </li>
+            <li>
+              <strong>Distribution lock.</strong> Every vault that deploys a Title
+              Register is a vault a competitor cannot easily reach — the register
+              is the vault's own book of record, free forever, woven into its
+              operations. The network compounds: each onboarded vault makes the
+              next more valuable, and 25% of later vaults arrive by referral from
+              existing ones.
+            </li>
+            <li>
+              <strong>Governance permanence.</strong> The Council (Wyoming DUNA)
+              governs the protocol; the operating company licenses IP and runs
+              optional frontends. No single entity's failure ends the network —
+              and no competitor structured as a single issuer can copy that
+              without ceasing to be itself.
+            </li>
+          </ol>
+        </section>
+
+        <!-- 10 · RISKS -->
+        <section id="risks" class="memo-section" data-memo-section>
+          <h2 class="display display--md">VIII. Risks, Stated Plainly</h2>
+          <div class="memo-table-wrap">
+            <table class="memo-table memo-table--risks">
+              <thead>
+                <tr>
+                  <th scope="col">Risk</th>
+                  <th scope="col">Mitigation</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Vault adoption is slower than planned</th>
+                  <td>The Bear case models exactly this — 18 vaults by Year 5, not 40 — and still returns ~2.9x. CAC payback under two months means each signed vault is almost immediately accretive.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Regulatory reclassification</th>
+                  <td>The architecture was designed backwards from the risk register: the vault holds title, OpCo holds nothing, instruments are engineered against securities and stablecoin characterization, and Paul Hastings is on record. The GENIUS Act and March 2026 SEC/CFTC guidance moved the rails toward us.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Gold price stalls</th>
+                  <td>The flat-gold toggle shows the business grows without price help, and the Bear case assumes gold reaching only $6,500 by Year 5. A stalling gold price reduces TVL marks, but the fee engine runs on actions — mints, transfers, trades — and treasury drawdown capacity remains.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Incumbent response (Paxos / Tether / LBMA)</th>
+                  <td>Single issuers cannot become neutral multi-vault standards without abandoning their model; the hubs are charter-bound to their regions. The realistic incumbent response is to join the standard.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Series A doesn't close on time</th>
+                  <td>Modeled: the Bear case closes the A at month 22 with the treasury auto-bridging, minimum cash stays positive, and the company reaches profitability regardless.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Key person</th>
+                  <td>Two technical founders plus a CTO; Guardian multi-sig removes single-actor control of infrastructure; the Council survives the company.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Smart-contract failure</th>
+                  <td>Two audits in Year 1, pre-launch audits for every subsequent module, and monthly third-party proof-of-reserve attestation per vault.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 11 · TEAM & GOVERNANCE -->
+        <section id="team" class="memo-section" data-memo-section>
+          <h2 class="display display--md">IX. Team &amp; Governance</h2>
+          <ul class="memo-list">
+            <li>
+              <strong>Cole [●] — Co-founder.</strong> [1–2 sentence bio:
+              background, why him, why this.]
+            </li>
+            <li>
+              <strong>Austin [●] — Co-founder.</strong> [1–2 sentence bio.]
+            </li>
+            <li>
+              <strong>CTO — [●].</strong> [1–2 sentence bio; at $120k/yr —
+              equity-aligned.]
+            </li>
+            <li>
+              Two BD leads (gold industry / Web3) and a frontend engineer round
+              out the seed team; headcount scales 9 → 38 over five years,
+              driver-based in the model.
+            </li>
+          </ul>
+          <p>
+            <strong>Governance.</strong> The Global Gold Council (Wyoming DUNA,
+            Wyo. Stat. § 17-32) governs the protocol, with 2,045 on-chain members
+            already constituting its statutory membership — distribution that
+            exists before the raise, not after it. The OpCo board at seed is the
+            two founders. The company is founder-controlled by design:
+            founder-held super-voting common stock will carry 15–20 votes per
+            share, preserving founder voting control across future financings,
+            subject to customary investor protective provisions and sunset terms.
+          </p>
+        </section>
+
+        <!-- 12 · THE ROUND -->
+        <section id="round" class="memo-section" data-memo-section>
+          <h2 class="display display--md">X. The Round</h2>
+          <p>
+            $5M priced Series Seed at $50M post: 1x non-participating preference,
+            a 10% option pool from pre-money, a founder-designated board of two,
+            founder-held super-voting common stock carrying 15–20 votes per share,
+            and a Treasury Policy covenant that makes the gold-treasury discipline
+            contractual. Standard NVCA definitive documents, drafted by Paul
+            Hastings. The round may be completed in one or more closings on
+            identical terms; minimum check $100k. The data room includes the
+            financial model (live workbook), the term sheet, the research census,
+            the patent filings, the DUNA formation package, and the Wyoming
+            Reserve partnership documentation.
+          </p>
+          <p>
+            <strong>The one-paragraph case.</strong> Demand for on-chain gold is
+            proven by billions of dollars in single-issuer products. Supply is
+            stranded in 40–80 vaults with no pathway. Global Gold connects the two
+            with the only architecture in which the vault keeps title, no company
+            owns the market, and every fee is earned against real metal —
+            profitably, on the seed alone, with 40% of the round sitting in gold
+            while it works. The upside case is category-defining infrastructure
+            for a $34T asset class. The downside case is a profitable company that
+            roughly triples invested capital.
+          </p>
+
+          <hr class="memo-hr" />
+
+          <p class="memo-footnote">
+            ¹ <em>January 14, 2026 cross-market data: COMEX silver settlement
+            $91.78/oz; Shanghai physical approximately $101.54/oz (Shanghai Metal
+            Market); Indian retail approximately ₹290,000/kg (~$99.82/oz), up from
+            ₹238,000/kg on January 1. The Tokyo/UAE figures are dealer physical
+            prices at the peak of the late-December squeeze, quoted against COMEX
+            futures then printing in the low $70s.</em>
+          </p>
+
+          <p class="memo-confidential">
+            <em>Confidential. Prepared by Global Gold OpCo for accredited
+            investors. This memorandum references the Global Gold — Financial
+            Model v3.0 (Institutional); scenario definitions, assumptions, and
+            integrity checks are contained therein. Not an offer to sell
+            securities; any offering is made only through definitive documents.</em>
+          </p>
+        </section>
+      </div>
+    </div>
+  </div>
+</InnerPage>
+
+<style>
+  /* ===================================================================
+     DEAL MEMO — docs-style two-column layout on the pinned-hero shell.
+     Reuses global tokens (--char, --paper, --gold-*, --rule, --stone,
+     --gutter, --radius-img, --ease, serif/sans font vars).
+     =================================================================== */
+  .memo {
+    --memo-header-h: 78px;
+    padding-top: clamp(34px, 5vw, 64px);
+    padding-bottom: clamp(64px, 9vw, 120px);
+  }
+
+  .memo-shell {
+    max-width: 1320px;
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: clamp(32px, 4vw, 72px);
+    align-items: start;
+  }
+
+  /* ---- LEFT: sticky section menu (scroll-spy) ---- */
+  .memo-menu {
+    position: sticky;
+    top: calc(var(--memo-header-h) + 22px);
+    align-self: start;
+    max-height: calc(100dvh - var(--memo-header-h) - 44px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    /* Comfortably fits ~12 items; hide the scrollbar entirely. */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .memo-menu::-webkit-scrollbar {
+    display: none;
+  }
+
+  .memo-menu__toggle {
+    display: none;
+  }
+
+  .memo-menu__eyebrow {
+    margin: 0 0 0.9em;
+    color: var(--gold-deep);
+  }
+
+  .memo-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    border-left: 1px solid var(--rule-faint);
+  }
+  .memo-nav__link {
+    position: relative;
+    display: block;
+    padding: 7px 0 7px 16px;
+    margin-left: -1px;
+    border-left: 2px solid transparent;
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    line-height: 1.35;
+    color: var(--graphite);
+    transition: color var(--t-fast) var(--ease),
+      border-color var(--t-fast) var(--ease);
+  }
+  .memo-nav__link:hover {
+    color: var(--char);
+    border-left-color: var(--stone-warm);
+  }
+  .memo-nav__link.is-active {
+    color: var(--gold-deep);
+    font-weight: 500;
+    border-left-color: var(--gold);
+  }
+  .memo-nav__link:focus-visible {
+    outline: 2px solid var(--gold-deep);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* ---- Print button ---- */
+  .memo-print {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55em;
+    padding: 10px 16px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: var(--sans-display);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--char);
+    transition: border-color var(--t-fast) var(--ease),
+      color var(--t-fast) var(--ease);
+  }
+  .memo-print:hover {
+    border-color: var(--gold-deep);
+    color: var(--gold-deep);
+  }
+  .memo-print svg {
+    width: 16px;
+    height: 16px;
+    color: var(--gold-deep);
+  }
+  .memo-menu .memo-print {
+    margin-top: clamp(22px, 2.4vw, 30px);
+    width: 100%;
+    justify-content: center;
+  }
+
+  .memo-content__toolbar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: clamp(20px, 3vw, 32px);
+  }
+  /* On desktop the sidebar carries the print button; the inline one is the
+     mobile-friendly duplicate at the top of the content column. */
+  .memo-print--inline {
+    display: none;
+  }
+
+  /* ---- RIGHT: memo content ---- */
+  .memo-content {
+    min-width: 0;
+    max-width: 780px;
+  }
+
+  .memo-printhead {
+    display: none;
+  }
+
+  .memo-section {
+    scroll-margin-top: calc(var(--memo-header-h) + 28px);
+  }
+  .memo-section + .memo-section {
+    margin-top: clamp(48px, 6vw, 80px);
+    padding-top: clamp(40px, 5vw, 64px);
+    border-top: 1px solid var(--rule-faint);
+  }
+
+  .memo-head {
+    margin-bottom: clamp(8px, 2vw, 18px);
+  }
+  .memo-head .eyebrow {
+    margin-bottom: 1em;
+  }
+  .memo-head h1 {
+    margin: 0;
+  }
+  .memo-subtitle {
+    margin-top: 0.7em;
+    font-family: var(--serif-display);
+    font-weight: 300;
+    font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+    line-height: 1.28;
+    color: var(--graphite);
+  }
+
+  .memo-content :is(h2) {
+    margin-bottom: clamp(0.7em, 1.6vw, 1em);
+  }
+
+  .memo-content p {
+    font-family: var(--serif-body);
+    font-size: var(--t-body);
+    line-height: 1.7;
+    color: var(--graphite);
+    margin: 0 0 1.05em;
+  }
+  .memo-content strong {
+    color: var(--char);
+    font-weight: 500;
+  }
+
+  /* ---- Blockquotes ---- */
+  .memo-quote {
+    margin: clamp(1.2em, 2.4vw, 1.8em) 0;
+    padding: clamp(16px, 2vw, 22px) clamp(20px, 2.4vw, 28px);
+    border-left: 3px solid var(--gold);
+    background: rgba(216, 210, 200, 0.14);
+    border-radius: 0 var(--radius-img) var(--radius-img) 0;
+    font-family: var(--serif-display);
+    font-weight: 300;
+    font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+    line-height: 1.34;
+    color: var(--char);
+  }
+  .memo-quote--epigraph {
+    font-style: italic;
+  }
+  .memo-quote strong {
+    font-weight: 400;
+    color: var(--char);
+  }
+
+  /* ---- Lists ---- */
+  .memo-list {
+    margin: 0 0 1.1em;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85em;
+  }
+  .memo-list li {
+    font-family: var(--serif-body);
+    font-size: var(--t-body);
+    line-height: 1.68;
+    color: var(--graphite);
+    padding-left: 1.7em;
+    position: relative;
+  }
+  .memo-list:not(.memo-list--numbered) li::before {
+    content: "";
+    position: absolute;
+    left: 0.35em;
+    top: 0.62em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+  .memo-list--numbered {
+    counter-reset: memo-counter;
+  }
+  .memo-list--numbered li {
+    counter-increment: memo-counter;
+  }
+  .memo-list--numbered li::before {
+    content: counter(memo-counter) ".";
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-family: var(--sans-display);
+    font-weight: 500;
+    font-size: 0.95em;
+    color: var(--gold-deep);
+  }
+
+  /* ---- Tables ---- */
+  .memo-table-wrap {
+    margin: clamp(1.2em, 2.4vw, 1.8em) 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: var(--radius-img);
+  }
+  .memo-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--sans);
+    font-size: 0.92rem;
+    line-height: 1.45;
+    color: var(--graphite);
+  }
+  .memo-table th,
+  .memo-table td {
+    text-align: left;
+    padding: 11px 16px;
+    border: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  .memo-table thead th {
+    font-family: var(--sans-display);
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    background: rgba(216, 210, 200, 0.16);
+    white-space: nowrap;
+  }
+  .memo-table tbody th[scope="row"] {
+    font-family: var(--sans-display);
+    font-weight: 500;
+    color: var(--char);
+    background: rgba(216, 210, 200, 0.08);
+  }
+  .memo-table tbody tr:nth-child(even) td {
+    background: rgba(216, 210, 200, 0.05);
+  }
+  .memo-table strong {
+    color: var(--char);
+    font-weight: 600;
+  }
+
+  /* Two-column borderless "deal terms" list. */
+  .memo-table--terms th,
+  .memo-table--terms td {
+    border-left: 0;
+    border-right: 0;
+  }
+  .memo-table--terms th[scope="row"] {
+    width: 42%;
+    background: transparent;
+  }
+  .memo-table--terms td {
+    background: transparent !important;
+    color: var(--char);
+  }
+
+  .memo-table--risks th[scope="row"] {
+    width: 34%;
+  }
+
+  /* ---- footnote / confidential ---- */
+  .memo-hr {
+    height: 1px;
+    background: var(--rule);
+    border: 0;
+    margin: clamp(2em, 4vw, 3em) 0 clamp(1.4em, 2.4vw, 2em);
+  }
+  .memo-footnote,
+  .memo-confidential {
+    font-family: var(--serif-body);
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--graphite);
+  }
+  .memo-confidential {
+    margin-top: 1.2em;
+    color: var(--gold-deep);
+  }
+
+  /* ===================================================================
+     MOBILE — collapse the left menu into a sticky disclosure above the
+     content (mirrors the docs mobile pattern).
+     =================================================================== */
+  @media (max-width: 900px) {
+    .memo-shell {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0;
+    }
+
+    .memo-menu {
+      position: sticky;
+      top: var(--memo-header-h);
+      z-index: 40;
+      max-height: none;
+      overflow: visible;
+      margin-bottom: clamp(24px, 5vw, 34px);
+      background: color-mix(in srgb, var(--paper) 92%, transparent);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--rule);
+      border-radius: var(--radius-img);
+    }
+
+    .memo-menu__toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 13px 16px;
+      background: transparent;
+      border: 0;
+      cursor: pointer;
+      font-family: var(--sans-display);
+      font-size: 0.74rem;
+      font-weight: 500;
+      letter-spacing: var(--track-eyebrow);
+      text-transform: uppercase;
+      color: var(--gold-deep);
+    }
+    .memo-menu__toggle-chev {
+      font-size: 1.1rem;
+      line-height: 1;
+      transition: transform var(--t-fast) var(--ease);
+    }
+    .memo-menu.is-open .memo-menu__toggle-chev {
+      transform: rotate(90deg);
+    }
+
+    .memo-menu__panel {
+      display: none;
+      padding: 4px 16px 16px;
+    }
+    .memo-menu.is-open .memo-menu__panel {
+      display: block;
+    }
+    .memo-menu__eyebrow {
+      display: none;
+    }
+    .memo-menu .memo-print {
+      margin-top: 18px;
+    }
+
+    .memo-content {
+      max-width: none;
+    }
+    .memo-content__toolbar {
+      display: none;
+    }
+    .memo-print--inline {
+      display: inline-flex;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .memo-menu__toggle-chev {
+      transition: none;
+    }
+  }
+
+  /* ===================================================================
+     PRINT — clean printable / PDF memo document.
+     Hide all site chrome + the on-screen menu; render content full-width
+     in a legible serif; avoid breaking tables; page-break major sections.
+     =================================================================== */
+  @media print {
+    /* Hide site chrome, hero, menu, and the print buttons. */
+    :global([data-site-header]),
+    :global([data-site-footer]),
+    :global([data-hero]),
+    .memo-menu,
+    .memo-content__toolbar,
+    .memo-print {
+      display: none !important;
+    }
+
+    /* Neutralize the pinned-hero offset so content starts at the top. */
+    :global(.page-over--pinned) {
+      margin-top: 0 !important;
+    }
+    :global(html.footer-reveal .page-over) {
+      margin-bottom: 0 !important;
+      min-height: 0 !important;
+    }
+
+    .memo {
+      padding: 0;
+    }
+    .memo-shell {
+      display: block;
+      max-width: none;
+      margin: 0;
+      padding: 0;
+      gap: 0;
+    }
+    .memo-content {
+      max-width: none;
+      width: 100%;
+    }
+
+    /* Printed title header at the top of the document. */
+    .memo-printhead {
+      display: block;
+      margin-bottom: 20pt;
+      padding-bottom: 8pt;
+      border-bottom: 1pt solid #000;
+      font-family: "Georgia", serif;
+      font-size: 10pt;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #000;
+    }
+
+    /* Legible print serif. */
+    .memo-content,
+    .memo-content p,
+    .memo-content li,
+    .memo-footnote,
+    .memo-confidential,
+    .memo-subtitle {
+      font-family: "Georgia", "Times New Roman", serif !important;
+      color: #000 !important;
+    }
+    .memo-content p,
+    .memo-content li {
+      font-size: 10.5pt;
+      line-height: 1.5;
+    }
+    .memo-content strong {
+      color: #000 !important;
+    }
+
+    .memo-head h1 {
+      font-size: 22pt;
+      color: #000 !important;
+    }
+    .memo-content h2 {
+      font-size: 15pt;
+      color: #000 !important;
+    }
+
+    /* Major sections start on a fresh page (keep the summary on page 1). */
+    .memo-section {
+      break-inside: avoid-page;
+    }
+    .memo-section + .memo-section {
+      break-before: page;
+      margin-top: 0;
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    /* Keep tables and quotes intact across page breaks. */
+    .memo-table-wrap,
+    .memo-quote {
+      break-inside: avoid;
+      overflow: visible;
+    }
+    .memo-table {
+      font-size: 9pt;
+      color: #000 !important;
+    }
+    .memo-table th,
+    .memo-table td {
+      border: 0.75pt solid #000 !important;
+      background: transparent !important;
+      color: #000 !important;
+    }
+    .memo-table thead th {
+      color: #000 !important;
+      background: #eee !important;
+    }
+    .memo-quote {
+      border-left: 3pt solid #000;
+      background: transparent !important;
+      color: #000 !important;
+      font-style: italic;
+    }
+
+    @page {
+      margin: 2cm;
+    }
+  }
+</style>
+
+<script>
+  // =================================================================
+  // Deal-memo interactions — scroll-spy (IntersectionObserver), smooth
+  // anchor scrolling, mobile menu disclosure, and the print trigger.
+  // Mirrors the technique in docs.ts; wired per-page via astro:page-load
+  // so it survives <ClientRouter /> view-transition swaps.
+  // =================================================================
+  let memoSpy: IntersectionObserver | null = null;
+
+  function setupMemo() {
+    const root = document.querySelector<HTMLElement>("[data-memo]");
+    if (!root) {
+      memoSpy?.disconnect();
+      memoSpy = null;
+      return;
+    }
+
+    const sections = Array.from(
+      root.querySelectorAll<HTMLElement>("[data-memo-section]"),
+    );
+    const links = Array.from(
+      root.querySelectorAll<HTMLAnchorElement>("[data-memo-link]"),
+    );
+
+    // ---- scroll-spy ----
+    memoSpy?.disconnect();
+    memoSpy = null;
+
+    const setActive = (id: string | null) => {
+      links.forEach((link) => {
+        link.classList.toggle(
+          "is-active",
+          link.getAttribute("data-target") === id,
+        );
+      });
+    };
+
+    if (sections.length && links.length) {
+      const visible = new Set<string>();
+      memoSpy = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) visible.add(e.target.id);
+            else visible.delete(e.target.id);
+          });
+
+          let activeId: string | null = null;
+          for (const s of sections) {
+            if (visible.has(s.id)) {
+              activeId = s.id;
+              break;
+            }
+          }
+          // Nothing in the active band → the last section scrolled past.
+          if (!activeId) {
+            for (const s of sections) {
+              if (s.getBoundingClientRect().top < 140) activeId = s.id;
+            }
+            if (!activeId) activeId = sections[0].id;
+          }
+          setActive(activeId);
+        },
+        { rootMargin: "-110px 0px -62% 0px", threshold: 0 },
+      );
+      sections.forEach((s) => memoSpy!.observe(s));
+    }
+
+    // ---- mobile menu disclosure ----
+    const menu = root.querySelector<HTMLElement>("[data-memo-menu]");
+    const toggle = root.querySelector<HTMLButtonElement>("[data-memo-toggle]");
+    const isMenuOpen = () => Boolean(menu?.classList.contains("is-open"));
+    const setMenu = (open: boolean) => {
+      menu?.classList.toggle("is-open", open);
+      toggle?.setAttribute("aria-expanded", String(open));
+    };
+
+    // ---- click delegation (guarded so it attaches once per root) ----
+    if (!root.dataset.memoWired) {
+      root.dataset.memoWired = "1";
+
+      root.addEventListener("click", (e) => {
+        const target = e.target as Element | null;
+        if (!target) return;
+
+        // Print trigger.
+        if (target.closest("[data-memo-print]")) {
+          window.print();
+          return;
+        }
+
+        // Menu toggle (mobile).
+        if (target.closest("[data-memo-toggle]")) {
+          setMenu(!isMenuOpen());
+          return;
+        }
+
+        // Section link → smooth-scroll + close the mobile menu.
+        const link = target.closest<HTMLAnchorElement>("[data-memo-link]");
+        if (link) {
+          const id = link.getAttribute("data-target");
+          const section = id ? document.getElementById(id) : null;
+          if (section) {
+            e.preventDefault();
+            const reduce = window.matchMedia(
+              "(prefers-reduced-motion: reduce)",
+            ).matches;
+            section.scrollIntoView({
+              behavior: reduce ? "auto" : "smooth",
+              block: "start",
+            });
+            history.replaceState(null, "", `#${id}`);
+            setActive(id);
+          }
+          if (window.matchMedia("(max-width: 900px)").matches) setMenu(false);
+          return;
+        }
+      });
+    }
+
+    setMenu(false);
+  }
+
+  document.addEventListener("astro:page-load", setupMemo);
+  document.addEventListener("astro:before-swap", () => {
+    memoSpy?.disconnect();
+    memoSpy = null;
+  });
+</script>
