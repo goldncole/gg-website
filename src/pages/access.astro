@@ -1,0 +1,432 @@
+---
+// =====================================================================
+// PAGE — Access ("Request Access" contact form).
+// The single conversion endpoint every "Request Access" CTA across the
+// site points to (/access/). Understated, institutional invitation to be
+// contacted by the Global Gold team. Built on the shared InnerPage shell
+// so it inherits the same header nav, footer reveal, and scroll behavior
+// as every other inner page. The form posts to the Web3Forms API, which
+// relays each submission to Cole@GlobalGold.Finance.
+//
+// Progressive enhancement: the <form> carries a real action/method so it
+// still submits without JS; the client script below intercepts it to keep
+// the visitor on-page and swap in an inline confirmation on success.
+// =====================================================================
+import InnerPage from "../layouts/InnerPage.astro";
+import PageHero from "../components/blocks/PageHero.astro";
+
+// TODO: replace with the Web3Forms access key created for Cole@GlobalGold.Finance
+const WEB3FORMS_ACCESS_KEY = "REPLACE_WITH_WEB3FORMS_ACCESS_KEY";
+
+const CONTACT_EMAIL = "Cole@GlobalGold.Finance";
+
+const audiences = [
+  "Vault / Custodian",
+  "Refiner",
+  "Trader / Market Maker",
+  "Institutional Allocator",
+  "Bullion Dealer",
+  "DeFi / Protocol",
+  "Private Holder",
+  "Investor",
+  "Other",
+];
+---
+
+<InnerPage
+  title="Request Access — Global Gold"
+  description="Request access to the Global Gold Standard. Tell us who you are and what you're interested in, and the Global Gold team will be in touch."
+>
+  <PageHero
+    eyebrow="Request Access"
+    title="Request access."
+    lede="Tell us a little about you and what you're interested in. A member of the Global Gold team will be in touch to discuss participation in the Standard."
+  />
+
+  <section class="section access" aria-labelledby="access-form-heading">
+    <div class="container container--narrow access__inner">
+      <h2 id="access-form-heading" class="sr-only">Request access form</h2>
+
+      <form
+        id="access-form"
+        class="access__form reveal"
+        action="https://api.web3forms.com/submit"
+        method="POST"
+      >
+        {/* Web3Forms configuration (rendered into hidden inputs). */}
+        <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
+        <input type="hidden" name="subject" value="New Access Request — Global Gold" />
+        <input type="hidden" name="from_name" value="Global Gold Website" />
+
+        {/* Honeypot — visually hidden, must stay empty (Web3Forms convention). */}
+        <input
+          type="checkbox"
+          name="botcheck"
+          class="access__honeypot"
+          tabindex="-1"
+          autocomplete="off"
+          aria-hidden="true"
+        />
+
+        <div class="access__field">
+          <label class="access__label" for="name">Full name</label>
+          <input
+            class="access__control"
+            type="text"
+            id="name"
+            name="name"
+            autocomplete="name"
+            required
+          />
+        </div>
+
+        <div class="access__field">
+          <label class="access__label" for="email">Email</label>
+          <input
+            class="access__control"
+            type="email"
+            id="email"
+            name="email"
+            autocomplete="email"
+            required
+          />
+        </div>
+
+        <div class="access__field">
+          <label class="access__label" for="organization">
+            Organization <span class="access__optional">(optional)</span>
+          </label>
+          <input
+            class="access__control"
+            type="text"
+            id="organization"
+            name="organization"
+            autocomplete="organization"
+          />
+        </div>
+
+        <div class="access__field">
+          <label class="access__label" for="audience">
+            I am a&hellip; <span class="access__optional">(optional)</span>
+          </label>
+          <div class="access__select">
+            <select class="access__control" id="audience" name="audience">
+              <option value="" selected>Select one</option>
+              {audiences.map((a) => <option value={a}>{a}</option>)}
+            </select>
+          </div>
+        </div>
+
+        <div class="access__field">
+          <label class="access__label" for="message">What are you interested in?</label>
+          <textarea
+            class="access__control access__control--area"
+            id="message"
+            name="message"
+            rows="5"
+            required
+          ></textarea>
+        </div>
+
+        <div class="access__actions">
+          <button type="submit" class="access__submit" id="access-submit">
+            Request access
+          </button>
+        </div>
+
+        <p
+          id="access-status"
+          class="access__status"
+          role="status"
+          aria-live="polite"
+          hidden
+        ></p>
+      </form>
+
+      {/* Confirmation state — revealed by the client script on success. */}
+      <div id="access-success" class="access__success" hidden>
+        <p class="eyebrow">Received</p>
+        <h2 class="display display--md access__success-heading">Thank you.</h2>
+        <p class="access__success-body">
+          Your request has been received. The Global Gold team will be in touch shortly.
+        </p>
+      </div>
+    </div>
+  </section>
+</InnerPage>
+
+<script is:inline define:vars={{ CONTACT_EMAIL }}>
+  const form = document.getElementById("access-form");
+  const submitBtn = document.getElementById("access-submit");
+  const status = document.getElementById("access-status");
+  const success = document.getElementById("access-success");
+
+  if (form && submitBtn && status && success) {
+    const submitLabel = submitBtn.textContent;
+
+    const setStatus = (message, isError) => {
+      status.hidden = false;
+      status.textContent = message;
+      status.classList.toggle("access__status--error", Boolean(isError));
+    };
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      // Honeypot: silently treat as success if a bot ticked it.
+      if (form.elements.botcheck && form.elements.botcheck.checked) {
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending\u2026";
+      status.hidden = true;
+      status.classList.remove("access__status--error");
+
+      const data = Object.fromEntries(new FormData(form).entries());
+
+      try {
+        const response = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+
+        const json = await response.json().catch(() => ({}));
+
+        if (response.ok && json.success) {
+          form.hidden = true;
+          success.hidden = false;
+          success.querySelector("h2")?.focus?.();
+          success.scrollIntoView({ behavior: "smooth", block: "center" });
+          return;
+        }
+
+        throw new Error(json.message || "Request failed");
+      } catch (error) {
+        setStatus(
+          "Something went wrong sending your request. Please try again, or email us directly at " +
+            CONTACT_EMAIL +
+            ".",
+          true
+        );
+        // Provide a no-loss fallback link inside the status region.
+        const mailto = document.createElement("a");
+        mailto.href =
+          "mailto:" +
+          CONTACT_EMAIL +
+          "?subject=" +
+          encodeURIComponent("Access Request — Global Gold");
+        mailto.textContent = "Email " + CONTACT_EMAIL;
+        mailto.className = "access__status-link";
+        status.appendChild(document.createTextNode(" "));
+        status.appendChild(mailto);
+
+        submitBtn.disabled = false;
+        submitBtn.textContent = submitLabel;
+      }
+    });
+  }
+</script>
+
+<style>
+  .access {
+    /* The hero already carries the large top padding; pull the form up so it
+       sits in a comfortable relationship to the lede rather than a full
+       section gap below it. */
+    padding-top: clamp(8px, 2vw, 24px);
+  }
+
+  .access__inner {
+    max-width: 640px;
+    margin-inline: 0;
+  }
+
+  .access__form {
+    display: grid;
+    gap: clamp(22px, 3vw, 30px);
+  }
+
+  .access__field {
+    display: grid;
+    gap: 10px;
+  }
+
+  .access__label {
+    font-family: var(--sans-display);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--char);
+  }
+
+  .access__optional {
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--graphite);
+    text-transform: none;
+  }
+
+  .access__control {
+    width: 100%;
+    font-family: var(--serif-body);
+    font-size: var(--t-body);
+    line-height: 1.5;
+    color: var(--char);
+    background: transparent;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-img);
+    padding: 14px 16px;
+    transition:
+      border-color var(--t-fast) var(--ease),
+      box-shadow var(--t-fast) var(--ease);
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .access__control::placeholder {
+    color: var(--graphite);
+    opacity: 0.7;
+  }
+
+  .access__control:hover {
+    border-color: var(--gold-deep);
+  }
+
+  .access__control:focus,
+  .access__control:focus-visible {
+    outline: none;
+    border-color: var(--gold-deep);
+    box-shadow: 0 0 0 3px var(--gold-soft);
+  }
+
+  .access__control--area {
+    resize: vertical;
+    min-height: 140px;
+  }
+
+  /* Custom chevron for the native select. */
+  .access__select {
+    position: relative;
+  }
+  .access__select::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 18px;
+    width: 9px;
+    height: 9px;
+    border-right: 1.5px solid var(--gold-deep);
+    border-bottom: 1.5px solid var(--gold-deep);
+    transform: translateY(-65%) rotate(45deg);
+    pointer-events: none;
+  }
+  .access__select .access__control {
+    padding-right: 44px;
+    cursor: pointer;
+  }
+
+  /* Honeypot — visually hidden but reachable to bots that fill everything. */
+  .access__honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .access__actions {
+    margin-top: clamp(4px, 1vw, 10px);
+  }
+
+  .access__submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
+    padding: 15px 30px;
+    border: 1px solid var(--char);
+    background: var(--char);
+    color: var(--paper);
+    font-family: var(--sans-display);
+    font-size: 0.76rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    cursor: pointer;
+    transition:
+      background var(--t-base) var(--ease),
+      color var(--t-base) var(--ease),
+      border-color var(--t-base) var(--ease),
+      opacity var(--t-base) var(--ease);
+  }
+  .access__submit:hover {
+    background: var(--gold-deep);
+    border-color: var(--gold-deep);
+    color: var(--paper);
+  }
+  .access__submit:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--gold-soft);
+  }
+  .access__submit:disabled {
+    opacity: 0.6;
+    cursor: default;
+  }
+
+  .access__status {
+    margin: 0;
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--graphite);
+  }
+  .access__status--error {
+    color: var(--gold-deep);
+  }
+  .access__status-link {
+    color: var(--gold-deep);
+    border-bottom: 1px solid currentColor;
+    white-space: nowrap;
+  }
+  .access__status-link:hover {
+    color: var(--char);
+  }
+
+  /* ---- success state ---- */
+  .access__success {
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-img);
+    padding: clamp(28px, 5vw, 48px);
+    background: var(--paper);
+  }
+  .access__success-heading {
+    margin-top: 0.4em;
+  }
+  .access__success-body {
+    margin: clamp(14px, 2vw, 20px) 0 0;
+    max-width: 46ch;
+    font-family: var(--serif-body);
+    font-size: var(--t-lede);
+    line-height: 1.6;
+    color: var(--char);
+  }
+
+  /* ---- responsive ---- */
+  @media (max-width: 720px) {
+    .access__control {
+      /* Keep inputs at/above the site's mobile body floor and ≥16px so iOS
+         doesn't zoom the viewport on focus. */
+      font-size: 1.0625rem;
+    }
+    .access__submit {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>
