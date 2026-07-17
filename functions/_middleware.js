@@ -91,6 +91,48 @@ function isAssetPath(pathname) {
   );
 }
 
+// Link-preview / social scrapers allowed to read Open Graph tags on the public
+// marketing pages so shared links render a rich card even while the site is
+// gated. The confidential /deal-memo/ keeps its own separate gate (checked
+// first) and is NOT affected by this allow-list. Search-indexing crawlers
+// (Googlebot/bingbot) are deliberately excluded so the preview site stays out
+// of search results until it's public.
+const PREVIEW_BOTS = [
+  "facebookexternalhit", // Facebook + Apple iMessage rich links
+  "Facebot",
+  "Twitterbot",
+  "Slackbot", // covers "Slackbot-LinkExpanding"
+  "LinkedInBot",
+  "WhatsApp",
+  "TelegramBot",
+  "Discordbot",
+  "Applebot", // Apple Messages / Spotlight preview
+  "redditbot",
+  "Pinterest",
+  "vkShare",
+  "SkypeUriPreview",
+  "iframely",
+];
+
+function isPreviewBot(request) {
+  const ua = request.headers.get("User-Agent") || "";
+  return PREVIEW_BOTS.some((bot) => ua.includes(bot));
+}
+
+// A tiny set of assets that must be publicly fetchable (no password) so that
+// link-preview cards render before the site is public: the OG image + brand
+// icon and the usual crawler files.
+function isPublicPreviewAsset(pathname) {
+  return (
+    pathname === "/images/og-image.jpg" ||
+    pathname === "/images/gold-icon.png" ||
+    pathname === "/images/gold-icon.webp" ||
+    pathname === "/favicon.ico" ||
+    pathname === "/favicon.svg" ||
+    pathname === "/robots.txt"
+  );
+}
+
 /** Derive the opaque cookie token from the memo password (SHA-256 hex). */
 async function memoToken(password) {
   const data = new TextEncoder().encode(`${password}::gg-deal-memo::v1`);
@@ -244,19 +286,29 @@ export const onRequest = async ({ request, env, next }) => {
     return memoUnlockResponse({ configured: Boolean(memoPassword) });
   }
 
+  // ── Public preview assets: OG image + brand icon are fetchable without any
+  // password so shared-link previews render even while the site is gated. ──
+  if (isPublicPreviewAsset(pathname)) return next();
+
   // ── Shared static assets: allow site-auth OR a valid memo cookie ──
-  // (Lets a memo-only visitor load the page's CSS/fonts/images.)
+  // (Lets a memo-only visitor load the page's CSS/fonts/images.) Preview
+  // scrapers may also load assets so cards render fully.
   if (isAssetPath(pathname)) {
     if (
       hasValidSiteAuth(request, sitePassword) ||
-      (await hasValidMemoCookie(request, memoPassword))
+      (await hasValidMemoCookie(request, memoPassword)) ||
+      isPreviewBot(request)
     ) {
       return next();
     }
     return siteUnauthorized();
   }
 
-  // ── Everything else: the shared site password ──
-  if (hasValidSiteAuth(request, sitePassword)) return next();
+  // ── Everything else: the shared site password (or a preview scraper, so it
+  // can read the page's Open Graph tags — the deal-memo gate above is
+  // unaffected). ──
+  if (hasValidSiteAuth(request, sitePassword) || isPreviewBot(request)) {
+    return next();
+  }
   return siteUnauthorized();
 };

@@ -18,6 +18,8 @@ interface Props {
   heroPreload?: HeroPreload;
   /** Emit `robots: noindex, nofollow` — for private/unlisted pages. */
   noindex?: boolean;
+  /** Social share (Open Graph / Twitter) preview image, absolute or root-relative. */
+  ogImage?: string;
 }
 
 const {
@@ -25,7 +27,13 @@ const {
   description = "Global market infrastructure for allocated gold. One shared standard for how the world's gold is registered, represented, collateralized, and made liquid.",
   heroPreload,
   noindex = false,
+  ogImage = "/images/og-image.jpg",
 } = Astro.props;
+
+// Absolute URLs for canonical + social cards (requires `site` in astro.config).
+const siteBase = Astro.site ?? new URL("https://globalgold.finance");
+const canonicalURL = new URL(Astro.url.pathname, siteBase);
+const ogImageURL = new URL(ogImage, siteBase);
 ---
 
 <!doctype html>
@@ -35,8 +43,31 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
+    {!noindex && <link rel="canonical" href={canonicalURL.href} />}
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/png" href="/images/gold-icon.png" />
+
+    {/* Open Graph — link previews in iMessage, WhatsApp, Slack, Facebook, LinkedIn */}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Global Gold" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL.href} />
+    <meta property="og:image" content={ogImageURL.href} />
+    <meta property="og:image:secure_url" content={ogImageURL.href} />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Global Gold — The Global Gold Standard"
+    />
+
+    {/* Twitter / X large-image card */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL.href} />
     {
       heroPreload && (
         <link
