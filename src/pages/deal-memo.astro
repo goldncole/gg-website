@@ -1,7 +1,7 @@
 ---
 // =====================================================================
 // PAGE — /deal-memo/ (PRIVATE, unlisted).
-// A single-page, on-brand rendering of the confidential v5.0 Seed Round
+// A single-page, on-brand rendering of the confidential v6.0 Seed Round
 // Deal Memorandum. Reuses the homepage pinned scroll-over hero via
 // InnerPage(pinnedHero) and, below it, a docs-style two-column layout:
 // a sticky left section menu (scroll-spy highlighted, no visible
@@ -13,7 +13,7 @@
 // gate is handled separately in functions/_middleware.js (untouched).
 //
 // Content is transcribed to semantic HTML from the source markdown
-// (Investor Docs/Seed Round Deal Memo v5.md) — every section, table,
+// (Investor Docs/Seed Round Deal Memo v6.md) — every section, table,
 // blockquote, and the footnote. The 12 section ids drive the left menu.
 // =====================================================================
 import InnerPage from "../layouts/InnerPage.astro";
@@ -22,6 +22,7 @@ import InnerPage from "../layouts/InnerPage.astro";
 const menu = [
   { id: "summary", label: "Summary" },
   { id: "highlights", label: "Highlights" },
+  { id: "traction", label: "Traction" },
   { id: "thesis", label: "The Thesis" },
   { id: "why-now", label: "Why Now" },
   { id: "business-model", label: "Business Model" },
@@ -30,6 +31,7 @@ const menu = [
   { id: "returns", label: "Returns" },
   { id: "moat", label: "The Moat" },
   { id: "risks", label: "Risks" },
+  { id: "regulatory", label: "Regulatory Framework" },
   { id: "team", label: "Team & Governance" },
   { id: "round", label: "The Round" },
 ];
@@ -37,7 +39,7 @@ const menu = [
 
 <InnerPage
   title="Seed Round Deal Memorandum — Global Gold (Confidential)"
-  description="Confidential v5.0 Seed Round Deal Memorandum for Global Gold. For accredited investors only."
+  description="Confidential v6.0 Seed Round Deal Memorandum for Global Gold. For accredited investors only."
   noindex={true}
   pinnedHero={{
     src: "/images/Hero-hall3.png",
@@ -273,34 +275,64 @@ const menu = [
               every vault that joins.
             </li>
             <li>
-              <strong>Profitable on the Seed Alone.</strong> Base case:
-              EBITDA-positive in month 11, then $174M revenue and $161M EBITDA in
-              Year 5 — with the Series A ($18M at $90–120M post) funding
-              acceleration, not survival. Even the downside case reaches
-              profitability and returns ~2.9x to seed investors; the Base case
-              returns ~51x and the Accelerated case ~157x. The scenarios disagree
-              about how big, not whether the business works.
+              <strong>Bottom-Up Economics.</strong> The active Base case reaches
+              its first EBITDA-positive month in month 11, then $125.1M revenue
+              and $112.1M EBITDA in Year 5. TVL is calculated as the lesser of
+              modeled demand and vault supply; unserved demand queues rather than
+              being counted as revenue.
             </li>
             <li>
-              <strong>40% of the Round Is a Gold Position, Not Burn.</strong> $2M
-              of the $5M deploys at platform launch into six gold/gold liquidity
-              pools — the seed liquidity that makes the gold pairs tradable from
-              day one. The position is designed to minimize impermanent loss,
-              earn trading fees, and rise with gold ($2M → ~$5.1M by Year 5 on
-              the Base path, appreciation plus fees), while doubling as a
-              contractual runway backstop. If your thesis is that gold goes up,
-              40% of your check is exposed to that thesis while it works.
+              <strong>Launch Liquidity Is Explicitly Capitalized.</strong> $2M of
+              the $5M is ring-fenced to establish day-one depth in six gold/gold
+              pools. It is a cost of forming the market—not de-risked operating
+              cash—and is excluded from the Base-case runway.
             </li>
             <li>
-              <strong>Legally Credible From Day One.</strong> Paul Hastings LLP
-              as counsel of record. Governance through the Global Gold Council —
-              a Wyoming DUNA under Wyo. Stat. § 17-32, a standards body with real
-              legal personality. Patents pending on the Conditional Claim Token
-              and the Guardian multi-sig framework. The operating company does
-              not operate the protocol, custody metal, or issue instruments. The
-              posture is designed for regulators, not against them.
+              <strong>Separated by Design.</strong> Vaults custody metal and issue
+              CCTs; the Council sets standards; the Foundation applies admissions
+              and operates the ecosystem treasury; and the OpCo builds technology
+              and optional frontends. Management's classification analysis is
+              pending independent counsel confirmation.
             </li>
           </ol>
+        </section>
+
+        <!-- TRACTION -->
+        <section id="traction" class="memo-section" data-memo-section>
+          <h2 class="display display--md">Traction and Readiness</h2>
+          <p>
+            <strong>Core MVP live on testnet.</strong> The reviewable flow covers
+            Title Register entry → CCT mint → collateralization → USG/SMU mint →
+            redemption. Deployment evidence and a private investor demonstration
+            are available in the data room.
+          </p>
+          <p>
+            The codebase has undergone internal and adversarial review and is
+            prepared for audit handoff. <strong>No Tier 1 independent
+            smart-contract audit has been completed.</strong> Management intends
+            to engage a Tier 1 firm and complete required audits before mainnet
+            launch. Testnet deployment is evidence of implementation, not
+            production security.
+          </p>
+          <p>
+            <strong>The Wyoming Reserve.</strong> The first pilot vault has signed
+            a non-binding MOU. Technical validation, final commercial and
+            integration scope, and binding definitive documentation remain.
+            Management's target is to complete the agreement before mainnet pilot
+            activation.
+          </p>
+          <p>
+            <strong>Texas Bullion Depository.</strong> Global Gold is in active
+            discussions with the state depository. Because of state-government
+            involvement, Texas will not execute a preliminary MOU; management
+            expects it to participate in an investor reference call on request.
+            No commercial agreement has been signed.
+          </p>
+          <p>
+            Global Gold also has access to an existing 10,000+ community across
+            its founders' networks. The model does not count that community as
+            current users or revenue.
+          </p>
         </section>
 
         <!-- 3 · THESIS -->
@@ -348,12 +380,12 @@ const menu = [
             21% in two weeks on delivery delays, and physical silver in Tokyo and
             the UAE changed hands at $120–130/oz against a COMEX print in the low
             $70s — regional markets walking away from the paper benchmark because
-            no clearing pathway connects them. Congress's response — the SILVER
-            Act (H.R. 8007 / S. 4621), which mandates COMEX depository expansion
-            beyond the 11 facilities clustered within 150 miles of New York, and
-            which the CFTC Chairman has endorsed — is an admission that the market
-            structure itself is the problem. It is also a preview of our second
-            metal: the protocol replicates onto silver in Year 2 of the plan.
+            no clearing pathway connects them. The introduced SILVER Act (H.R.
+            8007 / S. 4621) expressly seeks greater geographic diversity,
+            liquidity, market access, competition, and resilience in
+            precious-metals depositories. It has not been enacted, and no official
+            CFTC Chairman endorsement has been verified. It is market-structure
+            evidence, not a regulatory authorization for Global Gold.
           </p>
           <p>
             Outside the hubs entirely sits the wedge — state depositories, SPDIs,
@@ -373,8 +405,9 @@ const menu = [
             <li>
               <strong>The Claim.</strong> A Conditional Claim Token (CCT) — an
               on-chain claim to that exact bar, and the right to request its title
-              transfer. One bar, one claim. Not title, not a warehouse receipt: a
-              patent-pending instrument engineered for regulatory defensibility.
+              transfer. One bar, one claim. Management's legal posture is that it
+              is not itself title or a warehouse receipt; independent counsel
+              confirmation remains pending.
             </li>
             <li>
               <strong>The Unit.</strong> Collateralize the claim to mint Standard
@@ -435,25 +468,28 @@ const menu = [
         <section id="why-now" class="memo-section" data-memo-section>
           <h2 class="display display--md">II. Why Now</h2>
           <p>
-            <strong>Gold Is Re-Monetizing.</strong> Central banks are net buyers
-            at multi-decade highs. BIS Basel III moved allocated gold to Tier 1
-            HQLA status. Sovereign reserves are diversifying away from USD assets.
-            Gold crossed $4,100/oz in 2026. And vaults are watching storage
-            margins compress at precisely the moment their institutional customers
-            are increasing physical allocation — that mismatch is the wedge
-            customer's urgency.
+            <strong>Demand Has Reached a New Scale.</strong> World Gold Council
+            data shows total gold demand exceeded 5,000 tonnes for the first time
+            in 2025, reaching approximately $555 billion in annual value. Central
+            banks added 863 tonnes—below the prior three years' exceptional pace
+            but still historically elevated and geographically broad.
           </p>
           <p>
-            <strong>The Legal Rails Just Opened.</strong> Wyoming Stat. § 17-32
-            created the first U.S. framework for decentralized governance with
-            legal personality. The GENIUS Act separated fiat-pegged stablecoins
-            from commodity-referenced instruments. The March 2026 SEC–CFTC
-            harmonization — a Memorandum of Understanding plus an interpretive
-            release (Release No. 33-11412) joined by both agencies — confirmed
-            most digital assets are not securities and treats fully-reserved,
-            1:1-redeemable tokens as receipts under CFTC spot-market jurisdiction.
-            The WGC + BCG March 2026 paper validated the shared-infrastructure
-            thesis outright — while every incumbent remains at concept stage.
+            <strong>Gold Already Receives Favorable Credit-Risk
+            Treatment.</strong> Under Basel-derived credit-risk rules, gold
+            bullion held in a bank's own vault or on an allocated basis, to the
+            extent backed by bullion liabilities, may receive a 0% risk
+            weight—cash-like treatment that dates to Basel I. Gold is
+            <strong>not</strong> Level 1 HQLA and carries an 85% Required Stable
+            Funding factor under the NSFR. Global Gold does not claim otherwise.
+          </p>
+          <p>
+            <strong>Regulation Is an Accelerant, Not the Source of
+            Legality.</strong> Wyoming's DUNA statute, the GENIUS Act, and the
+            March 2026 SEC/CFTC interpretation reduce ambiguity. They do not
+            categorically classify Global Gold's instruments or eliminate
+            securities, commodities, money-transmission, custody, or venue risk.
+            Management's pre-existing-law and reversal analysis appears below.
           </p>
           <p>
             <strong>The Window Is a Standards Window.</strong> The first credible
@@ -469,9 +505,10 @@ const menu = [
             The operating company (Global Gold OpCo) is the software company
             behind the protocol. It licenses technology, operates an optional
             frontend, and provides KYC rails. It does not operate the protocol,
-            custody metal, or issue instruments. Every revenue line is
-            recipient-tagged in the financial model, so investors can see exactly
-            what belongs to whom:
+            custody metal, or issue CCTs. Client-facing CCT fees are legally vault
+            fees: the vault issues the CCT and pays the OpCo's technology-service
+            slice. Protocol-economic fees flow to the Foundation Treasury. Every
+            revenue line is recipient-tagged in the financial model:
           </p>
           <div class="memo-table-wrap">
             <table class="memo-table">
@@ -483,10 +520,12 @@ const menu = [
                 </tr>
               </thead>
               <tbody>
-                <tr><td>Tokenization fee (at CCT mint)</td><td>40 bps of bar value</td><td>50% vault / 50% OpCo</td></tr>
-                <tr><td>Collateralization fee (at SMU mint)</td><td>20 bps</td><td>50% vault / 50% OpCo</td></tr>
+                <tr><td>Tokenization fee (at CCT mint)</td><td>2.5 bps of bar value</td><td>50% vault / 50% OpCo technology slice</td></tr>
+                <tr><td>Collateralization fee (at SMU mint)</td><td>40 bps</td><td>50% vault / 50% OpCo technology slice</td></tr>
+                <tr><td>Settlement / title-transfer events</td><td>50 bps</td><td>50% vault / 50% OpCo settlement-rails slice</td></tr>
+                <tr><td>Redemption fee (at CCT burn)</td><td>25 bps</td><td>50% vault / 50% OpCo technology slice</td></tr>
                 <tr><td>gGold mint/burn — frontend</td><td>10 bps</td><td>OpCo</td></tr>
-                <tr><td>gGold mint/burn — protocol</td><td>12.5 bps</td><td>Protocol treasury</td></tr>
+                <tr><td>gGold mint/burn — protocol</td><td>12.5 bps</td><td>Foundation Treasury</td></tr>
                 <tr><td>DEX routing — frontend</td><td>.25 bps of routed volume</td><td>OpCo</td></tr>
                 <tr><td>Marketplace take (Year 2+)</td><td>75 bps</td><td>OpCo</td></tr>
                 <tr><td>Perpetuals trading (Year 3+, Series A funded)</td><td>2.5 bps</td><td>OpCo</td></tr>
@@ -563,48 +602,53 @@ const menu = [
               </thead>
               <tbody>
                 <tr><td>1</td><td>3</td><td>$353M</td><td>$1.2M</td><td>($2.1M)</td></tr>
-                <tr><td>2</td><td>10</td><td>$1.6B</td><td>$9.3M</td><td>$2.2M</td></tr>
-                <tr><td>3</td><td>18</td><td>$4.1B</td><td>$32.2M</td><td>$24.7M</td></tr>
-                <tr><td>4</td><td>28</td><td>$9.8B</td><td>$74.3M</td><td>$64.8M</td></tr>
-                <tr><td>5</td><td>40</td><td>$23.4B</td><td>$174.3M</td><td>$161.3M</td></tr>
+                <tr><td>2</td><td>10</td><td>$1.6B</td><td>$7.1M</td><td>Approximately break-even</td></tr>
+                <tr><td>3</td><td>18</td><td>$4.1B</td><td>$23.3M</td><td>$15.7M</td></tr>
+                <tr><td>4</td><td>28</td><td>$9.8B</td><td>$53.0M</td><td>$43.5M</td></tr>
+                <tr><td>5</td><td>40</td><td>$23.4B</td><td>$125.1M</td><td>$112.1M</td></tr>
               </tbody>
             </table>
           </div>
           <p>
             For context: ~72 tonnes on-rails in Year 5 is 2% of one year's mine
-            supply and 0.032% of above-ground stock — roughly 9% of where
-            McKinsey projects the tokenized-gold market alone by 2030 ($200B), in
-            a model that treats that projection as a floor, not a ceiling.
-            EBITDA-positive in month 11; blended take rate of 108 bps,
-            sanity-checked against incumbents.
+            supply and 0.032% of above-ground stock. The model reaches its first
+            EBITDA-positive month in month 11. Year 5 is a scenario output, not a
+            commitment; investors should underwrite the validation gates below.
           </p>
-          <p><strong>All Three Scenarios, Year 5:</strong></p>
+          <p><strong>The First $353 Million — Month-12 Bridge:</strong></p>
           <div class="memo-table-wrap">
             <table class="memo-table">
               <thead>
                 <tr>
-                  <th scope="col"></th>
-                  <th scope="col">Bear</th>
-                  <th scope="col">Base</th>
-                  <th scope="col">Accelerated</th>
+                  <th scope="col">Driver or output</th>
+                  <th scope="col">Month-12 target</th>
                 </tr>
               </thead>
               <tbody>
-                <tr><th scope="row">Vaults live</th><td>18</td><td>40</td><td>55</td></tr>
-                <tr><th scope="row">TVL</th><td>$3.5B</td><td>$23.4B</td><td>$65.1B</td></tr>
-                <tr><th scope="row">OpCo revenue</th><td>$14.6M</td><td>$174M</td><td>$511M</td></tr>
-                <tr><th scope="row">OpCo EBITDA</th><td>$7.2M</td><td>$161M</td><td>$492M</td></tr>
-                <tr><th scope="row">Seed MOIC (post-dilution)</th><td><strong>2.9x</strong></td><td><strong>51x</strong></td><td><strong>157x</strong></td></tr>
+                <tr><th scope="row">Vaults live</th><td>3</td></tr>
+                <tr><th scope="row">Steady-state capacity</th><td>200 kilo bars per vault per month, six-month ramp</td></tr>
+                <tr><th scope="row">Kilo bars in custody</th><td>2,272</td></tr>
+                <tr><th scope="row">DeFi integrations</th><td>5</td></tr>
+                <tr><th scope="row">Active users</th><td>2,540 across five demand avatars</td></tr>
+                <tr><th scope="row">gGold float</th><td>$172.0M</td></tr>
+                <tr><th scope="row">Total TVL</th><td>$352.8M</td></tr>
+                <tr><th scope="row">Annualized exit revenue run rate</th><td>$4.4M</td></tr>
               </tbody>
             </table>
           </div>
           <p>
-            The Bear case is the sentence that matters most. Gold rises only to
-            $6,500, adoption is slow, and the Series A lands seven months late —
-            and the company still reaches profitability in Year 4, never runs out
-            of cash (the gold treasury auto-bridges), and returns ~2.9x to the
-            seed. <strong>The downside case is a profitable company that roughly
-            triples invested capital.</strong>
+            Five user avatars create demand while separate vault cohorts create
+            supply. Realized bar stock is the lesser of the two; early unserved
+            demand queues rather than being counted. The Wyoming pilot calibrates
+            throughput and buyer behavior—it does not become a universal average
+            multiplied across every future vault.
+          </p>
+          <p>
+            Management targets, not binding covenants: Tier 1 audit before
+            mainnet; binding Wyoming pilot documentation before activation; three
+            live Year-1 vaults; measurable recurring mints, collateralizations,
+            redemptions, and users; and a visible signed pipeline toward ten
+            Year-2 vaults before international scaling.
           </p>
           <p><strong>Use of the $5M</strong> (engine-derived; sums to the raise):</p>
           <div class="memo-table-wrap">
@@ -638,38 +682,25 @@ const menu = [
 
         <!-- 7 · GOLD POSITION -->
         <section id="gold-position" class="memo-section" data-memo-section>
-          <h2 class="display display--md">V. The Gold Position — Why 40% of This Round Is De-Risked</h2>
+          <h2 class="display display--md">V. The $2 Million Market-Capital Allocation</h2>
           <p>
-            The $2M treasury deployment is how the market starts. At platform
-            launch, the company seeds six gold/gold liquidity pools so the
-            protocol is tradable from day one — not a network waiting for someone
-            else to supply the first depth. That launch liquidity is also a gold
-            position with three secondary benefits:
+            Markets do not bootstrap themselves. Forty percent of the Seed is
+            ring-fenced in a segregated account, wallet, or special-purpose
+            structure to establish day-one depth in six gold/gold pools. This is a
+            cost of forming the market, not de-risked operating cash, and it is
+            excluded from the Base-case runway.
           </p>
-          <ol class="memo-list memo-list--numbered">
-            <li>
-              <strong>Gold Appreciation.</strong> $2M marked on the modeled gold
-              path reaches ~$4.3M by Year 5 — the "you believe gold goes up"
-              payoff, aligned with the thesis that brought investors to the memo.
-            </li>
-            <li>
-              <strong>Fee Income.</strong> The pools earn trading fees as the
-              market routes through them — ~$0.8M more by Year 5 in the Base
-              case.
-            </li>
-            <li>
-              <strong>Runway Insurance.</strong> A needs-based drawdown policy —
-              contractual, under the term sheet's Treasury Policy covenant — tops
-              up operating cash automatically if the Series A slips. In the Bear
-              case it bridges the company to a late A; in the Base case it is
-              never touched.
-            </li>
-          </ol>
           <p>
-            Idle operating cash above working-capital needs sweeps into the same
-            instruments. Operating risk is confined to roughly $3M of the round;
-            the other $2M is doing double duty as launch liquidity and
-            gold-denominated treasury backstop.
+            The allocation carries gold-price, smart-contract, custody,
+            pool-counterparty, concentration, and operational risks. Appreciation
+            and fee income are incidental recoveries, not reasons to invest.
+          </p>
+          <p>
+            The Base model assumes external liquidity reaches approximately 50%
+            of the OpCo position by Year 1 and 500% by Year 5. Any future
+            non-market draw requires replacement third-party depth, compliance
+            with minimum spread and liquidity floors, and Board approval including
+            the lead-investor director while that seat is occupied.
           </p>
         </section>
 
@@ -678,8 +709,8 @@ const menu = [
           <h2 class="display display--md">VI. Returns Analysis</h2>
           <p>
             Applying protocol/infrastructure multiples (10–20x revenue; 15–30x
-            EBITDA) to Year-5 Base financials implies a valuation of
-            <strong>$1.6B–$3.7B (mid: ~$3.1B)</strong>. After post-Series-A
+            EBITDA) to current Year-5 Base financials implies a blended valuation
+            of <strong>$1.47B–$2.93B (mid: ~$2.17B)</strong>. After post-Series-A
             dilution and an ESOP refresh, seed ownership at exit is ~8.3%:
           </p>
           <div class="memo-table-wrap">
@@ -695,16 +726,16 @@ const menu = [
                 <tr><td>$250M</td><td>$21M</td><td>4.1x</td></tr>
                 <tr><td>$500M</td><td>$41M</td><td>8.3x</td></tr>
                 <tr><td>$1.0B</td><td>$83M</td><td>16.6x</td></tr>
-                <tr><td>$2.0B</td><td>$166M</td><td>33.1x</td></tr>
-                <tr><td>Base-case implied (~$3.1B)</td><td>~$255M</td><td><strong>~51x</strong></td></tr>
+                <tr><td>$2.0B</td><td>$166M</td><td>33.2x</td></tr>
+                <tr><td>Base-case midpoint (~$2.17B)</td><td>~$180M</td><td><strong>~36x</strong></td></tr>
               </tbody>
             </table>
           </div>
           <p>
-            The 1x non-participating preference protects the legal floor; the Bear
-            case protects it operationally at ~2.9x. The Series A is planned at
-            $18M on $90–120M post — a 2.1x step-up, priced so the A investor
-            underwrites observable month-15 milestones rather than this model.
+            The Series A is planned at $18M on $90–120M post, priced so the A
+            investor underwrites observable product, vault, audit, user, and
+            transaction milestones rather than this model. All return figures are
+            scenario outputs, not valuation promises.
           </p>
         </section>
 
@@ -714,29 +745,23 @@ const menu = [
           <p>Three legs. Each alone is replicable. Together, they are not.</p>
           <ol class="memo-list memo-list--numbered">
             <li>
-              <strong>Legal Architecture.</strong> The CCT is a per-bar claim
-              instrument that is not title, not a warehouse receipt, and not a
-              security — patent pending. It creates a two-layer separation of the
-              title instrument from the settlement instrument, each with its own
-              classification. Counsel of record: Paul Hastings, LLP.
+              <strong>Distribution and Workflow.</strong> The free Title Register
+              becomes part of a vault's records, KYC, settlement, and audit
+              workflow. Each binding integration makes the network more useful and
+              raises operational switching costs.
             </li>
             <li>
-              <strong>Distribution Lock.</strong> Every vault that deploys a Title
-              Register is a vault a competitor cannot easily reach — the register
-              is the vault's own book of record, free forever, woven into its
-              operations. The network compounds: each onboarded vault makes the
-              next more valuable, and 25% of later vaults arrive by referral from
-              existing ones.
+              <strong>Neutral Coordination.</strong> Single issuers and regional
+              hubs can build technology, but a neutral multi-vault standard asks
+              them to agree on governance, admissions, liability, data, fee
+              allocation, and control—often against existing economics.
             </li>
             <li>
-              <strong>Governance Permanence.</strong> The Council (Wyoming DUNA)
-              governs the protocol; the operating company licenses IP and runs
-              optional frontends; and a neutral Foundation — a Swiss charitable
-              steward, planned to hold the ecosystem treasury and admit
-              counterparties at arm's length — is on the roadmap to deepen that
-              separation. No single entity's failure ends the network — and no
-              competitor structured as a single issuer can copy that without
-              ceasing to be itself.
+              <strong>Regulatory-Defensibility Engineering.</strong> Patent
+              filings document deliberate implementation choices and preserve
+              potential exclusion or licensing rights. They support—but do not
+              replace—the broader moat of distribution, liquidity, governance,
+              integrations, and operating history.
             </li>
           </ol>
         </section>
@@ -755,23 +780,23 @@ const menu = [
               <tbody>
                 <tr>
                   <th scope="row">Vault adoption is slower than planned</th>
-                  <td>The Bear case models exactly this — 18 vaults by Year 5, not 40 — and still returns ~2.9x. CAC payback under two months means each signed vault is almost immediately accretive.</td>
+                  <td>The model includes slower vault scenarios, but management must prove onboarding time, throughput, and economics in the Wyoming pilot before applying them to later cohorts.</td>
                 </tr>
                 <tr>
                   <th scope="row">Regulatory reclassification</th>
-                  <td>The architecture was designed backwards from the risk register: the vault holds title, OpCo holds nothing, instruments are engineered against securities and stablecoin characterization, and Paul Hastings is on record. The GENIUS Act and March 2026 SEC/CFTC guidance moved the rails toward us.</td>
+                  <td>The separated architecture reduces risk but does not eliminate it. Management maintains a pre-existing-law and reversal plan; independent counsel confirmation remains pending.</td>
                 </tr>
                 <tr>
                   <th scope="row">Gold price stalls</th>
-                  <td>The flat-gold toggle shows the business grows without price help, and the Bear case assumes gold reaching only $6,500 by Year 5. A stalling gold price reduces TVL marks, but the fee engine runs on actions — mints, transfers, trades — and treasury drawdown capacity remains.</td>
+                  <td>The flat-gold toggle separates business growth from price appreciation. A stalling price reduces TVL marks; fee revenue still depends on mints, transfers, redemptions, and trading.</td>
                 </tr>
                 <tr>
                   <th scope="row">Incumbent response (Paxos / Tether / LBMA)</th>
-                  <td>Single issuers cannot become neutral multi-vault standards without abandoning their model; the hubs are charter-bound to their regions. The realistic incumbent response is to join the standard.</td>
+                  <td>A well-capitalized consortium can compete. Global Gold's defense is to secure binding vault integrations, embed workflows, build multi-jurisdiction liquidity, preserve anti-capture governance, and offer incumbents a defined path to participate before a rival coalition forms.</td>
                 </tr>
                 <tr>
                   <th scope="row">Series A doesn't close on time</th>
-                  <td>Modeled: the Bear case closes the A at month 22 with the treasury auto-bridging, minimum cash stays positive, and the company reaches profitability regardless.</td>
+                  <td>The Base case does not depend on the $2M market-capital allocation for runway. Any non-market draw requires replacement third-party depth, liquidity-floor tests, and Board approval.</td>
                 </tr>
                 <tr>
                   <th scope="row">Key person</th>
@@ -779,16 +804,74 @@ const menu = [
                 </tr>
                 <tr>
                   <th scope="row">Smart-contract failure</th>
-                  <td>Two audits in Year 1, pre-launch audits for every subsequent module, and monthly third-party proof-of-reserve attestation per vault.</td>
+                  <td>No Tier 1 independent audit has been completed. Two audits are budgeted in Year 1; critical findings must be remediated before mainnet, with pre-launch audits for subsequent modules and proof-of-reserve attestations per vault.</td>
                 </tr>
               </tbody>
             </table>
           </div>
         </section>
 
+        <!-- REGULATORY FRAMEWORK -->
+        <section id="regulatory" class="memo-section" data-memo-section>
+          <h2 class="display display--md">IX. Regulatory Framework</h2>
+          <blockquote class="memo-quote">
+            Management analysis pending independent counsel confirmation. This
+            section is not a legal opinion.
+          </blockquote>
+          <p>
+            <strong>SEC/CFTC Release No. 33-11412.</strong> The March 17, 2026
+            interpretation classifies crypto assets as digital commodities,
+            digital collectibles, digital tools, stablecoins, or digital
+            securities and describes a digital tool as performing a practical
+            function such as a credential or title instrument. The Title Register
+            and CCT have practical record and claim functions, but a CCT also
+            embodies contractual rights concerning physical property. The release
+            informs the analysis; it does not determine Global Gold instrument
+            classification.
+          </p>
+          <p>
+            <strong>GENIUS Act.</strong> Public Law 119-27 defines a payment
+            stablecoin around redemption for “a fixed amount of monetary value.”
+            USG and gGold are designed around quantities of gold, not a fixed
+            dollar amount. Management therefore does not presently treat them as
+            GENIUS Act payment stablecoins. The Act does not affirmatively
+            classify gold-referenced instruments.
+          </p>
+          <p>
+            <strong>SILVER Act.</strong> H.R. 8007 and S. 4621 seek greater
+            geographic diversity, liquidity, market resiliency, market access,
+            competition, and cost efficiency in precious-metals depositories.
+            They remain introduced bills and provide no Global Gold safe harbor.
+          </p>
+          <p>
+            <strong>Wyoming DUNA Act.</strong> Wyo. Stat. § 17-32 provides that a
+            DUNA is a legal entity separate from its members for contract and tort
+            purposes. That supports Council legal personality; it does not resolve
+            federal token classification.
+          </p>
+          <p>
+            <strong>If the 2026 SEC/CFTC interpretation is withdrawn.</strong>
+            The Title Register continues as vault-operated software under state
+            property, contract, and recordkeeping law. Management would tighten
+            CCT transfer permissions and KYC, geofence or sequence USG/SMU and
+            gGold distribution, use licensed intermediaries or regulated venues
+            where required, and disable affected frontend routes. The 2026
+            developments reduce cost and timeline; the architecture does not rely
+            on their permanence.
+          </p>
+          <p>
+            Primary authorities:
+            <a href="https://www.sec.gov/files/rules/interp/2026/33-11412.pdf" target="_blank" rel="noopener noreferrer">SEC/CFTC Release No. 33-11412</a>,
+            <a href="https://www.congress.gov/119/plaws/publ27/PLAW-119publ27.htm" target="_blank" rel="noopener noreferrer">Public Law 119-27</a>,
+            <a href="https://www.congress.gov/119/bills/hr8007/BILLS-119hr8007ih.pdf" target="_blank" rel="noopener noreferrer">H.R. 8007</a>,
+            <a href="https://www.congress.gov/119/bills/s4621/BILLS-119s4621is.pdf" target="_blank" rel="noopener noreferrer">S. 4621</a>, and
+            <a href="https://wyoleg.gov/2024/Enroll/SF0050.pdf" target="_blank" rel="noopener noreferrer">Wyoming Senate File 50</a>.
+          </p>
+        </section>
+
         <!-- 11 · TEAM & GOVERNANCE -->
         <section id="team" class="memo-section" data-memo-section>
-          <h2 class="display display--md">IX. Team &amp; Governance</h2>
+          <h2 class="display display--md">X. Team &amp; Governance</h2>
           <ul class="memo-list">
             <li>
               <strong>Cole — Co-Founder &amp; Chief Executive Officer.</strong> Serial entrepreneur with a
@@ -813,9 +896,34 @@ const menu = [
               the company's core architecture.
             </li>
             <li>
-              Headcount scales 9 → 38 over five years, driver-based in the model.
+              <strong>Paul West — Chief Technology Officer.</strong> Software
+              architect and blockchain engineer with approximately 29 years of
+              experience, including more than two decades at Noble Systems,
+              enterprise systems supporting thousands of concurrent users, and a
+              core database migration that improved performance by more than
+              400%. He later served as Interim CTO of Phantasma Chain and built
+              multi-chain tokenization, governance, identity, and Web3
+              infrastructure at NitroDome and BlockLeader.
+            </li>
+            <li>
+              <strong>Tony Erwin — Chief Business Development Officer.</strong>
+              Finance and technology executive with 20+ years in advanced
+              networking and enterprise technology, including nearly 14 years at
+              Extreme Networks. He holds an M.S. in Finance with a FinTech
+              concentration, is a Certified Blockchain Architect and CBDA
+              designee, serves as a GBBC Ambassador and Georgia representative
+              for the U.S. Blockchain Coalition, and previously led negotiations
+              around an $11.5M renewable-energy financing and subsequent $16M
+              sale.
             </li>
           </ul>
+          <p>
+            Institutional bullion clearing, regulated custody, and in-house
+            legal/compliance leadership remain gaps. Management intends to recruit
+            an institutional custody/market-infrastructure adviser and a senior
+            legal/compliance leader as the company scales; neither role is
+            represented as filled.
+          </p>
           <p>
             <strong>Governance.</strong> Global Gold is built around a
             deliberately separated three-pillar structure: the operating company
@@ -828,25 +936,28 @@ const menu = [
             The Foundation holds the single ecosystem treasury, applies the
             Council's standards to counterparty admissions, and stewards the
             protocol IP through a neutral head-license structure, while operating
-            no protocol and taking custody of no metal. The OpCo board at seed is
-            the two founders. The company is founder-controlled by design:
-            founder-held super-voting common stock will carry 15–20 votes per
-            share, preserving founder voting control across future financings,
-            subject to customary investor protective provisions and sunset terms.
+            no protocol and taking custody of no metal. The OpCo board at Seed
+            will have three seats: one designated by each Founder and one by the
+            lead investor. Founder-held super-voting common stock will carry
+            <strong>20 votes per share</strong>, subject to customary transfer,
+            service, ownership, and public-company sunset terms. The Series Seed
+            receives customary protective provisions over major corporate actions.
           </p>
         </section>
 
         <!-- 12 · THE ROUND -->
         <section id="round" class="memo-section" data-memo-section>
-          <h2 class="display display--md">X. The Round</h2>
+          <h2 class="display display--md">XI. The Round</h2>
           <p>
             $5M priced Series Seed at $50M post: 1x non-participating preference,
-            a 10% option pool from pre-money, a founder-designated board of two,
-            founder-held super-voting common stock carrying 15–20 votes per share,
-            and a Treasury Policy covenant that makes the gold-treasury discipline
-            contractual. Standard NVCA definitive documents, drafted by Babb
-            Reed &amp; Leak LLP. The round may be completed in one or more closings on
-            identical terms; minimum check $100k. The data room includes the
+            a 10% option pool from pre-money, a three-person Board with one
+            lead-investor seat, founder-held super-voting common stock carrying
+            20 votes per share, customary preferred protective provisions, and a
+            segregated Treasury Policy for the $2M market-capital allocation.
+            Standard NVCA definitive documents, drafted by Babb Reed &amp; Leak LLP
+            with Paul Hastings LLP advising on relevant regulatory architecture.
+            The round may be completed in one or more closings on identical terms;
+            minimum check $100k. The data room includes the
             financial model (live workbook), the term sheet, the research census,
             the patent filings, the DUNA formation package, and the Wyoming
             Reserve partnership documentation.
@@ -857,10 +968,12 @@ const menu = [
             stranded in 40–80 vaults with no pathway. Global Gold connects the two
             with the only architecture in which the vault keeps title, no company
             owns the market, and every fee is earned against real metal —
-            profitably, on the seed alone, with 40% of the round sitting in gold
-            while it works. The upside case is category-defining infrastructure
-            for a $34T asset class. The downside case is a profitable company that
-            roughly triples invested capital.
+            through a separated architecture and a bottom-up demand-and-supply
+            engine. The core MVP is live on testnet; the Wyoming Reserve has
+            signed an MOU; and Texas is in active discussions. The work still
+            ahead is material: Tier 1 audits, binding pilot documentation,
+            regulated-market execution, and repeatable vault onboarding. The Seed
+            finances those gates.
           </p>
 
           <hr class="memo-hr" />
