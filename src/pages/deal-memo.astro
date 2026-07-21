@@ -25,6 +25,7 @@ const menu = [
   { id: "traction", label: "Traction" },
   { id: "thesis", label: "The Thesis" },
   { id: "why-now", label: "Why Now" },
+  { id: "standards-window", label: "The Standards Window" },
   { id: "business-model", label: "Business Model" },
   { id: "financial-plan", label: "Financial Plan" },
   { id: "gold-position", label: "Gold Position" },
@@ -202,6 +203,13 @@ const menu = [
           </p>
 
           <p>
+            Asset classes get one settlement standard per migration — DTCC for
+            equities, SWIFT for interbank payments, and, in physical gold
+            itself, LBMA Good Delivery. Gold's on-chain migration is now
+            underway. This memorandum is about who writes its standard.
+          </p>
+
+          <p>
             Demand is already proven in billions of dollars of single-issuer
             gold tokens; supply sits stranded in dozens of institutional vaults
             with no pathway into that demand. This round connects them.
@@ -211,12 +219,12 @@ const menu = [
             <table class="memo-table memo-table--terms">
               <tbody>
                 <tr><th scope="row">Raising</th><td>$5,000,000</td></tr>
-                <tr><th scope="row">Post-Money Valuation</th><td>$50,000,000</td></tr>
-                <tr><th scope="row">Instrument</th><td>Priced equity — Series Seed Preferred</td></tr>
-                <tr><th scope="row">Round Dilution</th><td>10%</td></tr>
+                <tr><th scope="row">Instrument</th><td>Post-money SAFE (YC standard)</td></tr>
+                <tr><th scope="row">Valuation Cap</th><td>$50,000,000 (post-money)</td></tr>
+                <tr><th scope="row">Discount</th><td>None</td></tr>
+                <tr><th scope="row">MFN</th><td>Yes</td></tr>
                 <tr><th scope="row">Minimum Investment</th><td>$100,000</td></tr>
-                <tr><th scope="row">Closings</th><td>One or more closings, identical terms</td></tr>
-                <tr><th scope="row">Liquidation Pref.</th><td>1x non-participating (market standard)</td></tr>
+                <tr><th scope="row">Closings</th><td>Multiple closings; the cap applies to this closing and steps up upon completion of the Wyoming pilot transaction</td></tr>
                 <tr><th scope="row">Counsel</th><td>Paul Hastings LLP and Babb Reed &amp; Leak LLP</td></tr>
               </tbody>
             </table>
@@ -436,7 +444,12 @@ const menu = [
             through dollars or relying on a single issuer. The Reserve makes the
             neutrality credible — backing diversified across approved gold tokens,
             issuers, and jurisdictions; mint and redeem by rule; no single company
-            able to freeze, gate, or break the unit. For users, gGold is gold that
+            able to freeze, gate, or break the unit itself. External basket
+            components (such as PAXG and XAUT) carry their own issuer controls;
+            the Reserve manages that exposure through per-issuer concentration
+            limits and a Council-governed reweighting-and-ejection playbook for
+            freeze or depeg events, so no external issuer action can impair the
+            unit's redeemability. For users, gGold is gold that
             can move anywhere. For the network, it is the settlement asset that
             concentrates liquidity, routes volume, and turns local gold markets
             into one global market.
@@ -509,11 +522,50 @@ const menu = [
           </p>
         </section>
 
-        <!-- 5 · BUSINESS MODEL -->
-        <section id="business-model" class="memo-section" data-memo-section>
-          <h2 class="display display--md">III. The Business Model</h2>
+        <!-- 5 · THE STANDARDS WINDOW -->
+        <section id="standards-window" class="memo-section" data-memo-section>
+          <h2 class="display display--md">III. The Standards Window</h2>
           <p>
-            The operating company (Global Gold OpCo) is the software company
+            Every time an asset class migrates onto new rails, the migration
+            produces exactly one settlement standard. U.S. equities produced
+            DTCC. Interbank payments produced SWIFT. Foreign-exchange settlement
+            produced CLS. And gold itself has already run this experiment once:
+            when the modern bullion market formed, it converged on a single
+            standard — LBMA Good Delivery — and that standard has governed which
+            bars trade at full liquidity for a century. The question in each
+            migration was never whether a standard would emerge. It was who
+            would write it, and who would own the rails it runs on.
+          </p>
+          <p>
+            Gold's on-chain migration has begun — evidenced by the reserve,
+            liquidity, and custody data above, by single-issuer tokens proving
+            billions in demand, and by state depositories entering active
+            discussions with protocol builders. The standard-setting window is
+            open now, and it is finite: the legal rails exist, the incumbent
+            issuers and regional hubs are architecturally unable to occupy
+            neutral ground (Section I), and no rival coalition has yet formed —
+            the competitive scenario named plainly in Section IX. Management
+            believes the window in which a de facto standard gets established
+            is approximately the next eighteen months: long enough to matter,
+            short enough that entry never gets cheaper.
+          </p>
+          <p>
+            That is what this round prices. Not a discounted-cash-flow claim on
+            Year-5 revenue — a position in the standards contest for a $34
+            trillion asset class's settlement layer, entered at seed price,
+            during the window in which the contest is decided. Standards
+            contests have losers, and Section IX prices that risk honestly. But
+            the winner of this one writes the rulebook — and collects the fees
+            — for how the world's oldest store of value moves for decades.
+          </p>
+        </section>
+
+        <!-- 6 · BUSINESS MODEL -->
+        <section id="business-model" class="memo-section" data-memo-section>
+          <h2 class="display display--md">IV. The Business Model</h2>
+          <p>
+            The operating company, Global Gold Protocol, LLC (converting to a
+            Delaware C-Corporation prior to SAFE execution), is the software company
             behind the protocol. It licenses technology, operates an optional
             frontend, and provides KYC rails. It does not operate the protocol,
             custody metal, or issue CCTs. Client-facing CCT fees are legally vault
@@ -545,6 +597,18 @@ const menu = [
               </tbody>
             </table>
           </div>
+          <p>
+            <strong>The Fee Architecture, Explained.</strong> The schedule is
+            deliberately weighted toward recurring motion rather than one-time
+            onboarding. Tokenization — the vault's entry event — is priced near
+            zero (2.5 bps), for the same reason the Title Register is free:
+            nothing should create friction at the door. The network monetizes
+            what happens after the door — collateralization, settlement,
+            redemption, minting, routing, and trading — because a settlement
+            standard's economics should compound with velocity, not gate
+            adoption. Every rate above is the active schedule in Financial
+            Model v3.0.
+          </p>
           <p>Three design choices matter to an investor:</p>
           <ul class="memo-list">
             <li>
@@ -582,9 +646,9 @@ const menu = [
           </p>
         </section>
 
-        <!-- 6 · FINANCIAL PLAN -->
+        <!-- 7 · FINANCIAL PLAN -->
         <section id="financial-plan" class="memo-section" data-memo-section>
-          <h2 class="display display--md">IV. The Financial Plan</h2>
+          <h2 class="display display--md">V. The Financial Plan</h2>
           <p>
             The model was built to answer the investor question that matters: is
             this business pulled by real demand, or propped up by assumed TVL?
@@ -648,6 +712,15 @@ const menu = [
             </table>
           </div>
           <p>
+            The gGold float target is the most ambitious line in the bridge,
+            and management treats it as such: single-issuer incumbents took
+            years to reach comparable float without multi-vault supply, day-one
+            launch liquidity, or DeFi integrations — the three drivers the
+            model relies on to move faster. The bridge's revenue run-rate is
+            driven primarily by tokenization, collateralization, and settlement
+            volume, not by the gGold float line.
+          </p>
+          <p>
             Five user avatars create demand while separate vault cohorts create
             supply. Realized bar stock is the lesser of the two; early unserved
             demand queues rather than being counted. The Wyoming pilot generates
@@ -691,9 +764,9 @@ const menu = [
           </p>
         </section>
 
-        <!-- 7 · GOLD POSITION -->
+        <!-- 8 · GOLD POSITION -->
         <section id="gold-position" class="memo-section" data-memo-section>
-          <h2 class="display display--md">V. The $2 Million Productive Gold-Liquidity Treasury</h2>
+          <h2 class="display display--md">VI. The $2 Million Productive Gold-Liquidity Treasury</h2>
           <p>
             Forty percent of the Seed launches the first Global Gold markets.
             At platform activation, the Company deploys $2M across six gold/gold
@@ -715,13 +788,16 @@ const menu = [
             The Base model assumes external liquidity reaches approximately 50%
             of the OpCo position by Year 1 and 500% by Year 5. The Treasury Policy
             keeps the position focused on market quality, productive deployment,
-            and disciplined rebalancing as the ecosystem matures.
+            and disciplined rebalancing as the ecosystem matures. Because four
+            of the six pools include external single-issuer tokens, the
+            Treasury Policy also applies the same per-issuer concentration
+            limits and freeze-event playbook that govern the gGold Reserve.
           </p>
         </section>
 
-        <!-- 8 · RETURNS -->
+        <!-- 9 · RETURNS -->
         <section id="returns" class="memo-section" data-memo-section>
-          <h2 class="display display--md">VI. Returns Analysis</h2>
+          <h2 class="display display--md">VII. Returns Analysis</h2>
           <p>
             Applying protocol/infrastructure multiples (10–20x revenue; 15–30x
             EBITDA) to current Year-5 Base financials implies a blended valuation
@@ -747,6 +823,29 @@ const menu = [
             </table>
           </div>
           <p>
+            <strong>All three scenarios, presented neutrally</strong> (outputs
+            of Financial Model v3.0; scenario definitions and assumptions are
+            contained in the live workbook):
+          </p>
+          <div class="memo-table-wrap">
+            <table class="memo-table">
+              <thead>
+                <tr>
+                  <th scope="col">Scenario</th>
+                  <th scope="col">Year-5 Revenue</th>
+                  <th scope="col">Year-5 EBITDA</th>
+                  <th scope="col">Implied exit midpoint</th>
+                  <th scope="col">Seed MOIC</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Bear</td><td>[●]</td><td>[●]</td><td>[●]</td><td>[●]</td></tr>
+                <tr><td>Base</td><td>$125.1M</td><td>$112.1M</td><td>~$2.17B</td><td>~36x</td></tr>
+                <tr><td>Accelerated</td><td>[●]</td><td>[●]</td><td>[●]</td><td>[●]</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
             The Series A is planned at $18M on $90–120M post, priced so the A
             investor underwrites observable product, vault, audit, user, and
             transaction milestones. All return figures are scenario outputs
@@ -754,9 +853,9 @@ const menu = [
           </p>
         </section>
 
-        <!-- 9 · MOAT -->
+        <!-- 10 · MOAT -->
         <section id="moat" class="memo-section" data-memo-section>
-          <h2 class="display display--md">VII. The Moat</h2>
+          <h2 class="display display--md">VIII. The Moat</h2>
           <p>Three legs. Each alone is replicable. Together, they are not.</p>
           <ol class="memo-list memo-list--numbered">
             <li>
@@ -781,9 +880,9 @@ const menu = [
           </ol>
         </section>
 
-        <!-- 10 · RISKS -->
+        <!-- 11 · RISKS -->
         <section id="risks" class="memo-section" data-memo-section>
-          <h2 class="display display--md">VIII. Risks, Stated Plainly</h2>
+          <h2 class="display display--md">IX. Risks, Stated Plainly</h2>
           <div class="memo-table-wrap">
             <table class="memo-table memo-table--risks">
               <thead>
@@ -806,6 +905,10 @@ const menu = [
                   <td>The flat-gold toggle separates business growth from price appreciation. A stalling price reduces TVL marks; fee revenue still depends on mints, transfers, redemptions, and trading.</td>
                 </tr>
                 <tr>
+                  <th scope="row">External issuer action (PAXG / XAUT freeze or depeg)</th>
+                  <td>The gGold Reserve and the liquidity treasury hold external single-issuer tokens whose issuers retain freeze authority. Exposure is governed by per-issuer concentration limits and a Council-governed reweighting-and-ejection playbook; the protocol's own instruments (CCT, SMU/USG) carry no external issuer dependency.</td>
+                </tr>
+                <tr>
                   <th scope="row">Incumbent response (Paxos / Tether / LBMA)</th>
                   <td>A well-capitalized consortium can compete. Global Gold's defense is to secure binding vault integrations, embed workflows, build multi-jurisdiction liquidity, preserve anti-capture governance, and offer incumbents a defined path to participate before a rival coalition forms.</td>
                 </tr>
@@ -815,7 +918,7 @@ const menu = [
                 </tr>
                 <tr>
                   <th scope="row">Key person</th>
-                  <td>Two technical founders plus a CTO; Guardian multi-sig removes single-actor control of infrastructure; the Council survives the company.</td>
+                  <td>A four-person executive team spans protocol architecture, engineering, business development, and commercial leadership; Guardian multi-sig removes single-actor control of infrastructure; the Council and Foundation survive the company.</td>
                 </tr>
                 <tr>
                   <th scope="row">Smart-contract failure</th>
@@ -828,7 +931,7 @@ const menu = [
 
         <!-- COMPLIANCE ARCHITECTURE -->
         <section id="regulatory" class="memo-section" data-memo-section>
-          <h2 class="display display--md">IX. Compliance by Architecture</h2>
+          <h2 class="display display--md">X. Compliance by Architecture</h2>
           <p>
             Global Gold was designed from the legal perimeter inward. The system
             separates each regulated function so no single entity acts as vault,
@@ -882,12 +985,12 @@ const menu = [
           </p>
         </section>
 
-        <!-- 11 · TEAM & GOVERNANCE -->
+        <!-- 12 · TEAM & GOVERNANCE -->
         <section id="team" class="memo-section" data-memo-section>
-          <h2 class="display display--md">X. Team &amp; Governance</h2>
+          <h2 class="display display--md">XI. Team &amp; Governance</h2>
           <ul class="memo-list">
             <li>
-              <strong>Cole — Co-Founder &amp; Chief Executive Officer.</strong> Entrepreneur with a
+              <strong>Cole Chapman — Co-Founder &amp; Chief Executive Officer.</strong> Entrepreneur with a
               background in digital advertising and marketing, where he built
               multiple 8-figure companies before entering crypto in 2017 and later
               launching one of the first decentralized referral-marketing
@@ -899,7 +1002,7 @@ const menu = [
               their participants are organized around shared infrastructure.
             </li>
             <li>
-              <strong>Austin — Co-Founder &amp; Chief Web3 Officer.</strong> Founder of Coincraft, where he
+              <strong>Austin Sieberlich — Co-Founder &amp; Chief Web3 Officer.</strong> Founder of Coincraft, where he
               has shaped token economies and Web3 systems for 40+ companies,
               including full protocol architecture, vesting design, simulations,
               incentive mechanics, and economic review for projects such as Heale,
@@ -942,31 +1045,52 @@ const menu = [
             The Foundation holds the single ecosystem treasury, applies the
             Council's standards to counterparty admissions, and stewards the
             protocol IP through a neutral head-license structure, while operating
-            no protocol and taking custody of no metal. The OpCo board at Seed
-            will have three seats: one designated by each Founder and one by the
-            lead investor. Founder-held super-voting common stock will carry
-            20 votes per share, subject to customary transfer,
-            service, ownership, and public-company sunset terms. The Series Seed
-            receives customary protective provisions over major corporate actions.
+            no protocol and taking custody of no metal.
+          </p>
+          <p>
+            Corporate governance terms — board composition, investor protective
+            provisions, and the founders' voting structure, including sunset
+            provisions — will be negotiated with the lead investor at the
+            Series A. The founders' intent is to preserve protocol neutrality
+            through the standards-formation phase while adopting
+            institutional-standard governance as the company scales.
           </p>
         </section>
 
-        <!-- 12 · THE ROUND -->
+        <!-- 13 · THE ROUND -->
         <section id="round" class="memo-section" data-memo-section>
-          <h2 class="display display--md">XI. The Round</h2>
+          <h2 class="display display--md">XII. The Round</h2>
           <p>
-            $5M priced Series Seed at $50M post: 1x non-participating preference,
-            a 10% option pool from pre-money, a three-person Board with one
-            lead-investor seat, founder-held super-voting common stock carrying
-            20 votes per share, customary preferred protective provisions, and a
-            segregated Treasury Policy for the $2M market-capital allocation.
-            Standard NVCA definitive documents, drafted by Babb Reed &amp; Leak LLP
-            with Paul Hastings LLP advising on relevant regulatory architecture.
-            The round may be completed in one or more closings on identical terms;
-            minimum check $100k. The data room includes the
-            financial model (live workbook), the term sheet, the research census,
-            the patent filings, the DUNA formation package, and the Wyoming
-            Reserve partnership documentation.
+            $5,000,000 via post-money SAFE (YC standard): $50M valuation cap,
+            no discount, MFN, minimum check $100k. The cap applies to this
+            closing; upon completion of the Wyoming pilot transaction,
+            subsequent closings occur at an increased cap. The round includes
+            allocation reserved for strategic participants from the vaulting,
+            refining, and market-making industries. Global Gold Protocol, LLC
+            converts to a Delaware C-Corporation prior to SAFE execution.
+            Documents drafted by Babb Reed &amp; Leak LLP with Paul Hastings LLP
+            advising on relevant regulatory architecture. A segregated Treasury
+            Policy governs the $2M market-capital allocation. The data room
+            includes the financial model (live workbook), the SAFE, the research
+            census, the patent filings, the DUNA formation package, and the
+            Wyoming Reserve partnership documentation.
+          </p>
+          <p>
+            <strong>Market Context for This Round.</strong> Seed-stage
+            valuations in digital-asset infrastructure are rarely disclosed;
+            where they are, the observed range for RWA infrastructure brackets
+            this round's cap. Dinari — tokenized U.S. equities via an
+            SEC-registered transfer agent — was valued at $40.15M in 2024
+            (PitchBook) with a live product; Plume raised a $10M seed (May
+            2024) and a $20M Series A (December 2024) while still pre-mainnet;
+            Haven closed its seed at a $30M valuation; and Matrixdock — a
+            single-issuer tokenized-gold product with Brink's custody — is
+            currently raising at $50M. Later-stage anchors (Midas's $50M Series
+            A, March 2026; Superstate's $82.5M Series B) mark the category's
+            trajectory. Against that range, this round prices a multi-vault
+            settlement standard — with a complete testnet protocol, patent
+            filings, a separated legal architecture, and two state-level
+            depository relationships — at the same mark as single-product peers.
           </p>
           <p>
             <strong>The One-Paragraph Case.</strong> Demand for on-chain gold is
@@ -980,7 +1104,8 @@ const menu = [
             built a 10,000+ member gold-and-DeFi community. The Seed takes the
             system through Tier 1 audit, activates the first vault and liquidity
             markets, and turns a working protocol into the first operating network
-            for global allocated-gold settlement.
+            for global allocated-gold settlement. Infrastructure standards are
+            written once per migration. Gold's is being written now.
           </p>
 
           <hr class="memo-hr" />
